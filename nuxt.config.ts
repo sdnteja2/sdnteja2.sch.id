@@ -21,8 +21,16 @@ export default defineNuxtConfig({
   },
   content: {
     documentDriven: true,
+    navigation: {
+      fields: ['navTitle', 'icon'],
+    },
+    markdown: {
+      anchorLinks: false,
+    },
+
   },
   ui: {
+    icons: ['hugeicons'],
     global: true,
   },
   colorMode: {

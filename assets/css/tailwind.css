@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .masonry {
+    column-gap: 2;
+    column-count: 1;
+  }
+  .masonry-sm {
+    column-gap: 4;
+    column-count: 2;
+  }
+  .masonry-md {
+    column-gap: 4;
+    column-count: 3;
+  }
+  .break-inside {
+    break-inside: avoid;
+  }
+}
+
+@layer components {
+  .cardHover {
+    @apply hover:bg-merah-50 duration-100    hover:divide-merah-200  transition hover:ring-merah-200     dark:hover:bg-gelap-800    dark:hover:divide-gelap-700  dark:hover:ring-gelap-700;
+  }
+  .headline {
+    @apply text-balance mb-4 md:mb-6 py-2 md:text-4xl  text-3xl font-extrabold;
+  }
+  .subheadline {
+    @apply mt-3 mb-6 text-center max-w-3xl mx-auto;
+  }
+}
+
+@layer base {
+  html {
+    @apply text-[16px]  scroll-smooth;
+  }
+  body {
+    @apply font-body bg-slate-50 dark:bg-gelap-950 text-merah-900  dark:text-slate-300;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-title  font-black text-merah-600 dark:text-merah tracking-tighter text-balance;
+  }
+}

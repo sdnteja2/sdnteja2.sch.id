@@ -1,9 +1,11 @@
 <template>
   <div>
     <NuxtRouteAnnouncer />
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
+
+    <NavBar />
+    <NuxtPage />
+    <Footer />
+
     <!-- contoh nuxt img -->
 
   <!-- <div>
