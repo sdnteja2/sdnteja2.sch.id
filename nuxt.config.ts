@@ -30,7 +30,7 @@ export default defineNuxtConfig({
 
   },
   ui: {
-    icons: ['hugeicons'],
+
     global: true,
   },
   colorMode: {
