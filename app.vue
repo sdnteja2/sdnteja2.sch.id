@@ -3,7 +3,10 @@
     <NuxtRouteAnnouncer />
 
     <NavBar />
-    <NuxtPage />
+
+    <div>
+      <NuxtPage />
+    </div>
     <Footer />
 
     <!-- contoh nuxt img -->

@@ -44,6 +44,6 @@
   h3,
   h4,
   h5 {
-    @apply font-title  font-black text-merah-600 dark:text-merah tracking-tighter text-balance;
+    @apply font-title  font-black text-merah-600 dark:text-merah tracking-tight text-balance;
   }
 }
