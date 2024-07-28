@@ -8,9 +8,19 @@ defineProps({
     type: String,
     default: 'Wujudkan Impian Pendidikan Berkualitas untuk Semua, Lingkungan Belajar yang Nyaman, Kreatif, dan Menyenangkan',
   },
-  image: {
-    type: String,
-    default: 'https://dummyimage.com/400x400',
+  fasilitas: {
+    type: Array as () => { image: string, label: string }[],
+    default: () => ([
+      { image: 'https://dummyimage.com/400x400', label: 'contoh1' },
+      { image: 'https://dummyimage.com/400x700', label: 'contoh2' },
+      { image: 'https://dummyimage.com/400x500', label: 'contoh3' },
+      { image: 'https://dummyimage.com/400x600', label: 'contoh4' },
+      { image: 'https://picsum.photos/1920/1080?random=1', label: 'contoh5' },
+      { image: 'https://picsum.photos/1920/1080?random=2', label: 'contoh6' },
+      { image: 'https://picsum.photos/1920/1080?random=3', label: 'contoh7' },
+
+    ]),
+
   },
   cta: {
     type: String,
@@ -21,15 +31,6 @@ defineProps({
     default: '/',
   },
 })
-
-const images = [
-  'https://picsum.photos/1920/1080?random=1',
-  'https://picsum.photos/1920/1080?random=2',
-  'https://picsum.photos/1920/1080?random=3',
-  'https://picsum.photos/1920/1080?random=4',
-  'https://picsum.photos/1920/1080?random=5',
-  'https://picsum.photos/1920/1080?random=6',
-]
 
 const carouselRef = ref()
 
@@ -60,8 +61,15 @@ onMounted(() => {
           </p>
         </div>
         <div class=" ">
-          <UCarousel ref="carouselRef" v-slot="{ item }" indicators :items="images" :ui="{ item: 'basis-full' }" class="rounded-lg overflow-hidden" arrows>
-            <NuxtImg :src="item" preset="wide" class="w-full h-60 md:h-96 object-cover object-center rounded-md" draggable="false" />
+          <UCarousel ref="carouselRef" v-slot="{ item }" indicators :items="fasilitas" :ui="{ item: 'basis-full' }" class="rounded overflow-hidden">
+            <div class="w-full items-center justify-center relative">
+              <NuxtImg :src="item.image" preset="wide" class="w-full h-60 md:h-[350px] object-cover object-center rounded-md" />
+              <div class="absolute top-1 w-full   mx-auto flex items-center justify-center">
+                <div class="bg-gelap-800 text-primary p-1 rounded">
+                  <p> {{ item.label }}</p>
+                </div>
+              </div>
+            </div>
           </UCarousel>
           <!-- <NuxtImg preset="wide" class="w-full h-60 md:h-96 object-cover object-center rounded-md" :src="image" alt="Hero Image" /> -->
         </div>
