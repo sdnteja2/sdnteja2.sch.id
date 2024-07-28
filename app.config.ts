@@ -1,7 +1,7 @@
 export default defineAppConfig({
   ui: {
     primary: 'merah',
-    gray: 'cool',
+    gray: 'slate',
     horizontalNavigation:
     {
 

@@ -27,7 +27,7 @@ const links = [
 </script>
 
 <template>
-  <div class="w-full fixed  top-0 z-50 bg-white dark:bg-gray-900">
+  <div class="w-full fixed  top-0 z-50  bg-gray-100/75 dark:bg-gelap-900/75 backdrop-blur">
     <UContainer class="flex h-14 md:h-16 justify-between items-center">
       <div>LOGO</div>
       <div class="flex items-center space-x-4">
