@@ -157,6 +157,7 @@ function handleThumbnailError(error: any) {
         <Motion
           v-for="(media, index) in paginatedMedia"
           :key="media.idVideo"
+          v-memo="[media.idVideo, media.title, selectedKelas, selectedPelajaran, currentPage]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"

@@ -15,6 +15,7 @@ const img = useImage()
         <Motion
           v-for="(guru, index) in guruTeja"
           :key="guru.nama"
+          v-memo="[guru.nama, guru.foto, guru.path]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
@@ -33,6 +34,7 @@ const img = useImage()
                   sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 225px"
                   :placeholder="img(guru.foto, { h: 10, f: 'webp', blur: 2, q: 30 })"
                   loading="lazy"
+                  fetchpriority="low"
                   densities="1x 2x"
                   class="w-full h-full object-cover object-center transition-all duration-300 ease-in-out"
                 />

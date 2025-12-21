@@ -148,8 +148,9 @@ defineOgImageComponent('OgImage', {
             :src="image.src"
             height="auto"
             width="100%"
-            quality="70"
+            quality="75"
             loading="lazy"
+            fetchpriority="low"
             :alt="kegiatanPage?.title"
             class="rounded-lg w-full h-auto cursor-zoom-in"
             :placeholder="img(`${image.src}`, { h: 10, f: 'webp', blur: 1, q: 50 })"
@@ -197,16 +198,20 @@ defineOgImageComponent('OgImage', {
             v-if="selectedImage && !fullscreenImageLoading"
             format="webp"
             :src="selectedImage"
+            quality="90"
             class="w-full h-full object-contain"
             loading="eager"
+            fetchpriority="high"
           />
           <!-- Hidden image untuk trigger loading -->
           <NuxtImg
             v-if="selectedImage && fullscreenImageLoading"
             format="webp"
             :src="selectedImage"
+            quality="90"
             class="opacity-0 absolute"
             loading="eager"
+            fetchpriority="high"
             @load="onFullscreenImageLoad"
           />
         </div>

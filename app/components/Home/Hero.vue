@@ -9,23 +9,24 @@ const props = defineProps({
 })
 
 // Preload hero image untuk meningkatkan LCP
+const heroImageUrl = computed(() => {
+  // Jika local image, gunakan IPX path yang sama dengan NuxtImg
+  if (props.image.startsWith('/')) {
+    return `/_ipx/f_webp&q_85&w_1200&h_675/${props.image}`
+  }
+  return props.image
+})
+
 useHead({
   link: [
     {
       rel: 'preload',
       as: 'image',
-      href: props.image,
+      href: heroImageUrl.value,
       type: 'image/webp',
       fetchpriority: 'high',
-    },
-    {
-      rel: 'dns-prefetch',
-      href: 'https://res.cloudinary.com',
-    },
-    {
-      rel: 'preconnect',
-      href: 'https://res.cloudinary.com',
-      crossorigin: 'anonymous',
+      imagesrcset: `${heroImageUrl.value} 1200w`,
+      imagesizes: '(max-width: 768px) 100vw, 50vw',
     },
   ],
 })
@@ -91,39 +92,22 @@ useHead({
       </div>
     </div>
     <div class="flex-2">
-      <Motion
-        :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-        :in-view="{ opacity: 1, transform: 'translateY(0)' }"
-        :transition="{ delay: 0.1 * 2 }"
-      >
-        <div variant="soft" class="var rounded-4xl aspect-video">
-          <NuxtImg
-            format="webp"
-            quality="85"
-            loading="eager"
-            priority
-            fetchpriority="high"
-            title="SDN Teja II - Sekolah Dasar Negeri"
-            placeholder
-            :src="image"
-            alt="SDN Teja II - Sekolah Dasar Negeri Teja II, Rajagaluh, Majalengka"
-            class="w-full h-full object-cover aspect-video rounded-4xl"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-            width="1200"
-            height="675"
-            densities="1x 2x"
-            :modifiers="{
-              f_auto: true,
-              q_auto: true,
-              c_fill: true,
-              ar: '16:9',
-              w_1200: true,
-              h_675: true,
-              dpr_auto: true,
-            }"
-          />
-        </div>
-      </Motion>
+      <!-- No Motion wrapper untuk LCP image - immediate render -->
+      <div variant="soft" class="var rounded-4xl aspect-video">
+        <NuxtImg
+          format="webp"
+          quality="85"
+          loading="eager"
+          priority
+          fetchpriority="high"
+          title="SDN Teja II - Sekolah Dasar Negeri"
+          :src="image"
+          alt="SDN Teja II - Sekolah Dasar Negeri Teja II, Rajagaluh, Majalengka"
+          class="w-full h-full object-cover aspect-video rounded-4xl"
+          width="1200"
+          height="675"
+        />
+      </div>
     </div>
   </UContainer>
 </template>

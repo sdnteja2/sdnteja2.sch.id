@@ -43,6 +43,7 @@ const img = useImage()
         <Motion
           v-for="(artikel, index) in paginatedBlogs"
           :key="artikel.title"
+          v-memo="[artikel.title, artikel.image, artikel.date, currentPage]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
 
@@ -52,7 +53,6 @@ const img = useImage()
             <UCard variant="soft" class="bg-night-50 hover:shadow-none hover:ring hover:ring-primary transition-shadow ease-in-out duration-300  shadow-teja dark:bg-night-900 h-full rounded-4xl overflow-hidden">
               <div>
                 <NuxtImg
-                  fetchpriority="high"
                   format="webp"
                   quality="75"
                   height="300"
@@ -64,6 +64,7 @@ const img = useImage()
                   class="rounded-2xl object-cover object-center w-full h-[300px] bg-cover aspect-video"
                   :placeholder="img(artikel.image.toString(), { h: 15, w: 25, f: 'webp', blur: 5, q: 10 })"
                   loading="lazy"
+                  fetchpriority="low"
                 />
                 <div class="mt-4   ">
                   <h2 class="text-xl font-bold line-clamp-2">

@@ -35,6 +35,7 @@ const beritaTerkait = [
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 items-center my-6 gap-4">
           <Motion
             v-for="(berita, index) in beritaTerkait"
+            v-once
             :key="berita.title"
             :initial="{ opacity: 0, transform: 'translateY(10px)' }"
             :in-view="{ opacity: 1, transform: 'translateY(0)' }"
@@ -68,6 +69,7 @@ const beritaTerkait = [
         <Motion
           v-for="(berita, index) in beritaPage"
           :key="berita.title"
+          v-memo="[berita.title, berita.date, berita.path]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"

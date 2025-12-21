@@ -67,7 +67,8 @@ function changeLanguage(lang) {
               <NuxtLink :to="appConfig.site.socialMedia.email.url" :aria-label="appConfig.site.socialMedia.email.title">
                 <UTooltip :text="appConfig.site.socialMedia.email.title" :delay-duration="0">
                   <UIcon
-                    class="size-6 hover:text-red-500" :aria-label="appConfig.site.socialMedia.email.title"
+                    class="size-6 hover:text-red-500"
+                    :aria-label="appConfig.site.socialMedia.email.title"
                     :name="appConfig.site.socialMedia.email.icon"
                   />
                 </UTooltip>
@@ -76,7 +77,8 @@ function changeLanguage(lang) {
               <NuxtLink :to="appConfig.site.socialMedia.instagram.url" :aria-label="appConfig.site.socialMedia.instagram.title">
                 <UTooltip :text="appConfig.site.socialMedia.instagram.title" :delay-duration="0">
                   <UIcon
-                    class="size-6 hover:text-red-500" :aria-label="appConfig.site.socialMedia.instagram.title"
+                    class="size-6 hover:text-red-500"
+                    :aria-label="appConfig.site.socialMedia.instagram.title"
                     :name="appConfig.site.socialMedia.instagram.icon"
                   />
                 </UTooltip>

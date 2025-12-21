@@ -19,6 +19,7 @@ const img = useImage()
         <Motion
           v-for="(galeri, index) in kegiatanList"
           :key="galeri.title"
+          v-memo="[galeri.title, galeri.path, galeri.date]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
@@ -35,6 +36,7 @@ const img = useImage()
               :title="galeri.title"
               :alt="galeri.title"
               loading="lazy"
+              fetchpriority="low"
               :src="galeri.cover"
               :placeholder="img(galeri.cover, { h: 15, w: 25, f: 'webp', blur: 5, q: 10 })"
               class="rounded-3xl mb-4 aspect-video object-cover object-center h-[250px] w-full transition-all duration-300 ease-in-out"

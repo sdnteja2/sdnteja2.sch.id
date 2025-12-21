@@ -52,6 +52,7 @@ const props = withDefaults(defineProps<{
                 format="webp"
                 quality="70"
                 loading="lazy"
+                fetchpriority="low"
                 :alt="item.nama"
                 :title="item.nama"
                 :src="item.foto"

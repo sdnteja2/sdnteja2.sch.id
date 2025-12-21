@@ -1,8 +1,23 @@
 /* eslint-disable node/prefer-global/process */
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/ui', '@nuxtjs/seo', // Tambahkan eksplisit untuk color mode
-  '@nuxtjs/color-mode', '@nuxt/content', '@nuxthub/core', '@nuxt/eslint', '@nuxt/image', 'nuxt-booster', '@nuxt/scripts', 'nuxt-google-translate', 'nuxt-llms', 'motion-v/nuxt', 'nuxt-visitors'],
+  modules: [// Tambahkan eksplisit untuk color mode
+    '@nuxt/ui',
+    '@nuxtjs/seo',
+    '@nuxtjs/color-mode',
+    '@nuxt/content',
+    '@nuxthub/core',
+    '@nuxt/eslint',
+    '@nuxt/image',
+    'nuxt-booster',
+    '@nuxt/scripts',
+    'nuxt-google-translate',
+    'nuxt-llms',
+    'motion-v/nuxt',
+    'nuxt-visitors',
+    '@nuxt/fonts',
+    '@nuxt/hints',
+  ],
   experimental: {
     componentIslands: true,
     payloadExtraction: false,
@@ -12,6 +27,8 @@ export default defineNuxtConfig({
     treeshakeClientOnly: true,
     // Enable smart hydration strategies for Lazy components
     lazyHydration: true,
+    // View transitions untuk better perceived performance
+    viewTransition: true,
   },
   linkChecker: {
     runOnBuild: false,
@@ -19,6 +36,46 @@ export default defineNuxtConfig({
   googleTranslate: {
     defaultLanguage: 'id',
     supportedLanguages: ['id', 'en', 'es', 'ru'],
+  },
+  fonts: {
+    // Konfigurasi untuk font Rubik yang sudah digunakan
+    families: [
+      {
+        name: 'Rubik',
+        provider: 'google',
+        weights: [400, 500, 600, 700],
+        styles: ['normal'],
+        subsets: ['latin', 'latin-ext'],
+        // Optimize font display untuk better LCP
+        display: 'swap',
+        preload: true,
+      },
+    ],
+    defaults: {
+      weights: [400, 700],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: {
+        'sans-serif': ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Arial'],
+      },
+    },
+    // Gunakan Google sebagai provider utama
+    provider: 'google',
+    // Optimize font loading untuk better LCP
+    experimental: {
+      disableLocalFallbacks: false,
+    },
+  },
+  app: {
+    head: {
+      link: [
+        // Preconnect ke CDN untuk reduce TTFB
+        { rel: 'preconnect', href: 'https://res.cloudinary.com', crossorigin: 'anonymous' },
+        { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: 'anonymous' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+      ],
+    },
   },
   site: {
     url: 'https://sdnteja2.sch.id/',
@@ -107,6 +164,11 @@ export default defineNuxtConfig({
       youtube: 'https://img.youtube.com',
       vimeo: 'https://i.vimeocdn.com',
     },
+    // Preload critical images
+    preload: {
+      default: true,
+      sizes: [640, 768, 1024, 1280],
+    },
     screens: {
       'xs': 320,
       'sm': 640,
@@ -166,6 +228,25 @@ export default defineNuxtConfig({
     targetFormats: ['webp', 'avif', 'jpg', 'png', 'gif'],
   },
   ssr: true,
+  routeRules: {
+    // Static pages - prerender untuk LCP optimal
+    '/': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+    '/guru': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+    
+    // Stale-while-revalidate untuk konten dinamis
+    '/artikel/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } }, // 1 jam
+    '/berita/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+    '/kegiatan/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } }, // 2 jam
+    '/guru/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } },
+    
+    // API routes
+    '/api/**': { 
+      cors: true,
+      headers: {
+        'Cache-Control': 'public, max-age=300, s-maxage=600',
+      },
+    },
+  },
   nitro: {
     prerender: {
       routes: ['/'],
@@ -213,5 +294,13 @@ export default defineNuxtConfig({
     public: {
       cloudinaryBaseUrl: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl'}`,
     },
+  },
+  routeRules: {
+    '/': { prerender: true },
+    '/artikel/**': { swr: 3600 }, // Static with revalidation
+    '/berita/**': { swr: 3600 },
+    '/guru/**': { prerender: true },
+    '/kegiatan/**': { swr: 7200 },
+    '/api/**': { cors: true },
   },
 })

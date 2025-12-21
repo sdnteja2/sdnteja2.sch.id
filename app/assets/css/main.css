@@ -57,3 +57,32 @@
 body {
   @apply bg-night-100 font-sans dark:bg-night-950;
 }
+
+/* Optimize font display untuk reduce CLS */
+@supports (font: -apple-system-body) {
+  body {
+    font: -apple-system-body;
+  }
+}
+
+/* Prevent layout shift from images */
+img, picture, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* SVG inline tidak perlu display: block untuk avoid sizing issues */
+svg:not([class*="icon"]) {
+  display: inline-block;
+}
+
+/* Optimize container untuk prevent CLS */
+.max-w-\(--ui-container\) {
+  contain: layout style paint;
+}
+
+/* Prevent CLS dari motion animations */
+[class*="Motion"] {
+  content-visibility: auto;
+}

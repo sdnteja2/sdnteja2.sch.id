@@ -23,8 +23,8 @@ export interface SiswaApiResponse {
 }
 
 export function useSiswaData() {
-  // Data reactive refs
-  const data = ref<SiswaData[]>([]) // Start with empty data
+  // Data reactive refs - menggunakan shallowRef untuk performa karena data besar
+  const data = shallowRef<SiswaData[]>([]) // Start with empty data
   const pending = ref(false)
   const error = ref<Error | null>(null)
 

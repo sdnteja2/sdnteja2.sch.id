@@ -28,7 +28,17 @@ defineProps({
           <div class="md:grid md:grid-cols-2 md:gap-10 lg:gap-16 md:items-center">
             <div class="hidden md:block mb-24 md:mb-0 sm:px-6">
               <div class="relative flex items-center justify-center">
-                <NuxtImg class="rounded-[40px] h-96" :src="image" alt="Kepala Sekolah" />
+                <NuxtImg
+                  class="rounded-[40px] h-96"
+                  :src="image"
+                  alt="Kepala Sekolah"
+                  format="webp"
+                  quality="80"
+                  loading="lazy"
+                  fetchpriority="low"
+                  width="384"
+                  height="384"
+                />
               </div>
             </div>
             <!-- End Col -->
@@ -50,8 +60,12 @@ defineProps({
                       <NuxtImg
                         format="webp"
                         quality="70"
+                        loading="lazy"
+                        fetchpriority="low"
                         title="Kepala Sekolah"
-                        class="size-12 rounded-full object-cover" :src="image" alt="Kepala Sekolah"
+                        :src="image"
+                        alt="Kepala Sekolah"
+                        class="size-12 rounded-full object-cover"
                       />
                     </div>
                     <div class="ms-4 md:ms-0">

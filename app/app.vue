@@ -21,7 +21,7 @@ const { visitors } = useVisitors()
       <UiNav />
 
       <ClientOnly>
-        <UiChat />
+        <LazyUiChat />
       </ClientOnly>
 
       <div class="py-22  md:py-26">
@@ -36,7 +36,7 @@ const { visitors } = useVisitors()
     </div>
     <div class="utility">
       <ClientOnly>
-        <GoogleTranslate />
+        <LazyGoogleTranslate />
       </ClientOnly>
     </div>
   </div>
