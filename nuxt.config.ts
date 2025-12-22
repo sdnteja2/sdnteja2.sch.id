@@ -258,6 +258,7 @@ export default defineNuxtConfig({
       },
     },
   },
+  compatibilityDate: '2025-12-15',
   nitro: {
     prerender: {
       routes: ['/'],
@@ -291,8 +292,21 @@ export default defineNuxtConfig({
         },
       },
     },
-    // Konfigurasi cache headers untuk meningkatkan performa
-    preset: 'cloudflare_pages',
+    // // Konfigurasi cache headers untuk meningkatkan performa
+    // preset: 'cloudflare_pages',
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      wrangler: {
+        d1_databases: [
+          {
+            binding: 'DB',
+            database_name: 'sdnteja2-sch-id',
+            database_id: 'a9547d7a-a636-4d29-b9ac-ce0a253dc1f1',
+          },
+        ],
+      },
+    },
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
