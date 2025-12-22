@@ -20,10 +20,10 @@ const img = useImage()
 </script>
 
 <template>
-  <div class="bg-red-500 dark:bg-night-900 w-full pt-20 pb-28 mt-12">
+  <div class="bg-sky-500 dark:bg-sky-900 w-full pt-20 pb-28 mt-12">
     <UContainer>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
-        <div variant="soft" class="rounded-4xl p-6 bg-white dark:bg-night-950 py-8 md:sticky md:top-22 md:self-start">
+        <div variant="soft" class="rounded-4xl p-6 bg-white dark:bg-sky-950 py-8 md:sticky md:top-22 md:self-start">
           <h2 class="text-2xl md:text-3xl mb-4 font-bold">
             Berita Terakhir
           </h2>
@@ -34,7 +34,7 @@ const img = useImage()
               :transition="{ delay: 0.1 * index }"
             >
               <NuxtLink :to="berita.path">
-                <UCard class="mb-4 hover:ring-red-500">
+                <UCard class="mb-4 hover:ring-sky-500">
                   <p class="line-clamp-2">
                     {{ berita.title }}
                   </p>
@@ -52,7 +52,7 @@ const img = useImage()
                 :transition="{ delay: 0.1 * index }"
               >
                 <NuxtLink :to="artikel.path">
-                  <UCard variant="soft" class="bg-night-50 hover:shadow-none transition-shadow ease-in-out duration-300 shadow-teja dark:bg-night-950 h-full rounded-4xl overflow-hidden">
+                  <UCard variant="soft" class="bg-sky-50 hover:shadow-none transition-shadow ease-in-out duration-300 shadow-teja dark:bg-sky-950 h-full rounded-4xl overflow-hidden">
                     <div>
                       <NuxtImg
                         format="webp"

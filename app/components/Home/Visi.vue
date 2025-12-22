@@ -22,7 +22,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="bg-red-500 dark:bg-night-900 pt-20 pb-28 mt-12 min-h-[600px]">
+  <div class="bg-sky-500 dark:bg-sky-900 pt-20 pb-28 mt-12 min-h-[600px]">
     <UContainer class="min-h-[500px]">
       <div>
         <div class="md:grid md:grid-cols-2 md:gap-10 lg:gap-16 md:items-center">
@@ -33,7 +33,7 @@ defineProps({
               :in-view="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
-              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-night-50 text-night-700  dark:bg-night-950 dark:text-white   rounded-4xl  ">
+              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
                 <blockquote class="relative">
                   <div class="relative z-10">
                     <p class="text-xl font-medium italic text-balance  md:text-2xl md:leading-normal   xl:leading-normal  ">
@@ -83,7 +83,7 @@ defineProps({
               :in-view="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
-              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-night-50 text-night-700  dark:bg-night-950 dark:text-white   rounded-4xl  ">
+              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
                 <div v-once>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold">
                     Visi
@@ -101,7 +101,7 @@ defineProps({
               :in-view="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
-              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-night-50 text-night-700  dark:bg-night-950 dark:text-white   rounded-4xl  ">
+              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
                 <div v-once>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold ">
                     Misi
@@ -123,7 +123,7 @@ defineProps({
               :in-view="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
-              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-night-50 text-night-700  dark:bg-night-950 dark:text-white   rounded-4xl  ">
+              <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
                 <div v-once>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold ">
                     Tujuan

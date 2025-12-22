@@ -19,7 +19,6 @@ const img = useImage()
         <Motion
           v-for="(galeri, index) in kegiatanList"
           :key="galeri.title"
-          v-memo="[galeri.title, galeri.path, galeri.date]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"

@@ -129,7 +129,7 @@ defineOgImageComponent('OgImage', {
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <USkeleton
           v-for="n in 3" :key="n"
-          class="w-full h-20 md:h-[200px] rounded-lg bg-red-500/50 dark:bg-red-700/50"
+          class="w-full h-20 md:h-50 rounded-lg bg-sky-500/50 dark:bg-sky-700/50"
         />
       </div>
       <div class="animate-pulse text-2xl py-16 text-center">
@@ -164,7 +164,7 @@ defineOgImageComponent('OgImage', {
     <Transition>
       <div
         v-if="showFullscreen"
-        class="fixed inset-0 bg-night-900/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
+        class="fixed inset-0 bg-sky-900/90 backdrop-blur-md z-50 flex items-center justify-center p-4"
         @click="closeFullscreen"
       >
         <UButton
@@ -191,7 +191,7 @@ defineOgImageComponent('OgImage', {
           <!-- Skeleton loader while image is loading -->
           <USkeleton
             v-if="fullscreenImageLoading"
-            class="absolute inset-0 w-full h-[50%] top-1/2 -translate-y-1/2 rounded-lg bg-red-500/50 dark:bg-red-700/50"
+            class="absolute inset-0 w-full h-[50%] top-1/2 -translate-y-1/2 rounded-lg bg-sky-500/50 dark:bg-sky-700/50"
           />
           <!-- Image hanya muncul saat sudah selesai loading -->
           <NuxtImg

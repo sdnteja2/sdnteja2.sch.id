@@ -55,17 +55,17 @@ const statsCards = computed(() => [
 
       <!-- Loading State -->
       <div v-if="pending" class="flex items-center justify-center py-8">
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600" />
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-sky-600" />
         <span class="ml-2 ">Memuat data siswa...</span>
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <div v-else-if="error" class="bg-sky-100 border border-sky-400 text-red-700 px-4 py-3 rounded mb-4">
         <strong class="font-bold">Error:</strong>
         <span class="block sm:inline ml-2">
           Data dari server tidak dapat dimuat.
         </span>
-        <div class="text-sm mt-2 text-red-600">
+        <div class="text-sm mt-2 text-sky-600">
           {{ error.message || 'Gagal memuat data dari Google Apps Script' }}
         </div>
         <UButton

@@ -58,7 +58,7 @@ useSchemaOrg([
         >
           <UCard
             variant="soft"
-            class="rounded-3xl bg-night-50 shadow-teja dark:bg-night-900"
+            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
           >
             <div class="flex flex-col items-center justify-center p-4">
               <NuxtImg
@@ -104,7 +104,7 @@ useSchemaOrg([
         >
           <UCard
             variant="soft"
-            class="rounded-3xl bg-night-50 shadow-teja dark:bg-night-900"
+            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
           >
             <div class="p-4">
               <h3 class="text-xl font-bold mb-2 flex items-center">
@@ -127,7 +127,7 @@ useSchemaOrg([
         >
           <UCard
             variant="soft"
-            class="rounded-3xl bg-night-50 shadow-teja dark:bg-night-900"
+            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
           >
             <div class="p-4">
               <h3 class="text-xl font-bold mb-3 flex items-center">
@@ -136,7 +136,7 @@ useSchemaOrg([
               </h3>
 
               <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="bg-white dark:bg-night-800 rounded-xl p-3 shadow-sm">
+                <div class="bg-white dark:bg-sky-800 rounded-xl p-3 shadow-sm">
                   <p class="font-semibold text-sm text-gray-500 dark:text-gray-400">
                     Jabatan
                   </p>
@@ -145,7 +145,7 @@ useSchemaOrg([
                   </p>
                 </div>
 
-                <div class="bg-white dark:bg-night-800 rounded-xl p-3 shadow-sm">
+                <div class="bg-white dark:bg-sky-800 rounded-xl p-3 shadow-sm">
                   <p class="font-semibold text-sm text-gray-500 dark:text-gray-400">
                     Pendidikan
                   </p>
@@ -168,14 +168,14 @@ useSchemaOrg([
           <UCard
             data-aos="fade-up" data-aos-delay="300"
             variant="soft"
-            class="rounded-3xl bg-night-50 shadow-teja dark:bg-night-900"
+            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
           >
             <div class="p-4">
               <h3 class="text-xl font-bold mb-2 flex items-center">
                 <UIcon name="solar:stars-minimalistic-linear" class="mr-2" />
                 Pelatihan
               </h3>
-              <div class="bg-white dark:bg-night-800 rounded-xl p-4 shadow-sm">
+              <div class="bg-white dark:bg-sky-800 rounded-xl p-4 shadow-sm">
                 <ol v-if="guruPage?.pelatihan && guruPage.pelatihan.length" class="list-decimal list-inside">
                   <li v-for="(item, index) in guruPage.pelatihan" :key="index">
                     <span class="font-bold">

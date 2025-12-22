@@ -44,7 +44,7 @@ const beritaTerkait = [
             <UButton
 
               size="xl"
-              class="w-full rounded-4xl bg-night-800 dark:bg-red-500 px-8 md:py-4"
+              class="w-full rounded-4xl bg-sky-800 dark:bg-sky-500 px-8 md:py-4"
               :to="`${berita.url}?ref=SDNTEJAII`"
               target="_blank"
             >
@@ -75,7 +75,7 @@ const beritaTerkait = [
           :transition="{ delay: 0.1 * index }"
         >
           <NuxtLink :to="berita.path">
-            <UCard variant="soft" class="bg-night-50 shadow-teja hover:shadow-none hover:ring hover:ring-primary transition-shadow ease-in-out duration-300  dark:bg-night-900 h-full rounded-4xl p-2 overflow-hidden">
+            <UCard variant="soft" class="bg-sky-50 shadow-teja hover:shadow-none hover:ring hover:ring-primary transition-shadow ease-in-out duration-300  dark:bg-sky-900 h-full rounded-4xl p-2 overflow-hidden">
               <h2 class="text-lg font-bold">
                 {{ berita?.title }}
               </h2>

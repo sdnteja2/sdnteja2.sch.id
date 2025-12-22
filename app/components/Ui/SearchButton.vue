@@ -279,7 +279,7 @@ defineShortcuts({
             placeholder="Cari Konten ..."
             :groups="groups"
             :ui="{
-              item: 'hover:bg-red-300 dark:hover:bg-red-700 rounded focus:bg-red-300',
+              item: 'hover:bg-sky-300 dark:hover:bg-sky-700 rounded focus:bg-sky-300',
               root: 'flex flex-col min-h-0 w-full min-w-0 divide-y divide-[var(--ui-border)] h-full',
               content: 'max-h-full overflow-y-auto',
             }"

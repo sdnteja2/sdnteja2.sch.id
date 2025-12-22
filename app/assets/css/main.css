@@ -19,6 +19,18 @@
 
   --breakpoint-3xl: 1920px;
 
+  --color-sky-50: #eff9ff;
+  --color-sky-100: #daf2ff;
+  --color-sky-200: #bee8ff;
+  --color-sky-300: #91dcff;
+  --color-sky-400: #5ec6fc;
+  --color-sky-500: #38a9f9;
+  --color-sky-600: #208bee;
+  --color-sky-700: #1a75db;
+  --color-sky-800: #1c5eb1;
+  --color-sky-900: #1c508c;
+  --color-sky-950: #163155;
+
   --color-red-50: #fce9e9;
   --color-red-100: #f9d3d3;
   --color-red-200: #f3a6a6;
@@ -55,7 +67,7 @@
 }
 
 body {
-  @apply bg-night-100 font-sans dark:bg-night-950;
+  @apply bg-sky-100 font-sans dark:bg-night-950;
 }
 
 /* Optimize font display untuk reduce CLS */

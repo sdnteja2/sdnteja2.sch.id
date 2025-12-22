@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<{
         :in-view="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
-        <UCard variant="soft" class="rounded-4xl bg-night-50 shadow-teja dark:bg-night-900 md:py-8">
+        <UCard variant="soft" class="rounded-4xl bg-sky-50 shadow-teja dark:bg-sky-900 md:py-8">
           <UCarousel
             v-slot="{ item }"
             arrows

@@ -20,7 +20,7 @@ useSeoMeta({
       </NuxtLink>
 
       <!-- Error Code -->
-      <h1 class="text-6xl font-bold text-red-600 dark:text-red-500 mb-4">
+      <h1 class="text-6xl font-bold text-sky-600 dark:text-sky-500 mb-4">
         {{ error.statusCode || 500 }}
       </h1>
 

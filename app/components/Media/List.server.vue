@@ -163,7 +163,7 @@ function handleThumbnailError(error: any) {
           :transition="{ delay: 0.1 * index }"
         >
           <div class="flex justify-center flex-col h-full ">
-            <div class="p-4 ring rounded h-full dark:bg-night-900 ring-night-200 dark:ring-night-800 overflow-hidden shadow-lg">
+            <div class="p-4 ring rounded h-full dark:bg-sky-900 ring-night-200 dark:ring-night-800 overflow-hidden shadow-lg">
               <ScriptYouTubePlayer
                 ref="video"
                 thumbnail-size="maxresdefault"
@@ -182,7 +182,7 @@ function handleThumbnailError(error: any) {
                     >
                     <!-- Fallback content when image fails to load -->
                     <div
-                      class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-red-500 to-red-600 text-white"
+                      class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-sky-500 to-sky-600 text-white"
                       :class="{ hidden: !media._thumbnailError }"
                     >
                       <div class="text-center p-6">
@@ -204,7 +204,7 @@ function handleThumbnailError(error: any) {
                     </div>
                     <!-- Play button overlay -->
                     <div class="absolute inset-0 flex items-center justify-center">
-                      <div class="w-16 h-16 bg-red-600 bg-opacity-90 rounded-full flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
+                      <div class="w-16 h-16 bg-sky-600 bg-opacity-90 rounded-full flex items-center justify-center shadow-lg transform transition-transform hover:scale-110">
                         <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 20 20">
                           <path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z" />
                         </svg>

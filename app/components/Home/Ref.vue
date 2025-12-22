@@ -28,7 +28,7 @@ const props = withDefaults(defineProps<{
       :transition="{ delay: 0.1 * index }"
     >
       <NuxtLink :to="`${item.link}?ref=SDNTEJA2`" target="_blank" class="group transition-colors ease-in-out duration-300   ">
-        <UCard class="rounded-[40px]  h-full items-center justify-center flex bg-night-50 shadow-teja group-hover:bg-night-200 dark:group-hover:bg-night-700 transition-colors ease-in-out duration-300    dark:bg-night-900" variant="soft">
+        <UCard class="rounded-[40px]  h-full items-center justify-center flex bg-sky-50 shadow-teja group-hover:bg-sky-200 dark:group-hover:bg-sky-700 transition-colors ease-in-out duration-300    dark:bg-sky-900" variant="soft">
           <p v-once class="text-center  font-bold">
             {{ item.title }}
           </p>

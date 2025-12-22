@@ -3,9 +3,9 @@ import { id } from '@nuxt/ui/locale'
 
 useHead({
   meta: [
-    { name: 'theme-color', content: '#F22727', media: '(prefers-color-scheme: dark)' },
-    { name: 'theme-color', content: '#F22727', media: '(prefers-color-scheme: light)' },
-    { name: 'msapplication-TileColor', content: '#F22727' },
+    { name: 'theme-color', content: '#208bee', media: '(prefers-color-scheme: dark)' },
+    { name: 'theme-color', content: '#208bee', media: '(prefers-color-scheme: light)' },
+    { name: 'msapplication-TileColor', content: '#208bee' },
     { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
   ],
 })

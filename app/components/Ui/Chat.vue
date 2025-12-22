@@ -98,9 +98,9 @@ const isOpen = ref(false)
           </div>
 
           <!-- Error Message -->
-          <div v-if="error" class="px-4 py-2 bg-red-50 dark:bg-red-900/20 border-t border-red-200">
+          <div v-if="error" class="px-4 py-2 bg-sky-50 dark:bg-sky-900/20 border-t border-sky-200">
             <div class="flex items-center justify-between">
-              <span class="text-red-600 text-sm">{{ error.message || 'Terjadi error' }}</span>
+              <span class="text-sky-600 text-sm">{{ error.message || 'Terjadi error' }}</span>
               <UButton
                 label="Coba Lagi"
                 color="primary"

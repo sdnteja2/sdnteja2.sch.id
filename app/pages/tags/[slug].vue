@@ -136,7 +136,7 @@ useSeoMeta({
             :transition="{ delay: 0.1 }"
           >
             <NuxtLink :to="`${pageTag.path}`">
-              <UCard variant="soft" class="bg-night-50 hover:shadow-none transition-shadow ease-in-out duration-300  shadow-teja dark:bg-night-900 h-full rounded-4xl overflow-hidden">
+              <UCard variant="soft" class="bg-sky-50 hover:shadow-none transition-shadow ease-in-out duration-300  shadow-teja dark:bg-sky-900 h-full rounded-4xl overflow-hidden">
                 <UBadge class="mb-2">
                   {{ pageTag.type }}
                 </UBadge>

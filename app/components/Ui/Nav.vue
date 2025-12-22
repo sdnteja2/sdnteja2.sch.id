@@ -24,14 +24,14 @@ const dropdownItems = computed(() => {
 
 <template>
   <div>
-    <!-- <div class="bg-red-500 fixed z-50 top-0 w-full">
+    <!-- <div class="bg-sky-500 fixed z-50 top-0 w-full">
       <p class="text-xs text-center text-white  ">
         Website Masih dalam pengembangan
       </p>
     </div> -->
-    <div class="fixed top-4 mx-auto w-full z-50">
-      <UContainer>
-        <div variant="subtle" class="rounded-4xl p-4 px-6 md:rounded-[40px] dark:bg-night-800/80 bg-slate-50/50 shadow backdrop-blur">
+    <div class="fixed top-4 mx-auto w-full z-50  ">
+      <UContainer class=" ">
+        <div variant="subtle" class="rounded-4xl shadow  p-4 px-6 md:rounded-[40px] dark:bg-sky-800/80 bg-sky-200/50 backdrop-blur">
           <div class="flex justify-between items-center">
             <div>
               <NuxtLink to="/" aria-label="Beranda SDN Teja II">
@@ -43,7 +43,7 @@ const dropdownItems = computed(() => {
                 <div v-if="data" class="flex flex-row items-center space-x-4">
                   <div v-for="item in data" :key="item.path">
                     <NuxtLink
-                      class="hover:text-red-500"
+                      class="hover:text-sky-500"
                       :to="item.path"
                       :class="{ 'active-link': isActive(item.path), 'notranslate': item.path === '/' }"
                     >
@@ -82,6 +82,6 @@ const dropdownItems = computed(() => {
 
 <style scoped>
 .active-link {
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #38a9f9;
 }
 </style>

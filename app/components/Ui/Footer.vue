@@ -67,7 +67,7 @@ function changeLanguage(lang) {
               <NuxtLink :to="appConfig.site.socialMedia.email.url" :aria-label="appConfig.site.socialMedia.email.title">
                 <UTooltip :text="appConfig.site.socialMedia.email.title" :delay-duration="0">
                   <UIcon
-                    class="size-6 hover:text-red-500"
+                    class="size-6 hover:text-sky-500"
                     :aria-label="appConfig.site.socialMedia.email.title"
                     :name="appConfig.site.socialMedia.email.icon"
                   />
@@ -77,7 +77,7 @@ function changeLanguage(lang) {
               <NuxtLink :to="appConfig.site.socialMedia.instagram.url" :aria-label="appConfig.site.socialMedia.instagram.title">
                 <UTooltip :text="appConfig.site.socialMedia.instagram.title" :delay-duration="0">
                   <UIcon
-                    class="size-6 hover:text-red-500"
+                    class="size-6 hover:text-sky-500"
                     :aria-label="appConfig.site.socialMedia.instagram.title"
                     :name="appConfig.site.socialMedia.instagram.icon"
                   />
@@ -105,7 +105,7 @@ function changeLanguage(lang) {
 
         <!-- Link pemerintah - DISDIK MAJALENGKA -->
         <div>
-          <h2 class="text-xs font-semibold text-gray-900 dark:text-red-500 uppercase">
+          <h2 class="text-xs font-semibold text-gray-900 dark:text-sky-500 uppercase">
             {{ appConfig.site.government.disdikMajalengka.title }}
           </h2>
           <div class="mt-3 grid space-y-3 text-sm">
@@ -122,7 +122,7 @@ function changeLanguage(lang) {
 
         <!-- Link pemerintah - DISDIK JABAR -->
         <div>
-          <h2 class="text-xs font-semibold text-gray-900 dark:text-red-500 uppercase">
+          <h2 class="text-xs font-semibold text-gray-900 dark:text-sky-500 uppercase">
             {{ appConfig.site.government.disdikJabar.title }}
           </h2>
           <div class="mt-3 grid space-y-3 text-sm">
@@ -139,7 +139,7 @@ function changeLanguage(lang) {
 
         <!-- Link pemerintah - KEMDIKDASMEN -->
         <div>
-          <h2 class="text-xs font-semibold text-gray-900 dark:text-red-500 uppercase">
+          <h2 class="text-xs font-semibold text-gray-900 dark:text-sky-500 uppercase">
             {{ appConfig.site.government.kemdikdasmen.title }}
           </h2>
           <div class="mt-3 grid space-y-3 text-sm">

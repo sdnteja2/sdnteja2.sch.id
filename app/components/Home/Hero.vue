@@ -41,7 +41,7 @@ useHead({
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 0 }"
         >
-          <UCard variant="soft" class=" flex justify-evenly    flex-col h-full bg-red-500 dark:bg-night-700 text-white  p-4 rounded-4xl  ">
+          <UCard variant="soft" class=" flex justify-evenly    flex-col h-full bg-sky-500 dark:bg-sky-700 text-white  p-4 rounded-4xl  ">
             <div>
               <p class="pb-6 ">
                 <slot name="subtitle">
@@ -81,7 +81,7 @@ useHead({
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 1 }"
         >
-          <UCard variant="soft" class=" bg-night-50 shadow-teja dark:bg-night-900 h-full text-night-900 dark:text-white flex items-center justify-center   rounded-4xl  ">
+          <UCard variant="soft" class=" bg-sky-50 shadow-teja dark:bg-sky-900 h-full text-night-900 dark:text-white flex items-center justify-center   rounded-4xl  ">
             <p class="py-6 text-balance">
               <slot name="description">
                 Wujudkan Impian Pendidikan Berkualitas untuk Semua, Lingkungan Belajar yang Nyaman, Kreatif, dan Menyenangkan

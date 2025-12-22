@@ -23,7 +23,7 @@ defineProps({
         :in-view="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
-        <UCard variant="soft" class="rounded-4xl bg-night-200 dark:bg-night-900 py-8">
+        <UCard variant="soft" class="rounded-4xl bg-sky-200 dark:bg-sky-900 py-8">
           <!-- Grid -->
           <div class="md:grid md:grid-cols-2 md:gap-10 lg:gap-16 md:items-center">
             <div class="hidden md:block mb-24 md:mb-0 sm:px-6">
@@ -69,7 +69,7 @@ defineProps({
                       />
                     </div>
                     <div class="ms-4 md:ms-0">
-                      <div class="text-base font-semibold text-red-500">
+                      <div class="text-base font-semibold text-sky-500">
                         <slot name="nama">
                           Nama Kepala Sekolah
                         </slot>

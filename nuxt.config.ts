@@ -23,8 +23,6 @@ export default defineNuxtConfig({
     payloadExtraction: false,
     // Optimasi untuk mengurangi network requests
     writeEarlyHints: true,
-    // Reduce initial bundle size
-    treeshakeClientOnly: true,
     // Enable smart hydration strategies for Lazy components
     lazyHydration: true,
     // View transitions untuk better perceived performance
@@ -82,7 +80,7 @@ export default defineNuxtConfig({
     name: 'SDN TEJA II',
     description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
     defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
-    themeColor: '#F22727',
+    themeColor: '#208bee',
   },
   colorMode: {
     preference: 'system', // default value of $colorMode.preference
@@ -98,8 +96,15 @@ export default defineNuxtConfig({
     storage: 'localStorage',
   },
   hub: {
-    database: true,
-    ai: true,
+    db: 'sqlite',
+  },
+  studio: {
+    repository: {
+      provider: 'github', // 'github' or 'gitlab'
+      owner: 'sdnteja2',
+      repo: 'https://github.com/sdnteja2/sdnteja2.sch.id',
+      branch: 'master',
+    },
   },
   content: {
     preview: {
@@ -108,7 +113,7 @@ export default defineNuxtConfig({
     },
     database: {
       type: 'd1',
-      bindingName: 'teja2',
+      bindingName: 'DB',
     },
   },
   llms: {
@@ -232,15 +237,15 @@ export default defineNuxtConfig({
     // Static pages - prerender untuk LCP optimal
     '/': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
     '/guru': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
-    
+
     // Stale-while-revalidate untuk konten dinamis
     '/artikel/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } }, // 1 jam
     '/berita/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
     '/kegiatan/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } }, // 2 jam
     '/guru/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } },
-    
+
     // API routes
-    '/api/**': { 
+    '/api/**': {
       cors: true,
       headers: {
         'Cache-Control': 'public, max-age=300, s-maxage=600',
@@ -294,13 +299,5 @@ export default defineNuxtConfig({
     public: {
       cloudinaryBaseUrl: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl'}`,
     },
-  },
-  routeRules: {
-    '/': { prerender: true },
-    '/artikel/**': { swr: 3600 }, // Static with revalidation
-    '/berita/**': { swr: 3600 },
-    '/guru/**': { prerender: true },
-    '/kegiatan/**': { swr: 7200 },
-    '/api/**': { cors: true },
   },
 })

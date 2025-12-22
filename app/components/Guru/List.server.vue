@@ -15,14 +15,13 @@ const img = useImage()
         <Motion
           v-for="(guru, index) in guruTeja"
           :key="guru.nama"
-          v-memo="[guru.nama, guru.foto, guru.path]"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
           class="transition-transform duration-200 ease-in-out transform hover:scale-98"
         >
           <NuxtLink :to="guru.path" class="group">
-            <UCard variant="soft" class="bg-night-50 shadow-teja dark:bg-night-900 h-full rounded-4xl">
+            <UCard variant="soft" class="bg-sky-50 shadow-teja dark:bg-sky-900 h-full rounded-4xl">
               <div class="w-full aspect-square rounded-3xl overflow-hidden mb-4 bg-top bg-gray-100">
                 <NuxtImg
                   :src="guru.foto"

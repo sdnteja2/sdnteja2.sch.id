@@ -32,27 +32,27 @@
 ```typescript
 routeRules: {
   // Prerender static pages
-  '/': { 
-    prerender: true, 
-    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } 
+  '/': {
+    prerender: true,
+    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' }
   },
-  '/guru': { 
-    prerender: true, 
-    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } 
+  '/guru': {
+    prerender: true,
+    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' }
   },
-  
+
   // SWR untuk konten dinamis
-  '/artikel/**': { 
-    swr: 3600, 
-    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } 
+  '/artikel/**': {
+    swr: 3600,
+    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' }
   },
-  '/berita/**': { 
-    swr: 3600, 
-    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } 
+  '/berita/**': {
+    swr: 3600,
+    headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' }
   },
-  '/kegiatan/**': { 
-    swr: 7200, 
-    headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } 
+  '/kegiatan/**': {
+    swr: 7200,
+    headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' }
   },
 }
 ```
@@ -70,23 +70,23 @@ app: {
   head: {
     link: [
       // Preconnect ke Cloudinary CDN
-      { 
-        rel: 'preconnect', 
-        href: 'https://res.cloudinary.com', 
-        crossorigin: 'anonymous' 
+      {
+        rel: 'preconnect',
+        href: 'https://res.cloudinary.com',
+        crossorigin: 'anonymous'
       },
       { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
-      
+
       // Preconnect ke Google Fonts
-      { 
-        rel: 'preconnect', 
-        href: 'https://fonts.googleapis.com', 
-        crossorigin: 'anonymous' 
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+        crossorigin: 'anonymous'
       },
-      { 
-        rel: 'preconnect', 
-        href: 'https://fonts.gstatic.com', 
-        crossorigin: 'anonymous' 
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: 'anonymous'
       },
     ],
   },
@@ -167,7 +167,7 @@ image: {
 ```vue
 <template>
   <!-- ✅ Added min-height to prevent layout shift -->
-  <div class="bg-red-500 dark:bg-night-900 pt-20 pb-28 mt-12 min-h-[600px]">
+  <div class="bg-sky-500 dark:bg-sky-900 pt-20 pb-28 mt-12 min-h-[600px]">
     <UContainer class="min-h-[500px]">
       <!-- Content -->
     </UContainer>
