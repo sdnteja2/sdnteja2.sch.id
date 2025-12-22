@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   content: {
     database: {
       type: 'd1',
-      bindingName: 'teja2'
+      bindingName: 'teja2db'
     }
   },
     hub: {
