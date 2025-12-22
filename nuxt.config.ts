@@ -13,6 +13,12 @@ export default defineNuxtConfig({
    ui: {
     content: true
   },
+  content: {
+    database: {
+      type: 'd1',
+      bindingName: 'teja2'
+    }
+  },
   nitro: {
     preset: 'cloudflare_module',
     cloudflare: {
