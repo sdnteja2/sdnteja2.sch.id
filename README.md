@@ -1,50 +1,75 @@
-# SDN Teja 2 Website
+# Nuxt Content Starter
 
-Repositori ini disiapkan untuk situs resmi SDN Teja 2. Saat ini berisi dokumen README saja; kode akan ditambahkan kembali setelah restore/rekonstruksi.
+Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
 
-## Rencana Teknis (sebelumnya)
-- Framework: Nuxt (SSR) + Tailwind CSS
-- Konten: Nuxt Content (Markdown/YAML)
-- Deploy target: Vercel / Cloudflare Pages (Nitro preset menyesuaikan)
-- Database opsional: Turso (libSQL) / D1 untuk backup
+## Setup
 
-## Struktur yang akan digunakan
-- `app/` – komponen, halaman, layout
-- `content/` – konten markdown/yaml (berita, artikel, guru, kegiatan, media)
-- `public/` – aset statis (ikon, gambar)
-- `server/` – API routes (mis. /api/siswa)
-- `docs/` – catatan optimasi/performance
+Make sure to install dependencies:
 
-## Langkah awal (ketika kode sudah dipulihkan)
-1. Install dependencies
-   ```bash
-   bun install
-   # atau
-   npm install
-   ```
-2. Jalankan dev server
-   ```bash
-   bun dev
-   ```
-3. Build produksi
-   ```bash
-   bun run build
-   ```
-4. Preview lokal hasil build
-   ```bash
-   bun run preview
-   ```
+```bash
+# npm
+npm install
 
-## Konfigurasi lingkungan (contoh placeholder)
-Buat file `.env` sesuai target (Cloudflare/Vercel). Isi contoh:
-```
-NUXT_PUBLIC_SITE_URL=https://sdnteja2.sch.id
-NUXT_STUDIO_CLIENT_ID=
-NUXT_STUDIO_CLIENT_SECRET=
-NUXT_STUDIO_GITHUB_TOKEN=
-TURSO_DATABASE_URL=
-TURSO_AUTH_TOKEN=
+# pnpm
+pnpm install
+
+# yarn
+yarn install
+
+# bun
+bun install
 ```
 
-## Lisensi
-Konten dan aset mengikuti kebijakan internal SDN Teja 2. Kode dapat disesuaikan sesuai kebutuhan sekolah.
+## Development Server
+
+Start the development server on `http://localhost:3000`:
+
+```bash
+# npm
+npm run dev
+
+# pnpm
+pnpm dev
+
+# yarn
+yarn dev
+
+# bun
+bun run dev
+```
+
+## Production
+
+Build the application for production:
+
+```bash
+# npm
+npm run build
+
+# pnpm
+pnpm build
+
+# yarn
+yarn build
+
+# bun
+bun run build
+```
+
+Locally preview production build:
+
+```bash
+# npm
+npm run preview
+
+# pnpm
+pnpm preview
+
+# yarn
+yarn preview
+
+# bun
+bun run preview
+```
+
+Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
