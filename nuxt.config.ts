@@ -18,6 +18,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/hints',
     'nuxt-studio',
+    '@nuxthub/core-nightly',
   ],
   experimental: {
     componentIslands: true,
@@ -97,11 +98,7 @@ export default defineNuxtConfig({
     storage: 'localStorage',
   },
   hub: {
-    db: {
-      dialect: 'sqlite',
-      driver: 'd1',
-      connection: { databaseId: 'a9547d7a-a636-4d29-b9ac-ce0a253dc1f1' },
-    },
+    db: 'sqlite',
   },
   studio: {
     route: '/admin',
@@ -258,7 +255,7 @@ export default defineNuxtConfig({
       },
     },
   },
-  compatibilityDate: '2025-12-15',
+  compatibilityDate: '2025-12-22',
   nitro: {
     prerender: {
       routes: ['/'],
@@ -297,15 +294,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare_module',
     cloudflare: {
       deployConfig: true,
-      wrangler: {
-        d1_databases: [
-          {
-            binding: 'DB',
-            database_name: 'sdnteja2-sch-id',
-            database_id: 'a9547d7a-a636-4d29-b9ac-ce0a253dc1f1',
-          },
-        ],
-      },
+      nodeCompat: true,
     },
   },
   css: ['~/assets/css/main.css'],

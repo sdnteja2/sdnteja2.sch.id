@@ -1,10 +1,35 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sdnteja2-sch-id",
+  "main": "./.output/server/index.mjs",
+  "compatibility_date": "2025-12-22",
+  "assets": {
+    "directory": "./.output/public/",
+    "binding": "ASSETS"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "ai": {
+    "binding": "AI"
+  },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "sdnteja2-sch-id",
       "database_id": "a9547d7a-a636-4d29-b9ac-ce0a253dc1f1"
     }
-  ]
+  ],
+  "env": {
+    "preview": {
+      "ai": {
+        "binding": "AI"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_id": "e079bc1f-afd7-4782-8d42-d8c1e9f89341"
+        }
+      ]
+    }
+  }
 }

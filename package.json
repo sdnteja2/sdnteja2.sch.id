@@ -18,10 +18,11 @@
     "@nuxt/fonts": "0.12.1",
     "@nuxt/hints": "1.0.0-alpha.4",
     "@nuxt/ui": "^3.2.0",
-    "@nuxthub/core": "latest",
+    "@nuxthub/core": "^0.10.3",
+    "@nuxthub/core-nightly": "0.10.0-20251210-113644-c25eff9",
     "ai": "^4.3.18",
     "better-sqlite3": "^12.2.0",
-    "drizzle-orm": "^0.40.0",
+    "drizzle-orm": "^0.45.1",
     "motion-v": "^1.5.0",
     "nuxt": "^4.2.2",
     "nuxt-booster": "^3.2.2",
@@ -34,7 +35,7 @@
     "vue": "latest",
     "vue-router": "latest",
     "workers-ai-provider": "^0.7.2",
-    "wrangler": "^4.24.3"
+    "wrangler": "^4.56.0"
   },
   "onlyBuiltDependencies": [
     "@parcel/watcher",
@@ -51,7 +52,7 @@
     "@nuxtjs/seo": "^3.1.0",
     "@tailwindcss/typography": "^0.5.16",
     "@types/youtube": "^0.1.2",
-    "drizzle-kit": "^0.30.5",
+    "drizzle-kit": "^0.31.8",
     "eslint": "^9.31.0",
     "eslint-plugin-format": "^1.0.1",
     "eslint-plugin-tailwindcss": "^3.18.0"

@@ -1,0 +1,11 @@
+PRAGMA foreign_keys=OFF;
+DROP TABLE IF EXISTS _content_tes;
+DROP TABLE IF EXISTS _content_search;
+DROP TABLE IF EXISTS _content_info;
+DROP TABLE IF EXISTS _content_content;
+DROP TABLE IF EXISTS _content_berita;
+DROP TABLE IF EXISTS _content_guru;
+DROP TABLE IF EXISTS _content_artikel;
+DROP TABLE IF EXISTS _content_kegiatan;
+DROP TABLE IF EXISTS _content_media;
+PRAGMA foreign_keys=ON;
