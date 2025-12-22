@@ -8,6 +8,10 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    env:
+      STUDIO_GITHUB_CLIENT_ID: ${{ secrets.STUDIO_GITHUB_CLIENT_ID }}
+      STUDIO_GITHUB_CLIENT_SECRET: ${{ secrets.STUDIO_GITHUB_CLIENT_SECRET }}
+      STUDIO_GITHUB_TOKEN: ${{ secrets.STUDIO_GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
@@ -22,7 +26,3 @@ jobs:
 
       - name: Build & Deploy to NuxtHub
         uses: nuxt-hub/action@v2
-        env:
-          STUDIO_GITHUB_CLIENT_ID: ${{ secrets.STUDIO_GITHUB_CLIENT_ID }}
-          STUDIO_GITHUB_CLIENT_SECRET: ${{ secrets.STUDIO_GITHUB_CLIENT_SECRET }}
-          STUDIO_GITHUB_TOKEN: ${{ secrets.STUDIO_GITHUB_TOKEN }}

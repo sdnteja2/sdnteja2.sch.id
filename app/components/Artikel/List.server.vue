@@ -16,11 +16,19 @@ watch(currentPage, (newPage) => {
     },
   })
 })
-const { data: artikelPage } = await useAsyncData('HalamanArtikel', () => {
-  return queryCollection('artikel')
-    .select('title', 'date', 'path', 'image', 'author')
-    .order('date', 'DESC')
-    .all()
+const { data: artikelPage } = await useAsyncData('HalamanArtikel', async () => {
+  try {
+    return await queryCollection('artikel')
+      .select('title', 'date', 'path', 'image', 'author')
+      .order('date', 'DESC')
+      .all()
+  }
+  catch (error) {
+    console.error('Error fetching artikel data:', error)
+    return []
+  }
+}, {
+  default: () => [],
 })
 const totalItems = computed(() => artikelPage.value?.length ?? 0)
 
@@ -54,8 +62,8 @@ const img = useImage()
                 <NuxtImg
                   format="webp"
                   quality="75"
-                  height="300"
-                  width="450"
+                  :height="300"
+                  :width="450"
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 450px"
                   densities="1x 2x"
                   :src="artikel.image.toString()"

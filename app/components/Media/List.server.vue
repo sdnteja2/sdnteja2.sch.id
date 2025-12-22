@@ -17,11 +17,19 @@ watch(currentPage, (newPage) => {
   })
 })
 
-const { data: mediaPage } = await useAsyncData('Medias', () => {
-  return queryCollection('media')
-    .select('idVideo', 'title', 'kelas', 'link', 'pelajaran')
-    .order('kelas', 'DESC')
-    .all()
+const { data: mediaPage } = await useAsyncData('Medias', async () => {
+  try {
+    return await queryCollection('media')
+      .select('idVideo', 'title', 'kelas', 'link', 'pelajaran')
+      .order('kelas', 'DESC')
+      .all()
+  }
+  catch (error) {
+    console.error('Error fetching media data:', error)
+    return []
+  }
+}, {
+  default: () => [],
 })
 
 const video = ref()

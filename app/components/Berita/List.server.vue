@@ -1,11 +1,19 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 
-const { data: beritaPage } = await useAsyncData('HalamanBerita', () => {
-  return queryCollection('berita')
-    .select('title', 'date', 'path')
-    .order('date', 'DESC')
-    .all()
+const { data: beritaPage } = await useAsyncData('HalamanBerita', async () => {
+  try {
+    return await queryCollection('berita')
+      .select('title', 'date', 'path')
+      .order('date', 'DESC')
+      .all()
+  }
+  catch (error) {
+    console.error('Error fetching berita data:', error)
+    return []
+  }
+}, {
+  default: () => [],
 })
 
 const beritaTerkait = [

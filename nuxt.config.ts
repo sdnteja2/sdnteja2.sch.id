@@ -262,7 +262,8 @@ export default defineNuxtConfig({
     prerender: {
       routes: ['/'],
       crawlLinks: true,
-      // ignore: ['/api/**', '/kegiatan/**'],
+      ignore: ['/api/**', '/admin/**'],
+      failOnError: false,
     },
     experimental: {
       websocket: true,

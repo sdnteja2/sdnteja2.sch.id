@@ -69,8 +69,8 @@ useSchemaOrg([
                 quality="80"
                 loading="eager"
                 fetchpriority="high"
-                height="400"
-                width="300"
+                :height="400"
+                :width="300"
                 :placeholder="img(`${guruPage?.foto}`, { h: 10, w: 5, f: 'webp', blur: 2, q: 50 })"
                 class="rounded-lg mb-4 h-full w-auto shadow-md bg-cover bg-center object-cover "
               />

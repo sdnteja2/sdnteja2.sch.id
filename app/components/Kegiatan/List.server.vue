@@ -3,10 +3,18 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 
-const { data: kegiatanList } = await useAsyncData('kegiatanList', () => {
-  return queryCollection('kegiatan')
-    .order('date', 'DESC')
-    .all()
+const { data: kegiatanList } = await useAsyncData('kegiatanList', async () => {
+  try {
+    return await queryCollection('kegiatan')
+      .order('date', 'DESC')
+      .all()
+  }
+  catch (error) {
+    console.error('Error fetching kegiatan data:', error)
+    return []
+  }
+}, {
+  default: () => [],
 })
 
 const img = useImage()
@@ -28,8 +36,8 @@ const img = useImage()
             <NuxtImg
               format="webp"
               quality="75"
-              height="300"
-              width="500"
+              :height="300"
+              :width="500"
               sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 450px"
               densities="1x 2x"
               :title="galeri.title"

@@ -1,8 +1,16 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 
-const { data: guruTeja } = await useAsyncData('gurus', () => {
-  return queryCollection('guru').all()
+const { data: guruTeja } = await useAsyncData('gurus', async () => {
+  try {
+    return await queryCollection('guru').all()
+  }
+  catch (error) {
+    console.error('Error fetching guru data:', error)
+    return []
+  }
+}, {
+  default: () => [],
 })
 
 const img = useImage()
@@ -28,8 +36,8 @@ const img = useImage()
                   :alt="`Foto ${guru.nama} - Guru SDN Teja 2`"
                   format="webp"
                   quality="80"
-                  width="300"
-                  height="300"
+                  :width="300"
+                  :height="300"
                   sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 225px"
                   :placeholder="img(guru.foto, { h: 10, f: 'webp', blur: 2, q: 30 })"
                   loading="lazy"
