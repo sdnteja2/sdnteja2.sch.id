@@ -291,11 +291,11 @@ export default defineNuxtConfig({
     },
     // // Konfigurasi cache headers untuk meningkatkan performa
     // preset: 'cloudflare_pages',
-    preset: 'cloudflare_module',
-    cloudflare: {
-      deployConfig: true,
-      nodeCompat: true,
-    },
+    // preset: 'cloudflare_module',
+    // cloudflare: {
+    //   deployConfig: true,
+    //   nodeCompat: true,
+    // },
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
