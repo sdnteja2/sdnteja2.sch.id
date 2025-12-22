@@ -247,14 +247,7 @@ export default defineNuxtConfig({
     '/kegiatan/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } }, // 2 jam
     '/guru/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } },
 
-    // API routes with ISR
-    '/api/siswa': {
-      isr: 86400, // Revalidate every 24 hours
-      cors: true,
-      headers: {
-        'Cache-Control': 'public, max-age=3600, s-maxage=86400, stale-while-revalidate=172800',
-      },
-    },
+    // API routes
     '/api/**': {
       cors: true,
       headers: {
@@ -298,11 +291,11 @@ export default defineNuxtConfig({
     },
     // // Konfigurasi cache headers untuk meningkatkan performa
     // preset: 'cloudflare_pages',
-    // preset: 'cloudflare_module',
-    // cloudflare: {
-    //   deployConfig: true,
-    //   nodeCompat: true,
-    // },
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
+    },
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
