@@ -108,7 +108,7 @@ export default defineNuxtConfig({
     repository: {
       provider: 'github', // 'github' or 'gitlab'
       owner: 'sdnteja2',
-      repo: 'https://github.com/sdnteja2/sdnteja2.sch.id',
+      repo: 'sdnteja2.sch.id',
       branch: 'master',
     },
   },
