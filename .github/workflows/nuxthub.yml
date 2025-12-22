@@ -3,11 +3,8 @@ on: push
 
 jobs:
   deploy:
-    name: Deploy to NuxtHub
+    name: "Deploy to NuxtHub"
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ github.ref == 'refs/heads/master' && 'production' || 'preview' }}
-      url: ${{ steps.deploy.outputs.deployment-url }}
     permissions:
       contents: read
       id-token: write
@@ -18,19 +15,10 @@ jobs:
       - name: Install Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: 1.2.0
+          bun-version: latest
 
       - name: Install dependencies
         run: bun install
 
-      - name: Ensure NuxtHub module is installed
-        run: bunx nuxthub@latest ensure
-
-      - name: Build application
-        run: bun run build
-
-      - name: Deploy to NuxtHub
-        uses: nuxt-hub/action@v1
-        id: deploy
-        with:
-          project-key: sdnteja2-sch-id-vcyh
+      - name: Build & Deploy to NuxtHub
+        uses: nuxt-hub/action@v2
