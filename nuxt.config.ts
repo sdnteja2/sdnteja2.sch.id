@@ -17,6 +17,7 @@ export default defineNuxtConfig({
     'nuxt-visitors',
     '@nuxt/fonts',
     '@nuxt/hints',
+    'nuxt-studio',
   ],
   experimental: {
     componentIslands: true,
@@ -96,9 +97,14 @@ export default defineNuxtConfig({
     storage: 'localStorage',
   },
   hub: {
-    db: 'sqlite',
+    db: {
+      dialect: 'sqlite',
+      driver: 'd1',
+      connection: { databaseId: 'a9547d7a-a636-4d29-b9ac-ce0a253dc1f1' },
+    },
   },
   studio: {
+    route: '/admin',
     repository: {
       provider: 'github', // 'github' or 'gitlab'
       owner: 'sdnteja2',
@@ -285,7 +291,7 @@ export default defineNuxtConfig({
       },
     },
     // Konfigurasi cache headers untuk meningkatkan performa
-
+    preset: 'cloudflare_pages',
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
