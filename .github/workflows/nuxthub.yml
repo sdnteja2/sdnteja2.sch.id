@@ -8,21 +8,23 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    env:
-      STUDIO_GITHUB_CLIENT_ID: ${{ secrets.STUDIO_GITHUB_CLIENT_ID }}
-      STUDIO_GITHUB_CLIENT_SECRET: ${{ secrets.STUDIO_GITHUB_CLIENT_SECRET }}
-      STUDIO_GITHUB_TOKEN: ${{ secrets.STUDIO_GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          bun-version: latest
+          version: 10
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: bun install
+        run: pnpm install
 
       - name: Build & Deploy to NuxtHub
         uses: nuxt-hub/action@v2
