@@ -2,8 +2,10 @@
   <NuxtRouteAnnouncer />
   <UApp>
     <UiHeader />
-    <UContainer>
-    <NuxtPage />
+    <UContainer class="py-22  md:py-26">
+      <div>
+        <NuxtPage />
+      </div>
     </UContainer>
   </UApp>
 </template>
