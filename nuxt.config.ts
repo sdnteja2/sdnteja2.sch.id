@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   content: {
     database: {
       type: 'd1',
-      bindingName: 'teja2',
+      bindingName: 'DB', // Gunakan binding yang sama dengan NuxtHub
     },
   },
   hub: {
@@ -48,6 +48,8 @@ export default defineNuxtConfig({
       routes: ['/'],
       // Then crawl all the links on the page
       crawlLinks: true,
+      // Ignore errors for missing pages
+      failOnError: false,
     },
     preset: 'cloudflare_module',
     experimental: {
