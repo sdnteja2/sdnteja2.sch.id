@@ -13,12 +13,12 @@ function decrement() {
 <template>
   <div>
     <h3>Counter: {{ count }}</h3>
-    <button @click="increment">
+    <UButton color="primary" @click="increment">
       Increment
-    </button>
-    <button @click="decrement">
+    </UButton>
+    <UButton color="error" @click="decrement">
       Decrement
-    </button>
+    </UButton>
   </div>
 </template>
 
