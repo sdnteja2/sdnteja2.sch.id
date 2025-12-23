@@ -60,12 +60,16 @@
   --color-night-950: #060912;
 }
 
-
 body {
   @apply bg-blue-100 font-body dark:bg-night-950;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   @apply font-heading;
 }
 
@@ -77,14 +81,17 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Prevent layout shift from images */
-img, picture, video, canvas {
+img,
+picture,
+video,
+canvas {
   display: block;
   max-width: 100%;
   height: auto;
 }
 
 /* SVG inline tidak perlu display: block untuk avoid sizing issues */
-svg:not([class*="icon"]) {
+svg:not([class*='icon']) {
   display: inline-block;
 }
 
@@ -94,6 +101,6 @@ svg:not([class*="icon"]) {
 }
 
 /* Prevent CLS dari motion animations */
-[class*="Motion"] {
+[class*='Motion'] {
   content-visibility: auto;
 }

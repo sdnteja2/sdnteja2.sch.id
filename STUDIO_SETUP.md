@@ -13,9 +13,9 @@ Setelah deploy ke Cloudflare, Nuxt Studio tidak bisa diakses karena menggunakan 
    - **Application name**: `SDN Teja 2 Studio` (atau nama sesuai keinginan)
    - **Homepage URL**: URL website Anda (contoh: `https://sdnteja2.sch.id`)
    - **Authorization callback URL**: `https://sdnteja2.sch.id/api/__studio__/auth/github/callback`
-     
+
      ⚠️ **PENTING**: Ganti `sdnteja2.sch.id` dengan domain aktual Anda
-   
+
 4. Klik **"Register application"**
 5. Simpan **Client ID** dan generate **Client Secret**
 6. Simpan kedua value tersebut dengan aman
@@ -30,7 +30,7 @@ Setelah deploy ke Cloudflare, Nuxt Studio tidak bisa diakses karena menggunakan 
    **Untuk Production:**
    - Variable name: `STUDIO_GITHUB_CLIENT_ID`
    - Value: Client ID dari OAuth App yang Anda buat
-   
+
    - Variable name: `STUDIO_GITHUB_CLIENT_SECRET`
    - Value: Client Secret dari OAuth App yang Anda buat
 
