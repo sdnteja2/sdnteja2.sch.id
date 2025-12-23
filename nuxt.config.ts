@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   content: {
     database: {
       type: 'd1',
-      bindingName: 'teja2db'
+      bindingName: 'teja2'
     }
   },
     hub: {
@@ -30,6 +30,9 @@ export default defineNuxtConfig({
   },
   nitro: {
     preset: 'cloudflare_module',
+  },
+  routeRules: {
+    '/': { prerender: true }
   },
   devtools: { enabled: true },
   compatibilityDate: '2025-12-22',
