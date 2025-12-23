@@ -6,12 +6,5 @@
       "database_name": "teja2",
       "database_id": "21086ffa-4f15-4181-8cb6-52dcb7f5c549"
     }
-  ],
-  "vars": {
-    "STUDIO_GITHUB_CLIENT_ID": "Ov23lioCjXJbHy4yiWd2",
-    "STUDIO_GOOGLE_CLIENT_ID": "335320889762-s5g3udns3ep4pqoboam43kv1pqi04obm.apps.googleusercontent.com",
-    "STUDIO_GOOGLE_MODERATORS": "sdnteja2@gmail.com,dinarpermadi07@gmail.com",
-    "CLOUDINARY_API_KEY": "747436524922873",
-    "CLOUDINARY_CLOUD_NAME": "dyy24w5kl"
-  }
+  ]
 }
