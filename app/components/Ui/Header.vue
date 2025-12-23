@@ -21,6 +21,37 @@ const items = computed<NavigationMenuItem[]>(() => {
     },
   }))
 })
+
+const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+  server: false,
+})
+
+const links = [{
+  label: 'Docs',
+  icon: 'i-lucide-book',
+  to: '/docs/getting-started',
+}, {
+  label: 'Components',
+  icon: 'i-lucide-box',
+  to: '/docs/components',
+}, {
+  label: 'Showcase',
+  icon: 'i-lucide-presentation',
+  to: '/showcase',
+}]
+
+const searchTerm = ref('')
+const isSearchOpen = ref(false)
+
+// Define keyboard shortcuts
+defineShortcuts({
+  meta_k: () => {
+    isSearchOpen.value = true
+  },
+  meta_g: () => {
+    window.open('https://github.com/sdnteja2/sdnteja2.sch.id', '_blank')
+  },
+})
 </script>
 
 <template>
@@ -36,6 +67,18 @@ const items = computed<NavigationMenuItem[]>(() => {
             <div class="hidden md:block">
               <UNavigationMenu :items="items" />
             </div>
+            <UTooltip text="Cari..." :kbds="['meta', 'K']">
+              <UContentSearchButton @click="isSearchOpen = true" />
+            </UTooltip>
+
+            <UContentSearch
+              v-model="isSearchOpen"
+              v-model:search-term="searchTerm"
+              :files="files"
+              :navigation="navigation"
+              :links="links"
+              :fuse="{ resultLimit: 42 }"
+            />
 
             <UColorModeButton />
 
@@ -43,7 +86,7 @@ const items = computed<NavigationMenuItem[]>(() => {
               <UButton
                 color="neutral"
                 variant="ghost"
-                to="https://github.com/nuxt/ui"
+                to="https://github.com/sdnteja2/sdnteja2.sch.id"
                 target="_blank"
                 icon="i-simple-icons-github"
                 aria-label="GitHub"

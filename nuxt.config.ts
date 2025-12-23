@@ -8,14 +8,18 @@ export default defineNuxtConfig({
     '@nuxt/scripts',
     '@nuxt/ui',
     'motion-v/nuxt',
-    'nuxt-studio',
     '@nuxthub/core-nightly',
+    'nuxt-studio',
+    '@vueuse/nuxt',
   ],
   css: ['~/assets/css/main.css'],
   ui: {
     content: true,
   },
   studio: {
+    i18n: {
+      defaultLocale: 'id',
+    },
     route: '/admin',
     repository: {
       provider: 'github', // 'github' or 'gitlab'
@@ -46,6 +50,9 @@ export default defineNuxtConfig({
       crawlLinks: true,
     },
     preset: 'cloudflare_module',
+    experimental: {
+      websocket: true,
+    },
 
   },
   routeRules: {
@@ -66,11 +73,6 @@ export default defineNuxtConfig({
       youtube: 'https://img.youtube.com',
       vimeo: 'https://i.vimeocdn.com',
     },
-    // Preload critical images
-    // preload: {
-    //   default: true,
-    //   sizes: [640, 768, 1024, 1280],
-    // },
     screens: {
       'xs': 320,
       'sm': 640,

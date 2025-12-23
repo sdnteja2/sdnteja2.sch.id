@@ -1,11 +1,18 @@
+<script setup lang="ts">
+import { id } from '@nuxt/ui/locale'
+</script>
+
 <template>
   <NuxtRouteAnnouncer />
-  <UApp>
+  <UApp :locale="id">
+    <ClientOnly>
+      <LazyUiVisitors />
+    </ClientOnly>
     <UiHeader />
-    <UContainer class="py-22  md:py-26">
+    <UMain class="py-22  md:py-26">
       <div>
         <NuxtPage />
       </div>
-    </UContainer>
+    </UMain>
   </UApp>
 </template>
