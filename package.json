@@ -1,12 +1,14 @@
 {
   "name": "sdnteja2-sch-id",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@libsql/client": "^0.15.15",
@@ -17,15 +19,21 @@
     "@nuxt/scripts": "0.13.2",
     "@nuxt/ui": "4.3.0",
     "@nuxthub/core-nightly": "0.10.0-20251210-113644-c25eff9",
+    "@tailwindcss/typography": "^0.5.19",
     "@unhead/vue": "^2.0.3",
     "better-sqlite3": "^12.5.0",
     "drizzle-orm": "^0.45.1",
     "eslint": "^9.0.0",
+    "motion-v": "^1.7.4",
     "nuxt": "^4.2.2",
     "nuxt-studio": "1.0.0-beta.1",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "wrangler": "^4.56.0"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.8"
+    "@antfu/eslint-config": "^6.7.3",
+    "drizzle-kit": "^0.31.8",
+    "eslint": "^9.39.2",
+    "eslint-plugin-format": "^1.1.0"
   }
 }

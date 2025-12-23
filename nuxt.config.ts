@@ -10,29 +10,43 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@nuxthub/core-nightly',
   ],
-   css: ['~/assets/css/main.css'],
-   ui: {
-    content: true
+  css: ['~/assets/css/main.css'],
+  ui: {
+    content: true,
+  },
+  studio: {
+    route: '/admin',
+    repository: {
+      provider: 'github', // 'github' or 'gitlab'
+      owner: 'sdnteja2',
+      repo: 'sdnteja2.sch.id',
+      branch: 'master'
+    }
   },
   content: {
     database: {
       type: 'd1',
-      bindingName: 'teja2'
-    }
+      bindingName: 'teja2',
+    },
   },
-    hub: {
+  hub: {
     // D1 database
     db: {
       dialect: 'sqlite',
       driver: 'd1',
-      connection: { databaseId: '21086ffa-4f15-4181-8cb6-52dcb7f5c549' }
+      connection: { databaseId: '21086ffa-4f15-4181-8cb6-52dcb7f5c549' },
     },
   },
   nitro: {
     preset: 'cloudflare_module',
   },
   routeRules: {
-    '/': { prerender: true }
+    '/': { prerender: true },
+  },
+  eslint: {
+    config: {
+      standalone: false,
+    },
   },
   devtools: { enabled: true },
   compatibilityDate: '2025-12-22',
