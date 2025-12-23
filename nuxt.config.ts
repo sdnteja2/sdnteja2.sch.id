@@ -20,8 +20,8 @@ export default defineNuxtConfig({
       provider: 'github', // 'github' or 'gitlab'
       owner: 'sdnteja2',
       repo: 'sdnteja2.sch.id',
-      branch: 'master'
-    }
+      branch: 'master',
+    },
   },
   content: {
     database: {
@@ -42,13 +42,14 @@ export default defineNuxtConfig({
       // Pre-render the homepage
       routes: ['/'],
       // Then crawl all the links on the page
-      crawlLinks: true
+      crawlLinks: true,
     },
     preset: 'cloudflare_module',
 
   },
   routeRules: {
     '/': { prerender: true },
+    '/admin/**': { ssr: true }, // Nuxt Studio route harus SSR
   },
   eslint: {
     config: {
