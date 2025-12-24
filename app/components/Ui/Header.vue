@@ -55,7 +55,7 @@ defineShortcuts({
 </script>
 
 <template>
-  <div class="fixed top-4 mx-auto w-full z-50">
+  <div class="fixed top-4 mx-auto w-full  z-50">
     <UContainer>
       <div class="rounded-4xl shadow-teja p-2 px-6 md:rounded-[40px] dark:bg-sky-800/80 bg-sky-200/50 backdrop-blur">
         <div class="flex items-center justify-between">

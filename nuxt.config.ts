@@ -95,6 +95,9 @@ export default defineNuxtConfig({
       },
     },
   },
+  experimental: {
+    componentIslands: true,
+  },
   devtools: { enabled: true },
   compatibilityDate: '2025-12-22',
 })
