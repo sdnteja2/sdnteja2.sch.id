@@ -104,3 +104,20 @@ svg:not([class*='icon']) {
 [class*='Motion'] {
   content-visibility: auto;
 }
+
+/* Hide Vue PDF Viewer Watermark */
+.vpv-watermark,
+[class*="watermark"],
+[class*="vue-pdf-watermark"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide branding/logo */
+.vpv-branding,
+[class*="branding"] {
+  display: none !important;
+}
+

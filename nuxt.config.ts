@@ -61,6 +61,9 @@ export default defineNuxtConfig({
     '/': { prerender: true },
     '/admin/**': { ssr: true }, // Nuxt Studio route harus SSR
   },
+  build: {
+    transpile: [],
+  },
   eslint: {
     config: {
       standalone: false,

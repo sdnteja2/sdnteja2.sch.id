@@ -114,5 +114,20 @@ export default defineContentConfig({
         { columns: ['kelas', 'pelajaran'], name: 'idx_kelas_pelajaran' },
       ],
     }),
+
+    buku: defineCollection({
+      type: 'page',
+      source: {
+        include: 'buku/**/*.yml',
+        prefix: '/buku',
+      },
+      schema: z.object({
+        title: z.string(),
+        kelas: z.enum(['1', '2', '3', '4', '5', '6']),
+        pelajaran: z.string(),
+        link: z.string(),
+        tipe: z.enum(['Buku Siswa', 'Buku Guru']),
+      }),
+    }),
   },
 })
