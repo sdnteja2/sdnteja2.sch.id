@@ -9,6 +9,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
+    'nuxt-studio',
   ],
    ui: {
     content: true,
@@ -20,6 +21,12 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+     prerender: {
+      // Pre-render the homepage
+      routes: ['/'],
+      // Then crawl all the links on the page
+      crawlLinks: true,
+     },
     preset: 'cloudflare_module',
     cloudflare: {
       deployConfig: true,
@@ -32,6 +39,20 @@ export default defineNuxtConfig({
           }
         ]
       },
+    },
+  },
+    routeRules: {
+    '/': { prerender: true },
+    '/admin/**': { ssr: true }, // Nuxt Studio route harus SSR
+  },
+  studio: {
+
+    route: '/admin',
+    repository: {
+      provider: 'github', // 'github' or 'gitlab'
+      owner: 'sdnteja2',
+      repo: 'sdnteja2.sch.id',
+      branch: 'master',
     },
   },
   devtools: { enabled: true },
