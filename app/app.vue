@@ -1,6 +1,9 @@
 <template>
   <NuxtRouteAnnouncer />
   <UApp>
-    <NuxtPage />
+    <UiHeader />
+    <UMain class="py-20">
+      <NuxtPage />
+    </UMain>
   </UApp>
 </template>

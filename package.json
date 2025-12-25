@@ -1,13 +1,15 @@
 {
   "name": "sdnteja2-sch-id",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' nuxt build",
+    "dev": "NODE_OPTIONS='--max-old-space-size=4096' nuxt dev",
+    "generate": "NODE_OPTIONS='--max-old-space-size=4096' nuxt generate",
     "preview": "nuxt preview",
-    "deploy": "nuxt build && wrangler pages deploy .output/public"
+    "deploy": "NODE_OPTIONS='--max-old-space-size=4096' nuxt build && wrangler pages deploy .output/public",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@nuxt/content": "^3.9.0",
@@ -18,10 +20,17 @@
     "@nuxt/image": "2.0.0",
     "@nuxt/scripts": "0.13.2",
     "@nuxt/ui": "^4.3.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@unhead/vue": "^2.0.3",
     "better-sqlite3": "^12.5.0",
-    "eslint": "^9.0.0",
+    "motion-v": "^1.7.4",
     "nuxt": "^4.2.2",
     "nuxt-studio": "1.0.0-beta.3"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.7.3",
+    "@vueuse/nuxt": "^14.1.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-format": "^1.1.0"
   }
 }
