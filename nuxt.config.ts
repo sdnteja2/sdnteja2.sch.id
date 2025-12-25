@@ -8,7 +8,9 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/scripts',
+    '@nuxt/ui',
   ],
   devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
   compatibilityDate: '2024-04-03',
 })
