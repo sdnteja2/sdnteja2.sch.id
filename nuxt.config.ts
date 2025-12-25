@@ -36,5 +36,5 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ['~/assets/css/main.css'],
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2025-12-03',
 })
