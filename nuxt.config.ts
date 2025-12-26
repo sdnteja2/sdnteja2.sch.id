@@ -12,7 +12,26 @@ export default defineNuxtConfig({
     'nuxt-studio',
     'motion-v/nuxt',
     '@vueuse/nuxt',
+    '@nuxtjs/seo',
   ],
+  app: {
+    head: {
+      link: [
+        // Preconnect ke CDN untuk reduce TTFB
+        { rel: 'preconnect', href: 'https://res.cloudinary.com', crossorigin: 'anonymous' },
+        { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: 'anonymous' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+      ],
+    },
+  },
+  site: {
+    url: 'https://sdnteja2.sch.id/',
+    name: 'SDN TEJA II',
+    description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
+    defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
+    themeColor: '#208bee',
+  },
   ui: {
     content: true,
   },
@@ -105,7 +124,7 @@ export default defineNuxtConfig({
       branch: 'master',
     },
   },
-   image: {
+  image: {
     provider: 'ipx',
     format: ['webp', 'avif'],
     quality: 80,
