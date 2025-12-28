@@ -104,6 +104,10 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@vueuse/nuxt',
     '@nuxtjs/seo',
+    'nuxt-charts',
+    'nuxt-studio',
+    '@nuxt/scripts',
+    '@nuxt/hints',
   ],
   nitro: {
     cloudflare: {
@@ -134,24 +138,7 @@ export default defineNuxtConfig({
       ignore: ['/api/**', '/admin/**'],
       routes: ['/'],
     },
-    app: {
-      head: {
-        link: [
-        // Preconnect ke CDN untuk reduce TTFB
-          { rel: 'preconnect', href: 'https://res.cloudinary.com', crossorigin: 'anonymous' },
-          { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
-          { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: 'anonymous' },
-          { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
-        ],
-      },
-    },
-    site: {
-      url: 'https://sdnteja2.sch.id/',
-      name: 'SDN TEJA II',
-      description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
-      defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
-      themeColor: '#208bee',
-    },
+
     preset: 'cloudflare_module',
     // rollupConfig: {
     //   output: {
@@ -181,6 +168,27 @@ export default defineNuxtConfig({
     //     },
     //   },
     // },
+  },
+  sitemap: {
+    zeroRuntime: true,
+  },
+  app: {
+    head: {
+      link: [
+        // Preconnect ke CDN untuk reduce TTFB
+        { rel: 'preconnect', href: 'https://res.cloudinary.com', crossorigin: 'anonymous' },
+        { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: 'anonymous' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+      ],
+    },
+  },
+  site: {
+    url: 'https://sdnteja2.sch.id/',
+    name: 'SDN TEJA II',
+    description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
+    defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
+    themeColor: '#208bee',
   },
   studio: {
     repository: {
