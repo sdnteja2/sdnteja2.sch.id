@@ -100,13 +100,9 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
     '@nuxt/eslint',
-    '@nuxt/hints',
     '@nuxt/image',
-    '@nuxt/scripts',
     '@nuxt/ui',
     '@vueuse/nuxt',
-    'nuxt-studio',
-    'nuxt-component-meta',
     '@nuxtjs/seo',
   ],
   nitro: {
@@ -124,9 +120,11 @@ export default defineNuxtConfig({
     },
     compatibilityDate: '2025-12-12',
     experimental: {
-      openAPI: true,
-      websocket: true,
+      openAPI: false,
+      websocket: false,
     },
+    minify: true,
+    sourceMap: false,
     unenv: {
       external: [],
     },

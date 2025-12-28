@@ -15,10 +15,7 @@
     },
     "hugeicons": {
       "command": "npx",
-      "args": [
-        "-y",
-        "@hugeicons/mcp-server"
-      ]
+      "args": ["-y", "@hugeicons/mcp-server"]
     }
   }
 }
