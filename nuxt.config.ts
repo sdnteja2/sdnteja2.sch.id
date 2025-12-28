@@ -1,37 +1,37 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: '2025-12-12',
 
   // Development optimizations
-  vite: {
-    build: {
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              if (id.includes('@nuxt/ui'))
-                return 'nuxt-ui'
-              if (id.includes('@nuxt/content'))
-                return 'nuxt-content'
-              if (id.includes('vue'))
-                return 'vue'
-              return 'vendor'
-            }
-          },
-        },
-      },
-    },
-    optimizeDeps: {
-      include: ['vue', '@nuxt/ui', '@nuxt/content'],
-    },
-  },
+  // vite: {
+  //   build: {
+  //     chunkSizeWarningLimit: 1000,
+  //     rollupOptions: {
+  //       output: {
+  //         manualChunks: (id) => {
+  //           if (id.includes('node_modules')) {
+  //             if (id.includes('@nuxt/ui'))
+  //               return 'nuxt-ui'
+  //             if (id.includes('@nuxt/content'))
+  //               return 'nuxt-content'
+  //             if (id.includes('vue'))
+  //               return 'vue'
+  //             return 'vendor'
+  //           }
+  //         },
+  //       },
+  //     },
+  //   },
+  //   optimizeDeps: {
+  //     include: ['vue', '@nuxt/ui', '@nuxt/content'],
+  //   },
+  // },
 
   // TypeScript config - disable type checking during dev
-  typescript: {
-    strict: false,
-    typeCheck: false, // Disable during dev untuk save memory
-  },
+  // typescript: {
+  //   strict: false,
+  //   typeCheck: false, // Disable during dev untuk save memory
+  // },
 
   // Component metadata - optimize
   componentMeta: {
@@ -99,7 +99,7 @@ export default defineNuxtConfig({
     customCollections: [
       {
         dir: './app/assets/icons',
-        prefix: 'teja',
+        prefix: 'jadu',
       },
     ],
   },

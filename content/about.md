@@ -23,3 +23,6 @@ Card content here
 
 Footer slot content
 ::
+
+::page-card{title="Tailwind CSS" description="Nuxt UI integrates with latest Tailwind CSS, bringing significant improvements." icon="i-jadu-teja2" to="https://tailwindcss.com/docs/v4-beta" target="\_blank"}
+::

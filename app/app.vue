@@ -5,16 +5,6 @@ import { id } from '@nuxt/ui/locale'
 <template>
   <NuxtRouteAnnouncer />
   <UApp :locale="id">
-    <div>
-      <UButton
-        icon="i-teja-teja2"
-        size="md"
-        color="primary"
-        variant="solid"
-      >
-        Button
-      </UButton>
-    </div>
     <UMain>
       <UContainer>
         <NuxtPage />
