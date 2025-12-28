@@ -27,20 +27,7 @@ export default defineNuxtConfig({
   //   },
   // },
 
-  // TypeScript config - disable type checking during dev
-  // typescript: {
-  //   strict: false,
-  //   typeCheck: false, // Disable during dev untuk save memory
-  // },
-
   // Component metadata - optimize
-  componentMeta: {
-    exclude: [
-      '**/node_modules/**',
-      '**/.nuxt/**',
-      '**/dist/**',
-    ],
-  },
 
   content: {
     database: {
