@@ -3,16 +3,29 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
 
   // Development optimizations
-  // vite: {
-  //   optimizeDeps: {
-  //     include: ['vue', '@nuxt/ui', '@nuxt/content'],
-  //   },
-  //   server: {
-  //     watch: {
-  //       ignored: ['**/node_modules/**', '**/.git/**', '**/.nuxt/**'],
-  //     },
-  //   },
-  // },
+  vite: {
+    build: {
+      chunkSizeWarningLimit: 1000,
+      rollupOptions: {
+        output: {
+          manualChunks: (id) => {
+            if (id.includes('node_modules')) {
+              if (id.includes('@nuxt/ui'))
+                return 'nuxt-ui'
+              if (id.includes('@nuxt/content'))
+                return 'nuxt-content'
+              if (id.includes('vue'))
+                return 'vue'
+              return 'vendor'
+            }
+          },
+        },
+      },
+    },
+    optimizeDeps: {
+      include: ['vue', '@nuxt/ui', '@nuxt/content'],
+    },
+  },
 
   // TypeScript config - disable type checking during dev
   typescript: {

@@ -3,10 +3,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "NODE_OPTIONS='--max-old-space-size=4096' nuxt build",
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' nuxt dev",
     "dev:light": "NODE_OPTIONS='--max-old-space-size=2048' nuxt dev --no-fork",
-    "generate": "nuxt generate",
+    "generate": "NODE_OPTIONS='--max-old-space-size=4096' nuxt generate",
     "preview": "nuxt preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
