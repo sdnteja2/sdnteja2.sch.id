@@ -107,6 +107,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'nuxt-studio',
     'nuxt-component-meta',
+    '@nuxtjs/seo',
   ],
   nitro: {
     cloudflare: {

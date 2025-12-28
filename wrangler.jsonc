@@ -1,25 +1,4 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sdnteja2-sch-id",
-  "compatibility_date": "2025-12-28",
-  "main": ".output/server/index.mjs",
-  "site": {
-    "bucket": ".output/public"
-  },
-  "observability": {
-    "enabled": true
-  },
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_id": "21086ffa-4f15-4181-8cb6-52dcb7f5c549",
-      "database_name": "teja2"
-    }
-  ],
-  "kv_namespaces": [
-    {
-      "binding": "KV",
-      "id": "1b481a3fd45e4b18865b02c9afba3ce0"
-    }
-  ]
+  "name": "sdnteja2-sch-id"
 }
