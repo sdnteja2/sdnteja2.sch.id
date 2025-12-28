@@ -3,42 +3,6 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
 
   // Development optimizations
-  vite: {
-    build: {
-      chunkSizeWarningLimit: 1000,
-      rollupOptions: {
-        output: {
-          manualChunks: (id) => {
-            if (id.includes('node_modules')) {
-              // Group UI libraries
-              if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
-                return 'ui-libs'
-              }
-              // Group Nuxt modules
-              if (id.includes('@nuxt/ui'))
-                return 'nuxt-ui'
-              if (id.includes('@nuxt/content'))
-                return 'nuxt-content'
-              // Group Vue core
-              if (id.includes('vue') && !id.includes('node_modules/@vue'))
-                return 'vue'
-              // Group utilities
-              if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
-                return 'utils'
-              }
-              // Group other vendor dependencies
-              if (!id.includes('vue') && !id.includes('@vue')) {
-                return 'vendor'
-              }
-            }
-          },
-        },
-      },
-    },
-    optimizeDeps: {
-      include: ['vue', '@nuxt/ui', '@nuxt/content'],
-    },
-  },
 
   // Component metadata - optimize
 
@@ -168,6 +132,34 @@ export default defineNuxtConfig({
       routes: ['/'],
     },
     preset: 'cloudflare_module',
+    rollupConfig: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            // Group UI libraries
+            if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
+              return 'ui-libs'
+            }
+            // Group Nuxt modules
+            if (id.includes('@nuxt/ui'))
+              return 'nuxt-ui'
+            if (id.includes('@nuxt/content'))
+              return 'nuxt-content'
+              // Group Vue core
+            if (id.includes('vue') && !id.includes('node_modules/@vue'))
+              return 'vue'
+              // Group utilities
+            if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
+              return 'utils'
+            }
+            // Group other vendor dependencies
+            if (!id.includes('vue') && !id.includes('@vue')) {
+              return 'vendor'
+            }
+          }
+        },
+      },
+    },
   },
   studio: {
     repository: {
