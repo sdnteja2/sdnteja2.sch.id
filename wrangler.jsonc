@@ -1,4 +1,16 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "sdnteja2-sch-id"
+  "name": "sdnteja2-sch-id",
+  "compatibility_date": "2025-12-28",
+  "main": ".output/server/index.mjs",
+  "site": {
+    "bucket": ".output/public"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_id": "21086ffa-4f15-4181-8cb6-52dcb7f5c549",
+      "database_name": "teja2"
+    }
+  ]
 }
