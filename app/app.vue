@@ -6,7 +6,8 @@ import { id } from '@nuxt/ui/locale'
   <NuxtRouteAnnouncer />
   <UApp :locale="id">
     <UMain>
-      <UContainer>
+      <UiHeader />
+      <UContainer class="my-24">
         <NuxtPage />
       </UContainer>
     </UMain>

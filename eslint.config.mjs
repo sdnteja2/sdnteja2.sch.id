@@ -7,7 +7,7 @@ export default withNuxt(
     formatters: {
       css: true, // Format CSS with Prettier
       html: true, // Format HTML with Prettier
-      markdown: true, // Format Markdown with Prettier
+      markdown: false, // Format Markdown with Prettier
       // Prettier will also sort Tailwind classes via prettier-plugin-tailwindcss
       prettierOptions: {
         plugins: ['prettier-plugin-tailwindcss'],
