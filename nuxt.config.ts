@@ -122,9 +122,13 @@ export default defineNuxtConfig({
         ],
       },
     },
+    compatibilityDate: '2025-12-12',
     experimental: {
       openAPI: true,
       websocket: true,
+    },
+    unenv: {
+      external: [],
     },
     prerender: {
       crawlLinks: true,
@@ -132,35 +136,53 @@ export default defineNuxtConfig({
       ignore: ['/api/**', '/admin/**'],
       routes: ['/'],
     },
-    preset: 'cloudflare_module',
-    rollupConfig: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // Group UI libraries
-            if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
-              return 'ui-libs'
-            }
-            // Group Nuxt modules
-            if (id.includes('@nuxt/ui'))
-              return 'nuxt-ui'
-            if (id.includes('@nuxt/content'))
-              return 'nuxt-content'
-              // Group Vue core
-            if (id.includes('vue') && !id.includes('node_modules/@vue'))
-              return 'vue'
-              // Group utilities
-            if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
-              return 'utils'
-            }
-            // Group other vendor dependencies
-            if (!id.includes('vue') && !id.includes('@vue')) {
-              return 'vendor'
-            }
-          }
-        },
+    app: {
+      head: {
+        link: [
+        // Preconnect ke CDN untuk reduce TTFB
+          { rel: 'preconnect', href: 'https://res.cloudinary.com', crossorigin: 'anonymous' },
+          { rel: 'dns-prefetch', href: 'https://res.cloudinary.com' },
+          { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: 'anonymous' },
+          { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+        ],
       },
     },
+    site: {
+      url: 'https://sdnteja2.sch.id/',
+      name: 'SDN TEJA II',
+      description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
+      defaultLocale: 'id', // not needed if you have @nuxtjs/i18n installed
+      themeColor: '#208bee',
+    },
+    preset: 'cloudflare_module',
+    // rollupConfig: {
+    //   output: {
+    //     manualChunks: (id) => {
+    //       if (id.includes('node_modules')) {
+    //         // Group UI libraries
+    //         if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
+    //           return 'ui-libs'
+    //         }
+    //         // Group Nuxt modules
+    //         if (id.includes('@nuxt/ui'))
+    //           return 'nuxt-ui'
+    //         if (id.includes('@nuxt/content'))
+    //           return 'nuxt-content'
+    //           // Group Vue core
+    //         if (id.includes('vue') && !id.includes('node_modules/@vue'))
+    //           return 'vue'
+    //           // Group utilities
+    //         if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
+    //           return 'utils'
+    //         }
+    //         // Group other vendor dependencies
+    //         if (!id.includes('vue') && !id.includes('@vue')) {
+    //           return 'vendor'
+    //         }
+    //       }
+    //     },
+    //   },
+    // },
   },
   studio: {
     repository: {
