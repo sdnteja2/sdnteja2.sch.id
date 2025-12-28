@@ -1,6 +1,7 @@
 # Nuxt Content Starter
 
-Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn more.
+Look at the [Nuxt Content documentation](https://content.nuxt.com) to learn
+more.
 
 ## Setup
 
@@ -72,4 +73,6 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Check out the
+[deployment documentation](https://nuxt.com/docs/getting-started/deployment) for
+more information.

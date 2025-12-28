@@ -1,0 +1,48 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 100,
+  "trailingComma": "es5",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindConfig": "./tailwind.config.ts",
+  "tailwindFunctions": ["clsx", "cn", "cva", "tw", "twMerge", "twJoin"],
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "options": {
+        "parser": "vue",
+        "vueIndentScriptAndStyle": false
+      }
+    },
+    {
+      "files": ["*.json", "*.jsonc"],
+      "options": {
+        "printWidth": 120
+      }
+    },
+    {
+      "files": ["*.md", "*.mdx"],
+      "options": {
+        "parser": "markdown",
+        "proseWrap": "preserve",
+        "printWidth": 100,
+        "embeddedLanguageFormatting": "off"
+      }
+    },
+    {
+      "files": ["content/**/*.md"],
+      "options": {
+        "parser": "markdown",
+        "proseWrap": "preserve",
+        "printWidth": 100,
+        "embeddedLanguageFormatting": "off",
+        "htmlWhitespaceSensitivity": "ignore"
+      }
+    }
+  ]
+}

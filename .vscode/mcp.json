@@ -1,0 +1,24 @@
+{
+  "servers": {
+    "nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
+    },
+
+    "nuxt-ui": {
+      "type": "http",
+      "url": "https://ui.nuxt.com/mcp"
+    },
+    "nuxt-seo": {
+      "type": "http",
+      "url": "https://nuxtseo.com/mcp"
+    },
+    "hugeicons": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@hugeicons/mcp-server"
+      ]
+    }
+  }
+}

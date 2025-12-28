@@ -1,0 +1,46 @@
+{
+  "name": "sdnteja2-sch-id",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "NODE_OPTIONS='--max-old-space-size=4096' nuxt dev",
+    "dev:light": "NODE_OPTIONS='--max-old-space-size=2048' nuxt dev --no-fork",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{json,html,css}\"",
+    "format:check": "prettier --check \"**/*.{json,html,css}\"",
+    "format:tw": "prettier --write \"app/**/*.vue\"",
+    "clean": "rm -rf .nuxt node_modules/.cache"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.9.0",
+    "@nuxt/eslint": "^1.12.1",
+    "@nuxt/hints": "1.0.0-alpha.5",
+    "@nuxt/image": "2.0.0",
+    "@nuxt/scripts": "0.13.2",
+    "@nuxt/ui": "4.3.0",
+    "@nuxtjs/seo": "^3.3.0",
+    "@unhead/vue": "^2.0.3",
+    "@vueuse/nuxt": "14.1.0",
+    "better-sqlite3": "^12.5.0",
+    "motion-v": "^1.7.4",
+    "nuxt": "^4.2.2",
+    "nuxt-llms": "^0.1.3",
+    "nuxt-studio": "1.0.0-beta.3",
+    "typescript": "^5.9.3",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.7.3",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/youtube": "^0.1.2",
+    "eslint": "^9.39.2",
+    "eslint-plugin-format": "^1.1.0",
+    "nuxt-component-meta": "^0.16.0",
+    "prettier": "^3.7.4",
+    "prettier-plugin-tailwindcss": "^0.7.2"
+  }
+}

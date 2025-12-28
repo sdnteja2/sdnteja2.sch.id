@@ -1,0 +1,13 @@
+# Dependencies
+node_modules
+.nuxt
+.output
+dist
+
+# MDC Content (Nuxt Content with custom syntax)
+content/**/*.md
+*.md
+
+# Generated files
+.nitro
+.cache
