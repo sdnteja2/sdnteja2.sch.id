@@ -1,0 +1,336 @@
+# PENDIDIKAN AGAMA ISLAM (PAI)
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas I
+  kelas: '1'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BS-KLS-I.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas I
+  kelas: '1'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BG-KLS-I.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas II
+  kelas: '2'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BS-KLS-II.pdf'
+  tipe: Buku Siswa
+
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas III
+  kelas: '3'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam_BS_KLS_III.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas III
+  kelas: '3'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam_BG_KLS_III.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas IV
+  kelas: '4'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BS-KLS-IV.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas IV
+  kelas: '4'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BG-KLS-IV.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas V
+  kelas: '5'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BS-KLS-V.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas V
+  kelas: '5'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam-BG-KLS-V.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Agama Islam dan Budi Pekerti untuk SD Kelas VI
+  kelas: '6'
+  pelajaran: PAI
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Islam_BS_KLS_VI.pdf'
+  tipe: Buku Siswa
+
+# BAHASA INDONESIA
+- title: 'Bahasa Indonesia: Aku Bisa! untuk SD Kelas I (Edisi Revisi)'
+  kelas: '1'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa_Indonesia_BS_KLS_I_Rev.pdf'
+  tipe: Buku Siswa
+
+- title: 'Buku Panduan Guru Bahasa Indonesia: Aku Bisa! untuk SD Kelas I (Edisi Revisi)'
+  kelas: '1'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa_Indonesia_BG_KLS_I_Rev.pdf'
+  tipe: Buku Guru
+
+- title: 'Bahasa Indonesia: Keluargaku Unik untuk SD Kelas II (Edisi Revisi)'
+  kelas: '2'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Indonesia_BS_KLS_II_Rev.pdf'
+  tipe: Buku Siswa
+
+- title: 'Bahasa Indonesia: Kawan Seiring untuk SD Kelas III'
+  kelas: '3'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa-Indonesia-BS-KLS-III.pdf'
+  tipe: Buku Siswa
+
+- title: 'Buku Panduan Guru Bahasa Indonesia: Kawan Seiring untuk SD Kelas III'
+  kelas: '3'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa-Indonesia-BG-KLS-III.pdf'
+  tipe: Buku Guru
+
+- title: 'Bahasa Indonesia: Lihat Sekitar untuk SD Kelas IV (Edisi Revisi)'
+  kelas: '4'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa_Indonesia_BS_KLS_IV_Rev.pdf'
+  tipe: Buku Siswa
+
+- title: 'Bahasa Indonesia: Bergerak Bersama untuk SD Kelas V'
+  kelas: '5'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa-Indonesia-BS-KLS-V.pdf'
+  tipe: Buku Siswa
+
+- title: 'Bahasa Indonesia: Anak-Anak yang Mengubah Dunia untuk SD Kelas VI'
+  kelas: '6'
+  pelajaran: Bahasa Indonesia
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Bahasa-Indonesia-BG-KLS-VI.pdf'
+  tipe: Buku Guru
+
+# MATEMATIKA
+- title: Matematika untuk SD/MI Kelas I
+  kelas: '1'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-BS-KLS-I.pdf'
+  tipe: Buku Siswa
+
+- title: Matematika untuk SD/MI Kelas II
+  kelas: '2'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-BS-KLS-II.pdf'
+  tipe: Buku Siswa
+
+- title: Matematika untuk SD/MI Kelas III
+  kelas: '3'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_III.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Matematika untuk SD/MI Kelas III
+  kelas: '3'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika_BG_KLS_III.pdf'
+  tipe: Buku Guru
+
+- title: Matematika untuk SD/MI Kelas IV
+  kelas: '4'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-BS-KLS-IV.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Matematika untuk SD/MI Kelas IV
+  kelas: '4'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-BG-KLS-IV.pdf'
+  tipe: Buku Guru
+
+- title: Buku Panduan Guru Matematika untuk SD/MI Kelas V
+  kelas: '5'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-BG-KLS-V.pdf'
+  tipe: Buku Guru
+
+- title: Belajar Bersama Temanmu Matematika untuk SD Kelas V Volume 2
+  kelas: '5'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika-Vol-2-BS-KLS-V.pdf'
+  tipe: Buku Siswa
+
+- title: Matematika untuk SD/MI Kelas VI
+  kelas: '6'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika_BS_KLS_VI.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Matematika untuk SD Kelas VI - Volume 1
+  kelas: '6'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika_BG_KLS_VI_Vol_1_Lc.pdf'
+  tipe: Buku Guru
+
+- title: Buku Panduan Guru Matematika untuk SD Kelas VI - Volume 2
+  kelas: '6'
+  pelajaran: Matematika
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Matematika_BG_KLS_VI_Vol_2_Lc.pdf'
+  tipe: Buku Guru
+
+# ILMU PENGETAHUAN ALAM DAN SOSIAL (IPAS)
+- title: Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas III
+  kelas: '3'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS-BS-KLS-III.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas III
+  kelas: '3'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS-BG-KLS-III.pdf'
+  tipe: Buku Guru
+
+- title: Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV (Edisi Revisi)
+  kelas: '4'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_IV_Rev.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas IV (Edisi Revisi)
+  kelas: '4'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS_BG_KLS_IV_Rev.pdf'
+  tipe: Buku Guru
+
+- title: Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V (Edisi Revisi)
+  kelas: '5'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS_BS_KLS_V_Rev.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas V
+  kelas: '5'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS-BG-KLS-V.pdf'
+  tipe: Buku Guru
+
+- title: Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas VI
+  kelas: '6'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS-BS-KLS-VI.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Ilmu Pengetahuan Alam dan Sosial untuk SD Kelas VI
+  kelas: '6'
+  pelajaran: IPAS
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/IPAS-BG-KLS-VI.pdf'
+  tipe: Buku Guru
+
+# PENDIDIKAN PANCASILA
+- title: Pendidikan Pancasila untuk SD/MI Kelas I
+  kelas: '1'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-I.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas I
+  kelas: '1'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-I.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Pancasila untuk SD/MI Kelas II
+  kelas: '2'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-II.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas II
+  kelas: '2'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-II.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Pancasila untuk SD/MI Kelas III
+  kelas: '3'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-III.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas III
+  kelas: '3'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-III.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Pancasila untuk SD/MI Kelas IV
+  kelas: '4'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-IV.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas IV
+  kelas: '4'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-IV.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Pancasila untuk SD/MI Kelas V
+  kelas: '5'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-V.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas V
+  kelas: '5'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-V.pdf'
+  tipe: Buku Guru
+
+- title: Pendidikan Pancasila untuk SD/MI Kelas VI (Edisi Revisi)
+  kelas: '6'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BS-KLS-VI-Rev.pdf'
+  tipe: Buku Siswa
+
+- title: Buku Panduan Guru Pendidikan Pancasila untuk SD/MI Kelas VI (Edisi Revisi)
+  kelas: '6'
+  pelajaran: Pendidikan Pancasila
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Pendidikan-Pancasila-BG-KLS-VI-Rev.pdf'
+  tipe: Buku Guru
+
+# BAHASA INGGRIS
+- title: 'Bahasa Inggris: English for Nusantara Kids untuk SD Kelas III'
+  kelas: '3'
+  pelajaran: Bahasa Inggris
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Inggris_FN_BS_KLS_III.pdf'
+  tipe: Buku Siswa
+
+- title: 'Bahasa Inggris: English for Nusantara Kids untuk SD Kelas IV'
+  kelas: '4'
+  pelajaran: Bahasa Inggris
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Inggris_FN_BS_KLS_IV.pdf'
+  tipe: Buku Siswa
+
+- title: 'Bahasa Inggris: English for Nusantara Kids untuk SD Kelas V'
+  kelas: '5'
+  pelajaran: Bahasa Inggris
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Inggris_FN_BS_KLS_V.pdf'
+  tipe: Buku Siswa
+
+# SENI
+- title: Buku Panduan Guru Seni Musik untuk SD Kelas I (Edisi Revisi)
+  kelas: '1'
+  pelajaran: Seni Musik
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Seni_Musik_BG_KLS_I_Rev.pdf'
+  tipe: Buku Guru
+
+- title: Buku Panduan Guru Seni Rupa untuk SD Kelas I (Edisi Revisi)
+  kelas: '1'
+  pelajaran: Seni Rupa
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Seni_Rupa_BG_KLS_I_Rev.pdf'
+  tipe: Buku Guru
+
+- title: Buku Panduan Guru Seni Rupa untuk SD Kelas IV (Edisi Revisi)
+  kelas: '4'
+  pelajaran: Seni Rupa
+  link: 'https://static.buku.kemdikbud.go.id/content/pdf/bukuteks/kurikulum21/Seni_Rupa_BG_KLS_IV_Rev.pdf'
+  tipe: Buku Guru

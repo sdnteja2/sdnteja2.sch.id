@@ -16,6 +16,7 @@ const items = computed<NavigationMenuItem[]>(() => {
   return navigation.value.map(item => ({
     label: item.title || 'Untitled',
     to: item.path,
+    icon: item?.icon || 'i-jadu-teja2', // Ambil icon dari frontmatter navigation
     onClick: () => {
       isOpen.value = false
     },
@@ -30,14 +31,6 @@ const links = [{
   label: 'Docs',
   icon: 'i-lucide-book',
   to: '/docs/getting-started',
-}, {
-  label: 'Components',
-  icon: 'i-lucide-box',
-  to: '/docs/components',
-}, {
-  label: 'Showcase',
-  icon: 'i-lucide-presentation',
-  to: '/showcase',
 }]
 
 const searchTerm = ref('')
@@ -83,7 +76,7 @@ defineShortcuts({
                 />
 
                 <template #content>
-                  <UNavigationMenu :items="items" orientation="vertical" class="p-2 min-w-48" />
+                  <UNavigationMenu highlight :items="items" orientation="vertical" class="p-2 min-w-48" />
                 </template>
               </UPopover>
             </div>

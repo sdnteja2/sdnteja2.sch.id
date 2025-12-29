@@ -43,7 +43,7 @@ const tableData = computed(() => {
 const statsCards = computed(() => [
   {
     key: 'total',
-    title: 'Total Siswa',
+    title: 'Total',
     value: totalSiswa.value,
     bgClass: 'bg-blue-50 dark:bg-blue-900',
   },
@@ -112,8 +112,8 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'NIS',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-arrow-up-05'
-            : 'i-hugeicons-arrow-down-05'
+            ? 'i-hugeicons-sorting-02'
+            : 'i-hugeicons-sorting-01'
           : 'i-hugeicons-vertical-scroll-point',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
@@ -131,8 +131,8 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'Nama',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-arrow-up-05'
-            : 'i-hugeicons-arrow-down-05'
+            ? 'i-hugeicons-sorting-02'
+            : 'i-hugeicons-sorting-01'
           : 'i-hugeicons-vertical-scroll-point',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
@@ -157,8 +157,8 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'Usia',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-arrow-up-05'
-            : 'i-hugeicons-arrow-down-05'
+            ? 'i-hugeicons-sorting-02'
+            : 'i-hugeicons-sorting-01'
           : 'i-hugeicons-vertical-scroll-point',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
