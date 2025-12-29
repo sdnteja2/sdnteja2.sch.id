@@ -125,13 +125,10 @@ export default defineNuxtConfig({
     compatibilityDate: '2025-12-12',
     experimental: {
       openAPI: false,
-      websocket: false,
+      websocket: true,
     },
     minify: true,
     sourceMap: false,
-    unenv: {
-      external: [],
-    },
     prerender: {
       crawlLinks: true,
       failOnError: false,
@@ -168,6 +165,22 @@ export default defineNuxtConfig({
     //     },
     //   },
     // },
+  },
+  routeRules: {
+    // Static pages - prerender untuk LCP optimal
+    '/': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+    '/guru': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+
+    // Stale-while-revalidate untuk konten dinamis
+    '/artikel/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } }, // 1 jam
+    '/berita/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+    '/kegiatan/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } }, // 2 jam
+    '/guru/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } },
+
+    // API routes
+    '/api/**': {
+      cors: true,
+    },
   },
   sitemap: {
     zeroRuntime: true,
