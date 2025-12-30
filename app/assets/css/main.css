@@ -5,7 +5,7 @@
 @config '../../../tailwind.config.ts';
 
 @utility headLine {
-  @apply text-center text-5xl leading-8 font-bold md:text-6xl;
+  @apply text-center text-5xl leading-snug font-bold md:text-6xl;
 }
 
 @theme {
@@ -74,7 +74,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-heading leading-8 wrap-break-word;
+  @apply font-heading leading-snug wrap-break-word;
 }
 
 /* Optimize font display untuk reduce CLS */

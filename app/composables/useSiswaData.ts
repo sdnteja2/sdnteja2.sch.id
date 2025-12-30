@@ -1,3 +1,4 @@
+// app/composables/useSiswaData.ts
 /* eslint-disable no-console */
 export interface SiswaData {
   id?: number

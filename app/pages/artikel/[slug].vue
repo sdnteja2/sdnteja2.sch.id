@@ -1,3 +1,4 @@
+// app/pages/artikel/[slug].vue
 <script lang="ts" setup>
 const route = useRoute()
 
@@ -36,11 +37,18 @@ useSchemaOrg([
     },
   }),
 ])
+const tocOpen = ref(false) // atau true jika default terbuka
+
+function handleMove() {
+  if (window.innerWidth < 1024) { // asumsikan mobile < 1024px
+    tocOpen.value = false
+  }
+}
 </script>
 
 <template>
-  <div>
-    <UContainer>
+  <UContainer>
+    <UPage>
       <div class="max-w-4xl mx-auto ">
         <div class="mb-4">
           <UiBreadcrumb />
@@ -67,6 +75,20 @@ useSchemaOrg([
           <ContentRenderer v-if="artikelPage" :value="artikelPage" />
         </article>
       </div>
-    </UContainer>
-  </div>
+      <template v-if="artikelPage?.body?.toc?.links?.length" #right>
+        <UContentToc
+          v-model:open="tocOpen"
+          :ui="{
+            root: 'max-w-full mx-0 px-0 sm:px-2 top-24', // hilangkan -mx-4 px-4 di mobile
+            container: 'pt-4 pb-2.5', // sesuaikan jika perlu
+          }"
+
+          :links="artikelPage.body.toc.links"
+
+          title="Daftar Isi"
+          @move="handleMove"
+        />
+      </template>
+    </UPage>
+  </UContainer>
 </template>

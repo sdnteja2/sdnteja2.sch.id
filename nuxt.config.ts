@@ -1,11 +1,6 @@
-/* eslint-disable node/prefer-global/process */
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
-
-  // Development optimizations
-
-  // Component metadata - optimize
 
   content: {
     database: {
@@ -139,54 +134,77 @@ export default defineNuxtConfig({
     },
 
     preset: 'cloudflare_module',
-    rollupConfig: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('node_modules')) {
-            // Group UI libraries
-            if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
-              return 'ui-libs'
-            }
-            // Group Nuxt modules
-            if (id.includes('@nuxt/ui'))
-              return 'nuxt-ui'
-            if (id.includes('@nuxt/content'))
-              return 'nuxt-content'
-              // Group Vue core
-            if (id.includes('vue') && !id.includes('node_modules/@vue'))
-              return 'vue'
-              // Group utilities
-            if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
-              return 'utils'
-            }
-            // Group other vendor dependencies
-            if (!id.includes('vue') && !id.includes('@vue')) {
-              return 'vendor'
-            }
-          }
-        },
-      },
-    },
   },
   googleTranslate: {
     defaultLanguage: 'id',
     supportedLanguages: ['id', 'en', 'es', 'ru'],
   },
-  routeRules: {
-    // Static pages - prerender untuk LCP optimal
-    '/': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
-    '/guru': { prerender: true, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              // 1. Kelompokkan UI & Animasi (Modul paling berat di list Anda)
+              if (id.includes('@nuxt/ui') || id.includes('motion-v') || id.includes('@tailwindcss')) {
+                return 'vendor-ui'
+              }
 
-    // Stale-while-revalidate untuk konten dinamis
-    '/artikel/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } }, // 1 jam
-    '/berita/**': { swr: 3600, headers: { 'cache-control': 's-maxage=3600, stale-while-revalidate=7200' } },
-    '/kegiatan/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } }, // 2 jam
-    '/guru/**': { swr: 7200, headers: { 'cache-control': 's-maxage=7200, stale-while-revalidate=14400' } },
+              // 2. Kelompokkan Nuxt Content & Studio
+              if (id.includes('@nuxt/content') || id.includes('nuxt-studio')) {
+                return 'vendor-content'
+              }
+
+              // 3. Kelompokkan Charts & Data Viz
+              if (id.includes('nuxt-charts') || id.includes('chart.js')) {
+                return 'vendor-charts'
+              }
+
+              // 4. Kelompokkan Utilities (VueUse & Unhead)
+              if (id.includes('@vueuse') || id.includes('@unhead')) {
+                return 'vendor-utils'
+              }
+
+              // 5. Kelompokkan SEO & Scripts
+              if (id.includes('@nuxtjs/seo') || id.includes('@nuxt/scripts')) {
+                return 'vendor-marketing'
+              }
+
+              // 6. Vendor umum lainnya (kecuali core Nuxt/Vue agar tidak rusak)
+              if (!id.includes('vue') && !id.includes('nuxt') && !id.includes('nitro')) {
+                return 'vendor-others'
+              }
+            }
+          },
+        },
+      },
+    },
+  },
+
+  // Mencegah masalah error "manualChunks" pada sisi server (SSR)
+  hooks: {
+    'vite:extendConfig': function (config, { isServer }) {
+      if (isServer && config.build?.rollupOptions?.output) {
+        if (!Array.isArray(config.build.rollupOptions.output)) {
+          config.build.rollupOptions.output.manualChunks = undefined
+        }
+      }
+    },
+  },
+
+  routeRules: {
+    // Static pages - Prerender saat build time
+    '/': { prerender: true },
+    '/guru': { prerender: true },
+
+    // SWR - Otomatis mengatur cache-control & payload extraction
+    '/artikel/**': { swr: 3600 },
+    '/berita/**': { swr: 3600 },
+    '/kegiatan/**': { swr: 7200 },
+    '/guru/**': { swr: 7200 },
 
     // API routes
-    '/api/**': {
-      cors: true,
-    },
+    '/api/**': { cors: true },
   },
   sitemap: {
     zeroRuntime: true,
@@ -220,12 +238,13 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     cloudinary: {
-      apiKey: process.env.NUXT_CLOUDINARY_API_KEY || '747436524922873',
-      apiSecret: process.env.NUXT_CLOUDINARY_API_SECRET || 'dunxYcRv6GQls_MqTPycjkJQH3E',
-      cloudName: process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl',
+      // Biarkan kosong atau dummy, Nuxt akan mengambil dari NUXT_CLOUDINARY_API_KEY
+      apiKey: '',
+      apiSecret: '',
+      cloudName: '',
     },
     public: {
-      cloudinaryBaseUrl: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl'}`,
+      cloudinaryBaseUrl: '', // Akan diisi oleh NUXT_PUBLIC_CLOUDINARY_BASE_URL
     },
   },
 })

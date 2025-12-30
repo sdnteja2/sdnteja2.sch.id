@@ -1,3 +1,4 @@
+// app/components/Artikel/List.server.vue
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 

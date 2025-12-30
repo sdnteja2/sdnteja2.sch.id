@@ -1,112 +1,78 @@
+// app/pages/kegiatan/[slug].vue
 <script lang="ts" setup>
-// Ambil data berdasarkan slug dari route
 const route = useRoute()
-const { data: kegiatanPage } = await useAsyncData(`Kegiatan-${route.path}`, async () => {
-  return await queryCollection('kegiatan').path(route.path).first()
+const img = useImage()
+
+// 1. Ambil data halaman (SSR Friendly)
+const { data: kegiatanPage } = await useAsyncData(`Kegiatan-${route.path}`, () => {
+  return queryCollection('kegiatan').path(route.path).first()
 })
 
-// State untuk gambar
-interface Image {
-  src: string
-  alt?: string
-}
+// 2. Gunakan composable (Hapus useLazyFetch manual di bawahnya)
+// Composable ini sudah menangani status, data, dan error
+const {
+  data: images,
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  pending: imagesLoading,
+  error: imagesError,
+} = useKegiatanImages(computed(() => kegiatanPage.value?.tag))
 
-// Menggunakan useLazyFetch untuk mengambil gambar sesuai dokumentasi
-const { status, data: images, error } = await useLazyFetch('/api/get-images', {
-  params: {
-    tag: computed(() => kegiatanPage.value?.tag),
-  },
-  default: () => [],
-  transform: (response) => {
-    if (!Array.isArray(response)) {
-      // eslint-disable-next-line unicorn/prefer-type-error
-      throw new Error('Respons API tidak valid.')
-    }
-    return response as Image[]
-  },
-  watch: [computed(() => kegiatanPage.value?.tag)],
-})
-
-// Menangani kasus ketika tag tidak ada
+// Menangani kasus ketika tag tidak ada (Opsional, karena sudah dihandle di composable)
 watch(() => kegiatanPage.value, (newValue) => {
   if (newValue && !newValue.tag) {
-    error.value = new Error('Tag tidak ditemukan pada halaman ini.')
+    imagesError.value = new Error('Tag tidak ditemukan pada halaman ini.')
   }
 }, { immediate: true })
 
-const img = useImage()
-
-// State untuk menampilkan gambar dalam mode fullscreen
+// State untuk UI (Fullscreen)
 const showFullscreen = ref(false)
 const selectedImage = ref('')
 const currentImageIndex = ref(0)
-const fullscreenImageLoading = ref(true) // Track loading state for fullscreen image
+const fullscreenImageLoading = ref(true)
 
-// Fungsi untuk menampilkan gambar dalam mode fullscreen
 function openFullscreen(image: string) {
   selectedImage.value = image
   showFullscreen.value = true
-  fullscreenImageLoading.value = true // Reset loading state
-  document.body.style.overflow = 'hidden' // Mencegah scroll pada body
-
-  // Dapatkan indeks gambar yang sedang ditampilkan
+  fullscreenImageLoading.value = true
+  document.body.style.overflow = 'hidden'
   currentImageIndex.value = images.value?.findIndex(img => img.src === image) || 0
 }
 
-// Fungsi untuk menutup gambar fullscreen
 function closeFullscreen() {
   showFullscreen.value = false
-  document.body.style.overflow = 'auto' // Mengembalikan scroll pada body
+  document.body.style.overflow = 'auto'
 }
 
-// Fungsi untuk navigasi ke gambar sebelumnya
 function navigatePrev() {
   if (currentImageIndex.value > 0) {
-    fullscreenImageLoading.value = true // Set loading saat navigasi
+    fullscreenImageLoading.value = true
     currentImageIndex.value--
     selectedImage.value = images.value?.[currentImageIndex.value]?.src || ''
   }
 }
 
-// Fungsi untuk navigasi ke gambar berikutnya
 function navigateNext() {
   if (images.value && currentImageIndex.value < images.value.length - 1) {
-    fullscreenImageLoading.value = true // Set loading saat navigasi
+    fullscreenImageLoading.value = true
     currentImageIndex.value++
     selectedImage.value = images.value?.[currentImageIndex.value]?.src || ''
   }
 }
 
-// Handler untuk ketika gambar fullscreen selesai dimuat
 function onFullscreenImageLoad() {
   fullscreenImageLoading.value = false
 }
 
-// Computed properties untuk memeriksa apakah tombol navigasi harus dinonaktifkan
 const isPrevDisabled = computed(() => currentImageIndex.value <= 0)
-const isNextDisabled = computed(() => {
-  if (!images.value)
-    return true
-  return currentImageIndex.value >= images.value.length - 1
-})
+const isNextDisabled = computed(() => !images.value || currentImageIndex.value >= images.value.length - 1)
 
+// SEO & Meta
 useHead({
   title: kegiatanPage?.value?.title,
-  titleTemplate: '%s %separator %siteName',
-  templateParams: {
-    separator: '|',
-    siteName: 'SDN TEJA II',
-  },
-})
-useSeoMeta({
-  title: kegiatanPage?.value?.title,
-  description: kegiatanPage?.value?.description,
-  twitterTitle: kegiatanPage?.value?.title,
-  twitterDescription: kegiatanPage?.value?.description,
+  titleTemplate: '%s | SDN TEJA II',
 })
 
-defineOgImageComponent('OgImage', {
-  page: 'Kegiatan',
+useSeoMeta({
   title: kegiatanPage?.value?.title,
   description: kegiatanPage?.value?.description,
 })

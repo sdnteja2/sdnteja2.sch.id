@@ -1,3 +1,4 @@
+// server/api/get-images.ts
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
 
