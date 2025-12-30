@@ -2,7 +2,7 @@ import { defineCollection, defineContentConfig } from '@nuxt/content'
 import { z } from 'zod'
 // Reusable Schema Components
 const SocialLink = z.object({
-  icon: z.string().editor({ input: 'icon' }),
+  icon: z.string(),
   link: z.string(),
   alt: z.string(),
 })
@@ -58,7 +58,7 @@ export default defineContentConfig({
         lengkap: z.string(),
         catatan: z.string(),
         kelas: z.string(),
-        foto: z.string().editor({ input: 'media' }),
+        foto: z.string(),
         jabatan: z.string(),
         pendidikan: z.string(),
         pelatihan: z.array(Pelatihan),
@@ -77,7 +77,7 @@ export default defineContentConfig({
         description: z.string(),
         author: z.string(),
         date: z.date(),
-        image: z.string().editor({ input: 'media' }),
+        image: z.string(),
         tags: z.array(z.string()),
       }),
     }),
@@ -93,7 +93,7 @@ export default defineContentConfig({
         description: z.string(),
         date: z.date(),
         tag: z.string(),
-        cover: z.string().editor({ input: 'media' }),
+        cover: z.string(),
       }),
     }),
 
@@ -110,7 +110,7 @@ export default defineContentConfig({
       indexes: [
         { columns: ['kelas'] },
         { columns: ['pelajaran'] },
-        { columns: ['idVideo'], unique: true },
+        { columns: ['idVideo'] },
         { columns: ['kelas', 'pelajaran'], name: 'idx_kelas_pelajaran' },
       ],
     }),

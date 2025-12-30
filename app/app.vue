@@ -7,7 +7,7 @@ import { id } from '@nuxt/ui/locale'
   <NuxtRouteAnnouncer />
   <UApp :locale="id">
     <UMain>
-      <UiNav />
+      <UiHeader />
       <div class="py-22  md:py-26">
         <NuxtPage />
       </div>

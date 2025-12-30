@@ -21,6 +21,13 @@ export default defineNuxtConfig({
       bindingName: 'DB', // Gunakan binding yang sama dengan NuxtHub
       type: 'd1',
     },
+    build: {
+      markdown: {
+        toc: {
+          depth: 2,
+        },
+      },
+    },
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },

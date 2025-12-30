@@ -23,8 +23,91 @@ const items = computed<NavigationMenuItem[]>(() => {
   }))
 })
 
-const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
+const { data: files } = await useLazyAsyncData('search-all', () => {
+  return Promise.all([
+    // Markdown collections
+    queryCollectionSearchSections('artikel'),
+    queryCollectionSearchSections('berita'),
+    queryCollectionSearchSections('content'),
+    // YAML collections
+    queryCollection('guru').all(),
+    queryCollection('kegiatan').all(),
+  ])
+}, {
   server: false,
+  transform: (data) => {
+    const [artikelData, beritaData, contentData, guruData, kegiatanData] = data
+
+    // Helper function for clean URLs
+    const cleanPath = (path: string) => {
+      if (!path) return '/'
+      let cleanedPath = path.replace(/\.(yml|yaml|md)$/, '').replace(/\/\d+\./, '/')
+      return cleanedPath.startsWith('/') ? cleanedPath : `/${cleanedPath}`
+    }
+
+    // Default icons for each type
+    const getIconByType = (type: string) => {
+      switch (type) {
+        case 'artikel': return 'solar:document-add-linear'
+        case 'berita': return 'solar:clipboard-linear'
+        case 'guru': return 'solar:user-linear'
+        case 'kegiatan': return 'solar:gallery-wide-linear'
+        case 'content': return 'solar:home-angle-linear'
+        default: return 'i-lucide-file'
+      }
+    }
+
+    // Helper function for type labels (without emojis)
+    const getTypeLabel = (type: string) => {
+      switch (type) {
+        case 'artikel': return 'Artikel'
+        case 'berita': return 'Berita'
+        case 'guru': return 'Guru'
+        case 'kegiatan': return 'Kegiatan'
+        case 'content': return 'Halaman'
+        default: return 'Konten'
+      }
+    }
+
+    return [
+      ...(artikelData || []).map((item: any) => ({ 
+        ...item, 
+        type: 'artikel',
+        icon: item.icon || getIconByType('artikel')
+      })),
+      ...(beritaData || []).map((item: any) => ({ 
+        ...item, 
+        type: 'berita',
+        icon: item.icon || getIconByType('berita')
+      })),
+      ...(contentData || []).map((item: any) => ({ 
+        ...item, 
+        type: 'content',
+        icon: item.icon || getIconByType('content')
+      })),
+      // Transform YAML data to match search format
+      ...(guruData || []).map((item: any) => ({
+        id: item._path || item.path || item.id,
+        title: item.nama || item.title,
+        titles: [getTypeLabel('guru'), item.jabatan || '', item.kelas || ''].filter(Boolean),
+        level: 1,
+        content: `${item.nama || ''} ${item.lengkap || ''} ${item.catatan || ''} ${item.jabatan || ''} ${item.pendidikan || ''}`.trim(),
+        type: 'guru',
+        icon: getIconByType('guru'),
+        to: cleanPath(item._path || item.path || item.id)
+      })),
+      ...(kegiatanData || []).map((item: any) => ({
+        id: item._path || item.path || item.id,
+        title: item.title,
+        titles: [getTypeLabel('kegiatan'), item.tag || ''].filter(Boolean),
+        level: 1,
+        content: `${item.title || ''} ${item.description || ''} ${item.tag || ''}`.trim(),
+        type: 'kegiatan',
+        icon: getIconByType('kegiatan'),
+        to: cleanPath(item._path || item.path || item.id)
+      })),
+    ]
+  },
 })
 
 const links = [{

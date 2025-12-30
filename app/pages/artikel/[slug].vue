@@ -83,7 +83,7 @@ function handleMove() {
             container: 'pt-4 pb-2.5', // sesuaikan jika perlu
           }"
 
-          :links="artikelPage.body.toc.links"
+          :links="artikelPage.body.toc.links.map(link => ({ ...link, children: [] }))"
 
           title="Daftar Isi"
           @move="handleMove"
