@@ -1,3 +1,4 @@
+/* eslint-disable node/prefer-global/process */
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
@@ -108,6 +109,7 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@nuxt/scripts',
     '@nuxt/hints',
+    'nuxt-google-translate',
   ],
   nitro: {
     cloudflare: {
@@ -137,34 +139,38 @@ export default defineNuxtConfig({
     },
 
     preset: 'cloudflare_module',
-    // rollupConfig: {
-    //   output: {
-    //     manualChunks: (id) => {
-    //       if (id.includes('node_modules')) {
-    //         // Group UI libraries
-    //         if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
-    //           return 'ui-libs'
-    //         }
-    //         // Group Nuxt modules
-    //         if (id.includes('@nuxt/ui'))
-    //           return 'nuxt-ui'
-    //         if (id.includes('@nuxt/content'))
-    //           return 'nuxt-content'
-    //           // Group Vue core
-    //         if (id.includes('vue') && !id.includes('node_modules/@vue'))
-    //           return 'vue'
-    //           // Group utilities
-    //         if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
-    //           return 'utils'
-    //         }
-    //         // Group other vendor dependencies
-    //         if (!id.includes('vue') && !id.includes('@vue')) {
-    //           return 'vendor'
-    //         }
-    //       }
-    //     },
-    //   },
-    // },
+    rollupConfig: {
+      output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules')) {
+            // Group UI libraries
+            if (id.includes('@headlessui') || id.includes('@tailwindcss')) {
+              return 'ui-libs'
+            }
+            // Group Nuxt modules
+            if (id.includes('@nuxt/ui'))
+              return 'nuxt-ui'
+            if (id.includes('@nuxt/content'))
+              return 'nuxt-content'
+              // Group Vue core
+            if (id.includes('vue') && !id.includes('node_modules/@vue'))
+              return 'vue'
+              // Group utilities
+            if (id.includes('lodash') || id.includes('date-fns') || id.includes('validator')) {
+              return 'utils'
+            }
+            // Group other vendor dependencies
+            if (!id.includes('vue') && !id.includes('@vue')) {
+              return 'vendor'
+            }
+          }
+        },
+      },
+    },
+  },
+  googleTranslate: {
+    defaultLanguage: 'id',
+    supportedLanguages: ['id', 'en', 'es', 'ru'],
   },
   routeRules: {
     // Static pages - prerender untuk LCP optimal
@@ -211,5 +217,15 @@ export default defineNuxtConfig({
       repo: 'sdnteja2.sch.id',
     },
     route: '/admin',
+  },
+  runtimeConfig: {
+    cloudinary: {
+      apiKey: process.env.NUXT_CLOUDINARY_API_KEY || '747436524922873',
+      apiSecret: process.env.NUXT_CLOUDINARY_API_SECRET || 'dunxYcRv6GQls_MqTPycjkJQH3E',
+      cloudName: process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl',
+    },
+    public: {
+      cloudinaryBaseUrl: `https://res.cloudinary.com/${process.env.NUXT_CLOUDINARY_CLOUD_NAME || 'dyy24w5kl'}`,
+    },
   },
 })

@@ -2,7 +2,7 @@
   <div>
     <UContainer>
       <div class="pt-8 max-w-3xl mx-auto">
-        <h1 class="text-4xl text-center md:text-6xl text-balance   font-bold ">
+        <h1 class="text-4xl leading-8 wrap-break-word text-center md:text-6xl text-balance   font-bold ">
           <slot name="title">
             Hero Page
           </slot>

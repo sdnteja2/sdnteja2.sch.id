@@ -3,13 +3,20 @@ import { id } from '@nuxt/ui/locale'
 </script>
 
 <template>
+  <NuxtLoadingIndicator color="var(--ui-primary)" />
   <NuxtRouteAnnouncer />
   <UApp :locale="id">
     <UMain>
-      <UiHeader />
-      <UContainer class="my-24">
+      <UiNav />
+      <div class="py-22  md:py-26">
         <NuxtPage />
-      </UContainer>
+      </div>
+      <UiFooter />
     </UMain>
+    <div class="utility">
+      <ClientOnly>
+        <LazyGoogleTranslate />
+      </ClientOnly>
+    </div>
   </UApp>
 </template>

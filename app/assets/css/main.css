@@ -4,6 +4,10 @@
 @plugin '@tailwindcss/typography';
 @config '../../../tailwind.config.ts';
 
+@utility headLine {
+  @apply text-center text-5xl leading-8 font-bold md:text-6xl;
+}
+
 @theme {
   --font-heading: 'Momo Trust Display', sans-serif;
   --font-body: 'Google Sans', sans-serif;
@@ -70,7 +74,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-heading;
+  @apply font-heading leading-8 wrap-break-word;
 }
 
 /* Optimize font display untuk reduce CLS */
@@ -103,20 +107,4 @@ svg:not([class*='icon']) {
 /* Prevent CLS dari motion animations */
 [class*='Motion'] {
   content-visibility: auto;
-}
-
-/* Hide Vue PDF Viewer Watermark */
-.vpv-watermark,
-[class*='watermark'],
-[class*='vue-pdf-watermark'] {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-/* Hide branding/logo */
-.vpv-branding,
-[class*='branding'] {
-  display: none !important;
 }
