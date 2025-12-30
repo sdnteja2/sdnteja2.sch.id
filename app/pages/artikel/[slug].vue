@@ -78,9 +78,11 @@ function handleMove() {
       <template v-if="artikelPage?.body?.toc?.links?.length" #right>
         <UContentToc
           v-model:open="tocOpen"
+         class="mb-2"
           :ui="{
-            root: 'max-w-full mx-0 px-0 sm:px-2 top-18 rounded-xl', // hilangkan -mx-4 px-4 di mobile
-            container: 'px-2 py-2 ', // sesuaikan jika perlu
+            root: '!max-w-full !mx-0 !px-0 sm:!px-2 !top-18 !rounded-xl',
+            container: '!pt-2 !pb-0 !px-2 sm:!pt-2 sm:!pb-2 lg:!py-8 !border-b !border-dashed !border-default lg:!border-0 !flex !flex-col',
+            title: '!truncate !text-center',
           }"
 
           :links="artikelPage.body.toc.links.map(link => ({ ...link, children: [] }))"

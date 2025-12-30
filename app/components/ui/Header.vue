@@ -8,19 +8,28 @@ const { data: navigation } = await useAsyncData('navigation', () => {
   return queryCollectionNavigation('content')
 })
 
+const route = useRoute()
+
 // Transform navigation menjadi format NavigationMenuItem
 const items = computed<NavigationMenuItem[]>(() => {
   if (!navigation.value)
     return []
 
-  return navigation.value.map(item => ({
-    label: item.title || 'Untitled',
-    to: item.path,
-    icon: item?.icon || 'i-jadu-teja2', // Ambil icon dari frontmatter navigation
-    onClick: () => {
-      isOpen.value = false
-    },
-  }))
+  return navigation.value.map((item) => {
+    const isActive = item.path === '/'
+      ? route.path === '/'
+      : route.path.startsWith(item.path) || route.path.startsWith(`${item.path}/`)
+
+    return {
+      label: item.title || 'Untitled',
+      to: item.path,
+      icon: item?.icon || 'i-jadu-teja2', // Ambil icon dari frontmatter navigation
+      active: isActive,
+      onClick: () => {
+        isOpen.value = false
+      },
+    }
+  })
 })
 
 const { data: files } = await useLazyAsyncData('search-all', () => {
