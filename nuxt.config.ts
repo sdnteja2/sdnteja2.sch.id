@@ -147,63 +147,84 @@ export default defineNuxtConfig({
     defaultLanguage: 'id',
     supportedLanguages: ['id', 'en', 'es', 'ru'],
   },
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              // 1. Kelompokkan UI & Animasi (Modul paling berat di list Anda)
-              if (id.includes('@nuxt/ui') || id.includes('motion-v') || id.includes('@tailwindcss')) {
-                return 'vendor-ui'
-              }
+  
+  // vite: {
+  //   build: {
+  //     rollupOptions: {
+  //       output: {
+  //         manualChunks(id) {
+  //           if (id.includes('node_modules')) {
+  //             // 1. Kelompokkan UI & Animasi (Modul paling berat di list Anda)
+  //             if (id.includes('@nuxt/ui') || id.includes('motion-v') || id.includes('@tailwindcss')) {
+  //               return 'vendor-ui'
+  //             }
 
-              // 2. Kelompokkan Nuxt Content & Studio
-              if (id.includes('@nuxt/content') || id.includes('nuxt-studio')) {
-                return 'vendor-content'
-              }
+  //             // 2. Kelompokkan Nuxt Content & Studio
+  //             if (id.includes('@nuxt/content') || id.includes('nuxt-studio')) {
+  //               return 'vendor-content'
+  //             }
 
-              // 3. Kelompokkan Charts & Data Viz
-              if (id.includes('nuxt-charts') || id.includes('chart.js')) {
-                return 'vendor-charts'
-              }
+  //             // 3. Kelompokkan Charts & Data Viz
+  //             if (id.includes('nuxt-charts') || id.includes('chart.js')) {
+  //               return 'vendor-charts'
+  //             }
 
-              // 4. Kelompokkan Utilities (VueUse & Unhead)
-              if (id.includes('@vueuse') || id.includes('@unhead')) {
-                return 'vendor-utils'
-              }
+  //             // 4. Kelompokkan Utilities (VueUse & Unhead)
+  //             if (id.includes('@vueuse') || id.includes('@unhead')) {
+  //               return 'vendor-utils'
+  //             }
 
-              // 5. Kelompokkan SEO & Scripts
-              if (id.includes('@nuxtjs/seo') || id.includes('@nuxt/scripts')) {
-                return 'vendor-marketing'
-              }
+  //             // 5. Kelompokkan SEO & Scripts
+  //             if (id.includes('@nuxtjs/seo') || id.includes('@nuxt/scripts')) {
+  //               return 'vendor-marketing'
+  //             }
 
-              // 6. Vendor umum lainnya (kecuali core Nuxt/Vue agar tidak rusak)
-              if (!id.includes('vue') && !id.includes('nuxt') && !id.includes('nitro')) {
-                return 'vendor-others'
-              }
-            }
-          },
-        },
-      },
-    },
-  },
+  //             // 6. Vendor umum lainnya (kecuali core Nuxt/Vue agar tidak rusak)
+  //             if (!id.includes('vue') && !id.includes('nuxt') && !id.includes('nitro')) {
+  //               return 'vendor-others'
+  //             }
+  //           }
+  //         },
+  //       },
+  //     },
+  //   },
+  // },
 
   // Mencegah masalah error "manualChunks" pada sisi server (SSR)
   hooks: {
-    'vite:extendConfig': function (config, { isServer }) {
-      if (isServer && config.build?.rollupOptions?.output) {
-        if (!Array.isArray(config.build.rollupOptions.output)) {
-          config.build.rollupOptions.output.manualChunks = undefined
-        }
+    'content:file:beforeParse'(ctx) {
+      const { file } = ctx;
+
+      if (file.id.endsWith(".md")) {
+        file.body = file.body.replace(/react/gi, "Vue");
       }
     },
+    'content:file:afterParse'(ctx) {
+      const { file, content } = ctx;
+
+      const wordsPerMinute = 180;
+      const text = typeof file.body === 'string' ? file.body : '';
+      const wordCount = text.split(/\s+/).length;
+
+      content.readingTime = Math.ceil(wordCount / wordsPerMinute);
+    },
+    // 'vite:extendConfig': function (config, { isServer }) {
+    //   if (isServer && config.build?.rollupOptions?.output) {
+    //     if (!Array.isArray(config.build.rollupOptions.output)) {
+    //       config.build.rollupOptions.output.manualChunks = undefined
+    //     }
+    //   }
+    // },
   },
 
   routeRules: {
     // Static pages - Prerender saat build time
     '/': { prerender: true },
     '/guru': { prerender: true },
+    '/artikel': { prerender: true },
+    '/berita': { prerender: true },
+    '/kegiatan': { prerender: true },
+    '/media': { prerender: true },
 
     // SWR - Otomatis mengatur cache-control & payload extraction
     '/artikel/**': { swr: 3600 },

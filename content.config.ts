@@ -79,6 +79,7 @@ export default defineContentConfig({
         date: z.date(),
         image: z.string(),
         tags: z.array(z.string()),
+        readingTime: z.number().optional(),
       }),
     }),
 

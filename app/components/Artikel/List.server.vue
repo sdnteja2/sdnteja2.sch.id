@@ -20,7 +20,7 @@ watch(currentPage, (newPage) => {
 const { data: artikelPage } = await useAsyncData('HalamanArtikel', async () => {
   try {
     return await queryCollection('artikel')
-      .select('title', 'date', 'path', 'image', 'author')
+      .select('title', 'date', 'path', 'image', 'author', 'readingTime')
       .order('date', 'DESC')
       .all()
   }
@@ -79,14 +79,17 @@ const img = useImage()
                     {{ artikel?.title }}
                   </h2>
 
-                  <div class="mt-4   ">
-                    <UBadge>{{ new Date(artikel.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) }}</UBadge>
+                  <div class="mt-4 space-x-2 flex items-center   ">
+                    <UBadge>{{ new Date(artikel.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) }}</UBadge> <UBadge variant="outline">
+                   baca  {{ artikel?.readingTime }} menit 
+                    </UBadge>
                   </div>
                   <div class="mt-4   ">
                     <UBadge variant="outline">
                       Oleh: {{ artikel?.author }}
                     </UBadge>
                   </div>
+             
                 </div>
               </div>
             </UCard>

@@ -227,17 +227,17 @@ function getIconByType(type: string) {
 function getTypeLabel(type: string) {
   switch (type) {
     case 'artikel':
-      return '📝 Artikel'
+      return 'Artikel'
     case 'berita':
-      return '📰 Berita'
+      return 'Berita'
     case 'guru':
-      return '👨‍🏫 Guru'
+      return 'Guru'
     case 'kegiatan':
-      return '🎯 Kegiatan'
+      return 'Kegiatan'
     case 'content':
-      return '🏠 Halaman'
+      return 'Halaman'
     default:
-      return '📄 Konten'
+      return 'Konten'
   }
 }
 
