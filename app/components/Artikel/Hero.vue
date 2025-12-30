@@ -1,8 +1,8 @@
 <template>
   <div>
     <UContainer>
-      <div class="py-4 md:py-8 max-w-3xl mx-auto">
-        <h1 class="text-4xl text-center md:text-6xl text-balance   font-bold ">
+      <div class="mx-auto max-w-3xl py-4 md:py-8">
+        <h1 class="text-balance text-center text-4xl font-bold md:text-6xl">
           <slot name="title">
             Hero Page
           </slot>

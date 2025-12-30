@@ -5,7 +5,11 @@ const route = useRoute()
 const { data: artikelPage } = await useAsyncData(`artikel-${route.path}`, () => {
   return queryCollection('artikel').path(route.path).first()
 })
-
+const { data: surroundArtikel } = await useAsyncData(`${route.path}-surround`, () => {
+  return queryCollectionItemSurroundings('artikel', route.path, {
+    fields: ['description'],
+  })
+})
 useHead({
   title: artikelPage?.value?.title,
   titleTemplate: '%s %separator %siteName',
@@ -40,7 +44,8 @@ useSchemaOrg([
 const tocOpen = ref(false) // atau true jika default terbuka
 
 function handleMove() {
-  if (window.innerWidth < 1024) { // asumsikan mobile < 1024px
+  if (window.innerWidth < 1024) {
+    // asumsikan mobile < 1024px
     tocOpen.value = false
   }
 }
@@ -49,44 +54,69 @@ function handleMove() {
 <template>
   <UContainer>
     <UPage>
-      <div class="max-w-4xl mx-auto ">
+      <div class="mx-auto max-w-4xl">
         <div class="mb-4">
           <UiBreadcrumb />
         </div>
 
-        <div class="py-8 space-y-6 ">
-          <h1 class="text-3xl  md:text-4xl font-bold">
+        <div class="space-y-6 py-8">
+          <h1 class="text-3xl font-bold md:text-4xl">
             {{ artikelPage?.title }}
           </h1>
           <p>
             {{ artikelPage?.description }}
           </p>
-          <UBadge>
-            {{ artikelPage?.date ? new Date(artikelPage.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : '' }}
-          </UBadge>
+          <div class="flex flex-wrap gap-2">
+            <UBadge>
+              {{
+                artikelPage?.date
+                  ? new Date(artikelPage.date).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })
+                  : ''
+              }}
+            </UBadge>
+            <UBadge variant="outline">
+              Baca: {{ artikelPage?.readingTime }} menit
+            </UBadge>
+          </div>
         </div>
         <div class="flex flex-wrap gap-2">
-          <UButton v-for="(tag, n) in artikelPage?.tags" :key="n" size="xs" color="neutral" rel="noopener" :to="`/tags/${tag}`">
+          <UButton
+            v-for="(tag, n) in artikelPage?.tags"
+            :key="n"
+            size="xs"
+            color="neutral"
+            rel="noopener"
+            :to="`/tags/${tag}`"
+          >
             {{ tag }}
           </UButton>
         </div>
         <USeparator class="py-6" />
-        <article class="max-w-4xl prose-img:w-full mx-auto prose prose-night dark:prose-invert text-justify">
-          <ContentRenderer v-if="artikelPage" :value="artikelPage" />
+        <article
+          class="prose-img:w-full prose prose-night dark:prose-invert mx-auto max-w-4xl text-justify"
+        >
+          <UPageBody>
+            <ContentRenderer v-if="artikelPage" :value="artikelPage" />
+            <USeparator v-if="surroundArtikel?.filter(Boolean).length" />
+            <div class="[&_a]:no-underline">
+              <UContentSurround :surround="surroundArtikel as any" />
+            </div>
+          </UPageBody>
         </article>
       </div>
       <template v-if="artikelPage?.body?.toc?.links?.length" #right>
         <UContentToc
           v-model:open="tocOpen"
-         class="mb-2"
           :ui="{
-            root: '!max-w-full !mx-0 !px-0 sm:!px-2 !top-18 !rounded-xl',
-            container: '!pt-2 !pb-0 !px-2 sm:!pt-2 sm:!pb-2 lg:!py-8 !border-b !border-dashed !border-default lg:!border-0 !flex !flex-col',
-            title: '!truncate !text-center',
+            root: '!max-w-full !mx-0 !mb-2 !px-0 sm:!px-2 !top-18 !rounded-xl',
+            container:
+              '!pt-2 !pb-0 !px-2 sm:!pt-2 sm:!pb-2 lg:!py-8 !border-b !border-dashed !border-default lg:!border-0 !flex !flex-col',
           }"
-
-          :links="artikelPage.body.toc.links.map(link => ({ ...link, children: [] }))"
-
+          :links="artikelPage.body.toc.links.map((link) => ({ ...link, children: [] }))"
           title="Daftar Isi"
           @move="handleMove"
         />

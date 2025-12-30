@@ -30,28 +30,45 @@ defineOgImageComponent('OgImage', {
 <template>
   <div>
     <UContainer>
-      <div class="max-w-4xl mx-auto ">
+      <div class="mx-auto max-w-4xl">
         <div class="mb-4">
           <UiBreadcrumb />
         </div>
-        <div class="py-8 space-y-6 ">
-          <h1 class="text-3xl  md:text-4xl font-bold">
+        <div class="space-y-6 py-8">
+          <h1 class="text-3xl font-bold md:text-4xl">
             {{ beritaPage?.title }}
           </h1>
           <p>
             {{ beritaPage?.description }}
           </p>
           <UBadge>
-            {{ beritaPage?.date ? new Date(beritaPage.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) : '' }}
+            {{
+              beritaPage?.date
+                ? new Date(beritaPage.date).toLocaleDateString('id-ID', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })
+                : ''
+            }}
           </UBadge>
         </div>
         <div class="flex flex-wrap gap-2">
-          <UButton v-for="(tag, n) in beritaPage?.tags" :key="n" size="xs" color="neutral" rel="noopener" :to="`/tags/${tag}`">
+          <UButton
+            v-for="(tag, n) in beritaPage?.tags"
+            :key="n"
+            size="xs"
+            color="neutral"
+            rel="noopener"
+            :to="`/tags/${tag}`"
+          >
             {{ tag }}
           </UButton>
         </div>
         <USeparator class="py-6" />
-        <article class="max-w-4xl prose-img:w-full mx-auto prose prose-night dark:prose-invert text-justify">
+        <article
+          class="prose-img:w-full prose prose-night dark:prose-invert mx-auto max-w-4xl text-justify"
+        >
           <ContentRenderer v-if="beritaPage" :value="beritaPage" />
         </article>
       </div>

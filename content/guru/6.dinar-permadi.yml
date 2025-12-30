@@ -7,15 +7,15 @@ jabatan: Operator
 pendidikan: S1 - Pendidikan Guru Sekolah Dasar
 pelatihan: []
 sosial:
-  - icon: i-hugeicons-instagram
+  - icon: i-ph-instagram-logo-duotone
     link: https://www.instagram.com/narr07/
     alt: Instagram
-  - icon: i-hugeicons-mail-01
+  - icon: i-ph-envelope-simple-duotone
     link: mailto:dinarpermadi07@gmail.com?subject=Halo
     alt: Email
-  - icon: i-hugeicons-facebook-01
+  - icon: i-ph-facebook-logo-duotone
     link: https://www.facebook.com/narr07
     alt: Facebook
-  - icon: i-hugeicons-new-twitter-rectangle
+  - icon: i-ph-twitter-logo-duotone
     link: https://x.com/dinarpermadi07
     alt: Twitter / X

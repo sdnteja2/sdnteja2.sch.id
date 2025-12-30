@@ -16,7 +16,8 @@ useSeoMeta({
   description: 'Maaf, halaman ini tidak dapat ditemukan.',
 })
 
-const { data: navigation } = await useAsyncData('navigation', () => queryCollectionNavigation('content'))
+const { data: navigation } = await useAsyncData('navigation', () =>
+  queryCollectionNavigation('content'))
 const { data: files } = useLazyAsyncData('search', () => queryCollectionSearchSections('content'), {
   server: false,
 })
@@ -31,10 +32,7 @@ provide('navigation', navigation)
     <UError :error="error" />
 
     <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-      />
+      <LazyUContentSearch :files="files" :navigation="navigation" />
     </ClientOnly>
   </UApp>
 </template>

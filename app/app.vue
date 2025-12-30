@@ -8,7 +8,7 @@ import { id } from '@nuxt/ui/locale'
   <UApp :locale="id">
     <UMain>
       <UiHeader />
-      <div class="py-22  md:py-26">
+      <div class="py-22 md:py-26">
         <NuxtPage />
       </div>
       <UiFooter />

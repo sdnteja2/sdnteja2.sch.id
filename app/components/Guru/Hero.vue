@@ -1,13 +1,13 @@
 <template>
-  <div>
+ 
     <UContainer>
-      <div class="pt-8 max-w-3xl mx-auto">
-        <h1 class="headLine ">
+      <div class="mx-auto max-w-3xl pt-8 text-center leading-relaxed">
+        <h1 class="headLine">
           <slot name="title">
             Hero Page
           </slot>
         </h1>
       </div>
     </UContainer>
-  </div>
+ 
 </template>

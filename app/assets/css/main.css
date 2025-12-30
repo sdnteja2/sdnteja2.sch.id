@@ -5,7 +5,7 @@
 @config '../../../tailwind.config.ts';
 
 @utility headLine {
-  @apply text-center text-5xl font-bold leading-snug md:text-6xl;
+  @apply text-center text-5xl leading-snug font-bold md:text-6xl;
 }
 
 @theme {
@@ -65,7 +65,7 @@
 }
 
 body {
-  @apply font-body dark:bg-night-950 bg-blue-100;
+  @apply font-body dark:bg-night-950 bg-white;
 }
 
 h1,
@@ -74,7 +74,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-heading wrap-break-word leading-snug;
+  @apply font-heading leading-snug wrap-break-word;
 }
 
 /* Optimize font display untuk reduce CLS */

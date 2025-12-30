@@ -96,9 +96,9 @@ const paginatedBuku = computed(() => {
   <div class="py-20">
     <UContainer>
       <!-- Filter section -->
-      <div class="mb-8 flex flex-col md:flex-row items-start md:items-center gap-4">
+      <div class="mb-8 flex flex-col items-start gap-4 md:flex-row md:items-center">
         <div class="flex flex-col gap-2">
-          <h3 class="font-bold text-lg">
+          <h3 class="text-lg font-bold">
             Pilih Kelas:
           </h3>
           <USelect
@@ -110,7 +110,7 @@ const paginatedBuku = computed(() => {
         </div>
 
         <div class="flex flex-col gap-2">
-          <h3 class="font-bold text-lg">
+          <h3 class="text-lg font-bold">
             Pilih Pelajaran:
           </h3>
           <USelect
@@ -123,7 +123,7 @@ const paginatedBuku = computed(() => {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
         <Motion
           v-for="(buku, index) in paginatedBuku"
           :key="buku.title"
@@ -131,15 +131,17 @@ const paginatedBuku = computed(() => {
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
         >
-          <div class="flex justify-center flex-col h-full">
-            <div class="p-4 ring rounded h-full dark:bg-sky-900 ring-night-200 dark:ring-night-800 overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+          <div class="flex h-full flex-col justify-center">
+            <div
+              class="ring-night-200 dark:ring-night-800 h-full overflow-hidden rounded p-4 shadow-lg ring transition-shadow hover:shadow-xl dark:bg-sky-900"
+            >
               <!-- Book Info -->
-              <div class="flex justify-center flex-col h-full">
-                <h2 class="font-bold text-sm line-clamp-2 mb-2">
+              <div class="flex h-full flex-col justify-center">
+                <h2 class="mb-2 line-clamp-2 text-sm font-bold">
                   {{ buku.title }}
                 </h2>
 
-                <div class="space-y-1 text-xs mb-4">
+                <div class="mb-4 space-y-1 text-xs">
                   <p class="text-gray-600 dark:text-gray-300">
                     <span class="font-semibold">Pelajaran:</span> {{ buku.pelajaran }}
                   </p>
@@ -148,15 +150,11 @@ const paginatedBuku = computed(() => {
                   </p>
                 </div>
 
-                <div class="flex justify-between items-center gap-2">
+                <div class="flex items-center justify-between gap-2">
                   <UBadge block class="mt-2">
                     Kelas {{ buku.kelas }}
                   </UBadge>
-                  <UButton
-                    :to="buku.path"
-                    icon="solar:arrow-right-up-linear"
-                    size="sm"
-                  />
+                  <UButton :to="buku.path" icon="i-ph-arrow-square-up-right-duotone" size="sm" />
                 </div>
               </div>
             </div>
@@ -165,14 +163,14 @@ const paginatedBuku = computed(() => {
       </div>
 
       <!-- Empty state -->
-      <div v-if="paginatedBuku.length === 0" class="text-center py-12">
+      <div v-if="paginatedBuku.length === 0" class="py-12 text-center">
         <p class="text-gray-500 dark:text-gray-400">
           Tidak ada buku ditemukan untuk filter yang dipilih
         </p>
       </div>
 
       <!-- Pagination -->
-      <div v-if="totalItems > 0" class="flex justify-center mt-8">
+      <div v-if="totalItems > 0" class="mt-8 flex justify-center">
         <UPagination
           v-model:page="currentPage"
           show-edges

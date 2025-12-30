@@ -16,9 +16,10 @@ const items = computed<NavigationMenuItem[]>(() => {
     return []
 
   return navigation.value.map((item) => {
-    const isActive = item.path === '/'
-      ? route.path === '/'
-      : route.path.startsWith(item.path) || route.path.startsWith(`${item.path}/`)
+    const isActive
+      = item.path === '/'
+        ? route.path === '/'
+        : route.path.startsWith(item.path) || route.path.startsWith(`${item.path}/`)
 
     return {
       label: item.title || 'Untitled',
@@ -32,73 +33,64 @@ const items = computed<NavigationMenuItem[]>(() => {
   })
 })
 
-const { data: files } = await useLazyAsyncData('search-all', () => {
-  return Promise.all([
-    // Markdown collections
-    queryCollectionSearchSections('artikel'),
-    queryCollectionSearchSections('berita'),
-    queryCollectionSearchSections('content'),
-    // YAML collections
-    queryCollection('guru').all(),
-    queryCollection('kegiatan').all(),
-  ])
-}, {
-  server: false,
-  transform: (data) => {
-    const [artikelData, beritaData, contentData, guruData, kegiatanData] = data
-
-    // Helper function for clean URLs
-    const cleanPath = (path: string) => {
-      if (!path)
-        return '/'
-      const cleanedPath = path.replace(/\.(yml|yaml|md)$/, '').replace(/\/\d+\./, '/')
-      return cleanedPath.startsWith('/') ? cleanedPath : `/${cleanedPath}`
-    }
-
-    // Helper function for type labels
-    const getTypeLabel = (type: string) => {
-      switch (type) {
-        case 'artikel': return '📝 Artikel'
-        case 'berita': return '📰 Berita'
-        case 'guru': return '👨‍🏫 Guru'
-        case 'kegiatan': return '🎯 Kegiatan'
-        case 'content': return '🏠 Halaman'
-        default: return '📄 Konten'
-      }
-    }
-
-    return [
-      ...(artikelData || []).map((item: any) => ({ ...item, type: 'artikel' })),
-      ...(beritaData || []).map((item: any) => ({ ...item, type: 'berita' })),
-      ...(contentData || []).map((item: any) => ({ ...item, type: 'content' })),
-      // Transform YAML data to match search format
-      ...(guruData || []).map((item: any) => ({
-        id: item._path || item.path || item.id,
-        title: item.nama || item.title,
-        titles: [getTypeLabel('guru'), item.jabatan || '', item.kelas || ''].filter(Boolean),
-        level: 1,
-        content: `${item.nama || ''} ${item.lengkap || ''} ${item.catatan || ''} ${item.jabatan || ''} ${item.pendidikan || ''}`.trim(),
-        type: 'guru',
-        to: cleanPath(item._path || item.path || item.id),
-      })),
-      ...(kegiatanData || []).map((item: any) => ({
-        id: item._path || item.path || item.id,
-        title: item.title,
-        titles: [getTypeLabel('kegiatan'), item.tag || ''].filter(Boolean),
-        level: 1,
-        content: `${item.title || ''} ${item.description || ''} ${item.tag || ''}`.trim(),
-        type: 'kegiatan',
-        to: cleanPath(item._path || item.path || item.id),
-      })),
-    ]
+const { data: files } = await useLazyAsyncData(
+  'search-all',
+  () => {
+    return Promise.all([
+      queryCollectionSearchSections('artikel'),
+      queryCollectionSearchSections('berita'),
+      queryCollectionSearchSections('content'),
+      queryCollection('guru').all(),
+      queryCollection('kegiatan').all(),
+    ])
   },
-})
+  {
+    server: false,
+    transform: (data) => {
+      const [artikelData, beritaData, contentData, guruData, kegiatanData] = data
 
-const links = [{
-  label: 'Docs',
-  icon: 'i-lucide-book',
-  to: '/docs/getting-started',
-}]
+      const cleanPath = (path: string) => {
+        if (!path)
+          return '/'
+        const cleanedPath = path.replace(/\.(yml|yaml|md)$/, '').replace(/\/\d+\./, '/')
+        return cleanedPath.startsWith('/') ? cleanedPath : `/${cleanedPath}`
+      }
+
+      return [
+        ...(artikelData || []).map((item: any) => ({
+          ...item,
+          type: 'artikel',
+        })),
+        ...(beritaData || []).map((item: any) => ({
+          ...item,
+          type: 'berita',
+        })),
+        ...(contentData || []).map((item: any) => ({
+          ...item,
+          type: 'content',
+        })),
+        ...(guruData || []).map((item: any) => ({
+          id: item._path || item.path || item.id,
+          title: item.jabatan,
+          titles: [item.lengkap || ''].filter(Boolean),
+          level: 1,
+          content: `- ${item.catatan || ''} ${item.pendidikan || ''}`.trim(),
+          type: 'guru',
+          to: cleanPath(item._path || item.path || item.id),
+        })),
+        ...(kegiatanData || []).map((item: any) => ({
+          id: item._path || item.path || item.id,
+          title: item.title,
+          titles: [item.description || ''].filter(Boolean),
+          level: 1,
+          content: `${item.title || ''} ${item.description || ''} ${item.tag || ''}`.trim(),
+          type: 'kegiatan',
+          to: cleanPath(item._path || item.path || item.id),
+        })),
+      ]
+    },
+  },
+)
 
 const searchTerm = ref('')
 const isSearchOpen = ref(false)
@@ -112,12 +104,14 @@ defineShortcuts({
 </script>
 
 <template>
-  <div class="fixed top-4 mx-auto w-full  z-50">
+  <div class="fixed top-4 z-50 mx-auto w-full">
     <UContainer>
-      <div class="rounded-4xl shadow-teja p-2 px-6 md:rounded-[40px] dark:bg-sky-800/80 bg-sky-200/50 backdrop-blur">
+      <div
+        class="rounded-4xl shadow-teja bg-sky-200/50 p-2 px-6 backdrop-blur md:rounded-[40px] dark:bg-sky-800/80"
+      >
         <div class="flex items-center justify-between">
           <NuxtLink to="/" class="flex items-center gap-2 text-lg font-bold">
-            Teja II
+           <UiLogo />
           </NuxtLink>
 
           <div class="flex items-center gap-2">
@@ -129,21 +123,38 @@ defineShortcuts({
             </UTooltip>
 
             <UContentSearch
-              v-model="isSearchOpen" v-model:search-term="searchTerm" :files="files"
-              :navigation="navigation" :links="links" :fuse="{ resultLimit: 42 }"
+              v-model="isSearchOpen"
+              v-model:search-term="searchTerm"
+              :files="files"
+              :navigation="navigation"
+              :fuse="{ resultLimit: 42 }"
+              :fullscreen="false"
+              :ui="{
+                modal: 'sm:max-w-xl h-96',
+              }"
             />
 
             <UColorModeButton />
 
             <div class="md:hidden">
-              <UPopover v-model:open="isOpen" :content="{ align: 'end', side: 'bottom', sideOffset: 12 }">
+              <UPopover
+                v-model:open="isOpen"
+                :content="{ align: 'end', side: 'bottom', sideOffset: 12 }"
+              >
                 <UButton
-                  :icon="isOpen ? 'i-lucide-x' : 'i-lucide-menu'" color="neutral" variant="ghost"
+                  :icon="isOpen ? 'i-ph-x-square-duotone' : 'i-ph-list-duotone'"
+                  color="neutral"
+                  variant="ghost"
                   aria-label="Menu"
                 />
 
                 <template #content>
-                  <UNavigationMenu highlight :items="items" orientation="vertical" class="p-2 min-w-48" />
+                  <UNavigationMenu
+                    highlight
+                    :items="items"
+                    orientation="vertical"
+                    class="min-w-48 p-2"
+                  />
                 </template>
               </UPopover>
             </div>

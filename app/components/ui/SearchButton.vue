@@ -20,49 +20,54 @@ const value = ref({})
 const router = useRouter()
 
 // Fetch data menggunakan client-side approach dengan useLazyAsyncData
-const { data: allContent } = await useLazyAsyncData('search-content', () => {
-  return Promise.all([
-    // Markdown collections
-    queryCollectionSearchSections('artikel'),
-    queryCollectionSearchSections('berita'),
-    queryCollectionSearchSections('content'),
-    // YAML collections
-    queryCollection('guru').all(),
-    queryCollection('kegiatan').all(),
-  ])
-}, {
-  server: false,
-  default: () => [],
-  transform: (data) => {
-    const [artikelData, beritaData, contentData, guruData, kegiatanData] = data
-
-    // Transform and combine results
-    const searchResults = [
-      ...(artikelData || []).map((item: any) => ({ ...item, type: 'artikel' })),
-      ...(beritaData || []).map((item: any) => ({ ...item, type: 'berita' })),
-      ...(contentData || []).map((item: any) => ({ ...item, type: 'content' })),
-      // Transform YAML data to match search format
-      ...(guruData || []).map((item: any) => ({
-        id: item._path || item.path || item.id,
-        title: item.nama || item.title,
-        titles: [item.jabatan || '', item.kelas || ''].filter(Boolean),
-        level: 1,
-        content: `${item.nama || ''} ${item.lengkap || ''} ${item.catatan || ''} ${item.jabatan || ''} ${item.pendidikan || ''}`.trim(),
-        type: 'guru',
-      })),
-      ...(kegiatanData || []).map((item: any) => ({
-        id: item._path || item.path || item.id,
-        title: item.title,
-        titles: [item.tag || ''].filter(Boolean),
-        level: 1,
-        content: `${item.title || ''} ${item.description || ''} ${item.tag || ''}`.trim(),
-        type: 'kegiatan',
-      })),
-    ]
-
-    return searchResults
+const { data: allContent } = await useLazyAsyncData(
+  'search-content',
+  () => {
+    return Promise.all([
+      // Markdown collections
+      queryCollectionSearchSections('artikel'),
+      queryCollectionSearchSections('berita'),
+      queryCollectionSearchSections('content'),
+      // YAML collections
+      queryCollection('guru').all(),
+      queryCollection('kegiatan').all(),
+    ])
   },
-})
+  {
+    server: false,
+    default: () => [],
+    transform: (data) => {
+      const [artikelData, beritaData, contentData, guruData, kegiatanData] = data
+
+      // Transform and combine results
+      const searchResults = [
+        ...(artikelData || []).map((item: any) => ({ ...item, type: 'artikel' })),
+        ...(beritaData || []).map((item: any) => ({ ...item, type: 'berita' })),
+        ...(contentData || []).map((item: any) => ({ ...item, type: 'content' })),
+        // Transform YAML data to match search format
+        ...(guruData || []).map((item: any) => ({
+          id: item._path || item.path || item.id,
+          title: item.nama || item.title,
+          titles: [item.jabatan || '', item.kelas || ''].filter(Boolean),
+          level: 1,
+          content:
+            `${item.nama || ''} ${item.lengkap || ''} ${item.catatan || ''} ${item.jabatan || ''} ${item.pendidikan || ''}`.trim(),
+          type: 'guru',
+        })),
+        ...(kegiatanData || []).map((item: any) => ({
+          id: item._path || item.path || item.id,
+          title: item.title,
+          titles: [item.tag || ''].filter(Boolean),
+          level: 1,
+          content: `${item.title || ''} ${item.description || ''} ${item.tag || ''}`.trim(),
+          type: 'kegiatan',
+        })),
+      ]
+
+      return searchResults
+    },
+  },
+)
 
 // Set initial results
 searchResults.value = allContent.value || []
@@ -103,11 +108,15 @@ watch(searchTerm, (newTerm) => {
 })
 
 // Watch for data changes and update search results
-watch(allContent, (newData) => {
-  if (newData && (!searchTerm.value || searchTerm.value.length < 2)) {
-    searchResults.value = newData
-  }
-}, { immediate: true })
+watch(
+  allContent,
+  (newData) => {
+    if (newData && (!searchTerm.value || searchTerm.value.length < 2)) {
+      searchResults.value = newData
+    }
+  },
+  { immediate: true },
+)
 
 // Fungsi untuk menangani pemilihan item
 function onSelect(item: any) {
@@ -125,13 +134,16 @@ const groups = computed(() => {
   const limitedResults = filteredResults.slice(0, 50)
 
   // Grup berdasarkan tipe content
-  const groupedByType = limitedResults.reduce((acc, item) => {
-    if (!acc[item.type]) {
-      acc[item.type] = []
-    }
-    acc[item.type]!.push(item)
-    return acc
-  }, {} as Record<string, SearchResult[]>)
+  const groupedByType = limitedResults.reduce(
+    (acc, item) => {
+      if (!acc[item.type]) {
+        acc[item.type] = []
+      }
+      acc[item.type]!.push(item)
+      return acc
+    },
+    {} as Record<string, SearchResult[]>,
+  )
 
   // Buat grup untuk setiap tipe yang memiliki hasil
   const groups: Array<{
@@ -166,18 +178,20 @@ const groups = computed(() => {
 
   // Jika tidak ada pencarian, tampilkan sebagian dalam satu grup
   if (!searchTerm.value) {
-    return [{
-      id: 'all-content',
-      label: `Semua Konten (${limitedResults.length})`,
-      items: limitedResults.slice(0, 15).map(item => ({
-        id: item.id,
-        label: item.title,
-        icon: getIconByType(item.type),
-        suffix: getTypeLabel(item.type),
-        description: item.titles?.join(' > ') || '',
-        to: cleanPath(item.id),
-      })),
-    }]
+    return [
+      {
+        id: 'all-content',
+        label: `Semua Konten (${limitedResults.length})`,
+        items: limitedResults.slice(0, 15).map(item => ({
+          id: item.id,
+          label: item.title,
+          icon: getIconByType(item.type),
+          suffix: getTypeLabel(item.type),
+          description: item.titles?.join(' > ') || '',
+          to: cleanPath(item.id),
+        })),
+      },
+    ]
   }
 
   return groups
@@ -251,27 +265,24 @@ defineShortcuts({
 
 <template>
   <!-- Tombol untuk membuka modal -->
-  <UButton
-    square
-    icon="hugeicons:search-02"
-    aria-label="Buka pencarian"
-    @click="open = true"
-  />
+  <UButton square icon="hugeicons:search-02" aria-label="Buka pencarian" @click="open = true" />
 
   <!-- Modal Command Palette -->
   <ClientOnly>
     <UModal
       v-model:open="open"
       :ui="{
-        content: 'rounded-2xl w-full h-1/2 md:w-[1000px] md:h-[500px] mx-auto my-auto will-change-transform',
-        overlay: 'fixed inset-0 bg-(--ui-bg-elevated)/50 backdrop-blur flex items-center justify-center p-4 md:p-0 transition-opacity duration-200',
+        content:
+          'rounded-2xl w-full h-1/2 md:w-[1000px] md:h-[500px] mx-auto my-auto will-change-transform',
+        overlay:
+          'fixed inset-0 bg-(--ui-bg-elevated)/50 backdrop-blur flex items-center justify-center p-4 md:p-0 transition-opacity duration-200',
         body: 'p-0 overflow-hidden h-full',
       }"
       close-icon="ph:x-square-duotone"
       :transition="false"
     >
       <template #content>
-        <div class="h-full flex flex-col">
+        <div class="flex h-full flex-col">
           <UCommandPalette
             v-model="value"
             v-model:search-term="searchTerm"

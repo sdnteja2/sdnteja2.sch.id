@@ -69,7 +69,8 @@ const selectedGender = ref<string>('Semua Jenis Kelamin')
 // Filtered student data
 const filteredStudents = computed(() => {
   const kelasFilter = selectedKelas.value === 'Semua Kelas' ? undefined : selectedKelas.value
-  const genderFilter = selectedGender.value === 'Semua Jenis Kelamin' ? undefined : selectedGender.value
+  const genderFilter
+    = selectedGender.value === 'Semua Jenis Kelamin' ? undefined : selectedGender.value
   return filterSiswa(searchQuery.value, kelasFilter, genderFilter)
 })
 
@@ -112,9 +113,9 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'NIS',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-sorting-02'
-            : 'i-hugeicons-sorting-01'
-          : 'i-hugeicons-vertical-scroll-point',
+            ? 'i-ph-sort-ascending-duotone'
+            : 'i-ph-sort-descending-duotone'
+          : 'i-ph-funnel-duotone',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
       })
@@ -131,9 +132,9 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'Nama',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-sorting-02'
-            : 'i-hugeicons-sorting-01'
-          : 'i-hugeicons-vertical-scroll-point',
+            ? 'i-ph-sort-ascending-duotone'
+            : 'i-ph-sort-descending-duotone'
+          : 'i-ph-funnel-duotone',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
       })
@@ -157,9 +158,9 @@ const studentColumns: TableColumn<StudentData>[] = [
         label: 'Usia',
         icon: isSorted
           ? isSorted === 'asc'
-            ? 'i-hugeicons-sorting-02'
-            : 'i-hugeicons-sorting-01'
-          : 'i-hugeicons-vertical-scroll-point',
+            ? 'i-ph-sort-ascending-duotone'
+            : 'i-ph-sort-descending-duotone'
+          : 'i-ph-funnel-duotone',
         class: '-mx-2.5',
         onClick: () => column.toggleSorting(column.getIsSorted() === 'asc'),
       })
@@ -184,14 +185,14 @@ function clearFilters() {
 <template>
   <UContainer class="siswa-data">
     <div class="mb-6">
-      <h2 class="text-2xl font-bold  mb-4">
+      <h2 class="mb-4 text-2xl font-bold">
         Data Siswa Per Kelas
       </h2>
 
       <!-- Loading State -->
       <div v-if="pending" class="space-y-6">
         <!-- Stats Cards Skeleton -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div class="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
           <UCard v-for="i in 3" :key="i">
             <template #header>
               <USkeleton class="h-5 w-32" />
@@ -219,20 +220,16 @@ function clearFilters() {
       </div>
 
       <!-- Error State -->
-      <div v-else-if="error" class="bg-sky-100 border border-sky-400 text-red-700 px-4 py-3 rounded mb-4">
+      <div
+        v-else-if="error"
+        class="mb-4 rounded border border-sky-400 bg-sky-100 px-4 py-3 text-red-700"
+      >
         <strong class="font-bold">Error:</strong>
-        <span class="block sm:inline ml-2">
-          Data dari server tidak dapat dimuat.
-        </span>
-        <div class="text-sm mt-2 text-sky-600">
+        <span class="ml-2 block sm:inline"> Data dari server tidak dapat dimuat. </span>
+        <div class="mt-2 text-sm text-sky-600">
           {{ error.message || 'Gagal memuat data dari Google Apps Script' }}
         </div>
-        <UButton
-          class="mt-2"
-          color="warning"
-          size="sm"
-          @click="refresh()"
-        >
+        <UButton class="mt-2" color="warning" size="sm" @click="refresh()">
           Coba Muat Ulang
         </UButton>
       </div>
@@ -240,7 +237,7 @@ function clearFilters() {
       <!-- Success State -->
       <div v-else-if="data && data.length > 0" class="space-y-6">
         <!-- Stats Cards -->
-        <div class="grid grid-cols-3  gap-4 mb-6">
+        <div class="mb-6 grid grid-cols-3 gap-4">
           <Motion
             v-for="(card, index) in statsCards"
             :key="card.key"
@@ -254,7 +251,10 @@ function clearFilters() {
                   {{ card.title }}
                 </h3>
               </template>
-              <div class="py-3 px-4 rounded-lg flex items-center justify-center" :class="card.bgClass">
+              <div
+                class="flex items-center justify-center rounded-lg px-4 py-3"
+                :class="card.bgClass"
+              >
                 <p class="text-3xl font-bold">
                   {{ card.value }}
                 </p>
@@ -271,7 +271,7 @@ function clearFilters() {
         >
           <UCard>
             <template #header>
-              <h3 class="text-lg font-semibold ">
+              <h3 class="text-lg font-semibold">
                 Rincian Data Per Kelas
               </h3>
             </template>
@@ -286,7 +286,7 @@ function clearFilters() {
 
             <!-- Summary Footer -->
             <template #footer>
-              <div class="flex justify-between items-center text-sm  border-t pt-3">
+              <div class="flex items-center justify-between border-t pt-3 text-sm">
                 <span>Total Keseluruhan:</span>
                 <div class="flex gap-4">
                   <span>Laki-laki: <strong class="text-blue-600">{{ siswaLakiLaki }}</strong></span>
@@ -306,7 +306,7 @@ function clearFilters() {
         >
           <UCard>
             <template #header>
-              <div class="flex justify-between items-center">
+              <div class="flex items-center justify-between">
                 <h3 class="text-lg font-semibold">
                   Data Detail Siswa
                 </h3>
@@ -318,7 +318,7 @@ function clearFilters() {
 
             <!-- Filters -->
             <div class="mb-4 space-y-3">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
                 <!-- Search Input -->
                 <UInput
                   v-model="searchQuery"
@@ -341,7 +341,7 @@ function clearFilters() {
                   v-model="selectedKelas"
                   :items="[
                     'Semua Kelas',
-                    ...availableKelas.map(k => ({ value: k, label: `Kelas ${k}` })),
+                    ...availableKelas.map((k) => ({ value: k, label: `Kelas ${k}` })),
                   ]"
                   placeholder="Pilih Kelas"
                 />
@@ -359,7 +359,14 @@ function clearFilters() {
               </div>
 
               <!-- Clear Filters Button -->
-              <div v-if="searchQuery || selectedKelas !== 'Semua Kelas' || selectedGender !== 'Semua Jenis Kelamin'" class="flex justify-end">
+              <div
+                v-if="
+                  searchQuery
+                    || selectedKelas !== 'Semua Kelas'
+                    || selectedGender !== 'Semua Jenis Kelamin'
+                "
+                class="flex justify-end"
+              >
                 <UButton
                   color="neutral"
                   variant="soft"
@@ -382,14 +389,19 @@ function clearFilters() {
             />
 
             <!-- Empty State -->
-            <div v-if="filteredStudents.length === 0 && !pending" class="text-center py-8 text-gray-500">
+            <div
+              v-if="filteredStudents.length === 0 && !pending"
+              class="py-8 text-center text-gray-500"
+            >
               <p>Tidak ada data siswa yang sesuai dengan filter</p>
             </div>
 
             <template #footer>
-              <div class="flex flex-col md:flex-row items-center justify-between">
+              <div class="flex flex-col items-center justify-between md:flex-row">
                 <div class="text-sm text-gray-600">
-                  Menampilkan {{ ((currentPage - 1) * pageSize) + 1 }} - {{ Math.min(currentPage * pageSize, filteredStudents.length) }} dari {{ filteredStudents.length }} siswa
+                  Menampilkan {{ (currentPage - 1) * pageSize + 1 }} -
+                  {{ Math.min(currentPage * pageSize, filteredStudents.length) }} dari
+                  {{ filteredStudents.length }} siswa
                 </div>
                 <UPagination
                   v-if="filteredStudents.length > pageSize"
@@ -407,16 +419,21 @@ function clearFilters() {
       </div>
 
       <!-- No Data State -->
-      <div v-else class="text-center py-12">
-        <div class=" mb-4">
-          <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      <div v-else class="py-12 text-center">
+        <div class="mb-4">
+          <svg class="mx-auto h-16 w-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+            />
           </svg>
         </div>
-        <p class="text-lg  mb-2">
+        <p class="mb-2 text-lg">
           Tidak ada data siswa
         </p>
-        <p class="text-sm  mb-4">
+        <p class="mb-4 text-sm">
           Data siswa belum tersedia atau gagal dimuat
         </p>
         <UButton color="info" @click="refresh()">

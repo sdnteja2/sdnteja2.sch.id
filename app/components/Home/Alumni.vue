@@ -7,25 +7,27 @@ interface AlumniItem {
   job?: string
 }
 
-const props = withDefaults(defineProps<{
-  alumni?: AlumniItem[]
-}>(), {
-  alumni: () => [
-    {
-      foto: 'https://picsum.photos/468/468?random=1',
-      nama: 'John Doe',
-      job: 'Software Engineer',
-    },
-
-  ],
-})
+const props = withDefaults(
+  defineProps<{
+    alumni?: AlumniItem[]
+  }>(),
+  {
+    alumni: () => [
+      {
+        foto: 'https://picsum.photos/468/468?random=1',
+        nama: 'John Doe',
+        job: 'Software Engineer',
+      },
+    ],
+  },
+)
 </script>
 
 <template>
   <div class="py-8">
     <UContainer>
       <div class="py-8">
-        <h2 class="text-5xl text-center md:text-6xl   font-bold ">
+        <h2 class="text-center text-5xl font-bold md:text-6xl">
           Alumni
         </h2>
       </div>
@@ -34,7 +36,7 @@ const props = withDefaults(defineProps<{
         :in-view="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
-        <UCard variant="soft" class="rounded-4xl bg-sky-50 shadow-teja dark:bg-sky-900 md:py-8">
+        <UCard variant="soft" class="rounded-4xl shadow-teja bg-sky-50 md:py-8 dark:bg-sky-900">
           <UCarousel
             v-slot="{ item }"
             arrows
@@ -57,7 +59,8 @@ const props = withDefaults(defineProps<{
                 :title="item.nama"
                 :src="item.foto"
                 width="234"
-                height="234" class="rounded-4xl mb-4 shadow-lg"
+                height="234"
+                class="rounded-4xl mb-4 shadow-lg"
               />
               <h3 class="text-lg font-bold">
                 {{ item.nama }}

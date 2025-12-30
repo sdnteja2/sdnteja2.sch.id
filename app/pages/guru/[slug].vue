@@ -48,7 +48,7 @@ useSchemaOrg([
         <UiBreadcrumb />
       </div>
       <!-- Bento Grid Layout -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+      <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <!-- Main Profile Card -->
         <Motion
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
@@ -56,10 +56,7 @@ useSchemaOrg([
           :transition="{ delay: 0.1 * 0 }"
           class="md:col-span-1 md:row-span-2"
         >
-          <UCard
-            variant="soft"
-            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
-          >
+          <UCard variant="soft" class="shadow-teja rounded-3xl bg-sky-50 dark:bg-sky-900">
             <div class="flex flex-col items-center justify-center p-4">
               <NuxtImg
                 :src="guruPage?.foto"
@@ -71,16 +68,16 @@ useSchemaOrg([
                 fetchpriority="high"
                 :height="400"
                 :width="300"
-                :placeholder="img(`${guruPage?.foto}`, { h: 10, w: 5, f: 'webp', blur: 2, q: 50 })"
-                class="rounded-lg mb-4 h-full w-auto shadow-md bg-cover bg-center object-cover "
+                :placeholder="img(`${guruPage?.foto}`, { height: 10, width: 5, format: 'webp', blur: 2, quality: 50 })"
+                class="mb-4 h-full w-auto rounded-lg bg-cover bg-center object-cover shadow-md"
               />
-              <h1 class="text-lg md:text-xl font-bold mt-2">
+              <h1 class="mt-2 text-lg font-bold md:text-xl">
                 {{ guruPage?.lengkap }}
               </h1>
               <UBadge color="primary" variant="solid" class="mt-1">
                 {{ guruPage?.kelas }}
               </UBadge>
-              <div v-if="guruPage?.sosial && guruPage.sosial.length" class="flex space-x-2 mt-4">
+              <div v-if="guruPage?.sosial && guruPage.sosial.length" class="mt-4 flex space-x-2">
                 <UButton
                   v-for="(social, index) in guruPage.sosial"
                   :key="index"
@@ -102,16 +99,13 @@ useSchemaOrg([
           :transition="{ delay: 0.1 * 1 }"
           class="md:col-span-2"
         >
-          <UCard
-            variant="soft"
-            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
-          >
+          <UCard variant="soft" class="shadow-teja rounded-3xl bg-sky-50 dark:bg-sky-900">
             <div class="p-4">
-              <h3 class="text-xl font-bold mb-2 flex items-center">
-                <UIcon name="solar:notebook-linear" class="mr-2" />
+              <h3 class="mb-2 flex items-center text-xl font-bold">
+                <UIcon name="i-ph-quotes-duotone" class="mr-2" />
                 Quote
               </h3>
-              <p class="italic text-lg">
+              <p class="text-lg italic">
                 {{ guruPage?.catatan ? `"${guruPage.catatan}"` : 'Tidak ada catatan' }}
               </p>
             </div>
@@ -125,19 +119,16 @@ useSchemaOrg([
           :transition="{ delay: 0.1 * 2 }"
           class="md:col-span-2"
         >
-          <UCard
-            variant="soft"
-            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
-          >
+          <UCard variant="soft" class="shadow-teja rounded-3xl bg-sky-50 dark:bg-sky-900">
             <div class="p-4">
-              <h3 class="text-xl font-bold mb-3 flex items-center">
-                <UIcon name="solar:user-id-linear" class="mr-2" />
+              <h3 class="mb-3 flex items-center text-xl font-bold">
+                <UIcon name="i-ph-identification-card-duotone" class="mr-2" />
                 Informasi Guru
               </h3>
 
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div class="bg-white dark:bg-sky-800 rounded-xl p-3 shadow-sm">
-                  <p class="font-semibold text-sm text-gray-500 dark:text-gray-400">
+              <div class="grid grid-cols-1 gap-3 md:grid-cols-2">
+                <div class="rounded-xl bg-white p-3 shadow-sm dark:bg-sky-800">
+                  <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
                     Jabatan
                   </p>
                   <p class="font-bold">
@@ -145,8 +136,8 @@ useSchemaOrg([
                   </p>
                 </div>
 
-                <div class="bg-white dark:bg-sky-800 rounded-xl p-3 shadow-sm">
-                  <p class="font-semibold text-sm text-gray-500 dark:text-gray-400">
+                <div class="rounded-xl bg-white p-3 shadow-sm dark:bg-sky-800">
+                  <p class="text-sm font-semibold text-gray-500 dark:text-gray-400">
                     Pendidikan
                   </p>
                   <p class="font-bold">
@@ -166,21 +157,24 @@ useSchemaOrg([
           class="md:col-span-3"
         >
           <UCard
-            data-aos="fade-up" data-aos-delay="300"
+            data-aos="fade-up"
+            data-aos-delay="300"
             variant="soft"
-            class="rounded-3xl bg-sky-50 shadow-teja dark:bg-sky-900"
+            class="shadow-teja rounded-3xl bg-sky-50 dark:bg-sky-900"
           >
             <div class="p-4">
-              <h3 class="text-xl font-bold mb-2 flex items-center">
-                <UIcon name="solar:stars-minimalistic-linear" class="mr-2" />
+              <h3 class="mb-2 flex items-center text-xl font-bold">
+                <UIcon name="i-ph-shooting-star-duotone" class="mr-2" />
                 Pelatihan
               </h3>
-              <div class="bg-white dark:bg-sky-800 rounded-xl p-4 shadow-sm">
-                <ol v-if="guruPage?.pelatihan && guruPage.pelatihan.length" class="list-decimal list-inside">
+              <div class="rounded-xl bg-white p-4 shadow-sm dark:bg-sky-800">
+                <ol
+                  v-if="guruPage?.pelatihan && guruPage.pelatihan.length"
+                  class="list-inside list-decimal"
+                >
                   <li v-for="(item, index) in guruPage.pelatihan" :key="index">
                     <span class="font-bold">
-                      {{ item.title }}
-                    </span>- {{ item.tahun }}
+                      {{ item.title }} </span>- {{ item.tahun }}
                   </li>
                 </ol>
                 <p v-else class="italic">
@@ -193,10 +187,10 @@ useSchemaOrg([
       </div>
 
       <!-- Back Button -->
-      <div class="flex justify-center mb-8">
+      <div class="mb-8 flex justify-center">
         <UButton
           to="/guru"
-          icon="solar:arrow-left-linear"
+          icon="i-ph-arrow-circle-left-duotone"
           label="Kembali ke Daftar Guru"
           class="px-4 py-2"
         />

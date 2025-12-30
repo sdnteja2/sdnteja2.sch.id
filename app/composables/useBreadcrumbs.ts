@@ -5,10 +5,9 @@ export function useBreadcrumbs(breadcrumbData: Array<{ title: string, path: stri
     const paths = route.path.split('/').filter(Boolean)
 
     // Breadcrumb awal selalu Home
-    const breadcrumbArray = [{ label: 'Home', to: '/', icon: 'solar:home-angle-linear' }]
+    const breadcrumbArray: { label: string, to: string, icon?: string }[] = [{ label: 'Home', to: '/', icon: 'i-ph-house-duotone' }]
 
     let currentPath = ''
-    // eslint-disable-next-line unused-imports/no-unused-vars
     paths.forEach((segment, index) => {
       currentPath += `/${segment}`
 

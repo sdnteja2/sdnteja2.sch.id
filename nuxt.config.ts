@@ -29,6 +29,9 @@ export default defineNuxtConfig({
         },
       },
     },
+    renderer: {
+      anchorLinks: false,
+    },
   },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
@@ -149,48 +152,6 @@ export default defineNuxtConfig({
     supportedLanguages: ['id', 'en', 'es', 'ru'],
   },
 
-  // vite: {
-  //   build: {
-  //     rollupOptions: {
-  //       output: {
-  //         manualChunks(id) {
-  //           if (id.includes('node_modules')) {
-  //             // 1. Kelompokkan UI & Animasi (Modul paling berat di list Anda)
-  //             if (id.includes('@nuxt/ui') || id.includes('motion-v') || id.includes('@tailwindcss')) {
-  //               return 'vendor-ui'
-  //             }
-
-  //             // 2. Kelompokkan Nuxt Content & Studio
-  //             if (id.includes('@nuxt/content') || id.includes('nuxt-studio')) {
-  //               return 'vendor-content'
-  //             }
-
-  //             // 3. Kelompokkan Charts & Data Viz
-  //             if (id.includes('nuxt-charts') || id.includes('chart.js')) {
-  //               return 'vendor-charts'
-  //             }
-
-  //             // 4. Kelompokkan Utilities (VueUse & Unhead)
-  //             if (id.includes('@vueuse') || id.includes('@unhead')) {
-  //               return 'vendor-utils'
-  //             }
-
-  //             // 5. Kelompokkan SEO & Scripts
-  //             if (id.includes('@nuxtjs/seo') || id.includes('@nuxt/scripts')) {
-  //               return 'vendor-marketing'
-  //             }
-
-  //             // 6. Vendor umum lainnya (kecuali core Nuxt/Vue agar tidak rusak)
-  //             if (!id.includes('vue') && !id.includes('nuxt') && !id.includes('nitro')) {
-  //               return 'vendor-others'
-  //             }
-  //           }
-  //         },
-  //       },
-  //     },
-  //   },
-  // },
-
   // Mencegah masalah error "manualChunks" pada sisi server (SSR)
   hooks: {
     'content:file:beforeParse': function (ctx) {
@@ -233,6 +194,9 @@ export default defineNuxtConfig({
   },
   sitemap: {
     zeroRuntime: true,
+  },
+  linkChecker: {
+    runOnBuild: false,
   },
   app: {
     head: {

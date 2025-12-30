@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 
-const {
-  kelasBreakdown,
-} = useSiswaData()
+const { kelasBreakdown } = useSiswaData()
 
 // Bar Chart Data - Transform class breakdown for chart
 const chartData = computed(() => {

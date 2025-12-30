@@ -25,10 +25,7 @@ defineProps<Props>()
 <template>
   <UContentToc v-bind="$attrs" :links="links">
     <template #bottom>
-      <UiTocBotton
-        :has-links="!!links?.length"
-        :community-links="communityLinks"
-      />
+      <UiTocBotton :has-links="!!links?.length" :community-links="communityLinks" />
     </template>
     <template v-for="(_, name) in $slots" #[name]="slotData" :key="name">
       <slot :name="name" v-bind="slotData" />

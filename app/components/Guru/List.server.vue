@@ -1,17 +1,21 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v'
 
-const { data: guruTeja } = await useAsyncData('gurus', async () => {
-  try {
-    return await queryCollection('guru').all()
-  }
-  catch (error) {
-    console.error('Error fetching guru data:', error)
-    return []
-  }
-}, {
-  default: () => [],
-})
+const { data: guruTeja } = await useAsyncData(
+  'gurus',
+  async () => {
+    try {
+      return await queryCollection('guru').all()
+    }
+    catch (error) {
+      console.error('Error fetching guru data:', error)
+      return []
+    }
+  },
+  {
+    default: () => [],
+  },
+)
 
 const img = useImage()
 </script>
@@ -19,18 +23,18 @@ const img = useImage()
 <template>
   <div class="py-20">
     <UContainer>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         <Motion
           v-for="(guru, index) in guruTeja"
           :key="guru.nama"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
-          class="transition-transform duration-200 ease-in-out transform hover:scale-98"
+          class="hover:scale-98 transform transition-transform duration-200 ease-in-out"
         >
           <NuxtLink :to="guru.path" class="group">
-            <UCard variant="soft" class="bg-sky-50 shadow-teja dark:bg-sky-900 h-full rounded-4xl">
-              <div class="w-full aspect-square rounded-3xl overflow-hidden mb-4 bg-top bg-gray-100">
+            <UCard variant="soft" class="shadow-teja rounded-4xl h-full bg-sky-50 dark:bg-sky-900">
+              <div class="mb-4 aspect-square w-full overflow-hidden rounded-3xl bg-gray-100 bg-top">
                 <NuxtImg
                   :src="guru.foto"
                   :alt="`Foto ${guru.nama} - Guru SDN Teja 2`"
@@ -43,10 +47,10 @@ const img = useImage()
                   loading="lazy"
                   fetchpriority="low"
                   densities="1x 2x"
-                  class="w-full h-full object-cover object-center transition-all duration-300 ease-in-out"
+                  class="h-full w-full object-cover object-center transition-all duration-300 ease-in-out"
                 />
               </div>
-              <h2 class=" font-bold text-sm text-center">
+              <h2 class="text-center text-sm font-bold">
                 {{ guru.nama }}
               </h2>
             </UCard>

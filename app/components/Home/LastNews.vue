@@ -20,11 +20,14 @@ const img = useImage()
 </script>
 
 <template>
-  <div class="bg-sky-500 dark:bg-sky-900 w-full pt-20 pb-28 mt-12">
+  <div class="mt-12 w-full bg-sky-500 pb-28 pt-20 dark:bg-sky-900">
     <UContainer>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
-        <div variant="soft" class="rounded-4xl p-6 bg-white dark:bg-sky-950 py-8 md:sticky md:top-22 md:self-start">
-          <h2 class="text-2xl md:text-3xl mb-4 font-bold">
+        <div
+          variant="soft"
+          class="rounded-4xl md:top-22 bg-white p-6 py-8 md:sticky md:self-start dark:bg-sky-950"
+        >
+          <h2 class="mb-4 text-2xl font-bold md:text-3xl">
             Berita Terakhir
           </h2>
           <div v-for="(berita, index) in lastBerita" :key="berita.title">
@@ -52,7 +55,10 @@ const img = useImage()
                 :transition="{ delay: 0.1 * index }"
               >
                 <NuxtLink :to="artikel.path">
-                  <UCard variant="soft" class="bg-sky-50 hover:shadow-none transition-shadow ease-in-out duration-300 shadow-teja dark:bg-sky-950 h-full rounded-4xl overflow-hidden">
+                  <UCard
+                    variant="soft"
+                    class="shadow-teja rounded-4xl h-full overflow-hidden bg-sky-50 transition-shadow duration-300 ease-in-out hover:shadow-none dark:bg-sky-950"
+                  >
                     <div>
                       <NuxtImg
                         format="webp"
@@ -65,16 +71,26 @@ const img = useImage()
                         densities="1x 2x"
                         :src="artikel.image.toString()"
                         :alt="artikel.title"
-                        :placeholder="img(`${artikel.image.toString()}`, { h: 10, f: 'webp', blur: 1, q: 30 })"
-                        class="rounded-2xl object-cover object-center w-full h-[300px] bg-cover aspect-video"
+                        :placeholder="
+                          img(`${artikel.image.toString()}`, { h: 10, f: 'webp', blur: 1, q: 30 })
+                        "
+                        class="aspect-video h-[300px] w-full rounded-2xl bg-cover object-cover object-center"
                       />
                       <div class="mt-4">
-                        <h2 class="text-xl font-bold line-clamp-2">
+                        <h2 class="line-clamp-2 text-xl font-bold">
                           {{ artikel?.title }}
                         </h2>
 
                         <div class="mt-4">
-                          <UBadge>{{ new Date(artikel.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) }}</UBadge>
+                          <UBadge>
+                            {{
+                              new Date(artikel.date).toLocaleDateString('id-ID', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric',
+                              })
+                            }}
+                          </UBadge>
                         </div>
                       </div>
                     </div>

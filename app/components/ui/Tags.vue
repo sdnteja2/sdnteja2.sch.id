@@ -36,7 +36,7 @@ function handleTagSelect(tag: string) {
 </script>
 
 <template>
-  <div data-aos="fade-up" class="flex w-full justify-end my-4 items-center">
+  <div data-aos="fade-up" class="my-4 flex w-full items-center justify-end">
     <USelect
       v-model="selectedTag"
       :ui="{

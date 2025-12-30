@@ -29,7 +29,6 @@ interface ArtikelCollectionItem {
   title: string
   description: string
   tags: string[]
-
 }
 
 interface BeritaCollectionItem {
@@ -46,7 +45,7 @@ const totalPosts = ref(0) // Total jumlah item
 async function fetchPosts() {
   // Tentukan tipe eksplisit untuk hasil Promise.all()
   const { data: postsData } = await useAsyncData(`posts-${route.path}`, () => {
-    return Promise.all<(ArtikelCollectionItem[] | BeritaCollectionItem[])>([
+    return Promise.all<ArtikelCollectionItem[] | BeritaCollectionItem[]>([
       queryCollection('artikel')
         .where('tags', 'LIKE', `%${filter.value?.join('%')}%`)
         .order('date', 'DESC')
@@ -91,12 +90,16 @@ function applyPagination() {
 }
 
 // Load data saat halaman dimuat atau pagination berubah
-watch([currentPage, filter], async () => {
-  if (allPosts.value.length === 0) {
-    await fetchPosts()
-  }
-  applyPagination()
-}, { immediate: true })
+watch(
+  [currentPage, filter],
+  async () => {
+    if (allPosts.value.length === 0) {
+      await fetchPosts()
+    }
+    applyPagination()
+  },
+  { immediate: true },
+)
 
 // SEO Meta
 useSeoMeta({
@@ -116,7 +119,7 @@ useSeoMeta({
     </header>
 
     <section class="page-section">
-      <div class="sticky top-22 z-50 ">
+      <div class="top-22 sticky z-50">
         <UiTags />
       </div>
 
@@ -127,16 +130,19 @@ useSeoMeta({
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-4">
+        <div class="mb-4 grid grid-cols-1 gap-8 md:grid-cols-2">
           <Motion
-            v-for="(pageTag) in paginatedPosts"
+            v-for="pageTag in paginatedPosts"
             :key="pageTag.path"
             :initial="{ opacity: 0, transform: 'translateY(10px)' }"
             :in-view="{ opacity: 1, transform: 'translateY(0)' }"
             :transition="{ delay: 0.1 }"
           >
             <NuxtLink :to="`${pageTag.path}`">
-              <UCard variant="soft" class="bg-sky-50 hover:shadow-none transition-shadow ease-in-out duration-300  shadow-teja dark:bg-sky-900 h-full rounded-4xl overflow-hidden">
+              <UCard
+                variant="soft"
+                class="shadow-teja rounded-4xl h-full overflow-hidden bg-sky-50 transition-shadow duration-300 ease-in-out hover:shadow-none dark:bg-sky-900"
+              >
                 <UBadge class="mb-2">
                   {{ pageTag.type }}
                 </UBadge>
@@ -149,7 +155,7 @@ useSeoMeta({
                   </p>
 
                   <ul class="mt-4 flex flex-wrap">
-                    <li v-for="(tag, n) in pageTag.tags" :key="n" class="mr-2 mb-2">
+                    <li v-for="(tag, n) in pageTag.tags" :key="n" class="mb-2 mr-2">
                       <UButton size="xs" color="neutral" rel="noopener" :to="`/tags/${tag}`">
                         {{ tag }}
                       </UButton>
@@ -163,7 +169,7 @@ useSeoMeta({
       </div>
 
       <!-- Pagination -->
-      <div class="flex justify-center mt-8">
+      <div class="mt-8 flex justify-center">
         <UPagination
           v-model:page="currentPage"
           active-color="neutral"

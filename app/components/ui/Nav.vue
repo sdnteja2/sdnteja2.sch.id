@@ -29,10 +29,13 @@ const dropdownItems = computed(() => {
         Website Masih dalam pengembangan
       </p>
     </div> -->
-    <div class="fixed top-4 mx-auto w-full z-50  ">
+    <div class="fixed top-4 z-50 mx-auto w-full">
       <UContainer class=" ">
-        <div variant="subtle" class="rounded-4xl shadow  p-4 px-6 md:rounded-[40px] dark:bg-sky-800/80 bg-sky-200/50 backdrop-blur">
-          <div class="flex justify-between items-center">
+        <div
+          variant="subtle"
+          class="rounded-4xl bg-sky-200/50 p-4 px-6 shadow backdrop-blur md:rounded-[40px] dark:bg-sky-800/80"
+        >
+          <div class="flex items-center justify-between">
             <div>
               <NuxtLink to="/" aria-label="Beranda SDN Teja II">
                 <UiLogo />
@@ -45,7 +48,10 @@ const dropdownItems = computed(() => {
                     <NuxtLink
                       class="hover:text-sky-500"
                       :to="item.path"
-                      :class="{ 'active-link': isActive(item.path), 'notranslate': item.path === '/' }"
+                      :class="{
+                        'active-link': isActive(item.path),
+                        'notranslate': item.path === '/',
+                      }"
                     >
                       {{ item.title }}
                     </NuxtLink>

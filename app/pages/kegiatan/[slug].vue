@@ -17,11 +17,15 @@ const {
 } = useKegiatanImages(computed(() => kegiatanPage.value?.tag))
 
 // Menangani kasus ketika tag tidak ada (Opsional, karena sudah dihandle di composable)
-watch(() => kegiatanPage.value, (newValue) => {
-  if (newValue && !newValue.tag) {
-    imagesError.value = new Error('Tag tidak ditemukan pada halaman ini.')
-  }
-}, { immediate: true })
+watch(
+  () => kegiatanPage.value,
+  (newValue) => {
+    if (newValue && !newValue.tag) {
+      imagesError.value = new Error('Tag tidak ditemukan pada halaman ini.')
+    }
+  },
+  { immediate: true },
+)
 
 // State untuk UI (Fullscreen)
 const showFullscreen = ref(false)
@@ -61,7 +65,9 @@ function onFullscreenImageLoad() {
 }
 
 const isPrevDisabled = computed(() => currentImageIndex.value <= 0)
-const isNextDisabled = computed(() => !images.value || currentImageIndex.value >= images.value.length - 1)
+const isNextDisabled = computed(
+  () => !images.value || currentImageIndex.value >= images.value.length - 1,
+)
 
 // Track loaded state for gallery images
 const loadedImages = ref(new Set<string>())
@@ -98,21 +104,22 @@ useSeoMeta({
         {{ kegiatanPage?.title }}
       </h1>
 
-      <p> {{ kegiatanPage?.description }}</p>
+      <p>{{ kegiatanPage?.description }}</p>
     </div>
 
     <div v-if="imagesLoading">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         <USkeleton
-          v-for="n in 6" :key="n"
-          class="w-full h-48 rounded-2xl bg-sky-100 dark:bg-sky-800"
+          v-for="n in 6"
+          :key="n"
+          class="h-48 w-full rounded-2xl bg-sky-100 dark:bg-sky-800"
         />
       </div>
     </div>
 
     <div v-else-if="imagesError">
       <UAlert
-        icon="i-lucide-alert-circle"
+        icon="i-ph-warning-duotone"
         color="error"
         variant="soft"
         :title="imagesError.message || 'Terjadi kesalahan saat memuat gambar.'"
@@ -120,12 +127,16 @@ useSeoMeta({
     </div>
 
     <div v-else>
-      <div class="columns-1 sm:columns-2 md:columns-3 gap-4 space-y-4">
-        <div v-for="image in images" :key="image.src" class="relative group overflow-hidden rounded-2xl min-h-[200px] bg-sky-50 dark:bg-sky-900/20">
+      <div class="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-3">
+        <div
+          v-for="image in images"
+          :key="image.src"
+          class="group relative min-h-[200px] overflow-hidden rounded-2xl bg-sky-50 dark:bg-sky-900/20"
+        >
           <!-- Skeleton for individual image loading -->
           <USkeleton
             v-if="!loadedImages.has(image.src)"
-            class="absolute inset-0 w-full h-full rounded-2xl bg-sky-100 dark:bg-sky-800 animate-pulse"
+            class="absolute inset-0 h-full w-full animate-pulse rounded-2xl bg-sky-100 dark:bg-sky-800"
           />
 
           <NuxtImg
@@ -138,15 +149,23 @@ useSeoMeta({
             loading="lazy"
             fetchpriority="low"
             :alt="kegiatanPage?.title"
-            class="rounded-2xl w-full h-auto cursor-zoom-in transition-all duration-500 group-hover:scale-105"
+            class="h-auto w-full cursor-zoom-in rounded-2xl transition-all duration-500 group-hover:scale-105"
             :class="loadedImages.has(image.src) ? 'opacity-100' : 'opacity-0'"
-            :placeholder="img(`${image.src}`, { height: 10, width: 10, format: 'webp', blur: 1, quality: 50 })"
+            :placeholder="
+              img(`${image.src}`, { height: 10, width: 10, format: 'webp', blur: 1, quality: 50 })
+            "
             @click="openFullscreen(image.src)"
             @load="onImageLoad(image.src)"
           />
 
-          <div v-if="loadedImages.has(image.src)" class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 pointer-events-none flex items-center justify-center">
-            <UIcon name="i-lucide-maximize" class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 size-8 scale-75 group-hover:scale-100 transition-transform duration-300" />
+          <div
+            v-if="loadedImages.has(image.src)"
+            class="pointer-events-none absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 group-hover:bg-black/20"
+          >
+            <UIcon
+              name="i-lucide-maximize"
+              class="size-8 scale-75 text-white opacity-0 transition-opacity transition-transform duration-300 group-hover:scale-100 group-hover:opacity-100"
+            />
           </div>
         </div>
       </div>
@@ -161,44 +180,50 @@ useSeoMeta({
       }"
     >
       <template #content>
-        <div class="h-full w-full flex flex-col items-center justify-center p-4 relative bg-transparent" @click="closeFullscreen">
+        <div
+          class="relative flex h-full w-full flex-col items-center justify-center bg-transparent p-4"
+          @click="closeFullscreen"
+        >
           <!-- Close Button -->
           <UButton
             icon="i-lucide-x"
             color="neutral"
             variant="ghost"
             size="xl"
-            class="absolute top-6 right-6 z-50 text-white hover:bg-white/10 rounded-full cursor-pointer"
+            class="absolute right-6 top-6 z-50 cursor-pointer rounded-full text-white hover:bg-white/10"
             @click.stop="closeFullscreen"
           />
 
           <!-- Navigation Controls (Left) -->
           <UButton
             v-if="!isPrevDisabled"
-            icon="i-lucide-chevron-left"
+            icon="i-ph-arrow-fat-left-duotone"
             size="xl"
             color="neutral"
             variant="ghost"
-            class="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 z-50 text-white hover:bg-white/10 rounded-full h-16 w-16 cursor-pointer"
+            class="absolute left-4 top-1/2 z-50 h-16 w-16 -translate-y-1/2 cursor-pointer rounded-full text-white hover:bg-white/10 md:left-10"
             @click.stop="navigatePrev"
           />
 
           <!-- Navigation Controls (Right) -->
           <UButton
             v-if="!isNextDisabled"
-            icon="i-lucide-chevron-right"
+            icon="i-ph-arrow-fat-right-duotone"
             size="xl"
             color="neutral"
             variant="ghost"
-            class="absolute right-4 md:right-10 top-1/2 -translate-y-1/2 z-50 text-white hover:bg-white/10 rounded-full h-16 w-16 cursor-pointer"
+            class="absolute right-4 top-1/2 z-50 h-16 w-16 -translate-y-1/2 cursor-pointer rounded-full text-white hover:bg-white/10 md:right-10"
             @click.stop="navigateNext"
           />
 
           <!-- Main Image Container -->
-          <div class="relative w-full h-full flex items-center justify-center p-4 md:p-12 z-10" @click.stop="">
+          <div
+            class="relative z-10 flex h-full w-full items-center justify-center p-4 md:p-12"
+            @click.stop=""
+          >
             <USkeleton
               v-if="fullscreenImageLoading"
-              class="absolute max-w-5xl w-full aspect-video rounded-3xl bg-white/10"
+              class="absolute aspect-video w-full max-w-5xl rounded-3xl bg-white/10"
             />
 
             <transition name="fade" mode="out-in">
@@ -208,7 +233,7 @@ useSeoMeta({
                 format="webp"
                 :src="selectedImage"
                 quality="90"
-                class="max-w-full max-h-full object-contain rounded-lg shadow-2xl transition-opacity duration-300 pointer-events-auto"
+                class="pointer-events-auto max-h-full max-w-full rounded-lg object-contain shadow-2xl transition-opacity duration-300"
                 :class="{ 'opacity-0': fullscreenImageLoading }"
                 loading="eager"
                 fetchpriority="high"
@@ -218,11 +243,16 @@ useSeoMeta({
           </div>
 
           <!-- Counter and Caption -->
-          <div class="absolute bottom-8 flex flex-col items-center gap-2 z-50">
-            <UBadge color="neutral" variant="soft" size="lg" class="px-4 py-1 tracking-wider bg-white/10 text-white border-none">
+          <div class="absolute bottom-8 z-50 flex flex-col items-center gap-2">
+            <UBadge
+              color="neutral"
+              variant="soft"
+              size="lg"
+              class="border-none bg-white/10 px-4 py-1 tracking-wider text-white"
+            >
               {{ currentImageIndex + 1 }} / {{ images?.length || 0 }}
             </UBadge>
-            <p v-if="kegiatanPage?.title" class="text-white/60 text-sm font-medium">
+            <p v-if="kegiatanPage?.title" class="text-sm font-medium text-white/60">
               {{ kegiatanPage.title }}
             </p>
           </div>

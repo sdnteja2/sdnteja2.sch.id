@@ -13,7 +13,7 @@ defineProps({
   <div class="py-8">
     <UContainer>
       <div class="py-8">
-        <h2 class="text-5xl text-center md:text-6xl   font-bold ">
+        <h2 class="text-center text-5xl font-bold md:text-6xl">
           Selayang Pandang
         </h2>
       </div>
@@ -23,13 +23,13 @@ defineProps({
         :in-view="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
-        <UCard variant="soft" class="rounded-4xl bg-sky-200 dark:bg-sky-900 py-8">
+        <UCard variant="soft" class="rounded-4xl bg-sky-200 py-8 dark:bg-sky-900">
           <!-- Grid -->
-          <div class="md:grid md:grid-cols-2 md:gap-10 lg:gap-16 md:items-center">
-            <div class="hidden md:block mb-24 md:mb-0 sm:px-6">
+          <div class="md:grid md:grid-cols-2 md:items-center md:gap-10 lg:gap-16">
+            <div class="mb-24 hidden sm:px-6 md:mb-0 md:block">
               <div class="relative flex items-center justify-center">
                 <NuxtImg
-                  class="rounded-[40px] h-96"
+                  class="h-96 rounded-[40px]"
                   :src="image"
                   alt="Kepala Sekolah"
                   format="webp"
@@ -47,16 +47,21 @@ defineProps({
               <!-- Blockquote -->
               <blockquote class="relative">
                 <div class="relative z-10">
-                  <p class="text-xl font-medium italic text-balance  md:text-2xl md:leading-normal   xl:leading-normal">
+                  <p
+                    class="text-balance text-xl font-medium italic md:text-2xl md:leading-normal xl:leading-normal"
+                  >
                     <slot name="quote">
-                      Kehadiran website sekolah ini merupakan salah satu upaya kita untuk meningkatkan layanan informasi dan komunikasi sekolah kepada seluruh stakeholders, termasuk siswa, guru, karyawan, orang tua siswa, alumni, dan masyarakat umum.
+                      Kehadiran website sekolah ini merupakan salah satu upaya kita untuk
+                      meningkatkan layanan informasi dan komunikasi sekolah kepada seluruh
+                      stakeholders, termasuk siswa, guru, karyawan, orang tua siswa, alumni, dan
+                      masyarakat umum.
                     </slot>
                   </p>
                 </div>
 
                 <footer class="mt-6">
                   <div class="flex items-center">
-                    <div class="md:hidden shrink-0">
+                    <div class="shrink-0 md:hidden">
                       <NuxtImg
                         format="webp"
                         quality="70"
@@ -74,7 +79,7 @@ defineProps({
                           Nama Kepala Sekolah
                         </slot>
                       </div>
-                      <div class="text-xs ">
+                      <div class="text-xs">
                         <slot name="jabatan">
                           Kepala Sekolah
                         </slot>
@@ -83,11 +88,11 @@ defineProps({
                   </div>
                 </footer>
               </blockquote>
-            <!-- End Blockquote -->
+              <!-- End Blockquote -->
             </div>
-          <!-- End Col -->
+            <!-- End Col -->
           </div>
-        <!-- End Grid -->
+          <!-- End Grid -->
         </UCard>
       </Motion>
       <!-- End Testimonials -->
