@@ -1,7 +1,21 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
-
+ modules: [
+    '@nuxt/content',
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxt/ui',
+    '@vueuse/nuxt',
+    '@nuxtjs/seo',
+    'nuxt-charts',
+    'nuxt-studio',
+    '@nuxt/scripts',
+    '@nuxt/hints',
+    'nuxt-google-translate',
+    // 'nuxt-llms',
+    // '@nuxtjs/mcp-toolkit',
+  ],
   content: {
     database: {
       bindingName: 'DB', // Gunakan binding yang sama dengan NuxtHub
@@ -93,19 +107,7 @@ export default defineNuxtConfig({
       'xs': 320,
     },
   },
-  modules: [
-    '@nuxt/content',
-    '@nuxt/eslint',
-    '@nuxt/image',
-    '@nuxt/ui',
-    '@vueuse/nuxt',
-    '@nuxtjs/seo',
-    'nuxt-charts',
-    'nuxt-studio',
-    '@nuxt/scripts',
-    '@nuxt/hints',
-    'nuxt-google-translate',
-  ],
+ 
   nitro: {
     cloudflare: {
       deployConfig: true,
@@ -119,7 +121,6 @@ export default defineNuxtConfig({
         ],
       },
     },
-    compatibilityDate: '2025-12-12',
     experimental: {
       openAPI: false,
       websocket: true,

@@ -22,6 +22,7 @@
     "@nuxt/image": "2.0.0",
     "@nuxt/scripts": "0.13.2",
     "@nuxt/ui": "4.3.0",
+    "@nuxtjs/mcp-toolkit": "0.6.0",
     "@nuxtjs/seo": "^3.3.0",
     "@unhead/vue": "^2.0.3",
     "@vueuse/nuxt": "14.1.0",
@@ -34,7 +35,8 @@
     "nuxt-studio": "1.0.0-beta.3",
     "typescript": "^5.9.3",
     "vue": "^3.5.0",
-    "wrangler": "^4.54.0"
+    "wrangler": "^4.54.0",
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^6.7.3",
