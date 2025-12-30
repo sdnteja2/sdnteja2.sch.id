@@ -44,22 +44,24 @@ function changeLanguage(lang) {
       <div class="pt-3 pb-8">
         <div class="flex  justify-between  items-center gap-3">
           <!-- Language Dropdown -->
-          <div class="flex flex-wrap items-center gap-3">
-            <USelect
-              :model-value="activeLanguage"
-              :items="languageOptions"
-              :loading="!isLoaded"
-              value-key="value"
-              size="sm"
-              variant="subtle"
-              color="neutral"
-              highlight
-              arrow
-              class="w-15"
-              aria-label="Pilih bahasa"
-              @update:model-value="changeLanguage"
-            />
-          </div>
+          <ClientOnly>
+            <div class="flex flex-wrap items-center gap-3">
+              <USelect
+                :model-value="activeLanguage"
+                :items="languageOptions"
+                :loading="!isLoaded"
+                value-key="value"
+                size="sm"
+                variant="subtle"
+                color="neutral"
+                highlight
+                arrow
+                class="w-15"
+                aria-label="Pilih bahasa"
+                @update:model-value="changeLanguage"
+              />
+            </div>
+          </ClientOnly>
           <!-- Social Brands -->
           <div class="flex flex-wrap items-center gap-3 justify-end">
             <div class="space-x-4">

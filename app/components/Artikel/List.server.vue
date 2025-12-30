@@ -70,7 +70,7 @@ const img = useImage()
                   :src="artikel.image.toString()"
                   :alt="artikel.title"
                   class="rounded-2xl object-cover object-center w-full h-[300px] bg-cover aspect-video"
-                  :placeholder="img(artikel.image.toString(), { h: 15, w: 25, f: 'webp', blur: 5, q: 10 })"
+                  :placeholder="img(artikel.image.toString(), { height: 15, width: 25, format: 'webp', blur: 5, quality: 10 })"
                   loading="lazy"
                   fetchpriority="low"
                 />
@@ -81,7 +81,7 @@ const img = useImage()
 
                   <div class="mt-4 space-x-2 flex items-center   ">
                     <UBadge>{{ new Date(artikel.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' }) }}</UBadge> <UBadge variant="outline">
-                   baca  {{ artikel?.readingTime }} menit 
+                      baca  {{ artikel?.readingTime }} menit
                     </UBadge>
                   </div>
                   <div class="mt-4   ">
@@ -89,7 +89,6 @@ const img = useImage()
                       Oleh: {{ artikel?.author }}
                     </UBadge>
                   </div>
-             
                 </div>
               </div>
             </UCard>

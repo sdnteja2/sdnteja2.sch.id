@@ -79,8 +79,8 @@ function handleMove() {
         <UContentToc
           v-model:open="tocOpen"
           :ui="{
-            root: 'max-w-full mx-0 px-0 sm:px-2 top-24', // hilangkan -mx-4 px-4 di mobile
-            container: 'pt-4 pb-2.5', // sesuaikan jika perlu
+            root: 'max-w-full mx-0 px-0 sm:px-2 top-18 rounded-xl', // hilangkan -mx-4 px-4 di mobile
+            container: 'px-2 py-2 ', // sesuaikan jika perlu
           }"
 
           :links="artikelPage.body.toc.links.map(link => ({ ...link, children: [] }))"

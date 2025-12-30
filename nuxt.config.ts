@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
- modules: [
+  modules: [
     '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/image',
@@ -12,9 +12,10 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@nuxt/scripts',
     '@nuxt/hints',
-    'nuxt-google-translate',
     // 'nuxt-llms',
     // '@nuxtjs/mcp-toolkit',
+    'nuxt-google-translate',
+    'nuxt-llms',
   ],
   content: {
     database: {
@@ -114,7 +115,7 @@ export default defineNuxtConfig({
       'xs': 320,
     },
   },
- 
+
   nitro: {
     cloudflare: {
       deployConfig: true,
@@ -147,7 +148,7 @@ export default defineNuxtConfig({
     defaultLanguage: 'id',
     supportedLanguages: ['id', 'en', 'es', 'ru'],
   },
-  
+
   // vite: {
   //   build: {
   //     rollupOptions: {
@@ -192,21 +193,21 @@ export default defineNuxtConfig({
 
   // Mencegah masalah error "manualChunks" pada sisi server (SSR)
   hooks: {
-    'content:file:beforeParse'(ctx) {
-      const { file } = ctx;
+    'content:file:beforeParse': function (ctx) {
+      const { file } = ctx
 
-      if (file.id.endsWith(".md")) {
-        file.body = file.body.replace(/react/gi, "Vue");
+      if (file.id.endsWith('.md')) {
+        file.body = file.body.replace(/react/gi, 'Vue')
       }
     },
-    'content:file:afterParse'(ctx) {
-      const { file, content } = ctx;
+    'content:file:afterParse': function (ctx) {
+      const { file, content } = ctx
 
-      const wordsPerMinute = 180;
-      const text = typeof file.body === 'string' ? file.body : '';
-      const wordCount = text.split(/\s+/).length;
+      const wordsPerMinute = 180
+      const text = typeof file.body === 'string' ? file.body : ''
+      const wordCount = text.split(/\s+/).length
 
-      content.readingTime = Math.ceil(wordCount / wordsPerMinute);
+      content.readingTime = Math.ceil(wordCount / wordsPerMinute)
     },
     // 'vite:extendConfig': function (config, { isServer }) {
     //   if (isServer && config.build?.rollupOptions?.output) {
@@ -220,11 +221,6 @@ export default defineNuxtConfig({
   routeRules: {
     // Static pages - Prerender saat build time
     '/': { prerender: true },
-    '/guru': { prerender: true },
-    '/artikel': { prerender: true },
-    '/berita': { prerender: true },
-    '/kegiatan': { prerender: true },
-    '/media': { prerender: true },
 
     // SWR - Otomatis mengatur cache-control & payload extraction
     '/artikel/**': { swr: 3600 },
@@ -275,5 +271,10 @@ export default defineNuxtConfig({
     public: {
       cloudinaryBaseUrl: '', // Akan diisi oleh NUXT_PUBLIC_CLOUDINARY_BASE_URL
     },
+  },
+  llms: {
+    domain: 'https://sdnteja2.sch.id',
+    title: 'SDN TEJA II',
+    description: 'Website resmi SDN Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat',
   },
 })

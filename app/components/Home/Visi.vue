@@ -74,7 +74,7 @@ defineProps({
           </div>
           <div class=" flex flex-col space-y-4">
             <div class="py-8">
-              <h2 v-once class="text-5xl text-center md:text-6xl text-white font-extrabold ">
+              <h2 class="text-5xl text-center md:text-6xl text-white font-extrabold ">
                 Visi, Misi, dan Tujuan
               </h2>
             </div>
@@ -84,12 +84,12 @@ defineProps({
               :transition="{ delay: 0.1 }"
             >
               <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
-                <div v-once>
+                <div>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold">
                     Visi
                   </h2>
                 </div>
-                <div v-once>
+                <div>
                   <p class="  ">
                     Terwujudnya pribadi yang beriman dan bertakwa kepada Tuhan Tang Maha Esa, berilmu, berkarakter, terampil, kreatif dan berprestasi
                   </p>
@@ -102,12 +102,12 @@ defineProps({
               :transition="{ delay: 0.1 }"
             >
               <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
-                <div v-once>
+                <div>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold ">
                     Misi
                   </h2>
                 </div>
-                <div v-once>
+                <div>
                   <ol class="pb-6 list-decimal ml-6">
                     <li>Menciptakan lingkungan sekolah yang bernuansa agamis, bersih dan sehat</li>
                     <li>Meningkatkan kegiatan ibadah melalui kegiatan kultum dan Shalat berjamaah</li>
@@ -124,12 +124,12 @@ defineProps({
               :transition="{ delay: 0.1 }"
             >
               <UCard variant="soft" class="justify-evenly    flex-col h-full bg-sky-50 text-night-700  dark:bg-sky-950 dark:text-white   rounded-4xl  ">
-                <div v-once>
+                <div>
                   <h2 class="text-5xl md:text-6xl pb-4 font-bold ">
                     Tujuan
                   </h2>
                 </div>
-                <div v-once>
+                <div>
                   <ol class="pb-6 list-decimal ml-6">
                     <li>Terciptanya lingkungan yang agamis, bersih dan sehat</li>
                     <li>Meningkatnya ketakwaan peserta didik terhadap Tuhan Yang Maha Esa</li>

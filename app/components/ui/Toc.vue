@@ -23,9 +23,9 @@ defineProps<Props>()
 </script>
 
 <template>
-  <UContentToc :links="links">
+  <UContentToc v-bind="$attrs" :links="links">
     <template #bottom>
-      <ContentTocBottom
+      <UiTocBotton
         :has-links="!!links?.length"
         :community-links="communityLinks"
       />

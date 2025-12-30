@@ -44,10 +44,10 @@ const props = withDefaults(defineProps<{
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
           class="rounded-4xl object-cover object-center h-auto w-full aspect-video"
         />
-        <p v-if="item.title" v-once class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 dark:bg-sky-800/80 px-3 py-1 rounded-md font-medium">
+        <p v-if="item.title" class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-white/80 dark:bg-sky-800/80 px-3 py-1 rounded-md font-medium">
           {{ item.title }}
         </p>
-        <p v-if="item.description" v-once class="absolute bottom-4 right-4 bg-white/80 dark:bg-sky-800/80 px-3 py-1 rounded-md text-sm">
+        <p v-if="item.description" class="absolute bottom-4 right-4 bg-white/80 dark:bg-sky-800/80 px-3 py-1 rounded-md text-sm">
           {{ item.description }}
         </p>
       </div>
