@@ -143,7 +143,21 @@ export default defineNuxtConfig({
       ignore: ['/api/**', '/admin/**'],
       routes: ['/'],
     },
-
+    // Externalize OpenTelemetry packages that are not compatible with Cloudflare Workers
+    externals: {
+      external: [
+        '@opentelemetry/exporter-jaeger',
+        '@opentelemetry/sdk-node',
+        '@opentelemetry/api',
+      ],
+    },
+    rollupConfig: {
+      external: [
+        '@opentelemetry/exporter-jaeger',
+        '@opentelemetry/sdk-node',
+        '@opentelemetry/api',
+      ],
+    },
     preset: 'cloudflare_module',
   },
   googleTranslate: {
