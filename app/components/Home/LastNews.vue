@@ -72,7 +72,7 @@ const img = useImage()
                         :src="artikel.image.toString()"
                         :alt="artikel.title"
                         :placeholder="
-                          img(`${artikel.image.toString()}`, { h: 10, f: 'webp', blur: 1, q: 30 })
+                          img(`${artikel.image.toString()}`, { height: 10, format: 'webp', blur: 1, quality: 30 })
                         "
                         class="aspect-video h-[300px] w-full rounded-2xl bg-cover object-cover object-center"
                       />

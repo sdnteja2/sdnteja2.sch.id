@@ -12,8 +12,7 @@ export default defineNuxtConfig({
     'nuxt-studio',
     '@nuxt/scripts',
     '@nuxt/hints',
-    // 'nuxt-llms',
-    // '@nuxtjs/mcp-toolkit',
+    '@nuxtjs/mdc',
     'nuxt-google-translate',
     'nuxt-llms',
   ],
@@ -226,6 +225,10 @@ export default defineNuxtConfig({
     route: '/admin',
   },
   runtimeConfig: {
+    gemini: {
+      apiKey: '', // NUXT_GEMINI_API_KEY
+    },
+    aiGatewayApiKey: '',
     cloudinary: {
       // Biarkan kosong atau dummy, Nuxt akan mengambil dari NUXT_CLOUDINARY_API_KEY
       apiKey: '',

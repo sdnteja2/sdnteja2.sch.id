@@ -16,5 +16,9 @@
       "binding": "KV",
       "id": "1b481a3fd45e4b18865b02c9afba3ce0"
     }
-  ]
+  ],
+
+  "ai": {
+    "binding": "AI"
+  }
 }

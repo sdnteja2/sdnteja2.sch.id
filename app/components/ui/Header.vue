@@ -111,7 +111,7 @@ defineShortcuts({
       >
         <div class="flex items-center justify-between">
           <NuxtLink to="/" class="flex items-center gap-2 text-lg font-bold">
-           <UiLogo />
+            <UiLogo />
           </NuxtLink>
 
           <div class="flex items-center gap-2">

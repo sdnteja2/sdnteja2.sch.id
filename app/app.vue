@@ -12,6 +12,8 @@ import { id } from '@nuxt/ui/locale'
         <NuxtPage />
       </div>
       <UiFooter />
+      <!-- <UiChat /> -->
+      <UiChatGemini />
     </UMain>
     <div class="utility">
       <ClientOnly>
