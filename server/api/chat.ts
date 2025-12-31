@@ -1,151 +1,61 @@
-// server/api/chat.ts - RAG-Based AI Chat with Workers AI
-import { streamText } from 'ai'
-import { createWorkersAI } from 'workers-ai-provider'
-import { aggregateContentData } from '../utils/content-aggregator'
+import { streamText, convertToModelMessages } from 'ai'
+import { createGoogleGenerativeAI } from '@ai-sdk/google'
 
-export default defineEventHandler(async (event) => {
-  try {
-    const { messages } = await readBody(event)
-    console.log('[Chat API] Received messages:', messages.length)
+export default defineLazyEventHandler(async () => {
+  const config = useRuntimeConfig()
+  const apiKey = config.googleGenerativeAiApiKey
 
-    // Aggregate all content data from Nuxt Content
-    const contentData = await aggregateContentData(event)
-
-    // Create comprehensive system prompt with embedded data
-    const systemPrompt = `Kamu adalah JADU AI, asisten virtual resmi SDN Teja 2.
-
-Tugasmu adalah membantu siswa, orang tua, guru, dan pengunjung website mendapatkan informasi tentang SDN Teja 2.
-
-# DATA WEBSITE SDN TEJA II
-
-${contentData}
-
----
-
-# INSTRUKSI PENTING
-
-## Bahasa:
-**WAJIB menggunakan Bahasa Indonesia dalam setiap jawaban.** Jangan pernah menggunakan bahasa lain kecuali untuk istilah teknis yang tidak ada padanannya.
-
-## Aturan Menjawab:
-1. **HANYA gunakan data yang BENAR-BENAR ada di atas**
-2. **JANGAN membuat nama, tanggal, atau informasi yang tidak ada**
-3. Jika data tidak tersedia atau tidak jelas, katakan dengan jujur
-4. Jawab dalam bahasa Indonesia yang ramah, informatif, dan profesional
-5. Format jawaban dengan markdown yang rapi (headers, lists, bold, dll)
-
-## SINONIM PENTING (Kata-kata ini memiliki arti yang SAMA):
-- "guru kelas" = "wali kelas" (contoh: "guru kelas 3" = "wali kelas 3")
-- "artikel" = "blog" = "tulisan" = "postingan"
-- "berita" = "kabar" = "info terbaru" = "pengumuman"
-- "kegiatan" = "acara" = "event" = "aktivitas"
-- "kepala sekolah" = "kepsek" = "pimpinan sekolah"
-- "media" = "video" = "video pembelajaran"
-- "buku" = "buku pembelajaran" = "modul"
-
-## Identitas:
-- Nama: JADU AI
-- Peran: Asisten Virtual SDN Teja II
-- Lokasi Sekolah: Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat
-- Website: https://sdnteja2.sch.id
-
-## Cara Menjawab Pertanyaan:
-- **Tentang Guru/Wali Kelas**: Cari di section "Data Guru SDN Teja II" - lihat field "Kelas" untuk wali kelas
-- **Tentang Berita/Kabar**: Cari di section "Berita Terbaru"
-- **Tentang Artikel/Blog**: Cari di section "Artikel Pendidikan"
-- **Tentang Kegiatan/Acara**: Cari di section "Kegiatan Sekolah"
-- **Tentang Informasi Sekolah**: Cari di section "Informasi SDN Teja II"
-- **Tentang Media/Video**: Cari di section "Media Pembelajaran"
-- **Tentang Buku**: Cari di section "Buku Pembelajaran"
-
-## Jika Pertanyaan Di Luar Data:
-Jika pertanyaan tidak berkaitan dengan SDN Teja II atau data yang tersedia, jawab:
-"Maaf, saya hanya dapat menjawab pertanyaan seputar SDN Teja II. Apakah ada yang bisa saya bantu tentang sekolah kami?"
-
-Selamat membantu dan ingat untuk SELALU menjawab dalam Bahasa Indonesia! 🎓`
-
-    // Transform messages from frontend format to AI SDK format
-    const transformedMessages = messages.map((msg: any) => {
-    // Handle messages with 'parts' array (from @ai-sdk/vue Chat component)
-      if (msg.parts && Array.isArray(msg.parts)) {
-        const textContent = msg.parts
-          .filter((part: any) => part.type === 'text')
-          .map((part: any) => part.text)
-          .join('\n')
-
-        return {
-          role: msg.role,
-          content: textContent,
-        }
-      }
-
-      // Handle messages with 'content' already (standard format)
-      if (msg.content) {
-        return {
-          role: msg.role,
-          content: msg.content,
-        }
-      }
-
-      // Fallback: return as-is
-      return msg
-    })
-
-    console.log('[Chat API] Transformed messages:', transformedMessages.length)
-
-    // Prepare messages with system prompt
-    const fullMessages = [
-      { role: 'system', content: systemPrompt },
-      ...transformedMessages,
-    ]
-
-    // Create Workers AI instance with env.AI binding
-    console.log('[Chat API] Creating Workers AI instance...')
-    
-    // Proxy binding to inject Gateway configuration
-    const aiBinding = event.context.cloudflare.env.AI
-    const bindingWithGateway = {
-      ...aiBinding,
-      run: (model: any, inputs: any, options: any) => {
-        return aiBinding.run(model, inputs, {
-          ...options,
-          gateway: {
-            id: 'webb'
-          },
-          // Cache responses for 1 hour for repeating prompts
-          cache: {
-            ttl: 3600
-          }
-        })
-      }
-    }
-
-    const workersai = createWorkersAI({ binding: bindingWithGateway })
-    console.log('[Chat API] Workers AI instance created')
-
-    // Stream AI response
-    console.log('[Chat API] Calling streamText...')
-    const result = streamText({
-      // model: workersai('@cf/meta/llama-3.1-8b-instruct'),
-      model: workersai('@cf/google/gemma-2b-it-lora'),
-      messages: fullMessages,
-      // @ts-expect-error - maxTokens is supported by runtime but missing in type definition
-      maxTokens: 1024,
-      temperature: 0.4,
-    })
-    console.log('[Chat API] streamText called successfully')
-
-    console.log('[Chat API] Returning UI Message Stream response...')
-    
-    // Use AI SDK's UI message stream response for @ai-sdk/vue Chat class compatibility
-    return result.toUIMessageStreamResponse()
-  }
-  catch (error) {
-    console.error('[Chat API] Error:', error)
+  if (!apiKey) {
     throw createError({
       statusCode: 500,
-      message: 'Failed to process chat request',
-      data: error,
+      statusMessage: 'Google Generative AI API key is not configured.'
     })
   }
+
+  const google = createGoogleGenerativeAI({
+    apiKey
+  })
+
+  return defineEventHandler(async (event) => {
+    // Read messages from request body as UIMessage[]
+    const { messages } = await readBody(event)
+
+    // Aggregate content data for context (RAG)
+    const contentData = await aggregateContentData(event)
+
+    // Define system prompt
+    const systemPrompt = `KAMU ADALAH JADU AI (ASISTEN SDN TEJA 2).
+WAJIB MENJAWAB HANYA BERDASARKAN DATA DI BAWAH INI:
+
+<KONTEKS_DATA>
+${contentData}
+</KONTEKS_DATA>
+
+---
+ATURAN KERJA:
+1. Jawab selalu dalam BAHASA INDONESIA yang ramah dan profesional.
+2. Jika ditanya berita/artikel/kegiatan/guru, berikan informasi yang ada di dalam <KONTEKS_DATA> di atas.
+3. JANGAN pernah berkata "Saya tidak punya akses informasi real-time" atau "sebagai AI saya tidak tahu". Gunakan saja data yang tersedia.
+4. Jika data benar-benar tidak ada di konteks, katakan: "Maaf, informasi tersebut belum tersedia di website kami."
+5. Gunakan format Markdown yang rapi (list/bold/headers).
+
+IDENTITAS:
+- Nama: JADU AI
+- Sekolah: SDN Teja II, Rajagaluh, Majalengka.
+- Website: https://sdnteja2.sch.id
+---
+Tugasmu dimulai sekarang. Bantu pengguna dengan data sekolah yang tersedia.`
+
+    // Stream AI response using Gemini 1.5 Flash
+    const result = streamText({
+      model: google('gemini-2.5-flash'),
+      system: systemPrompt,
+      messages: await convertToModelMessages(messages),
+      temperature: 0.4,
+    })
+
+    // Returns a stream compatible with the Chat class and DefaultChatTransport
+    return result.toUIMessageStreamResponse()
+  })
+  
 })

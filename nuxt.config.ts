@@ -225,9 +225,7 @@ export default defineNuxtConfig({
     route: '/admin',
   },
   runtimeConfig: {
-    gemini: {
-      apiKey: '', // NUXT_GEMINI_API_KEY
-    },
+    googleGenerativeAiApiKey: '', // NUXT_GOOGLE_GENERATIVE_AI_API_KEY
     aiGatewayApiKey: '',
     cloudinary: {
       // Biarkan kosong atau dummy, Nuxt akan mengambil dari NUXT_CLOUDINARY_API_KEY

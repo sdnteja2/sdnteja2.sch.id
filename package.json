@@ -16,6 +16,7 @@
     "clean": "rm -rf .nuxt node_modules/.cache"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.2",
     "@ai-sdk/vue": "^3.0.3",
     "@nuxt/content": "^3.9.0",
     "@nuxt/eslint": "^1.12.1",
@@ -37,7 +38,6 @@
     "nuxt-studio": "1.0.0-beta.3",
     "typescript": "^5.9.3",
     "vue": "^3.5.0",
-    "workers-ai-provider": "^3.0.2",
     "wrangler": "^4.54.0",
     "zod": "^4.2.1"
   },
