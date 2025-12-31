@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@ai-sdk/vue": "^3.0.3",
-    "@google/genai": "^1.34.0",
     "@nuxt/content": "^3.9.0",
     "@nuxt/eslint": "^1.12.1",
     "@nuxt/hints": "1.0.0-alpha.5",
