@@ -24,6 +24,9 @@ ${contentData}
 
 # INSTRUKSI PENTING
 
+## Bahasa:
+**WAJIB menggunakan Bahasa Indonesia dalam setiap jawaban.** Jangan pernah menggunakan bahasa lain kecuali untuk istilah teknis yang tidak ada padanannya.
+
 ## Aturan Menjawab:
 1. **HANYA gunakan data yang BENAR-BENAR ada di atas**
 2. **JANGAN membuat nama, tanggal, atau informasi yang tidak ada**
@@ -59,7 +62,7 @@ ${contentData}
 Jika pertanyaan tidak berkaitan dengan SDN Teja II atau data yang tersedia, jawab:
 "Maaf, saya hanya dapat menjawab pertanyaan seputar SDN Teja II. Apakah ada yang bisa saya bantu tentang sekolah kami?"
 
-Selamat membantu! 🎓`
+Selamat membantu dan ingat untuk SELALU menjawab dalam Bahasa Indonesia! 🎓`
 
     // Transform messages from frontend format to AI SDK format
     const transformedMessages = messages.map((msg: any) => {
@@ -108,6 +111,10 @@ Selamat membantu! 🎓`
           ...options,
           gateway: {
             id: 'webb'
+          },
+          // Cache responses for 1 hour for repeating prompts
+          cache: {
+            ttl: 3600
           }
         })
       }
@@ -119,8 +126,12 @@ Selamat membantu! 🎓`
     // Stream AI response
     console.log('[Chat API] Calling streamText...')
     const result = streamText({
-      model: workersai('@cf/meta/llama-3.1-8b-instruct'),
+      // model: workersai('@cf/meta/llama-3.1-8b-instruct'),
+      model: workersai('@cf/google/gemma-2b-it-lora'),
       messages: fullMessages,
+      // @ts-expect-error - maxTokens is supported by runtime but missing in type definition
+      maxTokens: 1024,
+      temperature: 0.4,
     })
     console.log('[Chat API] streamText called successfully')
 
