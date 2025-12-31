@@ -142,7 +142,7 @@ function formatSekolah(sekolah: any): string {
 **NPSN**: ${npsn}
 **NSS**: ${nss}
 **Kepala Sekolah**: ${kepalaSekolah}
-**Alamat**: Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat
+**Alamat**: Desa Teja Kecamatan Rajagaluh, Kabupaten Majalengka, Jawa Barat
 **Website**: https://sdnteja2.sch.id
 
 **Deskripsi**:
