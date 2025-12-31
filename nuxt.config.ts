@@ -58,7 +58,7 @@ export default defineNuxtConfig({
         weights: [400],
         // Optimize font display untuk better LCP
         display: 'swap',
-        preload: true,
+        preload: false, // Disable preload to reduce bundle
       },
       {
         name: 'Google Sans',
@@ -68,14 +68,14 @@ export default defineNuxtConfig({
         weights: [400, 500, 600, 700],
         // Optimize font display untuk better LCP
         display: 'swap',
-        preload: true,
+        preload: false, // Disable preload to reduce bundle
       },
     ],
     // Gunakan Google sebagai provider utama
     provider: 'google',
-    // Optimize font loading untuk better LCP
+    // Disable local fallbacks to prevent fonts from being bundled
     experimental: {
-      disableLocalFallbacks: false,
+      disableLocalFallbacks: true,
     },
   },
   icon: {
@@ -137,13 +137,20 @@ export default defineNuxtConfig({
     },
     minify: true,
     sourceMap: false,
+    // Reduce bundle size
+    compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
       failOnError: false,
       ignore: ['/api/**', '/admin/**'],
       routes: ['/'],
     },
-
+    // Exclude large files from server bundle
+    serverAssets: [],
+    // Don't bundle fonts into server
+    externals: {
+      inline: [/^(?!.*\.ttf$).*$/],
+    },
     preset: 'cloudflare_module',
   },
   googleTranslate: {
