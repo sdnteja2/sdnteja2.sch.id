@@ -1,6 +1,5 @@
-// server/api/chatGemini.ts - AI Chat with Google Gemini via Gemini CLI Provider
-import { streamText } from 'ai'
-import { createGeminiProvider } from 'ai-sdk-provider-gemini-cli'
+// server/api/chatGemini.ts - AI Chat with Google Gemini via @google/genai
+import { GoogleGenAI } from '@google/genai'
 import { aggregateContentData } from '../utils/content-aggregator'
 
 export default defineEventHandler(async (event) => {
@@ -52,64 +51,83 @@ Jika pertanyaan tidak berkaitan dengan SDN Teja II atau data yang tersedia, jawa
 
 Selamat membantu! 🎓`
 
-    // Transform messages from frontend format to AI SDK format
-    const transformedMessages = messages.map((msg: any) => {
-      // Handle messages with 'parts' array (from @ai-sdk/vue Chat component)
-      if (msg.parts && Array.isArray(msg.parts)) {
-        const textContent = msg.parts
-          .filter((part: any) => part.type === 'text')
-          .map((part: any) => part.text)
-          .join('\n')
+    // Transform messages to Gemini format
+    const history = messages.slice(0, -1).map((msg: any) => {
+      const textContent = msg.parts
+        ? msg.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('\n')
+        : msg.content || ''
 
-        return {
-          role: msg.role,
-          content: textContent,
-        }
+      return {
+        role: msg.role === 'assistant' ? 'model' : 'user',
+        parts: [{ text: textContent }],
       }
-
-      // Handle messages with 'content' already (standard format)
-      if (msg.content) {
-        return {
-          role: msg.role,
-          content: msg.content,
-        }
-      }
-
-      // Fallback: return as-is
-      return msg
     })
 
-    console.log('[ChatGemini API] Transformed messages:', transformedMessages.length)
+    const lastMessage = messages[messages.length - 1]
+    const lastMessageText = lastMessage.parts
+      ? lastMessage.parts.filter((p: any) => p.type === 'text').map((p: any) => p.text).join('\n')
+      : lastMessage.content || ''
 
-    // Prepare messages with system prompt
-    const fullMessages = [
-      { role: 'system', content: systemPrompt },
-      ...transformedMessages,
-    ]
+    console.log('[ChatGemini API] History length:', history.length)
+    console.log('[ChatGemini API] Last message:', lastMessageText.substring(0, 50))
 
-    // Create Gemini CLI provider instance with API key authentication
+    // Create Gemini client
     const config = useRuntimeConfig(event)
-    console.log('[ChatGemini API] Creating Gemini provider instance...')
-
-    const gemini = createGeminiProvider({
-      authType: 'api-key',
+    const ai = new GoogleGenAI({
       apiKey: config.gemini.apiKey,
     })
 
-    console.log('[ChatGemini API] Gemini provider instance created')
-
-    // Stream AI response
-    console.log('[ChatGemini API] Calling streamText...')
-    const result = streamText({
-      model: gemini('gemini-2.5-flash'),
-      messages: fullMessages,
+    // Create chat session
+    const chat = ai.chats.create({
+      model: 'gemini-2.0-flash',
+      history,
+      config: {
+        systemInstruction: systemPrompt,
+      },
     })
-    console.log('[ChatGemini API] streamText called successfully')
 
-    console.log('[ChatGemini API] Returning UI Message Stream response...')
+    // Stream response
+    const streamResult = await chat.sendMessageStream({
+      message: lastMessageText,
+    })
 
-    // Use AI SDK's UI message stream response for @ai-sdk/vue Chat class compatibility
-    return result.toUIMessageStreamResponse()
+    // Generate unique message ID
+    const messageId = `msg-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`
+
+    // Create UI Message Stream compatible with @ai-sdk/vue
+    const encoder = new TextEncoder()
+    const stream = new ReadableStream({
+      async start(controller) {
+        try {
+          // Send message start
+          controller.enqueue(encoder.encode(`g:${JSON.stringify({ messageId })}\n`))
+
+          for await (const chunk of streamResult) {
+            const text = chunk.text
+            if (text) {
+              // Send text delta in UI message stream format
+              controller.enqueue(encoder.encode(`a:${JSON.stringify({ text })}\n`))
+            }
+          }
+
+          // Send finish
+          controller.enqueue(encoder.encode(`e:${JSON.stringify({ finishReason: 'stop' })}\n`))
+          controller.close()
+        }
+        catch (error) {
+          console.error('[ChatGemini Stream] Error:', error)
+          controller.error(error)
+        }
+      },
+    })
+
+    return new Response(stream, {
+      headers: {
+        'Content-Type': 'text/event-stream',
+        'Cache-Control': 'no-cache',
+        'Connection': 'keep-alive',
+      },
+    })
   }
   catch (error) {
     console.error('[ChatGemini API] Error:', error)
@@ -120,3 +138,4 @@ Selamat membantu! 🎓`
     })
   }
 })
+
