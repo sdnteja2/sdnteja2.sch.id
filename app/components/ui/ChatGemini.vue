@@ -1,34 +1,140 @@
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { DefaultChatTransport } from 'ai'
-import type { UIMessage } from 'ai'
-import { getTextFromMessage } from '@nuxt/ui/utils/ai'
 import { nextTick } from 'vue'
 import { useClipboard } from '@vueuse/core'
 
-const messages: UIMessage[] = []
+interface ChatMessage {
+  id: string
+  role: 'user' | 'assistant'
+  content: string
+  parts?: { type: string; text: string }[]
+}
+
+const messages = ref<ChatMessage[]>([])
 const input = ref('')
 const isOpen = ref(false)
+const status = ref<'ready' | 'streaming' | 'error'>('ready')
+const error = ref<Error | null>(null)
 
 const toast = useToast()
 const { copy } = useClipboard()
 
-const chat = new Chat({
-  messages,
-  transport: new DefaultChatTransport({
-    api: '/api/chatGemini'
-  })
-})
+// Get text from message
+function getTextFromMessage(message: ChatMessage): string {
+  if (message.parts && message.parts.length > 0) {
+    return message.parts
+      .filter(p => p.type === 'text')
+      .map(p => p.text)
+      .join('\n')
+  }
+  return message.content || ''
+}
 
-function handleSubmit(e?: Event) {
-  e?.preventDefault()
-  if (input.value.trim()) {
-    chat.sendMessage({ text: input.value })
-    input.value = ''
+// Send message and stream response
+async function sendMessage(text: string) {
+  if (!text.trim()) return
+
+  // Add user message
+  const userMessage: ChatMessage = {
+    id: `user-${Date.now()}`,
+    role: 'user',
+    content: text,
+    parts: [{ type: 'text', text }]
+  }
+  messages.value.push(userMessage)
+
+  // Create assistant message placeholder
+  const assistantMessage: ChatMessage = {
+    id: `assistant-${Date.now()}`,
+    role: 'assistant',
+    content: '',
+    parts: [{ type: 'text', text: '' }]
+  }
+  messages.value.push(assistantMessage)
+
+  status.value = 'streaming'
+  error.value = null
+
+  try {
+    // Format messages for API
+    const apiMessages = messages.value.slice(0, -1).map(m => ({
+      role: m.role,
+      parts: m.parts || [{ type: 'text', text: m.content }]
+    }))
+
+    const response = await fetch('/api/chatGemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: apiMessages })
+    })
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+    }
+
+    const reader = response.body?.getReader()
+    if (!reader) throw new Error('No response body')
+
+    const decoder = new TextDecoder()
+    let fullText = ''
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+
+      const chunk = decoder.decode(value, { stream: true })
+      const lines = chunk.split('\n')
+
+      for (const line of lines) {
+        if (!line.trim()) continue
+
+        // Parse stream format: prefix:json
+        if (line.startsWith('a:')) {
+          // Text chunk
+          try {
+            const data = JSON.parse(line.slice(2))
+            if (data.text) {
+              fullText += data.text
+              // Update message content
+              const lastMsg = messages.value[messages.value.length - 1]
+              if (lastMsg && lastMsg.role === 'assistant') {
+                lastMsg.content = fullText
+                lastMsg.parts = [{ type: 'text', text: fullText }]
+              }
+            }
+          } catch (e) {
+            // Ignore parse errors
+          }
+        }
+      }
+    }
+
+    status.value = 'ready'
+  } catch (err) {
+    console.error('[ChatGemini] Error:', err)
+    error.value = err as Error
+    status.value = 'error'
+    // Remove empty assistant message on error
+    if (messages.value.length > 0 && messages.value[messages.value.length - 1].role === 'assistant' && !messages.value[messages.value.length - 1].content) {
+      messages.value.pop()
+    }
   }
 }
 
-function copyMessage(message: UIMessage) {
+function handleSubmit(e?: Event) {
+  e?.preventDefault()
+  if (input.value.trim() && status.value !== 'streaming') {
+    const text = input.value
+    input.value = ''
+    sendMessage(text)
+  }
+}
+
+function stopGeneration() {
+  // For now, just set status to ready
+  status.value = 'ready'
+}
+
+function copyMessage(message: ChatMessage) {
   const text = getTextFromMessage(message)
   copy(text)
   toast.add({
@@ -52,11 +158,10 @@ function copyMessage(message: UIMessage) {
       content: 'w-[400px] max-w-[calc(100vw-3rem)] p-0 overflow-hidden',
     }"
   >
-    <!-- Floating Chat Button (Google Blue) -->
-        <!-- class="fixed bottom-6 right-24 z-50 shadow-lg hover:scale-110 transition-transform bg-blue-600 hover:bg-blue-700 text-white" -->
+    <!-- Floating Chat Button -->
     <UButton
       icon="i-heroicons-sparkles"
-     class="fixed bottom-6 right-6 z-50 shadow-lg hover:scale-110 transition-transform"
+      class="fixed bottom-6 right-6 z-50 shadow-lg hover:scale-110 transition-transform"
       size="lg"
       aria-label="Buka chat dengan Gemini AI"
     />
@@ -97,45 +202,62 @@ function copyMessage(message: UIMessage) {
         <!-- Chat Messages Area -->
         <div class="flex-1 overflow-hidden">
           <div
-            v-if="chat.messages.length > 0"
-            class="h-full overflow-y-auto px-4 py-4"
+            v-if="messages.length > 0"
+            class="h-full overflow-y-auto px-4 py-4 space-y-4"
           >
-            <UChatMessages
-              :messages="chat.messages"
-              :status="chat.status"
-              :should-scroll-to-bottom="true"
-              :should-auto-scroll="true"
-              :user="{
-                avatar: { icon: 'i-heroicons-user', color: 'primary' },
-                variant: 'soft',
-                side: 'right',
-              }"
-              :assistant="{
-                avatar: { icon: 'i-heroicons-sparkles' },
-                variant: 'outline',
-                side: 'left',
-              }"
+            <div
+              v-for="message in messages"
+              :key="message.id"
+              :class="[
+                'flex gap-3',
+                message.role === 'user' ? 'flex-row-reverse' : 'flex-row'
+              ]"
             >
-              <template #content="{ message }">
+              <!-- Avatar -->
+              <UAvatar
+                :icon="message.role === 'user' ? 'i-heroicons-user' : 'i-heroicons-sparkles'"
+                :color="message.role === 'user' ? 'primary' : 'neutral'"
+                size="sm"
+              />
+              
+              <!-- Message Content -->
+              <div
+                :class="[
+                  'max-w-[80%] rounded-lg px-3 py-2',
+                  message.role === 'user' 
+                    ? 'bg-primary-100 dark:bg-primary-900/30' 
+                    : 'bg-gray-100 dark:bg-gray-800'
+                ]"
+              >
                 <MDC
                   :value="getTextFromMessage(message)"
                   :cache-key="message.id"
                   class="prose prose-sm prose-sky dark:prose-invert max-w-none prose-p:my-1 prose-p:leading-relaxed"
                 />
-              </template>
-
-              <template #actions="{ message }">
-                <UButton
-                  v-if="message.role === 'assistant'"
-                  icon="i-heroicons-clipboard-document"
-                  color="neutral"
-                  variant="ghost"
-                  size="xs"
-                  aria-label="Salin jawaban"
-                  @click="copyMessage(message)"
-                />
-              </template>
-            </UChatMessages>
+                
+                <!-- Copy Button for Assistant -->
+                <div v-if="message.role === 'assistant' && message.content" class="mt-2 flex justify-end">
+                  <UButton
+                    icon="i-heroicons-clipboard-document"
+                    color="neutral"
+                    variant="ghost"
+                    size="xs"
+                    aria-label="Salin jawaban"
+                    @click="copyMessage(message)"
+                  />
+                </div>
+              </div>
+            </div>
+            
+            <!-- Streaming indicator -->
+            <div v-if="status === 'streaming'" class="flex gap-3">
+              <UAvatar icon="i-heroicons-sparkles" color="neutral" size="sm" />
+              <div class="flex items-center gap-1">
+                <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0ms" />
+                <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 150ms" />
+                <span class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 300ms" />
+              </div>
+            </div>
           </div>
 
           <!-- Empty State -->
@@ -179,19 +301,35 @@ function copyMessage(message: UIMessage) {
 
         <!-- Input Footer -->
         <div class="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-800">
-          <UChatPrompt
-            v-model="input"
-            :error="chat.error"
-            variant="outline"
-            placeholder="Ketik pesan Anda..."
-            @submit="handleSubmit"
-          >
-            <UChatPromptSubmit
-              :status="chat.status"
-              color="primary"
-              @stop="chat.stop()"
+          <form class="flex gap-2" @submit.prevent="handleSubmit">
+            <UInput
+              v-model="input"
+              class="flex-1"
+              variant="outline"
+              placeholder="Ketik pesan Anda..."
+              :disabled="status === 'streaming'"
             />
-          </UChatPrompt>
+            <UButton
+              v-if="status === 'streaming'"
+              icon="i-heroicons-stop"
+              color="neutral"
+              variant="soft"
+              type="button"
+              aria-label="Hentikan"
+              @click="stopGeneration"
+            />
+            <UButton
+              v-else
+              icon="i-heroicons-paper-airplane"
+              color="primary"
+              type="submit"
+              :disabled="!input.trim()"
+              aria-label="Kirim"
+            />
+          </form>
+          <p v-if="error" class="text-xs text-red-500 mt-2">
+            {{ error.message }}
+          </p>
         </div>
       </div>
     </template>
