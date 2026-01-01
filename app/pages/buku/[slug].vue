@@ -74,16 +74,20 @@ const refreshIframe = () => {
                         </button>
                    </div>
                </div>
-               
                <div class="w-full h-[800px] relative">
-                    <!-- Gunakan Native Object untuk PDF (Support file besar) -->
+                 <NuxtPdfKit 
+                 :src="bukuPage.link"
+                 :title="bukuPage.title"
+                 :keywords="bukuPage.pelajaran"
+                  />
+               </div>
+               <!-- <div class="w-full h-[800px] relative">
                    <object
                         :key="iframeKey"
                         :data="bukuPage.link"
                         type="application/pdf"
                         class="w-full h-full"
                    >
-                        <!-- Fallback jika browser tidak support PDF embed -->
                         <div class="flex flex-col items-center justify-center h-full gap-4 text-gray-500">
                             <UIcon name="i-ph-file-pdf-duotone" class="w-16 h-16 text-gray-400" />
                             <p class="text-center px-4">
@@ -93,7 +97,7 @@ const refreshIframe = () => {
                             <UButton :to="bukuPage.link" target="_blank" icon="i-ph-download-duotone" label="Download PDF" />
                         </div>
                    </object>
-               </div>
+               </div> -->
           </div>
       </div>
 

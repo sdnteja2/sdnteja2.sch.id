@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     '@nuxtjs/mdc',
     'nuxt-google-translate',
     'nuxt-llms',
+    'nuxt-pdf-kit',
   ],
   content: {
     database: {
