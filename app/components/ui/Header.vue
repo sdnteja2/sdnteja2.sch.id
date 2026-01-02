@@ -107,15 +107,15 @@ defineShortcuts({
   <div class="fixed top-4 z-50 mx-auto w-full">
     <UContainer>
       <div
-        class="rounded-4xl shadow-teja bg-sky-200/50 p-2 px-6 backdrop-blur md:rounded-[40px] dark:bg-sky-800/80"
+        class="rounded-4xl shadow-teja bg-sky-200/50 p-2 px-3 sm:px-4 lg:px-6 backdrop-blur md:rounded-[40px] dark:bg-sky-800/80"
       >
         <div class="flex items-center justify-between">
-          <NuxtLink to="/" class="flex items-center gap-2 text-lg font-bold">
-            <UiLogo />
+          <NuxtLink to="/" class="flex items-center gap-1 sm:gap-2 text-base sm:text-lg font-bold">
+            <UiLogo class="scale-90 sm:scale-100" />
           </NuxtLink>
 
-          <div class="flex items-center gap-2">
-            <div class="hidden md:block">
+          <div class="flex items-center gap-1 sm:gap-2">
+            <div class="hidden lg:block">
               <UNavigationMenu :items="items" />
             </div>
             <UTooltip text="Cari..." :kbds="['meta', 'K']">
@@ -136,7 +136,7 @@ defineShortcuts({
 
             <UColorModeButton />
 
-            <div class="md:hidden">
+            <div class="lg:hidden">
               <UPopover
                 v-model:open="isOpen"
                 :content="{ align: 'end', side: 'bottom', sideOffset: 12 }"

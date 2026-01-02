@@ -5,7 +5,11 @@
 @config '../../../tailwind.config.ts';
 
 @utility headLine {
-  @apply text-center text-5xl leading-snug font-bold md:text-6xl;
+  @apply text-center text-5xl font-bold md:text-6xl;
+}
+
+@utility paragraf {
+  @apply prose-p:my-5 prose-p:leading-7 prose-p:text-pretty;
 }
 
 @theme {
@@ -74,15 +78,11 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-heading leading-snug wrap-break-word;
+  @apply font-heading leading-tight break-words;
 }
 
 /* Optimize font display untuk reduce CLS */
-@supports (font: -apple-system-body) {
-  body {
-    font: -apple-system-body;
-  }
-}
+
 
 /* Prevent layout shift from images */
 img,

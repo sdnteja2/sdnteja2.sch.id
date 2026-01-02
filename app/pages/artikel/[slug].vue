@@ -100,7 +100,7 @@ function handleMove() {
           class="prose-img:w-full prose prose-night dark:prose-invert mx-auto max-w-4xl text-justify"
         >
           <UPageBody>
-            <ContentRenderer v-if="artikelPage" :value="artikelPage" />
+            <ContentRenderer class="prose-p:my-3 prose-p:leading-7 prose-p:text-pretty" v-if="artikelPage" :value="artikelPage" />
             <USeparator v-if="surroundArtikel?.filter(Boolean).length" />
             <div class="[&_a]:no-underline">
               <UContentSurround :surround="surroundArtikel as any" />

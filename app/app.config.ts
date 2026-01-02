@@ -47,6 +47,12 @@ export default defineAppConfig({
       upload: 'i-ph-upload-simple-duotone',
       warning: 'i-ph-warning-duotone',
     },
+
+    prose: {
+      p: {
+        base: 'leading-[1.0] text-pretty my-0',
+      },
+    },
   },
   site: {
     copyright: '© 2025 narr07. All rights reserved.',
