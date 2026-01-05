@@ -78,7 +78,7 @@ h3,
 h4,
 h5,
 h6 {
-  @apply font-heading leading-tight wrap-break-word;
+  @apply font-heading wrap-break-word leading-tight;
 }
 
 /* Optimize font display untuk reduce CLS */

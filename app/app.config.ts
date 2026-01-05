@@ -47,12 +47,38 @@ export default defineAppConfig({
       upload: 'i-ph-upload-simple-duotone',
       warning: 'i-ph-warning-duotone',
     },
-
     prose: {
-      p: {
-        base: 'leading-[1.0] text-pretty my-0',
+      h1: {
+        slots: {
+          base: 'text-4xl font-bold mb-8 scroll-mt-[calc(45px+var(--ui-header-height))] lg:scroll-mt-(--ui-header-height)',
+          // Hapus 'text-highlighted' dari class base
+        },
+      },
+      h2: {
+        slots: {
+          base: 'relative text-2xl font-bold mt-12 mb-6 scroll-mt-[calc(48px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(48px+var(--ui-header-height))]',
+          // Hapus 'text-highlighted' dari sini juga
+        },
+      },
+      h3: {
+        slots: {
+          base: 'relative text-xl font-bold mt-8 mb-3 scroll-mt-[calc(32px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(32px+var(--ui-header-height))]',
+          // Hapus 'text-highlighted' dari sini juga
+        },
+      },
+      h4: {
+        slots: {
+          base: 'text-lg font-bold mt-6 mb-2 scroll-mt-[calc(24px+45px+var(--ui-header-height))] lg:scroll-mt-[calc(24px+var(--ui-header-height))]',
+          // Hapus 'text-highlighted' dari sini juga
+        },
       },
     },
+
+    // prose: {
+    //   p: {
+    //     base: 'leading-[1.0] text-pretty my-0',
+    //   },
+    // },
   },
   site: {
     copyright: '© 2025 narr07. All rights reserved.',

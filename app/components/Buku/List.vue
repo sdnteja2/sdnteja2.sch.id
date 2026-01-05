@@ -81,16 +81,16 @@ const paginatedBuku = computed(() => {
 })
 
 // Visual helper for book colors based on class
-const getBookColor = (kelas: string) => {
-    const colors = {
-        '1': 'text-red-500 bg-red-100 dark:bg-red-900/20',
-        '2': 'text-orange-500 bg-orange-100 dark:bg-orange-900/20',
-        '3': 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/20',
-        '4': 'text-green-500 bg-green-100 dark:bg-green-900/20',
-        '5': 'text-blue-500 bg-blue-100 dark:bg-blue-900/20',
-        '6': 'text-purple-500 bg-purple-100 dark:bg-purple-900/20',
-    }
-    return colors[kelas as keyof typeof colors] || 'text-primary-500 bg-primary-100 dark:bg-primary-900/20'
+function getBookColor(kelas: string) {
+  const colors = {
+    1: 'text-red-500 bg-red-100 dark:bg-red-900/20',
+    2: 'text-orange-500 bg-orange-100 dark:bg-orange-900/20',
+    3: 'text-yellow-500 bg-yellow-100 dark:bg-yellow-900/20',
+    4: 'text-green-500 bg-green-100 dark:bg-green-900/20',
+    5: 'text-blue-500 bg-blue-100 dark:bg-blue-900/20',
+    6: 'text-purple-500 bg-purple-100 dark:bg-purple-900/20',
+  }
+  return colors[kelas as keyof typeof colors] || 'text-primary-500 bg-primary-100 dark:bg-primary-900/20'
 }
 </script>
 
@@ -99,45 +99,47 @@ const getBookColor = (kelas: string) => {
     <UContainer>
       <!-- Filter Header -->
       <div class="mb-10 text-center space-y-4">
-        <h2 class="text-3xl font-bold">Perpustakaan Digital</h2>
+        <h2 class="text-3xl font-bold">
+          Perpustakaan Digital
+        </h2>
         <p class="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-            Akses buku pelajaran digital (BSE) untuk siswa dan guru. Filter berdasarkan kelas atau mata pelajaran yang Anda butuhkan.
+          Akses buku pelajaran digital (BSE) untuk siswa dan guru. Filter berdasarkan kelas atau mata pelajaran yang Anda butuhkan.
         </p>
 
         <!-- Filters -->
         <div class="mb-8 flex flex-col items-start gap-4 md:flex-row md:items-center justify-center">
-            <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">
-                    Pilih Kelas:
-                </h3>
-                <USelect
-                    v-model="selectedKelas"
-                    :items="uniqueKelas"
-                    placeholder="Pilih Kelas"
-                    class="w-40"
-                    icon="i-ph-chalkboard-teacher-duotone"
-                />
-            </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">
+              Pilih Kelas:
+            </h3>
+            <USelect
+              v-model="selectedKelas"
+              :items="uniqueKelas"
+              placeholder="Pilih Kelas"
+              class="w-40"
+              icon="i-ph-chalkboard-teacher-duotone"
+            />
+          </div>
 
-            <div class="flex flex-col gap-2">
-                <h3 class="text-lg font-bold">
-                    Pilih Pelajaran:
-                </h3>
-                <USelect
-                    v-model="selectedPelajaran"
-                    :items="uniquePelajaran"
-                    placeholder="Pilih Pelajaran"
-                    class="w-56"
-                    :disabled="selectedKelas === 'Semua Kelas'"
-                    icon="i-ph-books-duotone"
-                />
-            </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold">
+              Pilih Pelajaran:
+            </h3>
+            <USelect
+              v-model="selectedPelajaran"
+              :items="uniquePelajaran"
+              placeholder="Pilih Pelajaran"
+              class="w-56"
+              :disabled="selectedKelas === 'Semua Kelas'"
+              icon="i-ph-books-duotone"
+            />
+          </div>
         </div>
 
         <!-- Data Info -->
         <div class="mt-4 text-sm text-gray-500 text-center">
-            <span v-if="bukuData">Menampilkan {{ filteredBuku.length }} buku dari total {{ bukuData.length }} buku</span>
-            <span v-else>Memuat data buku...</span>
+          <span v-if="bukuData">Menampilkan {{ filteredBuku.length }} buku dari total {{ bukuData.length }} buku</span>
+          <span v-else>Memuat data buku...</span>
         </div>
       </div>
 
@@ -150,53 +152,52 @@ const getBookColor = (kelas: string) => {
           :in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.05 * index }"
         >
-            <div class="group relative h-full">
-                <!-- Card Container -->
-                <div class="h-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col">
-                    
-                    <!-- Book Visual (Icon) -->
-                    <div 
-                        class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300"
-                        :class="getBookColor(buku.kelas)"
-                    >
-                        <UIcon name="i-ph-book-bookmark-duotone" class="w-8 h-8" />
-                    </div>
+          <div class="group relative h-full">
+            <!-- Card Container -->
+            <div class="h-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col">
+              <!-- Book Visual (Icon) -->
+              <div
+                class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300"
+                :class="getBookColor(buku.kelas)"
+              >
+                <UIcon name="i-ph-book-bookmark-duotone" class="w-8 h-8" />
+              </div>
 
-                    <!-- Content -->
-                    <div class="flex-1">
-                        <div class="flex justify-between items-start mb-2">
-                             <UBadge size="xs" color="primary" variant="soft">
-                                Kelas {{ buku.kelas }}
-                            </UBadge>
-                            <UBadge size="xs" :color="buku.tipe === 'Buku Guru' ? 'neutral' : 'primary'" variant="subtle">
-                                {{ buku.tipe }}
-                            </UBadge>
-                        </div>
-
-                        <h3 class="font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 min-h-[3rem]">
-                            {{ buku.title }}
-                        </h3>
-                        
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-1">
-                            {{ buku.pelajaran }}
-                        </p>
-                    </div>
-
-                    <!-- Footer Action -->
-                    <div class="pt-4 mt-auto border-t border-gray-100 dark:border-gray-700 flex justify-between items-center opacity-80 group-hover:opacity-100 transition-opacity">
-                        <span class="text-xs text-gray-400">PDF Document</span>
-                        <UButton
-                            :to="buku.path"
-                            color="primary"
-                            variant="ghost"
-                            size="xs"
-                            icon="i-ph-arrow-right-bold"
-                        >
-                            Buka
-                        </UButton>
-                    </div>
+              <!-- Content -->
+              <div class="flex-1">
+                <div class="flex justify-between items-start mb-2">
+                  <UBadge size="xs" color="primary" variant="soft">
+                    Kelas {{ buku.kelas }}
+                  </UBadge>
+                  <UBadge size="xs" :color="buku.tipe === 'Buku Guru' ? 'neutral' : 'primary'" variant="subtle">
+                    {{ buku.tipe }}
+                  </UBadge>
                 </div>
+
+                <h3 class="font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 min-h-[3rem]">
+                  {{ buku.title }}
+                </h3>
+
+                <p class="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-1">
+                  {{ buku.pelajaran }}
+                </p>
+              </div>
+
+              <!-- Footer Action -->
+              <div class="pt-4 mt-auto border-t border-gray-100 dark:border-gray-700 flex justify-between items-center opacity-80 group-hover:opacity-100 transition-opacity">
+                <span class="text-xs text-gray-400">PDF Document</span>
+                <UButton
+                  :to="buku.path"
+                  color="primary"
+                  variant="ghost"
+                  size="xs"
+                  icon="i-ph-arrow-right-bold"
+                >
+                  Buka
+                </UButton>
+              </div>
             </div>
+          </div>
         </Motion>
       </div>
 
@@ -204,16 +205,16 @@ const getBookColor = (kelas: string) => {
       <div v-if="paginatedBuku.length === 0" class="text-center py-20 bg-gray-50 dark:bg-gray-800/50 rounded-3xl mt-8">
         <UIcon name="i-ph-books-duotone" class="w-16 h-16 text-gray-300 dark:text-gray-600 mb-4" />
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            Tidak ada buku ditemukan
+          Tidak ada buku ditemukan
         </h3>
         <p class="text-gray-500 dark:text-gray-400 mb-6">
-            Coba ganti filter kelas atau mata pelajaran lainnya.
+          Coba ganti filter kelas atau mata pelajaran lainnya.
         </p>
-        <UButton 
-           
-            variant="ghost" 
-            label="Reset Filter" 
-            @click="selectedKelas = 'Semua Kelas'; selectedPelajaran = 'Semua Mapel'" 
+        <UButton
+
+          variant="ghost"
+          label="Reset Filter"
+          @click="selectedKelas = 'Semua Kelas'; selectedPelajaran = 'Semua Mapel'"
         />
       </div>
 
@@ -223,7 +224,6 @@ const getBookColor = (kelas: string) => {
           v-model:page="currentPage"
           :items-per-page="itemsPerPage"
           :total="totalItems"
-          
         />
       </div>
     </UContainer>

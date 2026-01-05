@@ -11,7 +11,7 @@ export interface BukuMetadata {
 export function useBukuCache(slug: string) {
   const STORAGE_KEY_PREFIX = 'buku-cache-'
   const CACHE_DURATION = 24 * 60 * 60 * 1000 // 24 Jam
-  
+
   const cacheKey = `${STORAGE_KEY_PREFIX}${slug}`
 
   const getFromLocalStorage = (): BukuMetadata | null => {
@@ -25,7 +25,8 @@ export function useBukuCache(slug: string) {
           }
           localStorage.removeItem(cacheKey)
         }
-      } catch (e) {
+      }
+      catch (e) {
         console.warn('Buku Cache Error:', e)
       }
     }
@@ -37,9 +38,10 @@ export function useBukuCache(slug: string) {
       try {
         localStorage.setItem(cacheKey, JSON.stringify({
           data,
-          timestamp: Date.now()
+          timestamp: Date.now(),
         }))
-      } catch (e) {
+      }
+      catch (e) {
         console.warn('Failed to save Buku Cache:', e)
       }
     }
@@ -47,6 +49,6 @@ export function useBukuCache(slug: string) {
 
   return {
     getFromLocalStorage,
-    saveToLocalStorage
+    saveToLocalStorage,
   }
 }

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { Chat } from '@ai-sdk/vue'
-import { DefaultChatTransport } from 'ai'
 import type { UIMessage } from 'ai'
+import { Chat } from '@ai-sdk/vue'
 import { getTextFromMessage } from '@nuxt/ui/utils/ai'
-import { nextTick } from 'vue'
 import { useClipboard } from '@vueuse/core'
+import { DefaultChatTransport } from 'ai'
+import { nextTick } from 'vue'
 
 const messages: UIMessage[] = []
 const input = ref('')
@@ -16,8 +16,8 @@ const { copy } = useClipboard()
 const chat = new Chat({
   messages,
   transport: new DefaultChatTransport({
-    api: '/api/chat'
-  })
+    api: '/api/chat',
+  }),
 })
 
 function handleSubmit(e?: Event) {
@@ -53,7 +53,7 @@ function copyMessage(message: UIMessage) {
     }"
   >
     <!-- Floating Chat Button -->
-      <!-- class="fixed bottom-6 right-6 z-50 shadow-lg hover:scale-110  -->
+    <!-- class="fixed bottom-6 right-6 z-50 shadow-lg hover:scale-110  -->
     <UButton
       icon="i-heroicons-chat-bubble-left-right"
       color="primary"
@@ -119,7 +119,6 @@ function copyMessage(message: UIMessage) {
                 side: 'left',
               }"
             >
-            
               <template #content="{ message }">
                 <MDC
                   :value="getTextFromMessage(message)"
@@ -159,30 +158,30 @@ function copyMessage(message: UIMessage) {
             <div class="space-y-2 text-xs w-full max-w-xs">
               <button
                 class="w-full text-left px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                @click="async () => { 
-                  input = 'Berita terbaru apa?'; 
+                @click="async () => {
+                  input = 'Berita terbaru apa?';
                   await nextTick();
-                  handleSubmit(); 
+                  handleSubmit();
                 }"
               >
                 💡 "Berita terbaru apa?"
               </button>
               <button
                 class="w-full text-left px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                @click="async () => { 
-                  input = 'Siapa guru kelas 5?'; 
+                @click="async () => {
+                  input = 'Siapa guru kelas 5?';
                   await nextTick();
-                  handleSubmit(); 
+                  handleSubmit();
                 }"
               >
                 👨‍🏫 "Siapa guru kelas 5?"
               </button>
               <button
                 class="w-full text-left px-3 py-2 bg-gray-50 dark:bg-gray-800 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                @click="async () => { 
-                  input = 'Ada kegiatan apa saja?'; 
+                @click="async () => {
+                  input = 'Ada kegiatan apa saja?';
                   await nextTick();
-                  handleSubmit(); 
+                  handleSubmit();
                 }"
               >
                 🎯 "Ada kegiatan apa saja?"
@@ -211,4 +210,3 @@ function copyMessage(message: UIMessage) {
     </template>
   </UPopover>
 </template>
-

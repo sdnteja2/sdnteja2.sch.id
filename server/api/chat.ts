@@ -1,5 +1,5 @@
-import { streamText, convertToModelMessages } from 'ai'
 import { createGoogleGenerativeAI } from '@ai-sdk/google'
+import { convertToModelMessages, streamText } from 'ai'
 
 export default defineLazyEventHandler(async () => {
   const config = useRuntimeConfig()
@@ -8,12 +8,12 @@ export default defineLazyEventHandler(async () => {
   if (!apiKey) {
     throw createError({
       statusCode: 500,
-      statusMessage: 'Google Generative AI API key is not configured.'
+      statusMessage: 'Google Generative AI API key is not configured.',
     })
   }
 
   const google = createGoogleGenerativeAI({
-    apiKey
+    apiKey,
   })
 
   return defineEventHandler(async (event) => {
@@ -57,5 +57,4 @@ Tugasmu dimulai sekarang. Bantu pengguna dengan data sekolah yang tersedia.`
     // Returns a stream compatible with the Chat class and DefaultChatTransport
     return result.toUIMessageStreamResponse()
   })
-  
 })

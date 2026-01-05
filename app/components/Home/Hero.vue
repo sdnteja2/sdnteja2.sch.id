@@ -48,14 +48,14 @@ useHead({
           >
             <div>
               <p class="pb-6">
-                <slot name="subtitle">
+                <slot mdc-unwrap="p" name="subtitle">
                   Selamat Datang di Website Kami
                 </slot>
               </p>
             </div>
             <div>
               <h1 class="text-[32px] font-bold md:text-[40px]">
-                <slot name="title">
+                <slot mdc-unwrap="p" name="title">
                   SDN Teja II
                 </slot>
               </h1>
@@ -63,14 +63,14 @@ useHead({
             <div class="notranslate mt-6 flex flex-col space-y-2">
               <div>
                 <UBadge variant="soft" color="neutral">
-                  <slot name="npsn">
+                  <slot mdc-unwrap="p" name="npsn">
                     NPSN: 20246133
                   </slot>
                 </UBadge>
               </div>
               <div>
                 <UBadge variant="soft" color="neutral">
-                  <slot name="nss">
+                  <slot mdc-unwrap="p" name="nss">
                     NSS: 20246133
                   </slot>
                 </UBadge>
@@ -90,7 +90,7 @@ useHead({
             class="shadow-teja text-night-900 rounded-4xl flex h-full items-center justify-center bg-sky-50 dark:bg-sky-900 dark:text-white"
           >
             <p class="text-balance py-6">
-              <slot name="description">
+              <slot mdc-unwrap="p" name="description">
                 Wujudkan Impian Pendidikan Berkualitas untuk Semua, Lingkungan Belajar yang Nyaman,
                 Kreatif, dan Menyenangkan
               </slot>
