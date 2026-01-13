@@ -20,7 +20,7 @@ watch(currentPage, (newPage) => {
 
 const { data: bukuData } = await useAsyncData('Buku', () => {
   return queryCollection('buku')
-    .select('title', 'path', 'kelas', 'pelajaran', 'link', 'tipe')
+    .select('title', 'path', 'kelas', 'pelajaran', 'link', 'tipe', 'image')
     .order('kelas', 'ASC')
     .all()
 })
@@ -90,7 +90,7 @@ function getBookColor(kelas: string) {
     5: 'text-blue-500 bg-blue-100 dark:bg-blue-900/20',
     6: 'text-purple-500 bg-purple-100 dark:bg-purple-900/20',
   }
-  return colors[kelas as keyof typeof colors] || 'text-primary-500 bg-primary-100 dark:bg-primary-900/20'
+  return colors[kelas as unknown as keyof typeof colors] || 'text-primary-500 bg-primary-100 dark:bg-primary-900/20'
 }
 </script>
 
@@ -155,8 +155,19 @@ function getBookColor(kelas: string) {
           <div class="group relative h-full">
             <!-- Card Container -->
             <div class="h-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col">
-              <!-- Book Visual (Icon) -->
+              <!-- Book Visual (Icon or Image) -->
+              <div v-if="buku.image" class="w-full aspect-21/29 mb-4 overflow-hidden rounded-xl bg-gray-100 dark:bg-gray-700 relative group-hover:shadow-md transition-all">
+                <NuxtImg
+                  :src="buku.image"
+                  :alt="buku.title"
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  format="webp"
+                  quality="50"
+                />
+              </div>
               <div
+                v-else
                 class="w-16 h-16 rounded-2xl flex items-center justify-center mb-4 transition-colors duration-300"
                 :class="getBookColor(buku.kelas)"
               >
@@ -174,7 +185,7 @@ function getBookColor(kelas: string) {
                   </UBadge>
                 </div>
 
-                <h3 class="font-bold text-gray-900 dark:text-white mb-1 line-clamp-2 min-h-[3rem]">
+                <h3 class="font-bold text-gray-900 dark:text-white mb-1  min-h-12 line-clamp-1">
                   {{ buku.title }}
                 </h3>
 

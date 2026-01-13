@@ -32,6 +32,15 @@ const iframeKey = ref(0)
 function refreshIframe() {
   iframeKey.value++
 }
+const pdfSource = computed(() => {
+  const link = bukuPage.value?.link
+  if (!link)
+    return ''
+  if (link.startsWith('https://static.sc.cloudapp.web.id')) {
+    return link.replace('https://static.sc.cloudapp.web.id', '/pdf-proxy')
+  }
+  return link
+})
 </script>
 
 <template>
@@ -82,7 +91,7 @@ function refreshIframe() {
           </div>
           <div class="w-full h-[800px] relative">
             <NuxtPdfKit
-              :src="bukuPage.link"
+              :src="pdfSource"
               :title="bukuPage.title"
               :keywords="bukuPage.pelajaran"
             />

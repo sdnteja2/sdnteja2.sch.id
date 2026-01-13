@@ -128,6 +128,7 @@ export default defineContentConfig({
         pelajaran: z.string(),
         link: z.string(),
         tipe: z.enum(['Buku Siswa', 'Buku Guru']),
+        image: z.string().optional(),
       }),
     }),
   },
