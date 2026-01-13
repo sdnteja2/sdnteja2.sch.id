@@ -2,10 +2,10 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-12-12',
   modules: [
+    '@nuxt/ui',
     '@nuxt/content',
     '@nuxt/eslint',
     '@nuxt/image',
-    '@nuxt/ui',
     '@vueuse/nuxt',
     '@nuxtjs/seo',
     'nuxt-charts',
