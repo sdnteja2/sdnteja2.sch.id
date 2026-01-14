@@ -1,3 +1,4 @@
+// app/pages/buku/[slug].vue
 <script lang="ts" setup>
 const route = useRoute()
 const slug = route.params.slug as string
@@ -33,12 +34,25 @@ function refreshIframe() {
   iframeKey.value++
 }
 const pdfSource = computed(() => {
-  const link = bukuPage.value?.link
+  const buku = bukuPage.value
+  if (!buku)
+    return ''
+
+  // Prioritas: pakai driveId → /cdn/<id>.pdf
+  if (buku.driveId) {
+    return `/cdn/${buku.driveId}.pdf`
+  }
+
+  // Fallback lama: link ke static.sc.cloudapp.web.id → /pdf-proxy
+  const link = buku.link as string | undefined
   if (!link)
     return ''
+
   if (link.startsWith('https://static.sc.cloudapp.web.id')) {
     return link.replace('https://static.sc.cloudapp.web.id', '/pdf-proxy')
   }
+
+  // Fallback terakhir: pakai link apa adanya (kalau memang sudah .pdf dan CORS aman)
   return link
 })
 </script>

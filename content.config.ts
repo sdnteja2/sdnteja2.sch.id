@@ -129,6 +129,7 @@ export default defineContentConfig({
         link: z.string(),
         tipe: z.enum(['Buku Siswa', 'Buku Guru']),
         image: z.string().optional(),
+        driveId: z.string().optional(),
       }),
     }),
   },
