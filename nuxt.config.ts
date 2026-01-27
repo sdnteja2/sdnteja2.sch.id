@@ -193,7 +193,7 @@ export default defineNuxtConfig({
     '/api/**': { cors: true },
 
     // Proxy untuk bypass CORS PDF
-    // '/pdf-proxy/**': { proxy: 'https://static.sc.cloudapp.web.id/**' },
+    '/pdf-proxy/**': { proxy: 'https://static.sc.cloudapp.web.id/**' },
   },
   sitemap: {
     zeroRuntime: true,

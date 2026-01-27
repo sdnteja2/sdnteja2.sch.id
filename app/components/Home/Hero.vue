@@ -111,7 +111,7 @@ useHead({
           title="SDN Teja II - Sekolah Dasar Negeri"
           :src="image"
           alt="SDN Teja II - Sekolah Dasar Negeri Teja II, Rajagaluh, Majalengka"
-          class="rounded-4xl aspect-video h-full w-full object-cover"
+          class="rounded-4xl w-auto h-full max-w-full object-cover"
           width="1200"
           height="675"
         />

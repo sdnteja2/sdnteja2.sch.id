@@ -74,7 +74,7 @@ const img = useImage()
                         :placeholder="
                           img(`${artikel.image.toString()}`, { height: 10, format: 'webp', blur: 1, quality: 30 })
                         "
-                        class="aspect-video h-[300px] w-full rounded-2xl bg-cover object-cover object-center"
+                        class="aspect-video h-75 w-full rounded-2xl bg-cover object-cover object-center"
                       />
                       <div class="mt-4">
                         <h2 class="line-clamp-2 text-xl font-bold">
