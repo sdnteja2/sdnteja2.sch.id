@@ -41,6 +41,10 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
+  components: {
+    global: true,
+    dirs: ['~/components'],
+  },
   fonts: {
     // Konfigurasi untuk font heading dan body
     defaults: {
