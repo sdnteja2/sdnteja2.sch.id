@@ -99,9 +99,9 @@ useHead({
         </Motion>
       </div>
     </div>
-    <div class="flex-2">
+    <div class="flex-2 h-full">
       <!-- No Motion wrapper untuk LCP image - immediate render -->
-      <div variant="soft" class="var rounded-4xl aspect-video">
+      <div variant="soft" class="var rounded-4xl h-full w-full">
         <NuxtImg
           format="webp"
           quality="85"
@@ -111,7 +111,7 @@ useHead({
           title="SDN Teja II - Sekolah Dasar Negeri"
           :src="image"
           alt="SDN Teja II - Sekolah Dasar Negeri Teja II, Rajagaluh, Majalengka"
-          class="rounded-4xl w-auto h-full max-w-full object-cover"
+          class="rounded-4xl w-full h-full object-cover"
           width="1200"
           height="675"
         />
