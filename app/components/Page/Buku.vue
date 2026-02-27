@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 // Pagination state
 const itemsPerPage = 12
@@ -124,11 +124,11 @@ const paginatedBuku = computed(() => {
       </div>
 
       <div class="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
-        <Motion
+        <motion.div
           v-for="(buku, index) in paginatedBuku"
           :key="buku.title"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
         >
           <div class="flex h-full flex-col justify-center">
@@ -159,7 +159,7 @@ const paginatedBuku = computed(() => {
               </div>
             </div>
           </div>
-        </Motion>
+        </motion.div>
       </div>
 
       <!-- Empty state -->

@@ -1,6 +1,6 @@
 // app/components/Artikel/List.server.vue
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 // Pagination state
 const itemsPerPage = 8
@@ -53,11 +53,11 @@ const img = useImage()
         <UiTags />
       </div>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <Motion
+        <motion.div
           v-for="(artikel, index) in paginatedBlogs"
           :key="artikel.title"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
         >
           <NuxtLink :to="artikel.path">
@@ -116,7 +116,7 @@ const img = useImage()
               </div>
             </UCard>
           </NuxtLink>
-        </Motion>
+        </motion.div>
       </div>
       <div class="mt-8 flex justify-center">
         <UPagination

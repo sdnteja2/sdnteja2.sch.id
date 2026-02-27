@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const props = defineProps({
   image: {
@@ -37,9 +37,9 @@ useHead({
   <UContainer class="flex flex-col gap-4 lg:flex-row">
     <div class="flex flex-1 flex-col gap-4">
       <div class="flex-1">
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 0 }"
         >
           <UCard
@@ -77,12 +77,12 @@ useHead({
               </div>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
       <div class="flex-1">
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 1 }"
         >
           <UCard
@@ -96,12 +96,12 @@ useHead({
               </slot>
             </p>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
     </div>
-    <div class="flex-2 h-full">
+    <div class="flex-2 flex items-center justify-center">
       <!-- No Motion wrapper untuk LCP image - immediate render -->
-      <div variant="soft" class="var rounded-4xl h-full w-full">
+      <div variant="soft" class="var rounded-4xl flex items-center justify-center h-full">
         <NuxtImg
           format="webp"
           quality="85"
@@ -111,7 +111,7 @@ useHead({
           title="SDN Teja II - Sekolah Dasar Negeri"
           :src="image"
           alt="SDN Teja II - Sekolah Dasar Negeri Teja II, Rajagaluh, Majalengka"
-          class="rounded-4xl w-full h-full object-cover"
+          class="rounded-4xl max-h-full w-auto object-contain"
           width="1200"
           height="675"
         />

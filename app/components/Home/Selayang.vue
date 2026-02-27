@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 defineProps({
   image: {
@@ -18,9 +18,9 @@ defineProps({
         </h2>
       </div>
       <!-- Testimonials -->
-      <Motion
+      <motion.div
         :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-        :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+        :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
         <UCard variant="soft" class="rounded-4xl bg-sky-200 py-8 dark:bg-sky-900">
@@ -94,7 +94,7 @@ defineProps({
           </div>
           <!-- End Grid -->
         </UCard>
-      </Motion>
+      </motion.div>
       <!-- End Testimonials -->
     </UContainer>
   </div>

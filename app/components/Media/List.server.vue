@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 // Pagination state
 const itemsPerPage = 10
@@ -168,11 +168,11 @@ function handleThumbnailError(error: any) {
       </div>
 
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-10">
-        <Motion
+        <motion.div
           v-for="(media, index) in paginatedMedia"
           :key="media.idVideo"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
         >
           <div class="flex h-full flex-col justify-center">
@@ -274,7 +274,7 @@ function handleThumbnailError(error: any) {
               </div>
             </div>
           </div>
-        </Motion>
+        </motion.div>
       </div>
 
       <div class="mt-8 flex justify-center">

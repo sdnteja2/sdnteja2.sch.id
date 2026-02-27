@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const props = defineProps({
   title: {
@@ -57,9 +57,9 @@ useHead({
   <UContainer class="flex flex-col gap-4 lg:flex-row">
     <div class="flex flex-1 flex-col gap-4">
       <div class="flex-1">
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 0 }"
         >
           <UCard
@@ -97,12 +97,12 @@ useHead({
               </div>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
       <div class="flex-1">
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 1 }"
         >
           <UCard
@@ -115,7 +115,7 @@ useHead({
               </slot>
             </p>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
     </div>
     <div class="flex-2">

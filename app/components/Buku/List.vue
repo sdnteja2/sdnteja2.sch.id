@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 // Pagination state
 const itemsPerPage = 12
@@ -145,11 +145,11 @@ function getBookColor(kelas: string) {
 
       <!-- Book Grid -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <Motion
+        <motion.div
           v-for="(buku, index) in paginatedBuku"
           :key="buku.title"
           :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.05 * index }"
         >
           <div class="group relative h-full">
@@ -209,7 +209,7 @@ function getBookColor(kelas: string) {
               </div>
             </div>
           </div>
-        </Motion>
+        </motion.div>
       </div>
 
       <!-- Empty state -->

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 interface ReferensiItem {
   title: string
@@ -23,11 +23,11 @@ const props = withDefaults(
 
 <template>
   <UContainer class="mx-auto my-10 grid grid-cols-2 justify-center gap-4 md:grid-cols-4">
-    <Motion
+    <motion.div
       v-for="(item, index) in props.referensi"
       :key="index"
       :initial="{ y: 10, opacity: 0 }"
-      :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+      :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
       :transition="{ delay: 0.1 * index }"
     >
       <UButton
@@ -41,6 +41,6 @@ const props = withDefaults(
       >
         {{ item.title }}
       </UButton>
-    </Motion>
+    </motion.div>
   </UContainer>
 </template>

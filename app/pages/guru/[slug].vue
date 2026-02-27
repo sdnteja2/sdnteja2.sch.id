@@ -50,9 +50,9 @@ useSchemaOrg([
       <!-- Bento Grid Layout -->
       <div class="mb-8 grid grid-cols-1 gap-4 md:grid-cols-3">
         <!-- Main Profile Card -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 0 }"
           class="md:col-span-1 md:row-span-2"
         >
@@ -90,12 +90,12 @@ useSchemaOrg([
               </div>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
 
         <!-- Bio Card -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 1 }"
           class="md:col-span-2"
         >
@@ -110,12 +110,12 @@ useSchemaOrg([
               </p>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
 
         <!-- Details Card -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 2 }"
           class="md:col-span-2"
         >
@@ -147,12 +147,12 @@ useSchemaOrg([
               </div>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
 
         <!-- Achievement Card -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * 3 }"
           class="md:col-span-3"
         >
@@ -183,7 +183,7 @@ useSchemaOrg([
               </div>
             </div>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
 
       <!-- Back Button -->

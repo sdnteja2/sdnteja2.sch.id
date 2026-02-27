@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const { data: lastArtikel } = await useAsyncData('ArtikelTerkahir', () => {
   return queryCollection('artikel')
@@ -31,9 +31,9 @@ const img = useImage()
             Berita Terakhir
           </h2>
           <div v-for="(berita, index) in lastBerita" :key="berita.title">
-            <Motion
+            <motion.div
               :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-              :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+              :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 * index }"
             >
               <NuxtLink :to="berita.path">
@@ -43,15 +43,15 @@ const img = useImage()
                   </p>
                 </UCard>
               </NuxtLink>
-            </Motion>
+            </motion.div>
           </div>
         </div>
         <div variant="soft" class="py-8 md:py-0">
           <div class="flex flex-col space-y-4">
             <div v-for="(artikel, index) in lastArtikel" :key="artikel.title">
-              <Motion
+              <motion.div
                 :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-                :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+                :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
                 :transition="{ delay: 0.1 * index }"
               >
                 <NuxtLink :to="artikel.path">
@@ -96,7 +96,7 @@ const img = useImage()
                     </div>
                   </UCard>
                 </NuxtLink>
-              </Motion>
+              </motion.div>
             </div>
           </div>
         </div>

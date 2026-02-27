@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     'nuxt-google-translate',
     'nuxt-llms',
     'nuxt-pdf-kit',
+    'motion-v/nuxt',
   ],
   content: {
     database: {

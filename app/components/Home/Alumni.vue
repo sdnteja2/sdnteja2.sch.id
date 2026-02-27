@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 interface AlumniItem {
   foto: string
@@ -31,9 +31,9 @@ const props = withDefaults(
           Alumni
         </h2>
       </div>
-      <Motion
+      <motion.div
         :initial="{ y: 10, opacity: 0 }"
-        :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+        :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
         :transition="{ delay: 0.1 }"
       >
         <UCard variant="soft" class="rounded-4xl shadow-teja bg-sky-50 md:py-8 dark:bg-sky-900">
@@ -71,7 +71,7 @@ const props = withDefaults(
             </div>
           </UCarousel>
         </UCard>
-      </Motion>
+      </motion.div>
     </UContainer>
   </div>
 </template>

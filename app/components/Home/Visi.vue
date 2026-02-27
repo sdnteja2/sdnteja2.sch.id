@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 defineProps({
   image: {
@@ -30,9 +30,9 @@ defineProps({
         <div class="md:grid md:grid-cols-2 md:items-center md:gap-10 lg:gap-16">
           <div class="md:top-22 mb-10 md:sticky md:self-start">
             <!-- Blockquote -->
-            <Motion
+            <motion.div
               :initial="{ y: 10, opacity: 0 }"
-              :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+              :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
               <UCard
@@ -76,7 +76,7 @@ defineProps({
                   </footer>
                 </blockquote>
               </UCard>
-            </Motion>
+            </motion.div>
             <!-- End Blockquote -->
           </div>
           <div class="flex flex-col space-y-4">
@@ -85,9 +85,9 @@ defineProps({
                 Visi, Misi, dan Tujuan
               </h2>
             </div>
-            <Motion
+            <motion.div
               :initial="{ y: 10, opacity: 0 }"
-              :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+              :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
               <UCard
@@ -106,10 +106,10 @@ defineProps({
                   </p>
                 </div>
               </UCard>
-            </Motion>
-            <Motion
+            </motion.div>
+            <motion.div
               :initial="{ y: 10, opacity: 0 }"
-              :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+              :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
               <UCard
@@ -142,10 +142,10 @@ defineProps({
                   </ol>
                 </div>
               </UCard>
-            </Motion>
-            <Motion
+            </motion.div>
+            <motion.div
               :initial="{ y: 10, opacity: 0 }"
-              :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+              :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
               :transition="{ delay: 0.1 }"
             >
               <UCard
@@ -173,7 +173,7 @@ defineProps({
                   </ol>
                 </div>
               </UCard>
-            </Motion>
+            </motion.div>
           </div>
         </div>
       </div>

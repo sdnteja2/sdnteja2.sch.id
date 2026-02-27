@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const { data: guruTeja } = await useAsyncData(
   'gurus',
@@ -24,11 +24,11 @@ const img = useImage()
   <div class="py-20">
     <UContainer>
       <div class="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-        <Motion
+        <motion.div
           v-for="(guru, index) in guruTeja"
           :key="guru.nama"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
           class="hover:scale-98 transform transition-transform duration-200 ease-in-out"
         >
@@ -43,7 +43,7 @@ const img = useImage()
                   :width="300"
                   :height="300"
                   sizes="(max-width: 640px) 150px, (max-width: 768px) 180px, 225px"
-                  :placeholder="img(guru.foto, { h: 10, f: 'webp', blur: 2, q: 30 })"
+                  :placeholder="img(guru.foto, { height: 10, format: 'webp', blur: 2, quality: 30 })"
                   loading="lazy"
                   fetchpriority="low"
                   densities="1x 2x"
@@ -55,7 +55,7 @@ const img = useImage()
               </h2>
             </UCard>
           </NuxtLink>
-        </Motion>
+        </motion.div>
       </div>
     </UContainer>
   </div>

@@ -1,7 +1,7 @@
 // KegiatanPage.vue
 
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const { data: kegiatanList } = await useAsyncData(
   'kegiatanList',
@@ -26,11 +26,11 @@ const img = useImage()
   <div class="py-20">
     <UContainer>
       <div class="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-        <Motion
+        <motion.div
           v-for="(galeri, index) in kegiatanList"
           :key="galeri.title"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
           class="hover:scale-98 transform transition-transform duration-200 ease-in-out"
         >
@@ -54,7 +54,7 @@ const img = useImage()
               {{ galeri.title }}
             </h2>
           </NuxtLink>
-        </Motion>
+        </motion.div>
       </div>
     </UContainer>
   </div>

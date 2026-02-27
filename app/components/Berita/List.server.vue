@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const { data: beritaPage } = await useAsyncData(
   'HalamanBerita',
@@ -44,12 +44,12 @@ const beritaTerkait = [
     <UContainer>
       <div class="mx-auto max-w-4xl">
         <div class="my-6 grid items-center gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <Motion
+          <motion.div
             v-for="(berita, index) in beritaTerkait"
             v-once
             :key="berita.title"
             :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-            :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+            :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
             :transition="{ delay: 0.1 * index }"
           >
             <UButton
@@ -69,18 +69,18 @@ const beritaTerkait = [
                 </div>
               </div>
             </UButton>
-          </Motion>
+          </motion.div>
         </div>
       </div>
       <div class="top-22 sticky z-50">
         <UiTags />
       </div>
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
-        <Motion
+        <motion.div
           v-for="(berita, index) in beritaPage"
           :key="berita.title"
           :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.1 * index }"
         >
           <NuxtLink :to="berita.path">
@@ -105,7 +105,7 @@ const beritaTerkait = [
               </div>
             </UCard>
           </NuxtLink>
-        </Motion>
+        </motion.div>
       </div>
     </UContainer>
   </div>

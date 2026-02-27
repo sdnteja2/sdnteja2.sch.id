@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TableColumn } from '@nuxt/ui'
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 // Use the composable for data fetching and utilities
 import { h, resolveComponent } from 'vue'
 
@@ -238,11 +238,11 @@ function clearFilters() {
       <div v-else-if="data && data.length > 0" class="space-y-6">
         <!-- Stats Cards -->
         <div class="mb-6 grid grid-cols-3 gap-4">
-          <Motion
+          <motion.div
             v-for="(card, index) in statsCards"
             :key="card.key"
             :initial="{ opacity: 0, transform: 'translateY(10px)' }"
-            :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+            :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
             :transition="{ delay: 0.1 * index }"
           >
             <UCard>
@@ -260,13 +260,13 @@ function clearFilters() {
                 </p>
               </div>
             </UCard>
-          </Motion>
+          </motion.div>
         </div>
 
         <!-- Class Data Table -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.4 }"
         >
           <UCard>
@@ -296,12 +296,12 @@ function clearFilters() {
               </div>
             </template>
           </UCard>
-        </Motion>
+        </motion.div>
 
         <!-- Student Detail Table with Filters -->
-        <Motion
+        <motion.div
           :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-          :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+          :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
           :transition="{ delay: 0.6 }"
         >
           <UCard>
@@ -415,7 +415,7 @@ function clearFilters() {
               </div>
             </template>
           </UCard>
-        </Motion>
+        </motion.div>
       </div>
 
       <!-- No Data State -->

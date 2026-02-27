@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Motion } from 'motion-v'
+import { motion } from 'motion-v'
 
 const { kelasBreakdown } = useSiswaData()
 
@@ -26,9 +26,9 @@ const yFormatter = (tick: number) => tick.toString()
 
 <template>
   <UContainer>
-    <Motion
+    <motion.div
       :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-      :in-view="{ opacity: 1, transform: 'translateY(0)' }"
+      :whileInView="{ opacity: 1, transform: 'translateY(0)' }"
       :transition="{ delay: 0.1 }"
     >
       <UCard>
@@ -75,7 +75,7 @@ const yFormatter = (tick: number) => tick.toString()
           </template>
         </BarChart>
       </UCard>
-    </Motion>
+    </motion.div>
   </UContainer>
 </template>
 
