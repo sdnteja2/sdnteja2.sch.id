@@ -1,24 +1,24 @@
-# Nuxt & Node
-.nuxt
+# Nuxt dev/build outputs
 .output
+.data
+.nuxt
+.nitro
+.cache
 dist
-node_modules
-.wrangler
 
-# Bun
-bun.lock
+# Node dependencies
+node_modules
 
 # Logs
+logs
 *.log
 
-# Environment variables
+# Misc
+.DS_Store
+.fleet
+.idea
+
+# Local env files
 .env
 .env.*
 !.env.example
-
-# IDE & OS
-.DS_Store
-Thumbs.db
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
