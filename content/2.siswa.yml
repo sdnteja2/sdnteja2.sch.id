@@ -1,0 +1,65 @@
+title: Data Siswa & Kesiswaan
+description: Rekapitulasi data peserta didik, program pembiasaan karakter profil pelajar Pancasila, dan wadah pengembangan minat bakat.
+academic_year: Tahun Ajaran Aktif
+semester: Semester Berjalan
+rombels:
+  - rombel: Kelas I
+    male: 14
+    female: 13
+    total: 27
+    wali: Siti Aminah, S.Pd.SD
+  - rombel: Kelas II
+    male: 15
+    female: 14
+    total: 29
+    wali: Dadan Ramdani, S.Pd.
+  - rombel: Kelas III
+    male: 16
+    female: 12
+    total: 28
+    wali: Ai Nurhayati, S.Pd.
+  - rombel: Kelas IV
+    male: 13
+    female: 15
+    total: 28
+    wali: Hendra Kurniawan, S.Pd.
+  - rombel: Kelas V
+    male: 15
+    female: 16
+    total: 31
+    wali: Rina Marlina, S.Pd.SD
+  - rombel: Kelas VI
+    male: 14
+    female: 15
+    total: 29
+    wali: Asep Saepudin, S.Pd.
+habits:
+  - title: Sholat Dhuha & Kultum Pagi
+    desc: Pembiasaan ibadah bersama di musholla sekolah untuk menumbuhkan ketakwaan dan adab islami.
+    icon: i-lucide-sun
+  - title: Literasi 15 Menit
+    desc: Membaca buku cerita dan pengetahuan umum sebelum jam pelajaran pertama dimulai di kelas maupun pojok baca.
+    icon: i-lucide-book-open
+  - title: Senam Kesegaran Jasmani
+    desc: Senam bersama setiap hari Jumat pagi untuk menjaga kebugaran, kesehatan, dan semangat belajar.
+    icon: i-lucide-activity
+  - title: Operasi Semut (Kebersihan)
+    desc: Gerakan peduli lingkungan menjaga kebersihan kelas, selasar, dan halaman sekolah secara gotong royong.
+    icon: i-lucide-sparkles
+extracurriculars:
+  - name: Pramuka (Siaga & Penggalang)
+    schedule: Jumat Sore
+    desc: Membentuk kemandirian, kedisiplinan, kepemimpinan, dan kecintaan pada alam.
+    icon: i-lucide-compass
+  - name: Seni Tari Sunda & Karawitan
+    schedule: Sabtu Pagi
+    desc: Melestarikan seni budaya daerah Jawa Barat serta menumbuhkan rasa percaya diri anak.
+    icon: i-lucide-music
+  - name: Olahraga (Futsal & Voli)
+    schedule: Rabu Sore
+    desc: Melatih sportivitas, kerjasama tim, ketangkasan fisik, dan persiapan kompetisi O2SN.
+    icon: i-lucide-trophy
+  - name: Dokter Kecil / PMR Mula
+    schedule: Kamis Sore
+    desc: Pendidikan pertolongan pertama, pola hidup bersih dan sehat (PHBS), serta peduli sesama.
+    icon: i-lucide-heart

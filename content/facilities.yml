@@ -1,0 +1,60 @@
+items:
+  - name: 'Ruang Kelas Nyaman'
+    category: 'Akademik'
+    description: 'Ruang belajar yang bersih, berpencahayaan alami, dan dilengkapi sarana pembelajaran interaktif.'
+    image: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Meja & kursi ramah anak'
+      - 'Ventilasi udara segar'
+      - 'Media pembelajaran aktif'
+    icon: 'i-lucide-book-open'
+
+  - name: 'Perpustakaan Sekolah'
+    category: 'Literasi'
+    description: 'Koleksi buku pengetahuan, cerita rakyat, dan pojok baca yang mendorong kecintaan literasi siswa.'
+    image: 'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Ratusan judul buku'
+      - 'Area baca tenang'
+      - 'Peminjaman buku teratur'
+    icon: 'i-lucide-library'
+
+  - name: 'Laboratorium Komputer'
+    category: 'Teknologi'
+    description: 'Sarana pengenalan teknologi informasi dan literasi digital sejak dini bagi seluruh peserta didik.'
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Perangkat komputer siap pakai'
+      - 'Bimbingan guru TIK'
+      - 'Simulasi asesmen digital'
+    icon: 'i-lucide-monitor'
+
+  - name: 'Unit Kesehatan Sekolah (UKS)'
+    category: 'Kesehatan'
+    description: 'Layanan pertolongan pertama dan pemeliharaan kesehatan siswa yang siap siaga dan higienis.'
+    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Tempat tidur periksa'
+      - 'Kotak P3K lengkap'
+      - 'Pemeriksaan berkala'
+    icon: 'i-lucide-heart-pulse'
+
+  - name: 'Lapangan Olahraga'
+    category: 'Aktivitas Luar'
+    description: 'Sarana serbaguna untuk upacara bendera, senam kebugaran, futsal, dan kegiatan pramuka.'
+    image: 'https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Upacara bendera rutin'
+      - 'Olahraga jasmani'
+      - 'Latihan pramuka terpadu'
+    icon: 'i-lucide-trophy'
+
+  - name: 'Taman Sekolah & Area Hijau'
+    category: 'Lingkungan'
+    description: 'Lingkungan terbuka yang asri dan sejuk untuk melatih kepedulian siswa terhadap pelestarian alam.'
+    image: 'https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80'
+    features:
+      - 'Tanaman bunga & peneduh'
+      - 'Tempat istirahat nyaman'
+      - 'Edukasi peduli sampah'
+    icon: 'i-lucide-trees'

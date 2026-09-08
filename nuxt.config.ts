@@ -2,7 +2,10 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@nuxt/content',
+    'nuxt-studio',
+    '@stefanobartoletti/nuxt-social-share'
   ],
 
   devtools: {
@@ -10,6 +13,14 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  runtimeConfig: {
+    cloudinary: {
+      apiKey: '',
+      apiSecret: '',
+      cloudName: ''
+    }
+  },
 
   routeRules: {
     '/': { prerender: true }
@@ -22,6 +33,24 @@ export default defineNuxtConfig({
       stylistic: {
         commaDangle: 'never',
         braceStyle: '1tbs'
+      }
+    }
+  },
+
+  socialShare: {
+    baseUrl: 'https://sdnteja2.sch.id'
+  },
+
+  studio: {
+    repository: {
+      provider: 'github',
+      owner: 'sdnteja2',
+      repo: 'sdnteja2.sch.id',
+      branch: 'master'
+    },
+    editor: {
+      components: {
+        exclude: ['content/prose/**', 'Prose*']
       }
     }
   }

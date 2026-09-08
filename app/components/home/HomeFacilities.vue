@@ -8,7 +8,18 @@ interface Facility {
   icon: string
 }
 
-const facilities: Facility[] = [
+interface FacilitySection {
+  headline?: string
+  title?: string
+  description?: string
+}
+
+const props = defineProps<{
+  section?: FacilitySection
+  items?: Facility[]
+}>()
+
+const defaultFacilities: Facility[] = [
   {
     name: 'Ruang Kelas Nyaman',
     category: 'Akademik',
@@ -70,13 +81,13 @@ const facilities: Facility[] = [
       <div class="max-w-2xl mx-auto text-center space-y-3 mb-10 sm:mb-14">
         <div class="inline-flex items-center gap-2 rounded-full border border-default/70 bg-muted px-3.5 py-1 text-xs font-semibold text-highlighted">
           <span class="inline-block size-2 rounded-full bg-primary" />
-          <span>Sarana & Prasarana</span>
+          <span>{{ props.section?.headline || 'Sarana & Prasarana' }}</span>
         </div>
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-highlighted">
-          Fasilitas Penunjang Belajar
+          {{ props.section?.title || 'Fasilitas Penunjang Belajar' }}
         </h2>
         <p class="text-sm sm:text-base text-muted leading-relaxed">
-          SDN Teja II menyediakan sarana dan lingkungan yang memadai demi mendukung kenyamanan belajar dan perkembangan potensi setiap siswa.
+          {{ props.section?.description || 'SDN Teja II menyediakan sarana dan lingkungan yang memadai demi mendukung kenyamanan belajar dan perkembangan potensi setiap siswa.' }}
         </p>
       </div>
 
@@ -88,7 +99,7 @@ const facilities: Facility[] = [
           dots
           loop
           wheel-gestures
-          :items="facilities"
+          :items="props.items && props.items.length ? props.items : defaultFacilities"
           :ui="{
             viewport: 'overflow-hidden py-3',
             item: 'basis-full sm:basis-1/2 lg:basis-1/3 p-2.5',

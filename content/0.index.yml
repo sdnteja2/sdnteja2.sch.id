@@ -1,0 +1,79 @@
+title: SD Negeri Teja II - Berkarakter, Cerdas & Berakhlak Mulia
+alumni_section:
+  headline: Jejak Prestasi & Pengabdian
+  title: Kiprah Alumni SDN Teja II
+  description: Keluarga besar alumni SDN Teja II yang kini berkarya di berbagai sektor pemerintahan, pendidikan, kesehatan, dan industri.
+  cta:
+    title: Apakah Anda Bagian dari Alumni SDN Teja II?
+    description: Mari pererat silaturahmi almamater, berbagi kisah inspirasi, dan berpartisipasi dalam kemajuan adik-adik kelas.
+    link:
+      label: Ikatan Alumni & Kontak
+      to: "#kontak"
+      icon: i-lucide-users
+      color: primary
+description: Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter dan potensi siswa.
+facilities_section:
+  headline: Sarana & Prasarana
+  title: Fasilitas Penunjang Belajar
+  description: SDN Teja II menyediakan sarana dan lingkungan yang memadai demi mendukung kenyamanan belajar dan perkembangan potensi setiap siswa.
+hero:
+  headline: Portal Resmi • SD Negeri Teja II Rajagaluh
+  title: Membentuk Generasi
+  title_highlight: Cerdas, Berkarakter & Berakhlak Mulia
+  description: Selamat datang di website resmi SD Negeri Teja II. Kami berkomitmen menghadirkan ekosistem pendidikan dasar yang ramah anak, berakar pada budi pekerti luhur, serta mendorong setiap siswa berkembang dengan gembira dan berprestasi.
+  links:
+    - label: Informasi Pendaftaran
+      to: "#kontak"
+      icon: i-lucide-user-plus
+      size: lg
+      color: primary
+    - label: Jelajahi Profil
+      to: "#profil"
+      icon: i-lucide-school
+      size: lg
+      color: neutral
+      variant: subtle
+  image:
+    src: /cover/sekolah.png
+    alt: Gedung SDN Teja II
+  mascot:
+    src: /maskot/bacabuku.png
+    alt: Maskot SDN Teja II
+    title: Pendidikan Karakter & Literasi
+    description: Belajar gembira, berdisiplin positif, dan saling menghargai sejak usia dini.
+  highlights:
+    - icon: i-lucide-badge-check
+      title: "NPSN Resmi: 20246347"
+      description: Kemendikbudristek RI
+    - icon: i-lucide-book-open
+      title: Kurikulum Merdeka
+      description: Pendidikan Karakter & Literasi
+    - icon: i-lucide-heart-handshake
+      title: Sekolah Ramah Anak
+      description: Lingkungan Inklusif & Nyaman
+    - icon: i-lucide-map-pin
+      title: Rajagaluh, Majalengka
+      description: Jl. Desa Teja, Jawa Barat
+profile:
+  headline: Selayang Pandang
+  title: Sambutan Kepala Sekolah
+  description: Mewujudkan layanan pendidikan transparan, berkualitas, dan kolaboratif bagi seluruh keluarga besar SDN Teja II.
+  quote: Kehadiran website sekolah ini merupakan salah satu upaya kita untuk meningkatkan layanan informasi dan komunikasi sekolah kepada seluruh stakeholders, termasuk siswa, guru, karyawan, orang tua siswa, alumni, dan masyarakat umum.
+  principal:
+    name: Susi Susanti, S.Pd.I., M.Pd.
+    role: Kepala Sekolah SDN Teja II
+    location: Kec. Rajagaluh, Kab. Majalengka
+    avatar: /cover/guru.png
+  vision: Terwujudnya pribadi yang beriman dan bertakwa kepada Tuhan Yang Maha Esa, berilmu, berkarakter, terampil, kreatif dan berprestasi.
+  missions:
+    - Menciptakan lingkungan sekolah yang bernuansa agamis, bersih dan sehat
+    - Meningkatkan kegiatan ibadah melalui kegiatan kultum dan Shalat berjamaah
+    - Mengoptimalkan guru profesional dan berdedikasi tinggi sehingga peserta didik mempunyai kompetensi yang baik dan berkarakter
+    - Menyelenggarakan pendidikan, pelatihan dan pembinaan berdasarkan bakat, minat dan kreativitas peserta didik melalui ekstrakurikuler
+    - Meningkatkan prestasi peserta didik dengan mengoptimalkan proses pembelajaran yang efektif dan efisien
+  goals:
+    - Terciptanya lingkungan yang agamis, bersih dan sehat
+    - Meningkatnya ketakwaan peserta didik terhadap Tuhan Yang Maha Esa
+    - Berkembangnya profesionalisme tenaga pendidik
+    - Terbentuknya pribadi peserta didik yang cerdas, terampil, kreatif, aktif dan berkarakter
+    - Meningkatnya jumlah peserta didik yang melanjutkan pendidikan ke jenjang yang lebih tinggi

@@ -1,0 +1,42 @@
+title: Data Sekolah
+address:
+  - label: Alamat
+    value: Jl. Desa Teja
+  - label: Desa / Kelurahan
+    value: Teja
+  - label: Kecamatan
+    value: Kec. Rajagaluh
+  - label: Kabupaten
+    value: Kab. Majalengka
+  - label: Provinsi
+    value: Jawa Barat
+  - label: Kode Pos
+    value: "45472"
+  - label: Email Resmi
+    value: sdnteja2@gmail.com
+description: Identitas resmi, legalitas, akreditasi, dan kondisi sarana prasarana penunjang kegiatan belajar mengajar SD Negeri Teja II.
+identity:
+  - label: Nama Sekolah
+    value: SD Negeri Teja II
+  - label: NPSN
+    value: "20246347"
+  - label: Bentuk Pendidikan
+    value: Sekolah Dasar (SD)
+  - label: Status Sekolah
+    value: Negeri
+  - label: Status Kepemilikan
+    value: Pemerintah Daerah
+  - label: SK Pendirian Sekolah
+    value: Nomor 421.2/Kep.17-Disdik/2004
+  - label: Kurikulum
+    value: Kurikulum Merdeka
+  - label: Akreditasi
+    value: B (Baik)
+  - label: Kepala Sekolah
+    value: Susi Susanti, S.Pd.I., M.Pd.
+  - label: Operator Sekolah
+    value: Tim Pendataan SDN Teja II
+npsn: "20246347"
+verification_notice:
+  title: Verifikasi Data Resmi
+  description: Data ini tersinkronisasi dengan Data Pokok Pendidikan (Dapodik) Kementerian Pendidikan Dasar dan Menengah RI.

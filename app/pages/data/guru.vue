@@ -1,4 +1,156 @@
 <script setup lang="ts">
+interface StaffMember {
+  name: string
+  role: string
+  category: string
+  nip: string
+  education: string
+  subject: string
+  avatar: string
+  highlight?: boolean
+  order?: number
+}
+
+const categoryOptions = [
+  'Semua Kategori',
+  'Kepala Sekolah',
+  'Guru Kelas',
+  'Guru Mapel',
+  'Tenaga Kependidikan'
+]
+
+const defaultStaffList: StaffMember[] = [
+  {
+    name: 'Susi Susanti, S.Pd.I., M.Pd.',
+    role: 'Kepala Sekolah',
+    category: 'Kepala Sekolah',
+    nip: '19790514 200801 2 006',
+    education: 'S2 Magister Pendidikan',
+    subject: 'Manajemen Pendidikan',
+    avatar: 'i-lucide-user-check',
+    highlight: true,
+    order: 1
+  },
+  {
+    name: 'Siti Aminah, S.Pd.SD',
+    role: 'Guru Kelas I',
+    category: 'Guru Kelas',
+    nip: '19840312 201001 2 015',
+    education: 'S1 PGSD',
+    subject: 'Tematik & Literasi Awal',
+    avatar: 'i-lucide-user',
+    order: 2
+  },
+  {
+    name: 'Dadan Ramdani, S.Pd.',
+    role: 'Guru Kelas II',
+    category: 'Guru Kelas',
+    nip: '19860724 201402 1 003',
+    education: 'S1 PGSD',
+    subject: 'Tematik & Numerasi Dasar',
+    avatar: 'i-lucide-user',
+    order: 3
+  },
+  {
+    name: 'Ai Nurhayati, S.Pd.',
+    role: 'Guru Kelas III',
+    category: 'Guru Kelas',
+    nip: '19881115 201903 2 008',
+    education: 'S1 PGSD',
+    subject: 'Tematik & Karakter',
+    avatar: 'i-lucide-user',
+    order: 4
+  },
+  {
+    name: 'Hendra Kurniawan, S.Pd.',
+    role: 'Guru Kelas IV',
+    category: 'Guru Kelas',
+    nip: '19900218 202012 1 004',
+    education: 'S1 PGSD',
+    subject: 'IPAS & Matematika',
+    avatar: 'i-lucide-user',
+    order: 5
+  },
+  {
+    name: 'Rina Marlina, S.Pd.SD',
+    role: 'Guru Kelas V',
+    category: 'Guru Kelas',
+    nip: '19850909 201101 2 018',
+    education: 'S1 PGSD',
+    subject: 'IPAS & Bahasa Indonesia',
+    avatar: 'i-lucide-user',
+    order: 6
+  },
+  {
+    name: 'Asep Saepudin, S.Pd.',
+    role: 'Guru Kelas VI',
+    category: 'Guru Kelas',
+    nip: '19830419 200902 1 002',
+    education: 'S1 PGSD',
+    subject: 'Persiapan Kelulusan & Sains',
+    avatar: 'i-lucide-user',
+    order: 7
+  },
+  {
+    name: 'Ujang Suherman, S.Pd.I.',
+    role: 'Guru PAI & Budi Pekerti',
+    category: 'Guru Mapel',
+    nip: '19871201 201903 1 005',
+    education: 'S1 Pendidikan Agama Islam',
+    subject: 'Pendidikan Agama & Baca Tulis Al-Qur\'an',
+    avatar: 'i-lucide-book-open',
+    order: 8
+  },
+  {
+    name: 'Agus Mulyana, S.Pd.',
+    role: 'Guru PJOK',
+    category: 'Guru Mapel',
+    nip: '19910816 202221 1 007',
+    education: 'S1 Pendidikan Jasmani',
+    subject: 'Olahraga, Kebugaran & Ekstrakurikuler',
+    avatar: 'i-lucide-trophy',
+    order: 9
+  },
+  {
+    name: 'M. Farhan, S.Kom.',
+    role: 'Operator Dapodik & IT',
+    category: 'Tenaga Kependidikan',
+    nip: '-',
+    education: 'S1 Sistem Informasi',
+    subject: 'Pendataan, ANBK & Administrasi Digital',
+    avatar: 'i-lucide-monitor',
+    order: 10
+  },
+  {
+    name: 'Yayu Yuliani, S.I.Pust.',
+    role: 'Pengelola Perpustakaan',
+    category: 'Tenaga Kependidikan',
+    nip: '-',
+    education: 'S1 Ilmu Perpustakaan',
+    subject: 'Pengelolaan Buku & Pojok Literasi',
+    avatar: 'i-lucide-library',
+    order: 11
+  },
+  {
+    name: 'Ade Kusnadi',
+    role: 'Tenaga Kebersihan & Keamanan',
+    category: 'Tenaga Kependidikan',
+    nip: '-',
+    education: 'SMA Sederajat',
+    subject: 'Lingkungan Sekolah Bersih & Aman',
+    avatar: 'i-lucide-shield-check',
+    order: 12
+  }
+]
+
+const { data: staffList } = await useAsyncData('page-data-guru-list', () =>
+  queryCollection('guru').order('order', 'ASC').all()
+)
+
+const activeStaffList = computed<StaffMember[]>(() => {
+  return staffList.value?.length ? staffList.value : defaultStaffList
+})
+
 useSeoMeta({
   title: 'Guru & Tenaga Kependidikan - SD Negeri Teja II',
   description:
@@ -12,128 +164,8 @@ useSeoMeta({
 const searchQuery = ref('')
 const selectedCategory = ref('Semua Kategori')
 
-const categoryOptions = [
-  'Semua Kategori',
-  'Kepala Sekolah',
-  'Guru Kelas',
-  'Guru Mapel',
-  'Tenaga Kependidikan'
-]
-
-const staffList = [
-  {
-    name: 'Susi Susanti, S.Pd.I., M.Pd.',
-    role: 'Kepala Sekolah',
-    category: 'Kepala Sekolah',
-    nip: '19790514 200801 2 006',
-    education: 'S2 Magister Pendidikan',
-    subject: 'Manajemen Pendidikan',
-    avatar: 'i-lucide-user-check',
-    highlight: true
-  },
-  {
-    name: 'Siti Aminah, S.Pd.SD',
-    role: 'Guru Kelas I',
-    category: 'Guru Kelas',
-    nip: '19840312 201001 2 015',
-    education: 'S1 PGSD',
-    subject: 'Tematik & Literasi Awal',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Dadan Ramdani, S.Pd.',
-    role: 'Guru Kelas II',
-    category: 'Guru Kelas',
-    nip: '19860724 201402 1 003',
-    education: 'S1 PGSD',
-    subject: 'Tematik & Numerasi Dasar',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Ai Nurhayati, S.Pd.',
-    role: 'Guru Kelas III',
-    category: 'Guru Kelas',
-    nip: '19881115 201903 2 008',
-    education: 'S1 PGSD',
-    subject: 'Tematik & Karakter',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Hendra Kurniawan, S.Pd.',
-    role: 'Guru Kelas IV',
-    category: 'Guru Kelas',
-    nip: '19900218 202012 1 004',
-    education: 'S1 PGSD',
-    subject: 'IPAS & Matematika',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Rina Marlina, S.Pd.SD',
-    role: 'Guru Kelas V',
-    category: 'Guru Kelas',
-    nip: '19850909 201101 2 018',
-    education: 'S1 PGSD',
-    subject: 'IPAS & Bahasa Indonesia',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Asep Saepudin, S.Pd.',
-    role: 'Guru Kelas VI',
-    category: 'Guru Kelas',
-    nip: '19830419 200902 1 002',
-    education: 'S1 PGSD',
-    subject: 'Persiapan Kelulusan & Sains',
-    avatar: 'i-lucide-user'
-  },
-  {
-    name: 'Ujang Suherman, S.Pd.I.',
-    role: 'Guru PAI & Budi Pekerti',
-    category: 'Guru Mapel',
-    nip: '19871201 201903 1 005',
-    education: 'S1 Pendidikan Agama Islam',
-    subject: 'Pendidikan Agama & Baca Tulis Al-Qur\'an',
-    avatar: 'i-lucide-book-open'
-  },
-  {
-    name: 'Agus Mulyana, S.Pd.',
-    role: 'Guru PJOK',
-    category: 'Guru Mapel',
-    nip: '19910816 202221 1 007',
-    education: 'S1 Pendidikan Jasmani',
-    subject: 'Olahraga, Kebugaran & Ekstrakurikuler',
-    avatar: 'i-lucide-trophy'
-  },
-  {
-    name: 'M. Farhan, S.Kom.',
-    role: 'Operator Dapodik & IT',
-    category: 'Tenaga Kependidikan',
-    nip: '-',
-    education: 'S1 Sistem Informasi',
-    subject: 'Pendataan, ANBK & Administrasi Digital',
-    avatar: 'i-lucide-monitor'
-  },
-  {
-    name: 'Yayu Yuliani, S.I.Pust.',
-    role: 'Pengelola Perpustakaan',
-    category: 'Tenaga Kependidikan',
-    nip: '-',
-    education: 'S1 Ilmu Perpustakaan',
-    subject: 'Pengelolaan Buku & Pojok Literasi',
-    avatar: 'i-lucide-library'
-  },
-  {
-    name: 'Ade Kusnadi',
-    role: 'Tenaga Kebersihan & Keamanan',
-    category: 'Tenaga Kependidikan',
-    nip: '-',
-    education: 'SMA Sederajat',
-    subject: 'Lingkungan Sekolah Bersih & Aman',
-    avatar: 'i-lucide-shield-check'
-  }
-]
-
 const filteredStaff = computed(() => {
-  return staffList.filter((item) => {
+  return activeStaffList.value.filter((item) => {
     const matchCat
       = selectedCategory.value === 'Semua Kategori'
         || item.category === selectedCategory.value
@@ -159,7 +191,12 @@ const filteredStaff = computed(() => {
             Home
           </NuxtLink>
           <span>/</span>
-          <span class="text-muted">Data</span>
+          <NuxtLink
+            to="/data"
+            class="hover:text-highlighted transition-colors"
+          >
+            Data
+          </NuxtLink>
           <span>/</span>
           <span class="text-highlighted font-medium">Guru & Tendik</span>
         </div>
@@ -180,7 +217,7 @@ const filteredStaff = computed(() => {
             size="md"
             class="self-start md:self-auto"
           >
-            Total: {{ staffList.length }} Pendidik & Staf
+            Total: {{ activeStaffList.length }} Pendidik & Staf
           </UBadge>
         </div>
       </div>

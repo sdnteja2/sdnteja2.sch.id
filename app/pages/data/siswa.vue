@@ -1,15 +1,26 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Data Siswa & Kesiswaan - SD Negeri Teja II',
-  description:
-    'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
-  ogTitle: 'Data Siswa & Kesiswaan - SD Negeri Teja II',
-  ogDescription:
-    'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
-  ogImage: '/cover/siswa.png'
-})
+interface StudentRombel {
+  rombel: string
+  male: number
+  female: number
+  total: number
+  wali: string
+}
 
-const studentStats = [
+interface HabitItem {
+  title: string
+  desc: string
+  icon: string
+}
+
+interface ExtracurricularItem {
+  name: string
+  schedule: string
+  desc: string
+  icon: string
+}
+
+const defaultStudentStats: StudentRombel[] = [
   { rombel: 'Kelas I', male: 14, female: 13, total: 27, wali: 'Siti Aminah, S.Pd.SD' },
   { rombel: 'Kelas II', male: 15, female: 14, total: 29, wali: 'Dadan Ramdani, S.Pd.' },
   { rombel: 'Kelas III', male: 16, female: 12, total: 28, wali: 'Ai Nurhayati, S.Pd.' },
@@ -18,11 +29,7 @@ const studentStats = [
   { rombel: 'Kelas VI', male: 14, female: 15, total: 29, wali: 'Asep Saepudin, S.Pd.' }
 ]
 
-const totalMale = computed(() => studentStats.reduce((acc, curr) => acc + curr.male, 0))
-const totalFemale = computed(() => studentStats.reduce((acc, curr) => acc + curr.female, 0))
-const grandTotal = computed(() => studentStats.reduce((acc, curr) => acc + curr.total, 0))
-
-const characterHabits = [
+const defaultCharacterHabits: HabitItem[] = [
   {
     title: 'Sholat Dhuha & Kultum Pagi',
     desc: 'Pembiasaan ibadah bersama di musholla sekolah untuk menumbuhkan ketakwaan dan adab islami.',
@@ -45,7 +52,7 @@ const characterHabits = [
   }
 ]
 
-const extracurriculars = [
+const defaultExtracurriculars: ExtracurricularItem[] = [
   {
     name: 'Pramuka (Siaga & Penggalang)',
     schedule: 'Jumat Sore',
@@ -71,6 +78,38 @@ const extracurriculars = [
     icon: 'i-lucide-heart'
   }
 ]
+
+const { data: page } = await useAsyncData('page-data-siswa', () =>
+  queryCollection('siswa').first()
+)
+
+const studentStats = computed<StudentRombel[]>(() => {
+  return page.value?.rombels?.length ? page.value.rombels : defaultStudentStats
+})
+
+const characterHabits = computed<HabitItem[]>(() => {
+  return page.value?.habits?.length ? page.value.habits : defaultCharacterHabits
+})
+
+const extracurriculars = computed<ExtracurricularItem[]>(() => {
+  return page.value?.extracurriculars?.length ? page.value.extracurriculars : defaultExtracurriculars
+})
+
+const totalMale = computed(() => studentStats.value.reduce((acc, curr) => acc + curr.male, 0))
+const totalFemale = computed(() => studentStats.value.reduce((acc, curr) => acc + curr.female, 0))
+const grandTotal = computed(() => studentStats.value.reduce((acc, curr) => acc + curr.total, 0))
+
+useSeoMeta({
+  title: `${page.value?.title || 'Data Siswa & Kesiswaan'} - SD Negeri Teja II`,
+  description:
+    page.value?.description
+    || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
+  ogTitle: `${page.value?.title || 'Data Siswa & Kesiswaan'} - SD Negeri Teja II`,
+  ogDescription:
+    page.value?.description
+    || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
+  ogImage: '/cover/siswa.png'
+})
 </script>
 
 <template>
@@ -86,7 +125,12 @@ const extracurriculars = [
             Home
           </NuxtLink>
           <span>/</span>
-          <span class="text-muted">Data</span>
+          <NuxtLink
+            to="/data"
+            class="hover:text-highlighted transition-colors"
+          >
+            Data
+          </NuxtLink>
           <span>/</span>
           <span class="text-highlighted font-medium">Siswa</span>
         </div>
@@ -94,10 +138,10 @@ const extracurriculars = [
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-highlighted">
-              Data Siswa & Kesiswaan
+              {{ page?.title || 'Data Siswa & Kesiswaan' }}
             </h1>
             <p class="text-muted text-base sm:text-lg mt-1 max-w-2xl">
-              Rekapitulasi data peserta didik, program pembiasaan karakter profil pelajar Pancasila, dan wadah pengembangan minat bakat.
+              {{ page?.description || 'Rekapitulasi data peserta didik, program pembiasaan karakter profil pelajar Pancasila, dan wadah pengembangan minat bakat.' }}
             </p>
           </div>
 
@@ -124,7 +168,7 @@ const extracurriculars = [
             {{ grandTotal }}
           </p>
           <p class="text-[11px] text-muted mt-0.5">
-            Tahun Ajaran Aktif
+            {{ page?.academic_year || 'Tahun Ajaran Aktif' }}
           </p>
         </UCard>
         <UCard class="text-center">
@@ -154,7 +198,7 @@ const extracurriculars = [
             Rombongan Belajar
           </p>
           <p class="text-2xl sm:text-3xl font-bold text-highlighted mt-1">
-            6
+            {{ studentStats.length }}
           </p>
           <p class="text-[11px] text-muted mt-0.5">
             Kelas I - VI
@@ -175,7 +219,7 @@ const extracurriculars = [
                 Rekapitulasi Siswa per Kelas
               </h2>
             </div>
-            <span class="text-xs text-muted">Semester Berjalan</span>
+            <span class="text-xs text-muted">{{ page?.semester || 'Semester Berjalan' }}</span>
           </div>
         </template>
 

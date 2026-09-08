@@ -1,5 +1,27 @@
 <script setup lang="ts">
-const misiList = [
+interface PrincipalData {
+  name: string
+  role: string
+  location: string
+  avatar: string
+}
+
+interface ProfileData {
+  headline?: string
+  title: string
+  description: string
+  quote: string
+  principal: PrincipalData
+  vision: string
+  missions: string[]
+  goals: string[]
+}
+
+const props = defineProps<{
+  data?: ProfileData
+}>()
+
+const defaultMisi = [
   'Menciptakan lingkungan sekolah yang bernuansa agamis, bersih dan sehat',
   'Meningkatkan kegiatan ibadah melalui kegiatan kultum dan Shalat berjamaah',
   'Mengoptimalkan guru profesional dan berdedikasi tinggi sehingga peserta didik mempunyai kompetensi yang baik dan berkarakter',
@@ -7,7 +29,7 @@ const misiList = [
   'Meningkatkan prestasi peserta didik dengan mengoptimalkan proses pembelajaran yang efektif dan efisien'
 ]
 
-const tujuanList = [
+const defaultTujuan = [
   'Terciptanya lingkungan yang agamis, bersih dan sehat',
   'Meningkatnya ketakwaan peserta didik terhadap Tuhan Yang Maha Esa',
   'Berkembangnya profesionalisme tenaga pendidik',
@@ -29,13 +51,13 @@ const tujuanList = [
           <div class="space-y-3">
             <div class="inline-flex items-center gap-2 rounded-full border border-default/70 bg-muted px-3.5 py-1 text-xs font-semibold text-highlighted">
               <span class="inline-block size-2 rounded-full bg-primary" />
-              <span>Selayang Pandang</span>
+              <span>{{ props.data?.headline || 'Selayang Pandang' }}</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-highlighted">
-              Sambutan Kepala Sekolah
+              {{ props.data?.title || 'Sambutan Kepala Sekolah' }}
             </h2>
             <p class="text-sm text-muted leading-relaxed">
-              Mewujudkan layanan pendidikan transparan, berkualitas, dan kolaboratif bagi seluruh keluarga besar SDN Teja II.
+              {{ props.data?.description || 'Mewujudkan layanan pendidikan transparan, berkualitas, dan kolaboratif bagi seluruh keluarga besar SDN Teja II.' }}
             </p>
           </div>
 
@@ -51,7 +73,7 @@ const tujuanList = [
                 class="size-7 text-primary/40"
               />
               <p class="text-sm sm:text-base text-muted leading-relaxed italic">
-                &ldquo;Kehadiran website sekolah ini merupakan salah satu upaya kita untuk meningkatkan layanan informasi dan komunikasi sekolah kepada seluruh stakeholders, termasuk siswa, guru, karyawan, orang tua siswa, alumni, dan masyarakat umum.&rdquo;
+                &ldquo;{{ props.data?.quote || 'Kehadiran website sekolah ini merupakan salah satu upaya kita untuk meningkatkan layanan informasi dan komunikasi sekolah kepada seluruh stakeholders, termasuk siswa, guru, karyawan, orang tua siswa, alumni, dan masyarakat umum.' }}&rdquo;
               </p>
             </div>
 
@@ -61,20 +83,20 @@ const tujuanList = [
             <div class="flex items-center gap-4">
               <div class="size-14 shrink-0 rounded-full border-2 border-primary/30 overflow-hidden bg-muted flex items-center justify-center">
                 <img
-                  src="/cover/guru.png"
-                  alt="Kepala Sekolah SDN Teja II"
+                  :src="props.data?.principal?.avatar || '/cover/guru.png'"
+                  :alt="props.data?.principal?.name || 'Kepala Sekolah SDN Teja II'"
                   class="size-full object-cover"
                 >
               </div>
               <div class="min-w-0">
                 <div class="text-base font-bold text-highlighted truncate">
-                  Susi Susanti, S.Pd.I., M.Pd.
+                  {{ props.data?.principal?.name || 'Susi Susanti, S.Pd.I., M.Pd.' }}
                 </div>
                 <div class="text-xs font-medium text-primary">
-                  Kepala Sekolah SDN Teja II
+                  {{ props.data?.principal?.role || 'Kepala Sekolah SDN Teja II' }}
                 </div>
                 <div class="text-[11px] text-muted">
-                  Kec. Rajagaluh, Kab. Majalengka
+                  {{ props.data?.principal?.location || 'Kec. Rajagaluh, Kab. Majalengka' }}
                 </div>
               </div>
             </div>
@@ -102,7 +124,7 @@ const tujuanList = [
               class="border border-primary/40 rounded-2xl p-6"
             >
               <p class="text-base sm:text-lg font-semibold text-highlighted leading-relaxed">
-                &ldquo;Terwujudnya pribadi yang beriman dan bertakwa kepada Tuhan Yang Maha Esa, berilmu, berkarakter, terampil, kreatif dan berprestasi.&rdquo;
+                &ldquo;{{ props.data?.vision || 'Terwujudnya pribadi yang beriman dan bertakwa kepada Tuhan Yang Maha Esa, berilmu, berkarakter, terampil, kreatif dan berprestasi.' }}&rdquo;
               </p>
             </UPageCard>
           </div>
@@ -123,7 +145,7 @@ const tujuanList = [
 
             <div class="space-y-3">
               <div
-                v-for="(misi, idx) in misiList"
+                v-for="(misi, idx) in (props.data?.missions?.length ? props.data.missions : defaultMisi)"
                 :key="idx"
                 class="flex items-start gap-3.5 p-4 rounded-xl border border-default/60 bg-muted/30 transition-colors hover:bg-muted/50"
               >
@@ -153,7 +175,7 @@ const tujuanList = [
 
             <div class="space-y-3">
               <div
-                v-for="(tujuan, idx) in tujuanList"
+                v-for="(tujuan, idx) in (props.data?.goals?.length ? props.data.goals : defaultTujuan)"
                 :key="idx"
                 class="flex items-start gap-3.5 p-4 rounded-xl border border-default/60 bg-muted/30 transition-colors hover:bg-muted/50"
               >

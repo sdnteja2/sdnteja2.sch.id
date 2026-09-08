@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "NODE_OPTIONS=--max-old-space-size=4096 nuxt build",
+    "dev": "NODE_OPTIONS=--max-old-space-size=4096 nuxt dev",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
@@ -13,12 +13,17 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.129",
     "@iconify-json/simple-icons": "^1.2.94",
+    "@nuxt/content": "^3.16.0",
     "@nuxt/ui": "^4.11.0",
+    "better-sqlite3": "^13.0.3",
     "nuxt": "^4.5.2",
-    "tailwindcss": "^4.3.3"
+    "nuxt-studio": "^1.7.0",
+    "tailwindcss": "^4.3.3",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
+    "@stefanobartoletti/nuxt-social-share": "^3.2.1",
     "eslint": "^10.10.0",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.11"

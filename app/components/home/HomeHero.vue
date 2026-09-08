@@ -1,7 +1,38 @@
 <script setup lang="ts">
 import type { ButtonProps } from '@nuxt/ui'
 
-const heroLinks = ref<ButtonProps[]>([
+interface HighlightItem {
+  icon: string
+  title: string
+  description: string
+}
+
+interface MascotData {
+  src: string
+  alt?: string
+  title?: string
+  description?: string
+}
+
+interface HeroData {
+  headline?: string
+  title?: string
+  title_highlight?: string
+  description?: string
+  links?: ButtonProps[]
+  highlights?: HighlightItem[]
+  image?: {
+    src: string
+    alt?: string
+  }
+  mascot?: MascotData
+}
+
+const props = defineProps<{
+  data?: HeroData
+}>()
+
+const defaultLinks: ButtonProps[] = [
   {
     label: 'Informasi Pendaftaran',
     to: '#kontak',
@@ -17,9 +48,9 @@ const heroLinks = ref<ButtonProps[]>([
     color: 'neutral',
     variant: 'subtle'
   }
-])
+]
 
-const schoolHighlights = [
+const defaultHighlights: HighlightItem[] = [
   {
     icon: 'i-lucide-badge-check',
     title: 'NPSN Resmi: 20246347',
@@ -47,7 +78,7 @@ const schoolHighlights = [
   <div class="relative">
     <UPageHero
       orientation="horizontal"
-      :links="heroLinks"
+      :links="props.data?.links?.length ? props.data.links : defaultLinks"
       :ui="{
         container: '!pt-3 !pb-8 sm:!pt-6 sm:!pb-12 lg:!pt-8 lg:!pb-14 gap-8 lg:gap-12 items-center',
         title: 'text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-highlighted leading-tight',
@@ -59,19 +90,24 @@ const schoolHighlights = [
       <template #headline>
         <div class="inline-flex items-center gap-2 rounded-full border border-default/70 bg-muted/40 px-3.5 py-1 text-xs font-semibold text-highlighted mb-3">
           <span class="inline-block size-2 rounded-full bg-primary" />
-          <span>Portal Resmi • SD Negeri Teja II Rajagaluh</span>
+          <span>{{ props.data?.headline || 'Portal Resmi • SD Negeri Teja II Rajagaluh' }}</span>
         </div>
       </template>
 
       <!-- Title: Tegas, Ceria & Menginspirasi -->
       <template #title>
-        <span>Membentuk Generasi</span>
-        <span class="text-primary block mt-1">Cerdas, Berkarakter & Berakhlak Mulia</span>
+        <span>{{ props.data?.title || 'Membentuk Generasi' }}</span>
+        <span
+          v-if="props.data?.title_highlight"
+          class="text-primary block mt-1"
+        >
+          {{ props.data.title_highlight }}
+        </span>
       </template>
 
       <!-- Description: Nyata dan Membumi -->
       <template #description>
-        Selamat datang di website resmi SD Negeri Teja II. Kami berkomitmen menghadirkan ekosistem pendidikan dasar yang ramah anak, berakar pada budi pekerti luhur, serta mendorong setiap siswa berkembang dengan gembira dan berprestasi.
+        {{ props.data?.description || 'Selamat datang di website resmi SD Negeri Teja II. Kami berkomitmen menghadirkan ekosistem pendidikan dasar yang ramah anak, berakar pada budi pekerti luhur, serta mendorong setiap siswa berkembang dengan gembira dan berprestasi.' }}
       </template>
 
       <!-- Right Slot: Showcase Foto Gedung Sekolah & Maskot Resmi -->
@@ -80,8 +116,8 @@ const schoolHighlights = [
           <!-- Foto Gedung Sekolah Asli -->
           <div class="relative aspect-16/10 w-full overflow-hidden bg-muted">
             <img
-              src="/cover/sekolah.png"
-              alt="Gedung SDN Teja II"
+              :src="props.data?.image?.src || '/cover/sekolah.png'"
+              :alt="props.data?.image?.alt || 'Gedung SDN Teja II'"
               class="size-full object-cover transition-transform duration-500 hover:scale-105"
             >
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
@@ -108,16 +144,16 @@ const schoolHighlights = [
                   name="i-lucide-smile"
                   class="size-4"
                 />
-                <span>Pendidikan Karakter & Literasi</span>
+                <span>{{ props.data?.mascot?.title || 'Pendidikan Karakter & Literasi' }}</span>
               </div>
               <p class="text-xs text-muted leading-relaxed">
-                Belajar gembira, berdisiplin positif, dan saling menghargai sejak usia dini.
+                {{ props.data?.mascot?.description || 'Belajar gembira, berdisiplin positif, dan saling menghargai sejak usia dini.' }}
               </p>
             </div>
             <div class="shrink-0">
               <img
-                src="/maskot/bacabuku.png"
-                alt="Maskot SDN Teja II"
+                :src="props.data?.mascot?.src || '/maskot/bacabuku.png'"
+                :alt="props.data?.mascot?.alt || 'Maskot SDN Teja II'"
                 class="size-16 sm:size-20 object-contain drop-shadow-sm"
               >
             </div>
@@ -127,32 +163,34 @@ const schoolHighlights = [
 
       <!-- Bottom Slot: Highlight NPSN, Kurikulum & Identitas Riil Sekolah -->
       <template #bottom>
-        <UContainer class="w-full">
-          <div class="mt-4 sm:mt-6 pt-6 sm:pt-8 border-t border-default/60">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-              <div
-                v-for="(item, idx) in schoolHighlights"
-                :key="idx"
-                class="flex items-center gap-3 p-3.5 rounded-2xl bg-muted/30 border border-default/50 transition-colors hover:bg-muted/50"
-              >
-                <div class="size-10 shrink-0 rounded-xl bg-muted border border-default/60 flex items-center justify-center text-primary">
-                  <UIcon
-                    :name="item.icon"
-                    class="size-5"
-                  />
+        <div class="w-full mt-4 sm:mt-6 pt-6 sm:pt-8 border-t border-default/60">
+          <UMarquee
+            pause-on-hover
+            :repeat="4"
+            :ui="{ root: '[--gap:--spacing(4)] [--duration:28s]', content: 'py-1' }"
+          >
+            <div
+              v-for="(item, idx) in (props.data?.highlights?.length ? props.data.highlights : defaultHighlights)"
+              :key="idx"
+              class="flex items-center gap-3 p-3.5 rounded-2xl bg-muted/30 border border-default/50 transition-colors hover:bg-muted/50 w-64 sm:w-72 shrink-0"
+            >
+              <div class="size-10 shrink-0 rounded-xl bg-muted border border-default/60 flex items-center justify-center text-primary">
+                <UIcon
+                  :name="item.icon"
+                  class="size-5"
+                />
+              </div>
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-highlighted truncate">
+                  {{ item.title }}
                 </div>
-                <div class="min-w-0">
-                  <div class="text-xs font-bold text-highlighted truncate">
-                    {{ item.title }}
-                  </div>
-                  <div class="text-[11px] text-muted truncate">
-                    {{ item.description }}
-                  </div>
+                <div class="text-[11px] text-muted truncate">
+                  {{ item.description }}
                 </div>
               </div>
             </div>
-          </div>
-        </UContainer>
+          </UMarquee>
+        </div>
       </template>
     </UPageHero>
   </div>

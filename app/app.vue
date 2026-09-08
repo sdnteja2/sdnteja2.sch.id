@@ -103,15 +103,19 @@ const footerColumns: FooterColumn[] = [
   }
 ]
 
+const route = useRoute()
+
 const navItems = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Home',
     icon: 'i-lucide-home',
-    to: '/'
+    to: '/',
+    active: route.path === '/'
   },
   {
     label: 'Data',
     icon: 'i-lucide-database',
+    active: route.path.startsWith('/data'),
     children: [
       {
         label: 'Data Sekolah',
@@ -136,6 +140,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Publikasi',
     icon: 'i-lucide-newspaper',
+    active: route.path.startsWith('/publikasi'),
     children: [
       {
         label: 'Berita',
@@ -160,6 +165,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Media',
     icon: 'i-lucide-film',
+    active: route.path.startsWith('/media'),
     children: [
       {
         label: 'Buku',

@@ -1,14 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({
-  title: 'Pusat Data - SD Negeri Teja II',
-  description:
-    'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, direktori guru & tenaga kependidikan, serta statistik siswa.',
-  ogTitle: 'Pusat Data - SD Negeri Teja II',
-  ogDescription:
-    'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, guru, dan siswa.'
-})
-
-const dataLinks = [
+const defaultDataLinks = [
   {
     title: 'Data Sekolah',
     desc: 'Identitas kelembagaan, NPSN 20246347, akreditasi, sarana prasarana dan legalitas operasional sekolah.',
@@ -31,6 +22,15 @@ const dataLinks = [
     badge: '6 Rombel'
   }
 ]
+
+useSeoMeta({
+  title: 'Pusat Data - SD Negeri Teja II',
+  description:
+    'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, direktori guru & tenaga kependidikan, serta statistik siswa.',
+  ogTitle: 'Pusat Data - SD Negeri Teja II',
+  ogDescription:
+    'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, guru, dan siswa.'
+})
 </script>
 
 <template>
@@ -60,7 +60,7 @@ const dataLinks = [
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
         <NuxtLink
-          v-for="item in dataLinks"
+          v-for="item in defaultDataLinks"
           :key="item.to"
           :to="item.to"
           class="group block"

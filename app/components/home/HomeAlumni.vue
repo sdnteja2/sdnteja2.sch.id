@@ -1,14 +1,34 @@
 <script setup lang="ts">
+import type { ButtonProps } from '@nuxt/ui'
+
 interface Alumni {
   nama: string
   jabatan: string
-  instansi: string
-  angkatan: string
-  foto: string
+  instansi?: string
+  angkatan?: string
+  foto?: string
   kutipan: string
 }
 
-const alumniList: Alumni[] = [
+interface AlumniCta {
+  title: string
+  description: string
+  link?: ButtonProps
+}
+
+interface AlumniSection {
+  headline?: string
+  title?: string
+  description?: string
+  cta?: AlumniCta
+}
+
+const props = defineProps<{
+  section?: AlumniSection
+  items?: Alumni[]
+}>()
+
+const defaultAlumniList: Alumni[] = [
   {
     nama: 'Wiwi Widiawati, S.I.P.',
     jabatan: 'Kepala Desa',
@@ -58,6 +78,17 @@ const alumniList: Alumni[] = [
     kutipan: 'Bimbingan bapak dan ibu guru membuka wawasan saya untuk mencintai sains dan terus melanjutkan pendidikan ke jenjang tinggi.'
   }
 ]
+
+const getInitials = (name: string) => {
+  if (!name) return 'A'
+  const parts = name.replace(/,\s*.*$/, '').trim().split(/\s+/)
+  const first = parts[0] || ''
+  const second = parts[1] || ''
+  if (first && second) {
+    return ((first[0] || '') + (second[0] || '')).toUpperCase()
+  }
+  return (first.slice(0, 2) || 'A').toUpperCase()
+}
 </script>
 
 <template>
@@ -70,49 +101,43 @@ const alumniList: Alumni[] = [
       <div class="max-w-2xl mx-auto text-center space-y-3 mb-10 sm:mb-14">
         <div class="inline-flex items-center gap-2 rounded-full border border-default/70 bg-muted px-3.5 py-1 text-xs font-semibold text-highlighted">
           <span class="inline-block size-2 rounded-full bg-primary" />
-          <span>Jejak Prestasi & Pengabdian</span>
+          <span>{{ props.section?.headline || 'Jejak Prestasi & Pengabdian' }}</span>
         </div>
         <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-highlighted">
-          Kiprah Alumni SDN Teja II
+          {{ props.section?.title || 'Kiprah Alumni SDN Teja II' }}
         </h2>
         <p class="text-sm sm:text-base text-muted leading-relaxed">
-          Keluarga besar alumni SDN Teja II yang kini berkarya di berbagai sektor pemerintahan, pendidikan, kesehatan, dan industri.
+          {{ props.section?.description || 'Keluarga besar alumni SDN Teja II yang kini berkarya di berbagai sektor pemerintahan, pendidikan, kesehatan, dan industri.' }}
         </p>
       </div>
 
-      <!-- Alumni Carousel -->
-      <div class="relative px-1 sm:px-2">
-        <UCarousel
-          v-slot="{ item }"
-          arrows
-          dots
-          loop
-          wheel-gestures
-          :items="alumniList"
-          :ui="{
-            viewport: 'overflow-hidden py-3',
-            item: 'basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4 p-2.5',
-            controls: 'relative mt-6 flex flex-col items-center gap-3',
-            dots: 'relative inset-auto flex items-center justify-center gap-2',
-            arrows: 'flex items-center justify-center gap-3',
-            prev: 'static rounded-full bg-elevated shadow-xs border border-default/80 hover:bg-muted p-2',
-            next: 'static rounded-full bg-elevated shadow-xs border border-default/80 hover:bg-muted p-2'
-          }"
-          class="w-full"
+      <!-- Alumni Marquee -->
+      <div class="relative w-full">
+        <UMarquee
+          pause-on-hover
+          :repeat="3"
+          :ui="{ root: '[--gap:--spacing(4)] [--duration:35s]', content: 'py-2' }"
         >
-          <div class="h-full flex flex-col justify-between border border-default/80 bg-elevated rounded-2xl p-6 shadow-sm transition-all duration-200 hover:border-primary/50 space-y-4">
+          <div
+            v-for="(item, idx) in (props.items && props.items.length ? props.items : defaultAlumniList)"
+            :key="idx"
+            class="w-72 sm:w-80 shrink-0 flex flex-col justify-between border border-default/80 bg-elevated rounded-2xl p-5 sm:p-6 shadow-sm transition-all duration-200 hover:border-primary/50 space-y-4"
+          >
             <!-- Bagian Foto & Angkatan -->
             <div class="space-y-3">
               <div class="flex items-start justify-between gap-3">
-                <div class="size-16 rounded-full border-2 border-primary/30 overflow-hidden bg-muted shrink-0 shadow-xs">
+                <div class="size-14 sm:size-16 rounded-full border-2 border-primary/30 overflow-hidden bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-xs font-bold text-sm sm:text-base">
                   <img
+                    v-if="item.foto"
                     :src="item.foto"
                     :alt="item.nama"
                     class="size-full object-cover"
                     loading="lazy"
                   >
+                  <span v-else>{{ getInitials(item.nama) }}</span>
                 </div>
                 <UBadge
+                  v-if="item.angkatan"
                   variant="subtle"
                   color="neutral"
                   class="text-[11px] font-medium px-2.5 py-0.5 rounded-full border border-default/60"
@@ -129,7 +154,10 @@ const alumniList: Alumni[] = [
                 <div class="text-xs font-semibold text-primary line-clamp-1">
                   {{ item.jabatan }}
                 </div>
-                <div class="text-[11px] text-muted line-clamp-1">
+                <div
+                  v-if="item.instansi"
+                  class="text-[11px] text-muted line-clamp-1"
+                >
                   {{ item.instansi }}
                 </div>
               </div>
@@ -142,21 +170,26 @@ const alumniList: Alumni[] = [
               </p>
             </div>
           </div>
-        </UCarousel>
+        </UMarquee>
       </div>
 
       <!-- Banner Pendataan Alumni -->
       <div class="mt-8 rounded-2xl border border-default/70 bg-muted/30 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
         <div class="space-y-1 text-center sm:text-left">
           <div class="text-base font-bold text-highlighted">
-            Apakah Anda Bagian dari Alumni SDN Teja II?
+            {{ props.section?.cta?.title || 'Apakah Anda Bagian dari Alumni SDN Teja II?' }}
           </div>
           <p class="text-xs sm:text-sm text-muted">
-            Mari pererat silaturahmi almamater, berbagi kisah inspirasi, dan berpartisipasi dalam kemajuan adik-adik kelas.
+            {{ props.section?.cta?.description || 'Mari pererat silaturahmi almamater, berbagi kisah inspirasi, dan berpartisipasi dalam kemajuan adik-adik kelas.' }}
           </p>
         </div>
         <div class="shrink-0">
           <UButton
+            v-if="props.section?.cta?.link"
+            v-bind="props.section.cta.link"
+          />
+          <UButton
+            v-else
             label="Ikatan Alumni & Kontak"
             to="#kontak"
             icon="i-lucide-users"
