@@ -72,6 +72,8 @@ export default defineNuxtConfig({
   routeRules: {
     '/**': { prerender: true },
     '/media/buku/**': { ogImage: false },
+    '/media/video': { ogImage: false },
+    '/publikasi/kegiatan/**': { ogImage: false },
     '/artikel/**': { redirect: { to: '/publikasi/artikel/**', statusCode: 301 } },
     '/berita/**': { redirect: { to: '/publikasi/berita/**', statusCode: 301 } },
     '/kegiatan/**': { redirect: { to: '/publikasi/kegiatan/**', statusCode: 301 } },
