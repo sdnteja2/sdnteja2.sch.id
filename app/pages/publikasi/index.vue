@@ -8,6 +8,12 @@ useSeoMeta({
     'Portal warta sekolah, artikel edukasi guru, dan dokumentasi ragam kegiatan pembelajaran SD Negeri Teja II.'
 })
 
+defineOgImage('OgImage', {
+  page: 'Publikasi',
+  title: 'Pusat Publikasi & Informasi',
+  description: 'Portal warta sekolah, artikel edukasi guru, dan dokumentasi ragam kegiatan pembelajaran SD Negeri Teja II.'
+})
+
 const publicationLinks = [
   {
     title: 'Warta & Berita',

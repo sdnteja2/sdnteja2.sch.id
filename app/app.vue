@@ -21,9 +21,10 @@ useSeoMeta({
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: '/cover/sekolah.png',
   twitterCard: 'summary_large_image'
 })
+
+defineOgImage('OgImage')
 
 const footerColumns: FooterColumn[] = [
   {

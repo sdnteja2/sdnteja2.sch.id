@@ -91,8 +91,13 @@ useSeoMeta({
   ogTitle: `${page.value?.title || 'Data Sekolah'} - SD Negeri Teja II`,
   ogDescription:
     page.value?.description
-    || 'Profil lengkap, identitas resmi, akreditasi, sarana prasarana, dan data operasional SD Negeri Teja II.',
-  ogImage: '/cover/sekolah.png'
+    || 'Profil lengkap, identitas resmi, akreditasi, sarana prasarana, dan data operasional SD Negeri Teja II.'
+})
+
+defineOgImage('OgImage', {
+  page: 'Data Sekolah',
+  title: page.value?.title || 'Profil & Data Sekolah',
+  description: page.value?.description || 'Profil lengkap, identitas resmi, akreditasi, dan sarana prasarana SD Negeri Teja II.'
 })
 </script>
 

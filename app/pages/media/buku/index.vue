@@ -5,8 +5,13 @@ useSeoMeta({
     'Koleksi lengkap buku teks Kurikulum Merdeka (Buku Siswa dan Buku Guru) Kelas 1 hingga Kelas 6 SD Negeri Teja II.',
   ogTitle: 'Pojok Baca & Buku Digital - SD Negeri Teja II',
   ogDescription:
-    'Koleksi lengkap buku teks Kurikulum Merdeka (Buku Siswa dan Buku Guru) Kelas 1 hingga Kelas 6 SD Negeri Teja II.',
-  ogImage: '/cover/buku.png'
+    'Koleksi lengkap buku teks Kurikulum Merdeka (Buku Siswa dan Buku Guru) Kelas 1 hingga Kelas 6 SD Negeri Teja II.'
+})
+
+defineOgImage('OgImage', {
+  page: 'Buku',
+  title: 'Pojok Baca & Buku Digital',
+  description: 'Koleksi lengkap buku teks Kurikulum Merdeka Kelas 1 hingga Kelas 6 SD Negeri Teja II.'
 })
 
 interface BukuItem {

@@ -92,8 +92,7 @@ useSeoMeta({
   title: `${buku.value?.title || 'Baca Buku'} - SD Negeri Teja II`,
   description: `Baca online ${buku.value?.title} (${buku.value?.tipe || 'Buku Teks'}) untuk Kelas ${buku.value?.kelas} di SD Negeri Teja II.`,
   ogTitle: `${buku.value?.title} - SD Negeri Teja II`,
-  ogDescription: `Baca online ${buku.value?.title} Kelas ${buku.value?.kelas} di SD Negeri Teja II.`,
-  ogImage: buku.value?.image || '/cover/buku.png'
+  ogDescription: `Baca online ${buku.value?.title} Kelas ${buku.value?.kelas} di SD Negeri Teja II.`
 })
 
 defineOgImage('OgImage', {

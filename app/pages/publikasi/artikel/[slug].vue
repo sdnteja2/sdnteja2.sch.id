@@ -35,8 +35,7 @@ useSeoMeta({
   title: `${page.value?.title} - Artikel SD Negeri Teja II`,
   description: page.value?.description,
   ogTitle: `${page.value?.title} - SD Negeri Teja II`,
-  ogDescription: page.value?.description,
-  ogImage: page.value?.image || '/cover/edu.png'
+  ogDescription: page.value?.description
 })
 
 defineOgImage('OgImage', {

@@ -12,6 +12,12 @@ useSeoMeta({
     'Rangkaian aktivitas kesiswaan, peringatan hari besar, pembiasaan karakter, dan dokumentasi agenda kegiatan SD Negeri Teja II.'
 })
 
+defineOgImage('OgImage', {
+  page: 'Kegiatan',
+  title: 'Agenda & Dokumentasi Kegiatan',
+  description: 'Rangkaian aktivitas kesiswaan, pembiasaan karakter, dan dokumentasi kegiatan SD Negeri Teja II.'
+})
+
 const searchQuery = ref('')
 const selectedTag = ref('Semua Kegiatan')
 

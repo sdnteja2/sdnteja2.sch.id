@@ -157,8 +157,13 @@ useSeoMeta({
     'Profil pendidik profesional dan staf tenaga kependidikan yang berdedikasi membimbing dan mendampingi siswa SD Negeri Teja II.',
   ogTitle: 'Guru & Tenaga Kependidikan - SD Negeri Teja II',
   ogDescription:
-    'Profil pendidik profesional dan staf tenaga kependidikan yang berdedikasi membimbing dan mendampingi siswa SD Negeri Teja II.',
-  ogImage: '/cover/guru.png'
+    'Profil pendidik profesional dan staf tenaga kependidikan yang berdedikasi membimbing dan mendampingi siswa SD Negeri Teja II.'
+})
+
+defineOgImage('OgImage', {
+  page: 'Data Guru',
+  title: 'Guru & Tenaga Kependidikan',
+  description: 'Profil pendidik profesional dan staf tenaga kependidikan yang berdedikasi membimbing dan mendampingi siswa SD Negeri Teja II.'
 })
 
 const searchQuery = ref('')

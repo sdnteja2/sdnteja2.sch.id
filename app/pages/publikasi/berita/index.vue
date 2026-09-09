@@ -12,6 +12,12 @@ useSeoMeta({
     'Kabar terkini seputar kegiatan, prestasi, pengumuman resmi, dan perkembangan pendidikan di SD Negeri Teja II.'
 })
 
+defineOgImage('OgImage', {
+  page: 'Berita',
+  title: 'Warta & Berita Sekolah',
+  description: 'Kabar terkini seputar kegiatan, prestasi, dan pengumuman resmi di SD Negeri Teja II.'
+})
+
 const searchQuery = ref('')
 const selectedTag = ref('Semua Tag')
 

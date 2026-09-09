@@ -31,6 +31,12 @@ useSeoMeta({
   ogDescription:
     'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, guru, dan siswa.'
 })
+
+defineOgImage('OgImage', {
+  page: 'Data',
+  title: 'Pusat Data Sekolah',
+  description: 'Pusat informasi dan data resmi SD Negeri Teja II: profil sekolah, direktori GTK, dan statistik siswa.'
+})
 </script>
 
 <template>

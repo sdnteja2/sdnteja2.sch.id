@@ -8,6 +8,12 @@ useSeoMeta({
     'Pusat sumber belajar digital SD Negeri Teja II, menyajikan katalog perpustakaan buku digital dan video edukatif.'
 })
 
+defineOgImage('OgImage', {
+  page: 'Media',
+  title: 'Pusat Media & Sumber Belajar',
+  description: 'Pusat sumber belajar digital SD Negeri Teja II: buku digital dan video edukatif.'
+})
+
 const mediaLinks = [
   {
     title: 'Pojok Baca & Buku Digital',

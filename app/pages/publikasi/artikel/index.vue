@@ -12,6 +12,12 @@ useSeoMeta({
     'Kumpulan gagasan, artikel edukatif, praktik baik pembelajaran, dan refleksi pedagogis dari para pendidik SD Negeri Teja II.'
 })
 
+defineOgImage('OgImage', {
+  page: 'Artikel',
+  title: 'Artikel & Opini Edukasi',
+  description: 'Kumpulan gagasan, artikel edukatif, dan praktik baik pembelajaran dari para pendidik SD Negeri Teja II.'
+})
+
 const searchQuery = ref('')
 const selectedTag = ref('Semua Topik')
 

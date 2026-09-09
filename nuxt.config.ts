@@ -94,11 +94,7 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
-    zeroRuntime: true,
-    defaults: {
-      width: 1200,
-      height: 600
-    }
+    zeroRuntime: true
   },
 
   robots: {

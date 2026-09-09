@@ -107,8 +107,13 @@ useSeoMeta({
   ogTitle: `${page.value?.title || 'Data Siswa & Kesiswaan'} - SD Negeri Teja II`,
   ogDescription:
     page.value?.description
-    || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
-  ogImage: '/cover/siswa.png'
+    || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.'
+})
+
+defineOgImage('OgImage', {
+  page: 'Data Siswa',
+  title: page.value?.title || 'Data Siswa & Kesiswaan',
+  description: page.value?.description || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.'
 })
 </script>
 
