@@ -111,7 +111,6 @@ const formatDate = (val: string | Date | undefined) => {
     year: 'numeric'
   })
 }
-
 </script>
 
 <template>

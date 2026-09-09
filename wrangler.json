@@ -1,0 +1,10 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "sdnteja2-sch-id",
+	"compatibility_date": "2026-06-30",
+	"main": "./.output/server/index.mjs",
+	"assets": {
+		"directory": "./.output/public",
+		"binding": "ASSETS"
+	}
+}
