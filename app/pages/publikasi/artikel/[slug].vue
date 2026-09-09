@@ -39,6 +39,12 @@ useSeoMeta({
   ogImage: page.value?.image || '/cover/edu.png'
 })
 
+defineOgImage('OgImage', {
+  page: 'Artikel',
+  title: page.value?.title,
+  description: page.value?.description
+})
+
 interface TocLink {
   id: string
   text: string
@@ -57,6 +63,8 @@ const tocLinks = computed<TocLink[]>(() => {
   }
   return sanitize((page.value?.body?.toc?.links as TocLink[]) || [])
 })
+
+const isTocOpen = ref(false)
 
 const nuxtApp = useNuxtApp()
 
@@ -267,35 +275,31 @@ watch(
           </div>
         </UPageBody>
 
-        <!-- Right Slot: ContentToc exactly matching Nuxt UI documentation layout -->
+        <!-- Right Slot: ContentToc matching Nuxt UI documentation layout -->
         <template
           v-if="tocLinks.length"
           #right
         >
-          <div class="order-first lg:order-last">
-            <div class="sticky top-20 z-10">
-              <UContentToc
-                highlight
-                highlight-color="primary"
-                highlight-variant="circuit"
-                title="Daftar Isi"
-                :links="tocLinks"
-                class="bg-transparent"
-                :ui="{
-                  root: 'max-h-[calc(100vh-6rem)] overflow-y-auto',
-                  content: 'max-h-[calc(100vh-14rem)] overflow-y-auto'
-                }"
-              >
-                <template #bottom>
-                  <ArticleShare
-                    :title="page?.title"
-                    :description="page?.description"
-                    compact
-                  />
-                </template>
-              </UContentToc>
-            </div>
-          </div>
+          <UContentToc
+            v-model:open="isTocOpen"
+            highlight
+            highlight-color="primary"
+            highlight-variant="circuit"
+            title="Daftar Isi"
+            :links="tocLinks"
+            :ui="{
+              content: 'max-h-60 sm:max-h-72 lg:max-h-[calc(100vh-14rem)] overflow-y-auto'
+            }"
+            @move="isTocOpen = false"
+          >
+            <template #bottom>
+              <ArticleShare
+                :title="page?.title"
+                :description="page?.description"
+                compact
+              />
+            </template>
+          </UContentToc>
         </template>
       </UPage>
     </UContainer>

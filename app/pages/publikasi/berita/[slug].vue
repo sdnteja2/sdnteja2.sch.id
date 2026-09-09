@@ -37,6 +37,12 @@ useSeoMeta({
   ogTitle: `${page.value?.title} - SD Negeri Teja II`,
   ogDescription: page.value?.description
 })
+
+defineOgImage('OgImage', {
+  page: 'Berita',
+  title: page.value?.title,
+  description: page.value?.description
+})
 </script>
 
 <template>

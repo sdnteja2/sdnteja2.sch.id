@@ -20,6 +20,20 @@ const { data: surround } = await useAsyncData(`kegiatan-surround-${route.path}`,
 const prevItem = computed(() => surround.value?.[0])
 const nextItem = computed(() => surround.value?.[1])
 
+useSeoMeta({
+  title: `${page.value?.title} - Kegiatan SD Negeri Teja II`,
+  description: page.value?.description,
+  ogTitle: `${page.value?.title} - SD Negeri Teja II`,
+  ogDescription: page.value?.description,
+  ogImage: page.value?.cover || '/cover/edu.png'
+})
+
+defineOgImage('OgImage', {
+  page: 'Kegiatan',
+  title: page.value?.title,
+  description: page.value?.description
+})
+
 // Mengambil gambar dari server /api/get-images menggunakan composable
 const {
   data: serverImages,

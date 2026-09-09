@@ -22,6 +22,12 @@ useSeoMeta({
     || 'Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter dan potensi siswa.',
   ogImage: page.value?.hero?.image?.src || '/cover/sekolah.png'
 })
+
+defineOgImage('OgImage', {
+  page: 'Beranda',
+  title: page.value?.title || 'SD Negeri Teja II',
+  description: page.value?.description || 'Sekolah ramah anak berkarakter, cerdas, dan berakhlak mulia di Rajagaluh, Majalengka.'
+})
 </script>
 
 <template>

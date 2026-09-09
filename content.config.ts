@@ -248,6 +248,33 @@ export const collections = {
       cover: property(z.string().optional()).editor({ input: 'media' }),
       gallery: z.array(z.string()).optional()
     })
+  }),
+  video: defineCollection({
+    type: 'data',
+    source: 'video/**',
+    schema: z.object({
+      title: z.string().nonempty(),
+      idVideo: z.string().nonempty(),
+      link: z.string().nonempty(),
+      kelas: z.string().nonempty(),
+      pelajaran: z.string().nonempty()
+    })
+  }),
+  buku: defineCollection({
+    type: 'page',
+    source: {
+      include: 'buku/**',
+      prefix: '/media/buku'
+    },
+    schema: z.object({
+      title: z.string(),
+      kelas: z.string(),
+      pelajaran: z.string(),
+      link: z.string().optional(),
+      tipe: z.string().optional(),
+      image: z.string().optional(),
+      driveId: z.string().optional()
+    })
   })
 }
 

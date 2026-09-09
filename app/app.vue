@@ -175,7 +175,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
       },
       {
         label: 'Video',
-        description: 'Galeri tayangan video dan dokumentasi kreatif',
+        description: 'Video pembelajaran interaktif siswa',
         icon: 'i-lucide-video',
         to: '/media/video'
       }
