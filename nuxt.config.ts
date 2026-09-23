@@ -13,15 +13,22 @@ const contentRoutes = [
   '/publikasi',
   '/publikasi/artikel',
   '/publikasi/berita',
-  '/publikasi/kegiatan'
+  '/publikasi/kegiatan',
+  '/publikasi/panduan',
+  '/publikasi/panduan/ipas'
 ]
 
 const mapContentDir = (dir: string, prefix: string) => {
   const full = resolve(process.cwd(), dir)
   if (existsSync(full)) {
-    readdirSync(full).forEach((file) => {
-      if (file.endsWith('.md') || file.endsWith('.yml') || file.endsWith('.yaml')) {
-        const slug = file.replace(/^\d+\./, '').replace(/\.(md|yml|yaml)$/, '')
+    readdirSync(full, { withFileTypes: true }).forEach((entry) => {
+      if (entry.isDirectory()) {
+        mapContentDir(`${dir}/${entry.name}`, `${prefix}/${entry.name}`)
+      } else if (
+        entry.isFile()
+        && (entry.name.endsWith('.md') || entry.name.endsWith('.yml') || entry.name.endsWith('.yaml'))
+      ) {
+        const slug = entry.name.replace(/^\d+\./, '').replace(/\.(md|yml|yaml)$/, '')
         contentRoutes.push(`${prefix}/${slug}`)
       }
     })
@@ -32,6 +39,7 @@ mapContentDir('content/artikel', '/publikasi/artikel')
 mapContentDir('content/berita', '/publikasi/berita')
 mapContentDir('content/kegiatan', '/publikasi/kegiatan')
 mapContentDir('content/buku', '/media/buku')
+mapContentDir('content/panduan', '/publikasi/panduan')
 
 export default defineNuxtConfig({
   modules: [
@@ -97,6 +105,7 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       crawlLinks: true,
+      concurrency: 4,
       routes: contentRoutes,
       ignore: ['/__nuxt_content/']
     }
@@ -139,7 +148,10 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
-    zeroRuntime: true
+    zeroRuntime: true,
+    security: {
+      renderTimeout: 60000
+    }
   },
 
   robots: {

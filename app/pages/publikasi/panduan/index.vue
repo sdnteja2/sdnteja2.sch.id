@@ -10,8 +10,9 @@ useSeoMeta({
 
 defineOgImage('OgImage', {
   page: 'Panduan',
-  title: 'Panduan Pembelajaran',
-  description: 'Pusat panduan kurikulum dan pembelajaran mendalam SD Negeri Teja II Rajagaluh.'
+  title: 'Panduan Pembelajaran & Kurikulum',
+  description:
+    'Pusat referensi, panduan kurikulum, dan pembelajaran mendalam bagi pendidik SD Negeri Teja II Rajagaluh.'
 })
 
 interface GuideItem {
