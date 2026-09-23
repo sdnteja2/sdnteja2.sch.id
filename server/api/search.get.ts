@@ -1,3 +1,5 @@
+import staticSearchIndex from '../../public/search-index.json' with { type: 'json' }
+
 export default defineEventHandler(async (event) => {
   const query = getQuery(event)
   const q = String(query.q || '').trim()
@@ -217,6 +219,24 @@ export default defineEventHandler(async (event) => {
     }
   } catch (err) {
     console.warn('Search sekolah query failed:', err)
+  }
+
+  // Fallback ke static search index jika query database kosong (misal di Cloudflare Workers tanpa D1)
+  if (results.length === 0 && Array.isArray(staticSearchIndex) && staticSearchIndex.length > 0) {
+    for (const item of staticSearchIndex) {
+      const matchScore = scoreMatch(item.title, `${item.content} ${(item.titles || []).join(' ')}`)
+      if (matchScore > 0) {
+        results.push({
+          id: item.id,
+          title: item.title,
+          titles: item.titles || [],
+          content: item.content || '',
+          icon: item.icon || 'i-lucide-file',
+          score: matchScore,
+          level: item.level || 1
+        })
+      }
+    }
   }
 
   // Urutkan berdasarkan skor tertinggi

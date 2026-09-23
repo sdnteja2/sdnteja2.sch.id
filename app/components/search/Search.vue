@@ -29,6 +29,30 @@ const fuse = {
   }
 }
 
+let searchIndexCache: SearchResultItem[] | null = null
+let fetchPromise: Promise<SearchResultItem[]> | null = null
+
+async function getSearchIndex(): Promise<SearchResultItem[]> {
+  if (searchIndexCache) return searchIndexCache
+  if (!fetchPromise) {
+    fetchPromise = $fetch<SearchResultItem[]>('/search-index.json')
+      .then((data) => {
+        searchIndexCache = data
+        return data
+      })
+      .catch((err) => {
+        console.warn('[Search] Failed to load /search-index.json:', err)
+        return []
+      })
+  }
+  return fetchPromise
+}
+
+onMounted(() => {
+  // Preload index in background
+  getSearchIndex()
+})
+
 async function search(query: string) {
   const q = query?.trim() || ''
   if (q.length < 2) {
@@ -36,8 +60,38 @@ async function search(query: string) {
     return []
   }
 
+  const needle = q.toLowerCase()
   isLoading.value = true
   try {
+    const allItems = await getSearchIndex()
+    if (allItems && allItems.length > 0) {
+      const words = needle.split(/\s+/).filter(Boolean)
+      const scored: Array<{ item: SearchResultItem, score: number }> = []
+
+      for (const item of allItems) {
+        const titleLower = item.title.toLowerCase()
+        const contentLower = (item.content || '').toLowerCase()
+        const titlesLower = (item.titles || []).join(' ').toLowerCase()
+        const fullText = `${titleLower} ${titlesLower} ${contentLower}`
+
+        const matchesAll = words.every(word => fullText.includes(word))
+        if (!matchesAll) continue
+
+        let score = 0
+        if (titleLower === needle) score += 100
+        else if (titleLower.startsWith(needle)) score += 50
+        else if (titleLower.includes(needle)) score += 30
+
+        if (titlesLower.includes(needle)) score += 20
+        if (contentLower.includes(needle)) score += 10
+
+        scored.push({ item, score })
+      }
+
+      scored.sort((a, b) => b.score - a.score)
+      return scored.slice(0, 25).map(s => s.item)
+    }
+
     const res = await $fetch<SearchResultItem[]>('/api/search', {
       query: {
         q,

@@ -112,7 +112,7 @@ export default defineNuxtConfig({
   },
 
   hooks: {
-    'build:before'() {
+    async 'build:before'() {
       const metaPath = resolve(process.cwd(), '.nuxt/component-meta.mjs')
       try {
         if (!existsSync(metaPath)) {
@@ -120,6 +120,16 @@ export default defineNuxtConfig({
         }
       } catch {
         // Ignore
+      }
+
+      // Generate search-index.json before build
+      try {
+        const { buildSearchIndex } = await import('./scripts/generate-search-index.mjs')
+        const items = buildSearchIndex()
+        const searchIndexPath = resolve(process.cwd(), 'public/search-index.json')
+        writeFileSync(searchIndexPath, JSON.stringify(items, null, 2), 'utf-8')
+      } catch (err) {
+        console.warn('Failed to build search index:', err)
       }
     },
     'nitro:config'() {
