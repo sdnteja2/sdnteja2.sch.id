@@ -21,9 +21,9 @@ const prevItem = computed(() => surround.value?.[0])
 const nextItem = computed(() => surround.value?.[1])
 
 useSeoMeta({
-  title: `${page.value?.title} - Kegiatan SD Negeri Teja II`,
+  title: page.value?.title,
   description: page.value?.description,
-  ogTitle: `${page.value?.title} - SD Negeri Teja II`,
+  ogTitle: `${page.value?.title} | SDN Teja II`,
   ogDescription: page.value?.description
 })
 

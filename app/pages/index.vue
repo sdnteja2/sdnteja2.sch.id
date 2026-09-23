@@ -12,11 +12,11 @@ const { data: alumniData } = await useAsyncData('home-alumni', () =>
 )
 
 useSeoMeta({
-  title: page.value?.title || 'SD Negeri Teja II - Berkarakter, Cerdas & Berakhlak Mulia',
+  title: page.value?.title || 'Berkarakter, Cerdas & Berakhlak Mulia',
   description:
     page.value?.description
     || 'Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter dan potensi siswa.',
-  ogTitle: page.value?.title || 'SD Negeri Teja II Rajagaluh',
+  ogTitle: `${page.value?.title || 'Berkarakter, Cerdas & Berakhlak Mulia'} | SDN Teja II`,
   ogDescription:
     page.value?.description
     || 'Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter dan potensi siswa.'

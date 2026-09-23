@@ -84,11 +84,11 @@ const { data: facilitiesDoc } = await useAsyncData('page-data-facilities', () =>
 )
 
 useSeoMeta({
-  title: `${page.value?.title || 'Data Sekolah'} - SD Negeri Teja II`,
+  title: page.value?.title || 'Data Sekolah',
   description:
     page.value?.description
     || 'Profil lengkap, identitas resmi, akreditasi, sarana prasarana, dan data operasional SD Negeri Teja II Rajagaluh Majalengka.',
-  ogTitle: `${page.value?.title || 'Data Sekolah'} - SD Negeri Teja II`,
+  ogTitle: `${page.value?.title || 'Data Sekolah'} | SDN Teja II`,
   ogDescription:
     page.value?.description
     || 'Profil lengkap, identitas resmi, akreditasi, sarana prasarana, dan data operasional SD Negeri Teja II.'

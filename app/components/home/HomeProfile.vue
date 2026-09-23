@@ -22,19 +22,19 @@ const props = defineProps<{
 }>()
 
 const defaultMisi = [
-  'Menciptakan lingkungan sekolah yang bernuansa agamis, bersih dan sehat',
-  'Meningkatkan kegiatan ibadah melalui kegiatan kultum dan Shalat berjamaah',
-  'Mengoptimalkan guru profesional dan berdedikasi tinggi sehingga peserta didik mempunyai kompetensi yang baik dan berkarakter',
-  'Menyelenggarakan pendidikan, pelatihan dan pembinaan berdasarkan bakat, minat dan kreativitas peserta didik melalui ekstrakurikuler',
-  'Meningkatkan prestasi peserta didik dengan mengoptimalkan proses pembelajaran yang efektif dan efisien'
+  'Menanamkan nilai spiritual dan keimanan melalui program rutin dan budaya sekolah',
+  'Mengoptimalkan pembelajaran inovatif bagi daya pikir kritis dan kreatif',
+  'Mengembangkan kegiatan kolaboratif, kepemimpinan, dan komunikasi efektif',
+  'Memperkuat pola hidup sehat fisik dan mental seluruh warga sekolah',
+  'Mendorong jiwa kemandirian, adaptif, dan rasa cinta tanah air dalam setiap kegiatan'
 ]
 
 const defaultTujuan = [
-  'Terciptanya lingkungan yang agamis, bersih dan sehat',
-  'Meningkatnya ketakwaan peserta didik terhadap Tuhan Yang Maha Esa',
-  'Berkembangnya profesionalisme tenaga pendidik',
-  'Terbentuknya pribadi peserta didik yang cerdas, terampil, kreatif, aktif dan berkarakter',
-  'Meningkatnya jumlah peserta didik yang melanjutkan pendidikan ke jenjang yang lebih tinggi'
+  'Menghasilkan lulusan beriman, berakhlak mulia, cinta tanah air, dan sehat jasmani',
+  'Membentuk siswa yang kritis, kreatif, dan inovatif pada setiap aspek kehidupan',
+  'Menumbuhkan kemampuan kolaboratif dan komunikasi yang kuat',
+  'Meningkatkan kesehatan fisik dan mental secara menyeluruh',
+  'Mempersiapkan lulusan yang mandiri dan siap menghadapi tantangan global'
 ]
 </script>
 
@@ -64,10 +64,10 @@ const defaultTujuan = [
           <!-- Card Sambutan -->
           <UPageCard
             variant="subtle"
-            class="border border-default/70 rounded-2xl p-6 shadow-sm space-y-6"
+            class="border border-default/70 rounded-2xl px-6 py-2 shadow-sm space-y-6"
           >
             <!-- Teks Sambutan -->
-            <div class="space-y-3">
+            <div class="">
               <UIcon
                 name="i-lucide-quote"
                 class="size-7 text-primary/40"

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Pusat Media & Sumber Belajar - SD Negeri Teja II',
+  title: 'Pusat Media & Sumber Belajar',
   description:
     'Pusat sumber belajar digital SD Negeri Teja II, menyajikan katalog perpustakaan buku digital dan video edukatif.',
-  ogTitle: 'Pusat Media & Sumber Belajar - SD Negeri Teja II',
+  ogTitle: 'Pusat Media & Sumber Belajar | SDN Teja II',
   ogDescription:
     'Pusat sumber belajar digital SD Negeri Teja II, menyajikan katalog perpustakaan buku digital dan video edukatif.'
 })

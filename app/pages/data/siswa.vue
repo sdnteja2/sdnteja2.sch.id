@@ -21,12 +21,12 @@ interface ExtracurricularItem {
 }
 
 const defaultStudentStats: StudentRombel[] = [
-  { rombel: 'Kelas I', male: 14, female: 13, total: 27, wali: 'Siti Aminah, S.Pd.SD' },
-  { rombel: 'Kelas II', male: 15, female: 14, total: 29, wali: 'Dadan Ramdani, S.Pd.' },
-  { rombel: 'Kelas III', male: 16, female: 12, total: 28, wali: 'Ai Nurhayati, S.Pd.' },
-  { rombel: 'Kelas IV', male: 13, female: 15, total: 28, wali: 'Hendra Kurniawan, S.Pd.' },
-  { rombel: 'Kelas V', male: 15, female: 16, total: 31, wali: 'Rina Marlina, S.Pd.SD' },
-  { rombel: 'Kelas VI', male: 14, female: 15, total: 29, wali: 'Asep Saepudin, S.Pd.' }
+  { rombel: 'Kelas I', male: 13, female: 9, total: 22, wali: 'Putriana Indrawati' },
+  { rombel: 'Kelas II', male: 6, female: 10, total: 16, wali: 'Retno Wulandari' },
+  { rombel: 'Kelas III', male: 13, female: 8, total: 21, wali: 'Yana Maulana Hidayat' },
+  { rombel: 'Kelas IV', male: 10, female: 10, total: 20, wali: 'Maspupah' },
+  { rombel: 'Kelas V', male: 6, female: 8, total: 14, wali: 'Dinar Permadi Yusup' },
+  { rombel: 'Kelas VI', male: 8, female: 8, total: 16, wali: 'Haris Sunardi' }
 ]
 
 const defaultCharacterHabits: HabitItem[] = [
@@ -100,11 +100,11 @@ const totalFemale = computed(() => studentStats.value.reduce((acc, curr) => acc 
 const grandTotal = computed(() => studentStats.value.reduce((acc, curr) => acc + curr.total, 0))
 
 useSeoMeta({
-  title: `${page.value?.title || 'Data Siswa & Kesiswaan'} - SD Negeri Teja II`,
+  title: page.value?.title || 'Data Siswa & Kesiswaan',
   description:
     page.value?.description
     || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.',
-  ogTitle: `${page.value?.title || 'Data Siswa & Kesiswaan'} - SD Negeri Teja II`,
+  ogTitle: `${page.value?.title || 'Data Siswa & Kesiswaan'} | SDN Teja II`,
   ogDescription:
     page.value?.description
     || 'Statistik peserta didik, rekapitulasi rombongan belajar, program pembiasaan karakter, dan kegiatan ekstrakurikuler SD Negeri Teja II.'

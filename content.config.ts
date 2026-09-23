@@ -103,6 +103,26 @@ const createExtracurricularSchema = () =>
     icon: property(z.string().nonempty()).editor({ input: 'icon' })
   })
 
+const createBosPhaseSchema = () =>
+  z.object({
+    phase: z.string().nonempty(),
+    period: z.string().nonempty(),
+    percentage: z.string().nonempty(),
+    amount: z.number().int(),
+    status: z.string().nonempty(),
+    date: z.string().nonempty()
+  })
+
+const createBosAllocationSchema = () =>
+  z.object({
+    component: z.string().nonempty(),
+    category: z.string().nonempty(),
+    amount: z.number().int(),
+    percentage: z.number(),
+    description: z.string().nonempty(),
+    icon: property(z.string().nonempty()).editor({ input: 'icon' })
+  })
+
 export const collections = {
   index: defineCollection({
     source: '0.index.yml',
@@ -189,12 +209,11 @@ export const collections = {
       name: z.string().nonempty(),
       role: z.string().nonempty(),
       category: z.string().nonempty(),
-      nip: z.string().default('-'),
-      education: z.string().nonempty(),
-      subject: z.string().nonempty(),
-      avatar: property(z.string().nonempty()).editor({ input: 'icon' }),
-      highlight: z.boolean().optional(),
-      order: z.number().int().optional()
+      tugas: z.string().nonempty(),
+      pendidikan: z.string().nonempty(),
+      sertifikasi: z.boolean().optional(),
+      avatar: property(z.string().optional()).editor({ input: 'icon' }),
+      highlight: z.boolean().optional()
     })
   }),
   siswa: defineCollection({
@@ -208,6 +227,31 @@ export const collections = {
       rombels: z.array(createRombelSchema()),
       habits: z.array(createHabitSchema()),
       extracurriculars: z.array(createExtracurricularSchema())
+    })
+  }),
+  bos: defineCollection({
+    source: '3.bos.yml',
+    type: 'data',
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: property(z.string().nonempty()).editor({ input: 'textarea' }),
+      fiscal_year: z.string().nonempty(),
+      student_count: z.number().int(),
+      unit_cost: z.number().int(),
+      total_budget: z.number().int(),
+      rekening: z.object({
+        bank: z.string().nonempty(),
+        branch: z.string().nonempty(),
+        account_number: z.string().nonempty(),
+        account_name: z.string().nonempty()
+      }),
+      phases: z.array(createBosPhaseSchema()),
+      allocations: z.array(createBosAllocationSchema()),
+      principles: z.array(z.object({
+        title: z.string().nonempty(),
+        desc: z.string().nonempty(),
+        icon: property(z.string().nonempty()).editor({ input: 'icon' })
+      }))
     })
   }),
   berita: defineCollection({
@@ -247,6 +291,23 @@ export const collections = {
       tag: z.string().optional(),
       cover: property(z.string().optional()).editor({ input: 'media' }),
       gallery: z.array(z.string()).optional()
+    })
+  }),
+  panduan: defineCollection({
+    type: 'page',
+    source: {
+      include: 'panduan/**',
+      prefix: '/publikasi/panduan'
+    },
+    schema: z.object({
+      title: z.string().nonempty(),
+      description: z.string().nonempty(),
+      guide: z.string().nonempty(),
+      guideTitle: z.string().nonempty(),
+      chapter: z.number().int().optional(),
+      fase: z.string().optional(),
+      readTime: z.string().optional(),
+      icon: property(z.string().optional()).editor({ input: 'icon' })
     })
   }),
   video: defineCollection({

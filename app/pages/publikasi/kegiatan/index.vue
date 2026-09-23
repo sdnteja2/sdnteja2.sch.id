@@ -4,10 +4,10 @@ const { data: activities } = await useAsyncData('publikasi-kegiatan-list', () =>
 )
 
 useSeoMeta({
-  title: 'Agenda & Dokumentasi Kegiatan - SD Negeri Teja II',
+  title: 'Agenda & Dokumentasi Kegiatan',
   description:
     'Rangkaian aktivitas kesiswaan, peringatan hari besar, pembiasaan karakter, dan dokumentasi agenda kegiatan SD Negeri Teja II.',
-  ogTitle: 'Agenda & Dokumentasi Kegiatan - SD Negeri Teja II',
+  ogTitle: 'Agenda & Dokumentasi Kegiatan | SDN Teja II',
   ogDescription:
     'Rangkaian aktivitas kesiswaan, peringatan hari besar, pembiasaan karakter, dan dokumentasi agenda kegiatan SD Negeri Teja II.'
 })

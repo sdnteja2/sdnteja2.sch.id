@@ -4,10 +4,10 @@ const { data: newsList } = await useAsyncData('publikasi-berita-list', () =>
 )
 
 useSeoMeta({
-  title: 'Warta & Berita Sekolah - SD Negeri Teja II',
+  title: 'Warta & Berita Sekolah',
   description:
     'Kabar terkini seputar kegiatan, prestasi, pengumuman resmi, dan perkembangan pendidikan di SD Negeri Teja II Rajagaluh.',
-  ogTitle: 'Warta & Berita Sekolah - SD Negeri Teja II',
+  ogTitle: 'Warta & Berita Sekolah | SDN Teja II',
   ogDescription:
     'Kabar terkini seputar kegiatan, prestasi, pengumuman resmi, dan perkembangan pendidikan di SD Negeri Teja II.'
 })

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Pojok Baca & Buku Digital - SD Negeri Teja II',
+  title: 'Pojok Baca & Buku Digital',
   description:
     'Koleksi lengkap buku teks Kurikulum Merdeka (Buku Siswa dan Buku Guru) Kelas 1 hingga Kelas 6 SD Negeri Teja II.',
-  ogTitle: 'Pojok Baca & Buku Digital - SD Negeri Teja II',
+  ogTitle: 'Pojok Baca & Buku Digital | SDN Teja II',
   ogDescription:
     'Koleksi lengkap buku teks Kurikulum Merdeka (Buku Siswa dan Buku Guru) Kelas 1 hingga Kelas 6 SD Negeri Teja II.'
 })
@@ -295,13 +295,14 @@ const onPageChange = (page: number) => {
         <UCard
           v-for="book in paginatedBooks"
           :key="book.path"
-          class="group hover:border-primary/50 transition-all flex flex-col justify-between overflow-hidden"
+          variant="subtle"
+          class="group hover:ring-primary/50 hover:shadow-md transition-all flex flex-col justify-between overflow-hidden"
           :ui="{ body: 'p-0 sm:p-0 flex flex-col h-full' }"
         >
           <!-- Book Cover Preview -->
           <NuxtLink
             :to="book.path"
-            class="block relative aspect-[3/4] w-full overflow-hidden bg-muted border-b border-default cursor-pointer"
+            class="block relative aspect-[3/4] w-full overflow-hidden bg-muted"
           >
             <img
               v-if="book.image"
@@ -312,33 +313,36 @@ const onPageChange = (page: number) => {
             >
             <div
               v-else
-              class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-muted/80 to-muted text-muted"
+              class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-primary/10 to-primary/5"
             >
               <UIcon
                 name="i-lucide-book-open"
-                class="size-12 mb-2 text-primary/70"
+                class="size-10 mb-2 text-primary"
               />
               <span class="text-xs font-semibold text-highlighted line-clamp-3">
                 {{ book.title }}
               </span>
             </div>
 
+            <!-- Gradient overlay untuk keterbacaan badge -->
+            <div class="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-black/40 to-transparent pointer-events-none" />
+
             <!-- Badges overlay -->
-            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+            <div class="absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 z-10">
               <UBadge
                 color="primary"
                 variant="solid"
                 size="xs"
-                class="shadow-sm font-semibold"
+                class="font-semibold"
               >
                 Kelas {{ book.kelas }}
               </UBadge>
               <UBadge
                 v-if="book.tipe"
                 :color="book.tipe === 'Buku Guru' ? 'warning' : 'neutral'"
-                variant="subtle"
+                variant="solid"
                 size="xs"
-                class="shadow-sm font-medium"
+                class="font-medium"
               >
                 {{ book.tipe }}
               </UBadge>
@@ -346,30 +350,28 @@ const onPageChange = (page: number) => {
           </NuxtLink>
 
           <!-- Book Info -->
-          <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+          <div class="p-4 flex-1 flex flex-col justify-between gap-3">
             <div class="space-y-1.5">
-              <span class="text-xs font-medium text-primary block">
+              <span class="text-xs font-semibold text-primary uppercase tracking-wide block">
                 {{ book.pelajaran }}
               </span>
               <NuxtLink
                 :to="book.path"
-                class="block font-bold text-highlighted text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2"
+                class="block font-bold text-highlighted text-sm leading-snug hover:text-primary transition-colors line-clamp-2"
               >
                 {{ book.title }}
               </NuxtLink>
             </div>
 
-            <div class="pt-3 border-t border-default flex items-center justify-between">
-              <UButton
-                :to="book.path"
-                label="Baca Buku"
-                icon="i-lucide-book-open"
-                color="primary"
-                variant="subtle"
-                size="xs"
-                class="w-full justify-center"
-              />
-            </div>
+            <UButton
+              :to="book.path"
+              label="Baca Buku"
+              icon="i-lucide-book-open"
+              color="primary"
+              variant="solid"
+              size="sm"
+              block
+            />
           </div>
         </UCard>
       </div>

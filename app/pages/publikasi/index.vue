@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Pusat Publikasi - SD Negeri Teja II',
+  title: 'Pusat Publikasi',
   description:
     'Portal warta sekolah, artikel edukasi guru, dan dokumentasi ragam kegiatan pembelajaran SD Negeri Teja II Rajagaluh.',
-  ogTitle: 'Pusat Publikasi - SD Negeri Teja II',
+  ogTitle: 'Pusat Publikasi | SDN Teja II',
   ogDescription:
     'Portal warta sekolah, artikel edukasi guru, dan dokumentasi ragam kegiatan pembelajaran SD Negeri Teja II.'
 })
@@ -35,6 +35,13 @@ const publicationLinks = [
     icon: 'i-lucide-calendar',
     to: '/publikasi/kegiatan',
     badge: 'Galeri Aktivitas'
+  },
+  {
+    title: 'Panduan Pembelajaran',
+    desc: 'Pedoman kurikulum resmi, pembelajaran mendalam, Capaian Pembelajaran, dan modul ajar guru.',
+    icon: 'i-lucide-book-open',
+    to: '/publikasi/panduan',
+    badge: 'Pedoman Kurikulum'
   }
 ]
 </script>
@@ -64,7 +71,7 @@ const publicationLinks = [
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <NuxtLink
           v-for="item in publicationLinks"
           :key="item.to"

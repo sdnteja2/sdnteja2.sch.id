@@ -4,10 +4,10 @@ const { data: articles } = await useAsyncData('publikasi-artikel-list', () =>
 )
 
 useSeoMeta({
-  title: 'Artikel & Opini Edukasi - SD Negeri Teja II',
+  title: 'Artikel & Opini Edukasi',
   description:
     'Kumpulan gagasan, artikel edukatif, praktik baik pembelajaran, dan refleksi pedagogis dari para pendidik SD Negeri Teja II.',
-  ogTitle: 'Artikel & Opini Edukasi - SD Negeri Teja II',
+  ogTitle: 'Artikel & Opini Edukasi | SDN Teja II',
   ogDescription:
     'Kumpulan gagasan, artikel edukatif, praktik baik pembelajaran, dan refleksi pedagogis dari para pendidik SD Negeri Teja II.'
 })

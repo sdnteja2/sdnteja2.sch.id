@@ -2,32 +2,39 @@
 const defaultDataLinks = [
   {
     title: 'Data Sekolah',
-    desc: 'Identitas kelembagaan, NPSN 20246347, akreditasi, sarana prasarana dan legalitas operasional sekolah.',
+    desc: 'Identitas kelembagaan, NPSN 20246133, akreditasi, sarana prasarana dan legalitas operasional sekolah.',
     icon: 'i-lucide-school',
     to: '/data/sekolah',
     badge: 'Profil & Fasilitas'
   },
   {
     title: 'Guru & Tenaga Kependidikan',
-    desc: 'Daftar kepala sekolah, guru kelas, guru mata pelajaran, operator dan staf kependidikan SDN Teja II.',
+    desc: 'Daftar kepala sekolah, guru kelas, guru mata pelajaran, dan staf kependidikan SDN Teja II.',
     icon: 'i-lucide-users',
     to: '/data/guru',
-    badge: '12 Pendidik & Staf'
+    badge: '8 Pendidik'
   },
   {
     title: 'Data Siswa & Kesiswaan',
-    desc: 'Rekapitulasi peserta didik per rombel, program pembiasaan karakter, dan ragam ekstrakurikuler.',
+    desc: 'Rekapitulasi 109 peserta didik per rombel, program pembiasaan karakter, dan ragam ekstrakurikuler.',
     icon: 'i-lucide-graduation-cap',
     to: '/data/siswa',
-    badge: '6 Rombel'
+    badge: '6 Rombel (109 Siswa)'
+  },
+  {
+    title: 'Anggaran Dana BOS',
+    desc: 'Laporan keterbukaan anggaran, pencairan tahap BOSP, dan rincian alokasi belanja operasional sekolah.',
+    icon: 'i-lucide-receipt',
+    to: '/data/bos',
+    badge: 'Transparansi BOSP'
   }
 ]
 
 useSeoMeta({
-  title: 'Pusat Data - SD Negeri Teja II',
+  title: 'Pusat Data',
   description:
     'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, direktori guru & tenaga kependidikan, serta statistik siswa.',
-  ogTitle: 'Pusat Data - SD Negeri Teja II',
+  ogTitle: 'Pusat Data | SDN Teja II',
   ogDescription:
     'Pusat informasi dan data resmi SD Negeri Teja II meliputi profil sekolah, guru, dan siswa.'
 })
@@ -64,7 +71,7 @@ defineOgImage('OgImage', {
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <NuxtLink
           v-for="item in defaultDataLinks"
           :key="item.to"

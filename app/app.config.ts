@@ -3,6 +3,15 @@ export default defineAppConfig({
     colors: {
       primary: 'red'
     },
+    button: {
+      compoundVariants: [
+        {
+          color: 'primary',
+          variant: 'solid',
+          class: 'text-white dark:text-white'
+        }
+      ]
+    },
     icons: {
       arrowDown: 'i-ph-arrow-down',
       arrowLeft: 'i-ph-arrow-left',

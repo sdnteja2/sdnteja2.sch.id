@@ -53,7 +53,7 @@ export default defineNuxtConfig({
 
   site: {
     url: 'https://sdnteja2.sch.id',
-    name: 'SD Negeri Teja II',
+    name: 'SDN Teja II',
     description:
       'Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter, literasi, dan potensi siswa.',
     defaultLocale: 'id',

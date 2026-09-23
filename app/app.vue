@@ -13,13 +13,13 @@ useHead({
   }
 })
 
-const title = 'SD Negeri Teja II - Berkarakter, Cerdas & Berakhlak Mulia'
+const title = 'Berkarakter, Cerdas & Berakhlak Mulia'
 const description = 'Website resmi SD Negeri Teja II, Kecamatan Rajagaluh, Kabupaten Majalengka. Sekolah ramah anak yang menumbuhkan karakter, literasi, dan potensi siswa.'
 
 useSeoMeta({
   title,
   description,
-  ogTitle: title,
+  ogTitle: `${title} | SDN Teja II`,
   ogDescription: description,
   twitterCard: 'summary_large_image'
 })
@@ -135,6 +135,12 @@ const navItems = computed<NavigationMenuItem[]>(() => [
         description: 'Statistik rombel, pembiasaan, dan kegiatan kesiswaan',
         icon: 'i-lucide-graduation-cap',
         to: '/data/siswa'
+      },
+      {
+        label: 'Anggaran BOS',
+        description: 'Transparansi alokasi, pencairan, dan penggunaan dana BOSP',
+        icon: 'i-lucide-receipt',
+        to: '/data/bos'
       }
     ]
   },
@@ -160,6 +166,12 @@ const navItems = computed<NavigationMenuItem[]>(() => [
         description: 'Dokumentasi agenda dan ekstrakurikuler siswa',
         icon: 'i-lucide-calendar',
         to: '/publikasi/kegiatan'
+      },
+      {
+        label: 'Panduan',
+        description: 'Pedoman kurikulum dan modul pembelajaran mendalam',
+        icon: 'i-lucide-book-open',
+        to: '/publikasi/panduan'
       }
     ]
   },
@@ -206,6 +218,27 @@ const navItems = computed<NavigationMenuItem[]>(() => [
       />
 
       <template #right>
+        <UTooltip
+          text="Cari data..."
+          :kbds="['meta', 'K']"
+        >
+          <UContentSearchButton
+            label="Cari..."
+            size="sm"
+            class="hidden sm:inline-flex"
+          />
+        </UTooltip>
+
+        <UTooltip
+          text="Cari data..."
+          :kbds="['meta', 'K']"
+        >
+          <UContentSearchButton
+            size="sm"
+            class="sm:hidden"
+          />
+        </UTooltip>
+
         <UColorModeButton />
 
         <UButton
@@ -230,6 +263,8 @@ const navItems = computed<NavigationMenuItem[]>(() => [
     <UMain>
       <NuxtPage />
     </UMain>
+
+    <LazySearch />
 
     <USeparator />
 

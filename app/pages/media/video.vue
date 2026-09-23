@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Video Pembelajaran - SD Negeri Teja II',
+  title: 'Video Pembelajaran',
   description:
     'Koleksi video materi pembelajaran Kurikulum Merdeka interaktif untuk Kelas 1 hingga Kelas 6 di SD Negeri Teja II.',
-  ogTitle: 'Video Pembelajaran - SD Negeri Teja II',
+  ogTitle: 'Video Pembelajaran | SDN Teja II',
   ogDescription:
     'Koleksi video materi pembelajaran Kurikulum Merdeka interaktif untuk Kelas 1 hingga Kelas 6 di SD Negeri Teja II.',
   ogImage: '/cover/sekolah.png'

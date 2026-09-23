@@ -1,0 +1,95 @@
+title: Transparansi Anggaran Dana BOS
+description: Laporan rencana dan realisasi Bantuan Operasional Satuan Pendidikan (BOSP) Reguler SD Negeri Teja II untuk keterbukaan informasi dan akuntabilitas pendidikan.
+fiscal_year: Tahun Ajaran 2025/2026
+student_count: 109
+unit_cost: 940000
+total_budget: 102460000
+rekening:
+  bank: BPD Jabar Banten (Bank BJB)
+  branch: KCP / Cabang Rajagaluh
+  account_number: "0007064675101"
+  account_name: SDN TEJA II
+phases:
+  - phase: Penyaluran Tahap I
+    period: Januari - Juni 2025
+    percentage: 50%
+    amount: 51230000
+    status: Terealisasi
+    date: 24 Maret 2025
+  - phase: Penyaluran Tahap II
+    period: Juli - Desember 2025
+    percentage: 50%
+    amount: 51230000
+    status: Berjalan
+    date: 18 Agustus 2025
+allocations:
+  - component: Kegiatan Pembelajaran & Ekstrakurikuler
+    category: Kurikulum & Kesiswaan
+    amount: 22500000
+    percentage: 22.0
+    description: Pengadaan bahan pembelajaran Kurikulum Merdeka, perlengkapan belajar tematik, kegiatan pramuka, seni tari, dan olahraga.
+    icon: i-lucide-book-open
+  - component: Pemeliharaan Sarana & Prasarana
+    category: Sarpras & Lingkungan
+    amount: 18200000
+    percentage: 17.8
+    description: Pengecatan ruang kelas, perbaikan sanitasi/toilet, perbaikan pintu jendela, dan perawatan berkala gedung sekolah.
+    icon: i-lucide-wrench
+  - component: Pengembangan Perpustakaan & Literasi
+    category: Literasi Sekolah
+    amount: 15400000
+    percentage: 15.0
+    description: Pengadaan buku teks utama kurikulum merdeka, buku pengayaan pojok baca, dan pemeliharaan koleksi perpustakaan.
+    icon: i-lucide-library
+  - component: Administrasi Kegiatan Persekolahan
+    category: Operasional Satuan Pendidikan
+    amount: 14360000
+    percentage: 14.0
+    description: Kebutuhan ATK kantor & guru, langganan daya dan jasa (listrik, internet sekolah), dan surat-menyurat resmi.
+    icon: i-lucide-clipboard-list
+  - component: Asesmen & Evaluasi Pembelajaran
+    category: Asesmen Akademik
+    amount: 12500000
+    percentage: 12.2
+    description: Penyelenggaraan Asesmen Sumatif (PTS, PAS), Asesmen Nasional Berbasis Komputer (ANBK), dan pelaporan hasil belajar.
+    icon: i-lucide-file-check
+  - component: Penyediaan Alat Multi Media & IT
+    category: Digitalisasi Pembelajaran
+    amount: 8500000
+    percentage: 8.3
+    description: Pemeliharaan proyektor, pemeliharaan lab komputer, router internet kelas, dan sarana multimedia pendukung guru.
+    icon: i-lucide-monitor
+  - component: Honorarium Pendidik & Staf Non-ASN
+    category: Tenaga Kependidikan
+    amount: 6000000
+    percentage: 5.9
+    description: Pembayaran honorarium guru honorer yang terdata resmi di Dapodik sesuai juknis kementerian.
+    icon: i-lucide-user-check
+  - component: Pelaksanaan Penerimaan Peserta Didik Baru (PPDB)
+    category: Kesiswaan Baru
+    amount: 3000000
+    percentage: 2.9
+    description: Sosialisasi PPDB, formulir pendaftaran, verifikasi berkas zonasi, dan Masa Pengenalan Lingkungan Sekolah (MPLS).
+    icon: i-lucide-user-plus
+  - component: Pengembangan Keprofesian Berkelanjutan (PKB)
+    category: Kompetensi Guru
+    amount: 2000000
+    percentage: 1.9
+    description: Partisipasi guru dalam Kelompok Kerja Guru (KKG), seminar peningkatan kompetensi, dan pelatihan metode ajar.
+    icon: i-lucide-graduation-cap
+principles:
+  - title: Fleksibel
+    desc: Pengelolaan dana dioptimalkan berdasarkan kebutuhan mendesak dan prioritas nyata sekolah.
+    icon: i-lucide-sliders
+  - title: Efektif
+    desc: Pemanfaatan anggaran berfokus memberikan dampak positif terhadap kualitas belajar mengajar.
+    icon: i-lucide-target
+  - title: Efisien
+    desc: Pemilihan belanja barang dan jasa dilakukan dengan hemat, tepat kualitas, dan tepat kuantitas.
+    icon: i-lucide-pie-chart
+  - title: Akuntabel
+    desc: Seluruh transaksi tercatat resmi melalui Aplikasi Rencana Kegiatan dan Anggaran Sekolah (ARKAS).
+    icon: i-lucide-shield-check
+  - title: Transparan
+    desc: Laporan keuangan terbuka untuk pengawasan komite sekolah, wali siswa, serta publik.
+    icon: i-lucide-eye

@@ -85,6 +85,12 @@
       "skillPath": "skills/nuxthub/SKILL.md",
       "computedHash": "f366b6a08c9a6806a4b0de604fd2128116455eb70bace08a8701023f9c7853e1"
     },
+    "pdf-inspector-windows": {
+      "source": "narr07/skills",
+      "sourceType": "github",
+      "skillPath": "pdf-inspector-windows/SKILL.md",
+      "computedHash": "991b2f78c230bd220ef3b3d9901bb957e351f24d295625bc9eedc54dff2eb15b"
+    },
     "vue": {
       "source": "onmax/nuxt-skills",
       "sourceType": "github",

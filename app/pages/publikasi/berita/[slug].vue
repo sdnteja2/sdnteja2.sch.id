@@ -32,9 +32,9 @@ const formatDate = (val: string | Date | undefined) => {
 }
 
 useSeoMeta({
-  title: `${page.value?.title} - Warta SD Negeri Teja II`,
+  title: page.value?.title,
   description: page.value?.description,
-  ogTitle: `${page.value?.title} - SD Negeri Teja II`,
+  ogTitle: `${page.value?.title} | SDN Teja II`,
   ogDescription: page.value?.description
 })
 
