@@ -30,12 +30,6 @@ interface BosData {
   student_count: number
   unit_cost: number
   total_budget: number
-  rekening: {
-    bank: string
-    branch: string
-    account_number: string
-    account_name: string
-  }
   phases: BosPhase[]
   allocations: BosAllocation[]
   principles: BosPrinciple[]
@@ -49,12 +43,6 @@ const defaultBosData: BosData = {
   student_count: 109,
   unit_cost: 940000,
   total_budget: 102460000,
-  rekening: {
-    bank: 'BPD Jabar Banten (Bank BJB)',
-    branch: 'KCP / Cabang Rajagaluh',
-    account_number: '0007064675101',
-    account_name: 'SDN TEJA II'
-  },
   phases: [
     {
       phase: 'Penyaluran Tahap I',
@@ -217,16 +205,12 @@ defineOgImage('OgImage', {
           <NuxtLink
             to="/"
             class="hover:text-highlighted transition-colors"
-          >
-            Home
-          </NuxtLink>
+          >Home</NuxtLink>
           <span>/</span>
           <NuxtLink
             to="/data"
             class="hover:text-highlighted transition-colors"
-          >
-            Data
-          </NuxtLink>
+          >Data</NuxtLink>
           <span>/</span>
           <span class="text-highlighted font-medium">Anggaran BOS</span>
         </div>
@@ -246,11 +230,8 @@ defineOgImage('OgImage', {
               variant="subtle"
               color="primary"
               size="md"
+              icon="i-lucide-calendar"
             >
-              <UIcon
-                name="i-lucide-calendar"
-                class="size-3.5 mr-1"
-              />
               {{ bos.fiscal_year }}
             </UBadge>
             <UBadge
@@ -258,7 +239,7 @@ defineOgImage('OgImage', {
               color="neutral"
               size="md"
             >
-              109 Siswa Sasaran
+              {{ bos.student_count }} Siswa Sasaran
             </UBadge>
           </div>
         </div>
@@ -266,7 +247,10 @@ defineOgImage('OgImage', {
 
       <!-- Ringkasan Anggaran Stat Cards -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <UCard class="hover:border-primary/50 transition-colors">
+        <UCard
+          variant="subtle"
+          class="hover:ring-primary/50 transition-all"
+        >
           <div class="space-y-2">
             <div class="flex items-center justify-between text-muted text-xs">
               <span>Total Pagu BOSP</span>
@@ -275,16 +259,19 @@ defineOgImage('OgImage', {
                 class="size-4 text-primary"
               />
             </div>
-            <div class="text-2xl sm:text-3xl font-bold text-highlighted">
+            <p class="text-2xl sm:text-3xl font-bold text-highlighted">
               {{ formatRupiah(bos.total_budget) }}
-            </div>
+            </p>
             <p class="text-xs text-muted">
               Pagu anggaran tahun berjalan
             </p>
           </div>
         </UCard>
 
-        <UCard class="hover:border-primary/50 transition-colors">
+        <UCard
+          variant="subtle"
+          class="hover:ring-primary/50 transition-all"
+        >
           <div class="space-y-2">
             <div class="flex items-center justify-between text-muted text-xs">
               <span>Satuan Biaya / Siswa</span>
@@ -293,16 +280,19 @@ defineOgImage('OgImage', {
                 class="size-4 text-primary"
               />
             </div>
-            <div class="text-2xl sm:text-3xl font-bold text-highlighted">
+            <p class="text-2xl sm:text-3xl font-bold text-highlighted">
               {{ formatRupiah(bos.unit_cost) }}
-            </div>
+            </p>
             <p class="text-xs text-muted">
               Per peserta didik / tahun
             </p>
           </div>
         </UCard>
 
-        <UCard class="hover:border-primary/50 transition-colors">
+        <UCard
+          variant="subtle"
+          class="hover:ring-primary/50 transition-all"
+        >
           <div class="space-y-2">
             <div class="flex items-center justify-between text-muted text-xs">
               <span>Peserta Didik Dapodik</span>
@@ -311,16 +301,19 @@ defineOgImage('OgImage', {
                 class="size-4 text-primary"
               />
             </div>
-            <div class="text-2xl sm:text-3xl font-bold text-highlighted">
+            <p class="text-2xl sm:text-3xl font-bold text-highlighted">
               {{ bos.student_count }} Siswa
-            </div>
+            </p>
             <p class="text-xs text-muted">
               Data sinkronisasi Dapodik aktif
             </p>
           </div>
         </UCard>
 
-        <UCard class="hover:border-primary/50 transition-colors">
+        <UCard
+          variant="subtle"
+          class="hover:ring-primary/50 transition-all"
+        >
           <div class="space-y-2">
             <div class="flex items-center justify-between text-muted text-xs">
               <span>Mekanisme Salur</span>
@@ -329,9 +322,9 @@ defineOgImage('OgImage', {
                 class="size-4 text-primary"
               />
             </div>
-            <div class="text-2xl sm:text-3xl font-bold text-primary">
-              2 Tahap
-            </div>
+            <p class="text-2xl sm:text-3xl font-bold text-primary">
+              {{ bos.phases.length }} Tahap
+            </p>
             <p class="text-xs text-muted">
               50% Tahap I • 50% Tahap II
             </p>
@@ -339,117 +332,57 @@ defineOgImage('OgImage', {
         </UCard>
       </div>
 
-      <!-- Penyaluran Tahap & Rekening Resmi Bank -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        <!-- Rincian Penyaluran Tahap -->
-        <div class="lg:col-span-7 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-highlighted flex items-center gap-2">
-              <UIcon
-                name="i-lucide-layers"
-                class="size-5 text-primary"
-              />
-              Tahapan Penyaluran Dana BOS
-            </h2>
-            <span class="text-xs text-muted">Langsung ke Rekening Sekolah</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <UCard
-              v-for="(phase, idx) in bos.phases"
-              :key="idx"
-              class="border border-default/70 hover:border-primary/50 transition-all relative overflow-hidden"
-            >
-              <div class="space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-bold text-primary uppercase tracking-wider">
-                    {{ phase.phase }}
-                  </span>
-                  <UBadge
-                    :color="phase.status === 'Terealisasi' ? 'neutral' : 'primary'"
-                    variant="subtle"
-                    size="xs"
-                  >
-                    {{ phase.status }}
-                  </UBadge>
-                </div>
-
-                <div class="text-xl sm:text-2xl font-bold text-highlighted">
-                  {{ formatRupiah(phase.amount) }}
-                </div>
-
-                <div class="pt-2 border-t border-default space-y-1 text-xs text-muted">
-                  <div class="flex items-center justify-between">
-                    <span>Periode:</span>
-                    <span class="font-medium text-highlighted">{{ phase.period }}</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span>Porsi:</span>
-                    <span class="font-medium text-highlighted">{{ phase.percentage }}</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span>Tanggal Update:</span>
-                    <span class="font-mono text-muted">{{ phase.date }}</span>
-                  </div>
-                </div>
-              </div>
-            </UCard>
-          </div>
+      <!-- Penyaluran Tahap -->
+      <div class="space-y-4">
+        <div class="flex items-center justify-between">
+          <h2 class="text-xl font-bold text-highlighted flex items-center gap-2">
+            <UIcon
+              name="i-lucide-layers"
+              class="size-5 text-primary"
+            />
+            Tahapan Penyaluran Dana BOS
+          </h2>
+          <span class="text-xs text-muted hidden sm:inline">Penyaluran langsung dari Kas Negara</span>
         </div>
 
-        <!-- Rekening Bank Resmi -->
-        <div class="lg:col-span-5 space-y-4">
-          <div class="flex items-center justify-between">
-            <h2 class="text-xl font-bold text-highlighted flex items-center gap-2">
-              <UIcon
-                name="i-lucide-landmark"
-                class="size-5 text-primary"
-              />
-              Rekening Resmi Penampung
-            </h2>
-          </div>
-
-          <UCard class="border border-primary/40 bg-elevated/40 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <UCard
+            v-for="(phase, idx) in bos.phases"
+            :key="idx"
+            variant="subtle"
+            class="hover:ring-primary/50 transition-all"
+          >
             <div class="space-y-3">
-              <div class="flex items-center gap-3">
-                <div class="size-11 rounded-xl bg-primary text-white flex items-center justify-center shrink-0">
-                  <UIcon
-                    name="i-lucide-credit-card"
-                    class="size-6"
-                  />
-                </div>
-                <div>
-                  <div class="text-xs font-semibold text-primary uppercase">
-                    Bank Penyalur Resmi
-                  </div>
-                  <div class="text-base font-bold text-highlighted">
-                    {{ bos.rekening.bank }}
-                  </div>
-                  <div class="text-xs text-muted">
-                    {{ bos.rekening.branch }}
-                  </div>
-                </div>
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold text-primary uppercase tracking-wide">
+                  {{ phase.phase }}
+                </span>
+                <UBadge
+                  :color="phase.status === 'Terealisasi' ? 'success' : 'warning'"
+                  variant="subtle"
+                  size="xs"
+                >
+                  {{ phase.status }}
+                </UBadge>
               </div>
 
-              <div class="p-3.5 rounded-xl border border-default bg-muted/40 space-y-2">
-                <div class="text-xs text-muted">
-                  Nomor Rekening BOS Sekolah:
-                </div>
-                <div class="text-xl font-mono font-bold text-highlighted tracking-wider">
-                  {{ bos.rekening.account_number }}
-                </div>
-                <div class="text-xs text-muted flex items-center gap-1.5 pt-1 border-t border-default/50">
-                  <span>Atas Nama:</span>
-                  <span class="font-semibold text-highlighted">{{ bos.rekening.account_name }}</span>
-                </div>
-              </div>
+              <p class="text-xl sm:text-2xl font-bold text-highlighted">
+                {{ formatRupiah(phase.amount) }}
+              </p>
 
-              <div class="flex items-center gap-2 text-xs text-muted">
-                <UIcon
-                  name="i-lucide-check-circle-2"
-                  class="size-4 text-emerald-500 shrink-0"
-                />
-                <span>Terverifikasi di Manajemen BOS (MBS) Kemendikdasmen</span>
+              <div class="pt-2 border-t border-default space-y-1.5 text-xs">
+                <div class="flex items-center justify-between">
+                  <span class="text-muted">Periode</span>
+                  <span class="font-medium text-highlighted">{{ phase.period }}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-muted">Porsi</span>
+                  <span class="font-medium text-highlighted">{{ phase.percentage }}</span>
+                </div>
+                <div class="flex items-center justify-between">
+                  <span class="text-muted">Tanggal Update</span>
+                  <span class="font-mono text-muted">{{ phase.date }}</span>
+                </div>
               </div>
             </div>
           </UCard>
@@ -477,7 +410,7 @@ defineOgImage('OgImage', {
             size="md"
             class="self-start sm:self-auto"
           >
-            9 Komponen Belanja
+            {{ bos.allocations.length }} Komponen Belanja
           </UBadge>
         </div>
 
@@ -485,40 +418,45 @@ defineOgImage('OgImage', {
           <UCard
             v-for="(item, idx) in bos.allocations"
             :key="idx"
-            class="hover:border-primary/50 transition-all hover:shadow-md flex flex-col justify-between"
+            variant="subtle"
+            class="hover:ring-primary/50 hover:shadow-md transition-all flex flex-col justify-between"
           >
-            <div class="space-y-3.5">
-              <div class="flex items-start justify-between gap-3">
-                <div class="size-10 rounded-xl bg-muted text-primary flex items-center justify-center shrink-0">
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center shrink-0">
                   <UIcon
                     :name="item.icon"
                     class="size-5"
                   />
                 </div>
-                <UBadge
-                  color="neutral"
-                  variant="subtle"
-                  size="xs"
-                >
-                  {{ item.percentage }}%
-                </UBadge>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[11px] font-semibold text-primary uppercase tracking-wide truncate">
+                    {{ item.category }}
+                  </p>
+                  <h3 class="font-bold text-highlighted text-sm leading-snug">
+                    {{ item.component }}
+                  </h3>
+                </div>
               </div>
 
-              <div class="space-y-1">
-                <span class="text-[11px] font-semibold text-primary uppercase tracking-wider">
-                  {{ item.category }}
-                </span>
-                <h3 class="font-bold text-highlighted text-base leading-snug">
-                  {{ item.component }}
-                </h3>
-                <p class="text-xs text-muted leading-relaxed pt-1">
-                  {{ item.description }}
-                </p>
+              <p class="text-xs text-muted leading-relaxed">
+                {{ item.description }}
+              </p>
+
+              <div>
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span class="text-muted">Porsi Anggaran</span>
+                  <span class="font-semibold text-highlighted">{{ item.percentage }}%</span>
+                </div>
+                <UProgress
+                  :model-value="item.percentage"
+                  size="sm"
+                />
               </div>
             </div>
 
-            <div class="pt-3 mt-4 border-t border-default flex items-center justify-between">
-              <span class="text-xs text-muted">Alokasi:</span>
+            <div class="pt-3 mt-3 border-t border-default flex items-center justify-between">
+              <span class="text-xs text-muted">Alokasi</span>
               <span class="text-base font-bold text-highlighted">{{ formatRupiah(item.amount) }}</span>
             </div>
           </UCard>
@@ -544,10 +482,11 @@ defineOgImage('OgImage', {
           <UCard
             v-for="(p, idx) in bos.principles"
             :key="idx"
-            class="text-center p-4 hover:border-primary/40 transition-colors"
+            variant="subtle"
+            class="text-center hover:ring-primary/40 transition-all"
           >
             <div class="space-y-2 flex flex-col items-center">
-              <div class="size-10 rounded-xl bg-muted text-primary flex items-center justify-center">
+              <div class="size-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
                 <UIcon
                   :name="p.icon"
                   class="size-5"
@@ -565,7 +504,10 @@ defineOgImage('OgImage', {
       </div>
 
       <!-- Notice Keterbukaan & Regulasi -->
-      <UCard class="border-dashed border-default bg-elevated/20 p-5 rounded-2xl">
+      <UCard
+        variant="subtle"
+        class="border-dashed"
+      >
         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div class="space-y-1">
             <div class="flex items-center gap-2 text-sm font-semibold text-highlighted">

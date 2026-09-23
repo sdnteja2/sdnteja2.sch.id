@@ -4,11 +4,6 @@ fiscal_year: Tahun Ajaran 2025/2026
 student_count: 109
 unit_cost: 940000
 total_budget: 102460000
-rekening:
-  bank: BPD Jabar Banten (Bank BJB)
-  branch: KCP / Cabang Rajagaluh
-  account_number: "0007064675101"
-  account_name: SDN TEJA II
 phases:
   - phase: Penyaluran Tahap I
     period: Januari - Juni 2025

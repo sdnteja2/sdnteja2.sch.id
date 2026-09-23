@@ -244,7 +244,7 @@ export const collections = {
         branch: z.string().nonempty(),
         account_number: z.string().nonempty(),
         account_name: z.string().nonempty()
-      }),
+      }).optional(),
       phases: z.array(createBosPhaseSchema()),
       allocations: z.array(createBosAllocationSchema()),
       principles: z.array(z.object({
