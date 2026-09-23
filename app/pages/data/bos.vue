@@ -522,7 +522,7 @@ defineOgImage('OgImage', {
             </p>
           </div>
           <UButton
-            to="/sekolah#kontak"
+            to="/data/sekolah#kontak"
             label="Hubungi Sekolah"
             color="neutral"
             variant="subtle"

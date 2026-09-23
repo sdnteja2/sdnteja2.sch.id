@@ -179,7 +179,7 @@ defineOgImage('OgImage', {
 
         <!-- Location, Map & Notice Column -->
         <div class="lg:col-span-5 space-y-6">
-          <UCard>
+          <UCard id="kontak">
             <template #header>
               <div class="flex items-center gap-2">
                 <UIcon
