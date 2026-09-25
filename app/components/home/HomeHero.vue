@@ -115,11 +115,13 @@ const defaultHighlights: HighlightItem[] = [
         <div class="relative w-full rounded-3xl border border-default/70 bg-elevated shadow-sm overflow-hidden">
           <!-- Foto Gedung Sekolah Asli -->
           <div class="relative aspect-16/10 w-full overflow-hidden bg-muted">
-            <img
-              :src="props.data?.image?.src || '/cover/sekolah.png'"
+            <NuxtImg
+              :src="props.data?.image?.src || '/cover/sekolah.webp'"
               :alt="props.data?.image?.alt || 'Gedung SDN Teja II'"
-              class="size-full object-cover transition-transform duration-500 hover:scale-105"
-            >
+              format="webp"
+              :placeholder="[24, 15, 20, 0]"
+              class="size-full object-cover transition-transform duration-500 hover:scale-105 [image-rendering:pixelated]"
+            />
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
             <div class="absolute bottom-4 left-4 right-4 text-white">
               <div class="flex items-center gap-2 mb-1">
@@ -151,11 +153,13 @@ const defaultHighlights: HighlightItem[] = [
               </p>
             </div>
             <div class="shrink-0">
-              <img
-                :src="props.data?.mascot?.src || '/maskot/bacabuku.png'"
+              <NuxtImg
+                :src="props.data?.mascot?.src || '/maskot/bacabuku.webp'"
                 :alt="props.data?.mascot?.alt || 'Maskot SDN Teja II'"
-                class="size-16 sm:size-20 object-contain drop-shadow-sm"
-              >
+                format="webp"
+                :placeholder="[16, 16, 20, 0]"
+                class="size-16 sm:size-20 object-contain drop-shadow-sm [image-rendering:pixelated]"
+              />
             </div>
           </div>
         </div>

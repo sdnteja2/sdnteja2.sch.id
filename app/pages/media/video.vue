@@ -6,7 +6,7 @@ useSeoMeta({
   ogTitle: 'Video Pembelajaran | SDN Teja II',
   ogDescription:
     'Koleksi video materi pembelajaran Kurikulum Merdeka interaktif untuk Kelas 1 hingga Kelas 6 di SD Negeri Teja II.',
-  ogImage: '/cover/sekolah.png'
+  ogImage: '/cover/sekolah.webp'
 })
 
 defineOgImage('OgImage', {

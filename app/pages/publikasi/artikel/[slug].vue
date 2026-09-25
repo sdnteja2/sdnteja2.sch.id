@@ -192,11 +192,13 @@ watch(
             v-if="page?.image"
             class="rounded-2xl overflow-hidden border border-default bg-muted max-h-[460px] shadow-sm"
           >
-            <img
+            <NuxtImg
               :src="page.image"
               :alt="page.title"
-              class="w-full h-full object-cover"
-            >
+              format="webp"
+              :placeholder="[30, 16, 25, 0]"
+              class="w-full h-full object-cover [image-rendering:pixelated]"
+            />
           </div>
 
           <USeparator />

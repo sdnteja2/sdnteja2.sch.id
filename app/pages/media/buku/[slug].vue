@@ -83,8 +83,8 @@ const pdfSrc = computed(() => {
 })
 
 const externalSourceUrl = computed(() => {
-  if (buku.value?.link) return buku.value.link
   if (buku.value?.driveId) return `https://drive.google.com/file/d/${buku.value.driveId}/view`
+  if (buku.value?.link) return buku.value.link
   return ''
 })
 

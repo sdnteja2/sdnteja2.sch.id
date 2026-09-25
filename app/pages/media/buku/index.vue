@@ -304,13 +304,15 @@ const onPageChange = (page: number) => {
             :to="book.path"
             class="block relative aspect-[3/4] w-full overflow-hidden bg-muted"
           >
-            <img
+            <NuxtImg
               v-if="book.image"
               :src="book.image"
               :alt="book.title"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              format="webp"
+              :placeholder="[16, 22, 20, 0]"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 [image-rendering:pixelated]"
               loading="lazy"
-            >
+            />
             <div
               v-else
               class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-br from-primary/10 to-primary/5"

@@ -213,7 +213,20 @@ export const collections = {
       pendidikan: z.string().nonempty(),
       sertifikasi: z.boolean().optional(),
       avatar: property(z.string().optional()).editor({ input: 'icon' }),
-      highlight: z.boolean().optional()
+      highlight: z.boolean().optional(),
+      socials: z
+        .union([
+          z.array(
+            z.object({
+              platform: z.string().optional(),
+              url: z.string(),
+              icon: z.string().optional(),
+              label: z.string().optional()
+            })
+          ),
+          z.record(z.string(), z.string())
+        ])
+        .optional()
     })
   }),
   siswa: defineCollection({

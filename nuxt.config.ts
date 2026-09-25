@@ -44,6 +44,7 @@ mapContentDir('content/panduan', '/publikasi/panduan')
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
+    '@nuxt/image',
     '@nuxt/ui',
     '@nuxtjs/seo',
     '@nuxt/content',
@@ -70,6 +71,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    public: {
+      appsScriptUrl: process.env.NUXT_PUBLIC_APPS_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbxPgMoh21zkt6ZUaaGpXAeZXPnKM_we4HEPPjqSPC79qq-YIUw9YREyeMcfh_aYiT0/exec'
+    },
     cloudinary: {
       apiKey: '',
       apiSecret: '',
@@ -79,6 +83,8 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/**': { prerender: true },
+    '/verifikasi/**': { prerender: false },
+    '/surat/**': { prerender: false },
     '/media/buku/**': { ogImage: false },
     '/media/video': { ogImage: false },
     '/publikasi/kegiatan/**': { ogImage: false },

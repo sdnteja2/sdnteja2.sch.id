@@ -1,4 +1,11 @@
 <script setup lang="ts">
+interface SocialItem {
+  platform?: string
+  url: string
+  icon?: string
+  label?: string
+}
+
 interface StaffMember {
   name: string
   role: string
@@ -7,7 +14,89 @@ interface StaffMember {
   pendidikan: string
   sertifikasi?: boolean
   avatar: string
-  highlight?: boolean
+  socials?: SocialItem[] | Record<string, string>
+}
+
+interface NormalizedSocial {
+  platform: string
+  url: string
+  icon: string
+  label: string
+}
+
+function resolveSocialMeta(platformOrUrl: string): { icon: string, label: string } {
+  const str = platformOrUrl.toLowerCase()
+  if (str.includes('instagram') || str === 'ig') {
+    return { icon: 'i-simple-icons-instagram', label: 'Instagram' }
+  }
+  if (str.includes('facebook') || str === 'fb') {
+    return { icon: 'i-simple-icons-facebook', label: 'Facebook' }
+  }
+  if (str.includes('tiktok') || str === 'tt') {
+    return { icon: 'i-simple-icons-tiktok', label: 'TikTok' }
+  }
+  if (str.includes('youtube') || str.includes('youtu.be') || str === 'yt') {
+    return { icon: 'i-simple-icons-youtube', label: 'YouTube' }
+  }
+  if (str.includes('twitter') || str.includes('x.com') || str === 'x') {
+    return { icon: 'i-simple-icons-x', label: 'X (Twitter)' }
+  }
+  if (str.includes('whatsapp') || str.includes('wa.me') || str === 'wa') {
+    return { icon: 'i-simple-icons-whatsapp', label: 'WhatsApp' }
+  }
+  if (str.includes('linkedin')) {
+    return { icon: 'i-simple-icons-linkedin', label: 'LinkedIn' }
+  }
+  if (str.includes('telegram') || str.includes('t.me') || str === 'tg') {
+    return { icon: 'i-simple-icons-telegram', label: 'Telegram' }
+  }
+  if (str.includes('threads')) {
+    return { icon: 'i-simple-icons-threads', label: 'Threads' }
+  }
+  if (str.includes('github')) {
+    return { icon: 'i-simple-icons-github', label: 'GitHub' }
+  }
+  if (str.includes('mailto:') || str === 'email' || str === 'mail') {
+    return { icon: 'i-lucide-mail', label: 'Email' }
+  }
+  if (str.includes('http') || str === 'website' || str === 'web' || str === 'blog') {
+    return { icon: 'i-lucide-globe', label: 'Website' }
+  }
+  return { icon: 'i-lucide-link', label: 'Tautan' }
+}
+
+function getStaffSocials(staff: StaffMember): NormalizedSocial[] {
+  if (!staff.socials) return []
+
+  if (Array.isArray(staff.socials)) {
+    return staff.socials
+      .filter((item) => Boolean(item && item.url))
+      .map((item) => {
+        const meta = resolveSocialMeta(item.platform || item.url)
+        return {
+          platform: item.platform || meta.label.toLowerCase(),
+          url: item.url,
+          icon: item.icon || meta.icon,
+          label: item.label || meta.label
+        }
+      })
+  }
+
+  if (typeof staff.socials === 'object') {
+    return Object.entries(staff.socials)
+      .filter(([_, url]) => Boolean(url))
+      .map(([platform, url]) => {
+        const meta = resolveSocialMeta(platform || url)
+        return {
+          platform,
+          url,
+          icon: meta.icon,
+          label: meta.label
+        }
+      })
+  }
+
+  return []
 }
 
 const categoryOptions = [
@@ -25,8 +114,7 @@ const defaultStaffList: StaffMember[] = [
     tugas: 'Tugas Pokok & Fungsi',
     pendidikan: 'S1',
     sertifikasi: true,
-    avatar: 'i-lucide-user',
-    highlight: false
+    avatar: 'i-lucide-user'
   }
 ]
 
@@ -155,10 +243,7 @@ const filteredStaff = computed(() => {
           v-for="staff in filteredStaff"
           :key="staff.name"
           variant="subtle"
-          :class="[
-            'transition-all hover:ring-primary/50',
-            staff.highlight ? 'ring-2 ring-primary/40' : ''
-          ]"
+          class="transition-all hover:ring-primary/50"
         >
           <div class="space-y-4">
             <div class="flex items-start justify-between gap-2">
@@ -172,16 +257,6 @@ const filteredStaff = computed(() => {
                   description: 'text-primary text-xs font-semibold uppercase tracking-wider'
                 }"
               />
-              <UBadge
-                v-if="staff.highlight"
-                color="primary"
-                variant="subtle"
-                size="sm"
-                icon="i-lucide-star"
-                class="shrink-0"
-              >
-                Pimpinan
-              </UBadge>
             </div>
 
             <div class="pt-3 border-t border-default space-y-2.5 text-sm">
@@ -221,6 +296,35 @@ const filteredStaff = computed(() => {
                       Tersertifikasi
                     </UBadge>
                   </div>
+                </div>
+              </div>
+
+              <!-- Social Media Links (Fleksibel: Tampil hanya jika ada) -->
+              <div
+                v-if="getStaffSocials(staff).length > 0"
+                class="pt-2.5 border-t border-default/60 flex items-center justify-between gap-2"
+              >
+                <span class="text-dimmed text-[11px] uppercase tracking-wide">
+                  Media Sosial
+                </span>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                  <UTooltip
+                    v-for="(soc, sIdx) in getStaffSocials(staff)"
+                    :key="sIdx"
+                    :text="soc.label"
+                  >
+                    <UButton
+                      :to="soc.url"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      :icon="soc.icon"
+                      size="xs"
+                      color="neutral"
+                      variant="subtle"
+                      class="size-7 p-0 flex items-center justify-center rounded-lg hover:text-primary hover:bg-primary/10 transition-colors"
+                      :aria-label="`${soc.label} ${staff.name}`"
+                    />
+                  </UTooltip>
                 </div>
               </div>
             </div>

@@ -131,12 +131,14 @@ const filteredActivities = computed(() => {
                 v-if="item.cover"
                 class="h-48 -mx-4 -mt-4 mb-4 overflow-hidden bg-muted relative"
               >
-                <img
+                <NuxtImg
                   :src="item.cover"
                   :alt="item.title"
+                  format="webp"
+                  :placeholder="[20, 12, 20, 0]"
                   loading="lazy"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                >
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 [image-rendering:pixelated]"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
                 <div class="absolute bottom-3 left-3 right-3 flex items-center justify-between text-white text-xs">
                   <UBadge

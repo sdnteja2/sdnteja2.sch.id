@@ -34,10 +34,10 @@ hero:
       color: neutral
       variant: subtle
   image:
-    src: /cover/sekolah.png
+    src: /cover/sekolah.webp
     alt: Gedung SDN Teja II
   mascot:
-    src: /maskot/bacabuku.png
+    src: /maskot/bacabuku.webp
     alt: Maskot SDN Teja II
     title: Pendidikan Karakter & Literasi
     description: Belajar gembira, berdisiplin positif, dan saling menghargai sejak usia dini.
@@ -63,7 +63,7 @@ profile:
     name: Susi Susanti, S.Pd.I., M.Pd.
     role: Kepala Sekolah SDN Teja II
     location: Kec. Rajagaluh, Kab. Majalengka
-    avatar: /cover/guru.png
+    avatar: /cover/guru.webp
   vision: "Menjadi sekolah yang BERKIBAR: Beriman, Edukatif, Rasional, Kreatif, Inspiratif, Berkolaborasi, Aktif, dan Responsif dalam membentuk generasi unggul sesuai Nilai-nilai Pancasila"
   missions:
     - Menanamkan nilai spiritual dan keimanan melalui program rutin dan budaya sekolah

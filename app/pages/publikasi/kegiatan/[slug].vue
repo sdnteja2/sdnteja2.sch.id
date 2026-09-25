@@ -187,11 +187,13 @@ const formatDate = (val: string | Date | undefined) => {
         class="group relative rounded-2xl overflow-hidden border border-default bg-muted shadow-sm cursor-zoom-in"
         @click="openFullscreen(page.cover)"
       >
-        <img
+        <NuxtImg
           :src="page.cover"
           :alt="page.title"
-          class="w-full h-auto max-h-[460px] object-cover group-hover:scale-102 transition-transform duration-300"
-        >
+          format="webp"
+          :placeholder="[30, 16, 25, 0]"
+          class="w-full h-auto max-h-[460px] object-cover group-hover:scale-102 transition-transform duration-300 [image-rendering:pixelated]"
+        />
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center pointer-events-none">
           <div class="opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 text-white px-3.5 py-1.5 rounded-full text-xs font-medium flex items-center gap-1.5">
             <UIcon
@@ -258,12 +260,14 @@ const formatDate = (val: string | Date | undefined) => {
             class="group relative h-48 rounded-2xl overflow-hidden border border-default bg-muted cursor-zoom-in shadow-xs"
             @click="openFullscreen(img.src)"
           >
-            <img
+            <NuxtImg
               :src="img.src"
               :alt="img.alt || page?.title"
+              format="webp"
+              :placeholder="[20, 14, 20, 0]"
               loading="lazy"
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-            >
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 [image-rendering:pixelated]"
+            />
             <div class="absolute inset-0 bg-black/0 group-hover:bg-black/25 transition-colors flex items-center justify-center">
               <UIcon
                 name="i-lucide-maximize"

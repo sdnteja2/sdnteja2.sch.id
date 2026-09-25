@@ -82,11 +82,13 @@ const defaultTujuan = [
             <!-- Profil Kepala Sekolah -->
             <div class="flex items-center gap-4">
               <div class="size-14 shrink-0 rounded-full border-2 border-primary/30 overflow-hidden bg-muted flex items-center justify-center">
-                <img
-                  :src="props.data?.principal?.avatar || '/cover/guru.png'"
+                <NuxtImg
+                  :src="props.data?.principal?.avatar || '/cover/guru.webp'"
                   :alt="props.data?.principal?.name || 'Kepala Sekolah SDN Teja II'"
-                  class="size-full object-cover"
-                >
+                  format="webp"
+                  :placeholder="[16, 16, 20, 0]"
+                  class="size-full object-cover [image-rendering:pixelated]"
+                />
               </div>
               <div class="min-w-0">
                 <div class="text-base font-bold text-highlighted truncate">

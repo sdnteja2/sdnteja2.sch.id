@@ -34,7 +34,7 @@ const defaultAlumniList: Alumni[] = [
     jabatan: 'Kepala Desa',
     instansi: 'Pemerintah Desa Teja',
     angkatan: 'Alumni 2005',
-    foto: '/alumni/wiwi-widiawati-kepala-desa-tiga-periode.jpg',
+    foto: '/alumni/wiwi-widiawati-kepala-desa-tiga-periode.webp',
     kutipan: 'Pondasi kejujuran dan disiplin yang ditanamkan para guru di SDN Teja II menjadi bekal berharga dalam melayani masyarakat.'
   },
   {
@@ -127,13 +127,15 @@ const getInitials = (name: string) => {
             <div class="space-y-3">
               <div class="flex items-start justify-between gap-3">
                 <div class="size-14 sm:size-16 rounded-full border-2 border-primary/30 overflow-hidden bg-primary/10 text-primary flex items-center justify-center shrink-0 shadow-xs font-bold text-sm sm:text-base">
-                  <img
+                  <NuxtImg
                     v-if="item.foto"
                     :src="item.foto"
                     :alt="item.nama"
-                    class="size-full object-cover"
+                    format="webp"
+                    :placeholder="[16, 16, 20, 0]"
+                    class="size-full object-cover [image-rendering:pixelated]"
                     loading="lazy"
-                  >
+                  />
                   <span v-else>{{ getInitials(item.nama) }}</span>
                 </div>
                 <UBadge

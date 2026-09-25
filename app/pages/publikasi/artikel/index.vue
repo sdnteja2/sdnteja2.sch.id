@@ -132,12 +132,14 @@ const filteredArticles = computed(() => {
                 v-if="item.image"
                 class="h-44 -mx-4 -mt-4 mb-4 overflow-hidden bg-muted relative"
               >
-                <img
+                <NuxtImg
                   :src="item.image"
                   :alt="item.title"
+                  format="webp"
+                  :placeholder="[20, 12, 20, 0]"
                   loading="lazy"
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                >
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 [image-rendering:pixelated]"
+                />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
 
