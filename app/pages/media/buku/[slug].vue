@@ -1,5 +1,14 @@
 <script setup lang="ts">
+import type { SplitterItem } from '@nuxt/ui'
+
 const route = useRoute()
+const colorMode = useColorMode()
+const isInfoDrawerOpen = ref(false)
+
+const splitterItems: SplitterItem[] = [
+  { slot: 'info', defaultSize: 28, minSize: 18, maxSize: 45, collapsible: true },
+  { slot: 'viewer', defaultSize: 72, minSize: 50 }
+]
 
 interface BukuItem {
   title: string
@@ -24,10 +33,8 @@ const { data: buku } = await useAsyncData(
       }
       if (import.meta.client) {
         try {
-          const item = localStorage.getItem(`sdnteja2-cache-${key}`)
-          if (item) {
-            return JSON.parse(item)
-          }
+          const item = localStorage.getItem(`sdnteja2-cache-v2-${key}`)
+          if (item) return JSON.parse(item)
         } catch {
           // Ignore storage error
         }
@@ -41,7 +48,7 @@ watch(
   (val) => {
     if (import.meta.client && val) {
       try {
-        localStorage.setItem(`sdnteja2-cache-buku-${route.path}`, JSON.stringify(val))
+        localStorage.setItem(`sdnteja2-cache-v2-buku-${route.path}`, JSON.stringify(val))
       } catch {
         // Ignore storage error
       }
@@ -88,6 +95,13 @@ const externalSourceUrl = computed(() => {
   return ''
 })
 
+const breadcrumbItems = computed(() => [
+  { label: 'Home', to: '/', icon: 'i-lucide-home' },
+  { label: 'Media', to: '/media' },
+  { label: 'Buku', to: '/media/buku' },
+  { label: buku.value?.title || 'Buku' }
+])
+
 useSeoMeta({
   title: buku.value?.title || 'Baca Buku',
   description: `Baca online ${buku.value?.title} (${buku.value?.tipe || 'Buku Teks'}) untuk Kelas ${buku.value?.kelas} di SD Negeri Teja II.`,
@@ -104,32 +118,16 @@ defineOgImage('OgImage', {
 
 <template>
   <div class="py-6 sm:py-10">
-    <UContainer class="space-y-6">
-      <!-- Breadcrumbs & Action Bar -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div class="space-y-2">
-          <div class="flex items-center gap-2 text-sm text-muted">
-            <NuxtLink
-              to="/"
-              class="hover:text-highlighted transition-colors"
-            >
-              Home
-            </NuxtLink>
-            <span>/</span>
-            <span class="text-muted">Media</span>
-            <span>/</span>
-            <NuxtLink
-              to="/media/buku"
-              class="hover:text-highlighted transition-colors"
-            >
-              Buku
-            </NuxtLink>
-            <span>/</span>
-            <span class="text-highlighted font-medium truncate max-w-[220px] sm:max-w-md">
-              {{ buku?.title }}
-            </span>
-          </div>
+    <UContainer class="space-y-5">
+      <!-- Breadcrumb -->
+      <UBreadcrumb :items="breadcrumbItems" />
 
+      <!-- Title + Actions Header -->
+      <div class="p-4 sm:p-5 rounded-2xl border border-default bg-elevated/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-2 min-w-0">
+          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-highlighted truncate">
+            {{ buku?.title }}
+          </h1>
           <div class="flex items-center gap-2 flex-wrap">
             <UBadge
               color="primary"
@@ -157,7 +155,16 @@ defineOgImage('OgImage', {
           </div>
         </div>
 
-        <div class="flex items-center gap-2 self-start sm:self-auto shrink-0">
+        <div class="flex items-center gap-2 shrink-0 flex-wrap">
+          <UButton
+            label="Info Buku"
+            icon="i-lucide-info"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            class="md:hidden"
+            @click="isInfoDrawerOpen = true"
+          />
           <UButton
             to="/media/buku"
             label="Katalog Buku"
@@ -181,82 +188,220 @@ defineOgImage('OgImage', {
         </div>
       </div>
 
-      <!-- Book Title Header -->
-      <div class="p-4 sm:p-5 rounded-2xl border border-default bg-elevated/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="space-y-1">
-          <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-highlighted">
-            {{ buku?.title }}
-          </h1>
-          <p class="text-xs sm:text-sm text-muted">
-            Mata Pelajaran: {{ buku?.pelajaran }} • Kurikulum Merdeka SD Negeri Teja II
-          </p>
-        </div>
-      </div>
+      <!-- Resizable Layout: Info Panel + PDF Viewer -->
+      <USplitter
+        id="buku-viewer-layout"
+        auto-save-id="buku-viewer-layout"
+        class="h-[80vh] sm:h-[85vh] rounded-2xl border border-default overflow-hidden"
+        :items="splitterItems"
+        :ui="{
+          handle: 'data-[orientation=horizontal]:w-1.5 data-[orientation=vertical]:h-1.5 bg-border/60 hover:bg-primary transition-colors data-[state=drag]:bg-primary cursor-col-resize'
+        }"
+      >
+        <!-- Info side panel -->
+        <template #info>
+          <div class="h-full w-full overflow-y-auto p-4 sm:p-5 bg-elevated/30 space-y-5">
+            <!-- Cover: sticky di dalam scroll container panel info -->
+            <div
+              v-if="buku?.image"
+              class="sticky top-0 z-10 rounded-xl overflow-hidden border border-default aspect-[3/4] bg-muted/20 shadow-sm"
+            >
+              <NuxtImg
+                :src="buku.image"
+                :alt="buku.title"
+                format="webp"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
 
-      <!-- Nuxt PDF Kit Viewer -->
-      <div class="relative w-full h-[78vh] sm:h-[84vh] rounded-2xl overflow-hidden border border-default bg-muted shadow-sm">
-        <ClientOnly>
-          <NuxtPdfKit
-            v-if="pdfSrc"
-            :src="pdfSrc"
-            :provider="pdfProvider"
-            theme="light"
-            :responsive="true"
-            initial-view-mode="single"
-            initial-scroll-mode="vertical"
-            class="h-full w-full"
-            :toolbar="{
-              sidebar: true,
-              pageNavigation: true,
-              zoom: true,
-              search: true,
-              rotate: true,
-              print: true,
-              download: true,
-              fullscreen: true,
-              themeToggle: true
-            }"
-          />
-          <div
-            v-else
-            class="h-full flex flex-col items-center justify-center p-8 text-center space-y-3"
-          >
-            <UIcon
-              name="i-lucide-file-warning"
-              class="size-12 text-warning mx-auto"
-            />
-            <p class="text-highlighted font-semibold text-lg">
-              Berkas PDF Tidak Tersedia
-            </p>
-            <p class="text-muted text-sm max-w-sm mx-auto">
-              Tautan unduh atau pratinjau untuk dokumen ini belum terhubung.
-            </p>
+            <div class="space-y-3">
+              <h3 class="text-sm font-bold text-highlighted">
+                Detail Buku
+              </h3>
+              <dl class="space-y-2 text-sm">
+                <div class="flex justify-between gap-2">
+                  <dt class="text-muted">
+                    Mata Pelajaran
+                  </dt>
+                  <dd class="text-highlighted font-medium text-right">
+                    {{ buku?.pelajaran }}
+                  </dd>
+                </div>
+                <div class="flex justify-between gap-2">
+                  <dt class="text-muted">
+                    Kelas
+                  </dt>
+                  <dd class="text-highlighted font-medium">
+                    {{ buku?.kelas }}
+                  </dd>
+                </div>
+                <div class="flex justify-between gap-2">
+                  <dt class="text-muted">
+                    Tipe
+                  </dt>
+                  <dd class="text-highlighted font-medium">
+                    {{ buku?.tipe || 'Buku Teks' }}
+                  </dd>
+                </div>
+                <div class="flex justify-between gap-2">
+                  <dt class="text-muted">
+                    Kurikulum
+                  </dt>
+                  <dd class="text-highlighted font-medium">
+                    Merdeka
+                  </dd>
+                </div>
+              </dl>
+            </div>
+
+            <USeparator />
+
             <UButton
-              to="/media/buku"
-              label="Kembali ke Katalog Buku"
-              icon="i-lucide-arrow-left"
-              color="neutral"
+              v-if="externalSourceUrl"
+              :to="externalSourceUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              label="Unduh / Buka di Tab Baru"
+              icon="i-lucide-download"
+              color="primary"
               variant="subtle"
               size="sm"
+              block
+            />
+
+            <p class="text-xs text-muted leading-relaxed">
+              Geser tepi panel ini untuk mengubah lebar tampilan sesuai kenyamanan membaca Anda.
+            </p>
+          </div>
+        </template>
+
+        <!-- PDF viewer panel -->
+        <template #viewer>
+          <div class="h-full w-full bg-muted">
+            <ClientOnly>
+              <NuxtPdfKit
+                v-if="pdfSrc"
+                :src="pdfSrc"
+                :provider="pdfProvider"
+                :theme="colorMode.value === 'dark' ? 'dark' : 'light'"
+                :responsive="true"
+                initial-view-mode="single"
+                initial-scroll-mode="vertical"
+                class="h-full w-full"
+                :toolbar="{
+                  sidebar: true,
+                  pageNavigation: true,
+                  zoom: true,
+                  search: true,
+                  rotate: true,
+                  print: true,
+                  download: true,
+                  fullscreen: true,
+                  themeToggle: true
+                }"
+              />
+              <UEmpty
+                v-else
+                icon="i-lucide-file-warning"
+                title="Berkas PDF Tidak Tersedia"
+                description="Tautan unduh atau pratinjau untuk dokumen ini belum terhubung."
+                class="h-full"
+                :actions="[{ label: 'Kembali ke Katalog Buku', icon: 'i-lucide-arrow-left', to: '/media/buku', color: 'neutral', variant: 'subtle' }]"
+              />
+
+              <template #fallback>
+                <div class="h-full flex flex-col items-center justify-center gap-3">
+                  <UIcon
+                    name="i-lucide-loader"
+                    class="size-10 text-primary animate-spin"
+                  />
+                  <p class="text-highlighted font-medium text-base">
+                    Memuat Penampil Buku PDF...
+                  </p>
+                  <p class="text-muted text-xs">
+                    Menyiapkan halaman dan dokumen PDF.
+                  </p>
+                </div>
+              </template>
+            </ClientOnly>
+          </div>
+        </template>
+      </USplitter>
+
+      <!-- Drawer untuk info buku pada perangkat mobile -->
+      <UDrawer
+        v-model:open="isInfoDrawerOpen"
+        title="Detail Buku"
+        :description="buku?.title"
+      >
+        <template #body>
+          <div class="space-y-4 p-1">
+            <div
+              v-if="buku?.image"
+              class="max-w-[200px] mx-auto rounded-xl overflow-hidden border border-default aspect-[3/4] bg-muted/20"
+            >
+              <NuxtImg
+                :src="buku.image"
+                :alt="buku.title"
+                format="webp"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+
+            <dl class="space-y-2 text-sm">
+              <div class="flex justify-between gap-2">
+                <dt class="text-muted">
+                  Mata Pelajaran
+                </dt>
+                <dd class="text-highlighted font-medium text-right">
+                  {{ buku?.pelajaran }}
+                </dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="text-muted">
+                  Kelas
+                </dt>
+                <dd class="text-highlighted font-medium">
+                  {{ buku?.kelas }}
+                </dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="text-muted">
+                  Tipe
+                </dt>
+                <dd class="text-highlighted font-medium">
+                  {{ buku?.tipe || 'Buku Teks' }}
+                </dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="text-muted">
+                  Kurikulum
+                </dt>
+                <dd class="text-highlighted font-medium">
+                  Merdeka
+                </dd>
+              </div>
+            </dl>
+
+            <USeparator />
+
+            <UButton
+              v-if="externalSourceUrl"
+              :to="externalSourceUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              label="Unduh / Buka di Tab Baru"
+              icon="i-lucide-download"
+              color="primary"
+              variant="subtle"
+              size="sm"
+              block
             />
           </div>
-
-          <template #fallback>
-            <div class="h-full flex flex-col items-center justify-center p-8 text-center space-y-3">
-              <UIcon
-                name="i-lucide-loader"
-                class="size-10 text-primary animate-spin mx-auto"
-              />
-              <p class="text-highlighted font-medium text-base">
-                Memuat Penampil Buku PDF...
-              </p>
-              <p class="text-muted text-xs">
-                Menyiapkan halaman dan dokumen PDF.
-              </p>
-            </div>
-          </template>
-        </ClientOnly>
-      </div>
+        </template>
+      </UDrawer>
     </UContainer>
   </div>
 </template>

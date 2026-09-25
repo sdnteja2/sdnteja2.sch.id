@@ -42,7 +42,9 @@ const { data: rawBooks } = await useAsyncData(
       }
       if (import.meta.client) {
         try {
-          const item = localStorage.getItem(`sdnteja2-cache-${key}`)
+          // Clear old stale cache if exists
+          localStorage.removeItem('sdnteja2-cache-buku-list')
+          const item = localStorage.getItem(`sdnteja2-cache-v2-${key}`)
           if (item) {
             return JSON.parse(item)
           }
@@ -59,7 +61,7 @@ watch(
   (val) => {
     if (import.meta.client && val?.length) {
       try {
-        localStorage.setItem('sdnteja2-cache-buku-list', JSON.stringify(val))
+        localStorage.setItem('sdnteja2-cache-v2-buku-list', JSON.stringify(val))
       } catch {
         // Ignore storage error
       }

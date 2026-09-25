@@ -117,6 +117,12 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    optimizeDeps: {
+      include: ['slugify']
+    }
+  },
+
   hooks: {
     async 'build:before'() {
       const metaPath = resolve(process.cwd(), '.nuxt/component-meta.mjs')
